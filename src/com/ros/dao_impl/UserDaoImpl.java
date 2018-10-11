@@ -1,5 +1,9 @@
 package com.ros.dao_impl;
-import com.ros.dao.UserDao;;
+import java.util.ArrayList;
+
+import com.ros.dao.UserDao;
+import com.ros.entity.UserBasicInfo;
+import com.ros.util.BaseDao;;
 
 public class UserDaoImpl implements UserDao  {
 
@@ -12,9 +16,17 @@ public class UserDaoImpl implements UserDao  {
 	 *  
 	 * 
 	 */
-	public boolean register() {
+	public boolean register(String userName) {
 		// TODO Auto-generated method stub
-		return false;
+		String sql="select * from user_basicinfo where userName=?";
+		ArrayList<UserBasicInfo> list=(ArrayList<UserBasicInfo>) BaseDao.select(sql, UserBasicInfo.class, userName);
+		if(list.size()>0) {
+			return false;
+		}
+		else {
+			return true;
+		}
+		
 	}
 
 }
