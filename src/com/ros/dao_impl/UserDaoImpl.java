@@ -13,8 +13,8 @@ public class UserDaoImpl implements UserDao  {
 	
 	@Override
 	/*
-	 *  
-	 * 
+	 * 用户注册方法
+	 * para userName  用户名
 	 */
 	public boolean register(String userName) {
 		// TODO Auto-generated method stub

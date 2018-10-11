@@ -7,13 +7,16 @@ import com.ros.service.UserService;
 public class UserServiceImpl implements UserService{
 
 	  UserDao ud=new UserDaoImpl();//实例化用户查询Dao对象
-	/* (non-Javadoc)
-	 * @see com.ros.service.UserService#register(java.lang.String)
-	 */
+	
+	  /*
+	   * 用户注册方法
+	   * 
+	   */
 	@Override
 	public boolean register(String userName) {
 		// TODO Auto-generated method stub
-		return false;
+		
+		return ud.register(userName);
 	}
 
 }
