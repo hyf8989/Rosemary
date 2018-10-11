@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的订单</title>
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<!-- Mobile Specific Meta  -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+		<!-- Google Fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900,100' rel='stylesheet' type='text/css'>
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<!-- Custom CSS -->
+		<link href="style.css" rel="stylesheet">
+		<style type="text/css">
+			.row1{
+				border: solid peachpuff  ;
+				margin-bottom: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<!-- header-start -->
+		<header>
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 col-sm-12 hidden-xs">
+							<div class="header-top-left">
+								<div class="welcome-msg">
+									<span class="default-msg hidden-xs">欢迎来电!</span>
+									<span class="phone">联系电话: <span class="number">01234-567890</span></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-xs-12 col-sm-12">
+							<div class="header-top-right">
+
+								<div class="language">
+									<div class="current">
+										<span>我的账户</span>
+									</div>
+									<ul class="lang">
+										<li><img src="img/lang/2.jpg" alt="ar" />
+											<a href="personal.html" title=""><span>我的信息</span></a>
+										</li>
+										<li><img src="img/lang/2.jpg" alt="ar" />
+											<a href="pwd.html" title=""><span>修改密码</span></a>
+										</li>
+										<li><img src="img/lang/7.jpg" alt="hb" />
+											<a href="myOrder.html" title=""><span>查看订单</span></a>
+										</li>
+									</ul>
+								</div>
+
+								<ul class="header-links hidden-xs">
+									<li>
+										<a class="login" href="../admin/login.html">
+											我是管理员
+										</a>
+									</li>
+									<li>
+										<a class="login" href="register.html">注册</a>
+									</li>
+									<li>
+										<a class="login" href="login.html">登录</a>
+									</li>
+								</ul>
+								<div class="language">
+									<div class="current">
+										<span>语言</span>
+									</div>
+									<ul class="lang">
+										<li class="selected"><img src="img/lang/1.jpg" alt="en" /><span>English</span></li>
+										<li><img src="img/lang/2.jpg" alt="ar" />
+											<a href="#" title=""><span>اللغة العربية</span></a>
+										</li>
+										<li><img src="img/lang/7.jpg" alt="hb" />
+											<a href="#" title=""><span>עִברִית</span></a>
+										</li>
+										<li><img src="img/lang/3.jpg" alt="es" />
+											<a href="#" title=""><span>Español</span></a>
+										</li>
+										<li><img src="img/lang/4.jpg" alt="ph" />
+											<a href="#" title=""><span>Pilipino</span></a>
+										</li>
+										<li><img src="img/lang/5.jpg" alt="fr" />
+											<a href="#" title=""><span>français</span></a>
+										</li>
+										<li><img src="img/lang/6.jpg" alt="sd" />
+											<a href="#" title=""><span>svensk</span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="header-middle">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4 col-sm-12 col-xs-8">
+							<div class="logo">
+								<a href="index.html"><img src="img/logo.png" alt="" /></a>
+							</div>
+						</div>
+						<div class="col-md-5 col-sm-6 hidden-xs">
+							<div class="search-box">
+								<form action="#">
+									<input class="form-control search-form" type="text" placeholder="请输入商品关键字搜索" />
+									<button class="search-button" value="Search" id="search" type="submit"><i class="fa fa-search"></i></button>
+								</form>
+							</div>
+						</div>
+						<div class="col-md-3 col-xs-4 col-sm-6">
+							<div class="shopping-cart">
+								<a class="cart" href="#" title="view shopping cart"><span class="hidden-xs">购物车<br><small>3件商品 - ￥199.00</small></span></a>
+								<div class="top-cart-content">
+									<div class="media header-middle-checkout">
+										<div class="media-left check-img">
+											<a href="#"><img src="img/cart/粉色满天星.jpg" alt="" /></a>
+										</div>
+										<div class="media-body checkout-content">
+											<h4 class="media-heading">
+                                                    <span class="cart-count">1</span>
+                                                    <a href="#">粉色满天星</a>
+                                                    <span class="btn-remove checkout-remove" title="remove this product from my cart"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                                </h4>
+											<p>￥ 78.15</p>
+										</div>
+									</div>
+									<div class="media header-middle-checkout last-child">
+										<div class="media-left check-img">
+											<a href="#"><img src="img/cart/紫色小雏菊.jpg" alt="" /></a>
+										</div>
+										<div class="media-body checkout-content">
+											<h4 class="media-heading">
+                                                    <span class="cart-count">2</span>
+                                                    <a href="#">紫色小雏菊</a>
+                                                    <span class="btn-remove checkout-remove" title="remove this product from my cart"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                                </h4>
+											<p>￥120.85</p>
+										</div>
+									</div>
+									<div class="cart-total">
+										<span>总价</span>
+										<span><b>￥199.00</b></span>
+									</div>
+									<div class="checkout">
+										<a href="#"><span>结算<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="main-menu-area hidden-xs hidden-sm">
+				<div class="container">
+					<div class="row">
+						<div class="colo-md-12">
+							<div class="main-menu">
+								<nav>
+									<ul>
+										<li>
+											<a href="index.html">首页</a>
+										</li>
+
+										<li>
+											<a href="shop.html">购物</a>
+										</li>
+										<li>
+											<a href="about.html">关于我们</a>
+										</li>
+										<li>
+											<a href="contact.html">联系我们</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- mobile-menu-area-start -->
+			<div class="mobile-menu-area visible-xs visible-sm">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="mobile_menu">
+								<nav id="mobile_menu_active">
+									<ul>
+										<li>
+											<a href="index.html">Home</a>
+										</li>
+										<li>
+											<a href="about.html">About</a>
+										</li>
+										<li>
+											<a href="shop.html">Shop</a>
+										</li>
+										<li>
+											<a href="contact.html">contact</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- mobile-menu-area-end -->
+		</header>
+		<!-- header-end -->
+
+		<div class="container">
+			<div style="margin-top: 20px; " class="row row1">
+				<ul>
+					<div style="clear: both;" class="col-md-12">
+						<div style="padding-top: 10px;padding-left:10px;float: left;">
+
+							<li><img src="img/singlepro/a01.jpg" / style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
+						</div>
+						<div style="padding-top: 10px;padding-left:10px;float: left;">
+							<li>订单编号：0201810101859</li>
+							<li>订单状态：已发货。</li>
+							<li>下单时间：2018.10.09 12:36:22</li>
+							<li>粉色洋桔梗----白色紫罗兰2扎、粉色洋桔梗1扎，斑春兰0.5扎. </li>
+							<li>数量：1</li>
+							<li>费用：359</li>
+
+						</div>
+					</div>
+				</ul>
+			</div>
+
+			<div class="row1 row">
+				<ul>
+					<div style="clear: both;" class="col-md-12">
+						<div style="padding-top: 10px;padding-left:10px;float: left;">
+							<li><img src="img/singlepro/a02.jpg" / style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
+						</div>
+						<div style="padding-top: 10px;padding-left:10px;float: left;">
+							<li>订单编号：0201810101010</li>
+							<li>订单状态：已收货。</li>
+							<li>到达时间：2018.10.09 12:36:22</li>
+							<li>戴安娜粉玫瑰----黛安娜玫瑰9枝，浅紫色勿忘我适量，栀子叶适量</li>
+							<li>数量：1</li>
+							<li>费用：128</li>
+						</div>
+					</div>
+				</ul>
+			</div>
+
+			<div class="row1 row">
+				<ul>
+					<div style="clear: both;" class="col-md-12">
+						<div style="padding-top: 10px;padding-left:10px;float: left;">
+							<li><img src="img/singlepro/a03.jpg" / style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
+						</div>
+						<div style="padding-top: 10px;padding-left:10px;float: left;">
+							<li>订单编号：0201810101011</li>
+							<li>订单状态：已签收。</li>
+							<li>签收时间：2018.10.09 12:36:22</li>
+							<li>香槟玫瑰----香槟玫瑰19枝，银叶菊1扎，绿色重瓣洋桔梗0.5扎，白色相思梅0.3扎</li>
+							<li>数量：12</li>
+							<li>费用：302</li>
+						</div>
+					</div>
+					<ul>
+						<div style="clear: both;" class="col-md-12">
+							<div style="padding-top: 5px;padding-left:10px;float: left;">
+								<li><img src="img/singlepro/a15.jpg" / style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
+							</div>
+							<div style="padding-top: 10px;padding-left:10px;float: left;">
+								<li>订单状态：已签收。</li>
+								<li>到达时间：2018.10.09 12:36:22</li>
+								<li>粉色满天星----一大扎粉色满天星饱满搭配</li>
+								<li>数量：1</li>
+								<li>费用：329</li>
+							</div>
+						</div>
+					</ul>
+				</ul>
+			</div>
+
+			<div class="row1 row">
+				<ul>
+					<div style="clear: both;" class="col-md-12">
+						<div style="padding-top: 10px;padding-left:10px;float: left;">
+							<li><img src="img/singlepro/a04.jpg" / style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
+						</div>
+						<div style="padding-top: 10px;padding-left:10px;float: left;">
+							<li>订单编号：0201810101012</li>
+							<li>订单状态：待发货。</li>
+							<li>预到达时间：2018.10.12 12:36:22</li>
+							<li>粉百合----粉百合2枝、红玫瑰9枝、叶上花1扎、红色康乃馨15枝、粉色洋桔梗0.5扎</li>
+							<li>数量：2</li>
+							<li>费用：286</li>
+						</div>
+					</div>
+				</ul>
+			</div>
+
+			<div class="row1 row">
+				<ul>
+					<div style="clear: both;" class="col-md-12">
+						<div style="padding-top: 10px;padding-left:10px;float: left;">
+							<li><img src="img/singlepro/a05.jpg" / style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
+						</div>
+						<div style="padding-top: 10px;padding-left:10px;float: left;">
+							<li>订单编号：0201810101013</li>
+							<li>订单状态：待发货。</li>
+							<li>签收时间：2018.10.12 12:36:22</li>
+							<li>白玫瑰----白百合2枝、雪山白玫瑰7枝、紫色洋桔梗3枝、栀子叶0.3扎、叶上白2枝、粉色绣球1枝</li>
+							<li>数量：2</li>
+							<li>费用：616</li>
+						</div>
+					</div>
+				</ul>
+			</div>
+
+		</div>
+	</body>
+
+</html>
