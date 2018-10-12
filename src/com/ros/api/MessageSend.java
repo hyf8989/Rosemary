@@ -47,7 +47,7 @@ public class MessageSend {
 	 * http://api.submail.cn/message/send
 	 */
 	
-	public StringBuilder sendCode() {
+	public StringBuilder sendCode(String phoneNumber) {
 		TreeMap<String, Object> requestData = new TreeMap<String, Object>();
 		/**
 		 * --------------------------------参数配置------------------------------------
@@ -69,7 +69,7 @@ public class MessageSend {
 		StringBuilder code=getCode();
 		String appid = "28052";
 		String appkey = "82031fe9975285caf82b85f85d55421d";
-		String to = "17720838367";
+		String to = phoneNumber;
 		String content = "【Rosemary】感谢您注册本网站，您的验证码是："+code;
 		String signtype = "md5";
 		/**

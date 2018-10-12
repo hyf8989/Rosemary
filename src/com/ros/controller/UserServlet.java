@@ -34,9 +34,10 @@ public class UserServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
-		if(op.equals("register")) {
+		if(op.equals("sendCode")) {
 			
 		}
+		
 		
 	}
 

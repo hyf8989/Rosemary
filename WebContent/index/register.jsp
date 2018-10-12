@@ -43,6 +43,7 @@
 	 $(function(){
 		 
 		var phoneNumber=$("#phoneNumber").val();
+		var phoneTest=/^1\d{10}$/;//手机号正则表达式
 		
 	 $("#send").click(function(){
 		$(this).attr("disabled","disabled");//将按钮设为不可点击
