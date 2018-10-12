@@ -24,43 +24,52 @@
 		</div>
 		<div>  
 		<input type="text" name="phone_number" class="phone_number" placeholder="输入手机号码" autocomplete="off" id="number"/>
-		 <button id="submit" value="点击发送验证码" onclick="sendCode(this)">点击发送验证码</button>
+		<input type="button" class="sendCode"  value="点击发送验证码" onclick="" />
 		</div>
 		
 
 		<button id="submit" type="submit">注 册</button>
 	</form>
-	<a href="index.html">
+	<a href="login.jsp">
 		<button type="button" class="register-tis">已经有账号？</button>
 	</a>
 
 </div>
+<script ></script>
 
 <script type="text/javascript">
- var clock = '';
- var nums =60;
- var btn;
- function sendCode(thisBtn)
- { 
-  btn = thisBtn;
- btn.disabled = true; //将按钮置为不可点击
- btn.value = nums+'秒后可重新获取';
- clock = setInterval(doLoop, 1000); //一秒执行一次 
-
- }
- function doLoop()
- {
- nums--;
- if(nums > 0){
-  btn.value = nums+'秒后可重新获取';
- }else{
-  clearInterval(clock); //清除js定时器
-  btn.disabled = false;
-  btn.value = '点击发送验证码';
-  nums = 60; //重置时间
- }
- }
+$(function(){
+	var clock = '';
+	 var nums =60;
+	 var btn;
+	 function doLoop(){
+		 nums--;
+		 if(nums > 0){
+		  btn.value = nums+'秒后可重新获取';
+		 }else{
+		  clearInterval(clock); //清除js定时器
+		  btn.disabled = false;
+		  btn.value = '点击发送验证码';
+		  nums = 60; //重置时间
+		 }
+		 
+	 }
+	 $(".sendCode").click(function(){
+		/*  btn = thisBtn;
+		 btn.disabled = true; //将按钮置为不可点击
+		 btn.value = nums+'秒后可重新获取';
+		 clock = setInterval(doLoop, 1000); //一秒执行一次  */
+		 alert(123);
+		 
+	 });
+	 
+	
+});
+ 
+ 
+ 
 </script>
+
 <script src="js/jquery.min.js"></script>
 <script src="js/common.js"></script>
 <!--背景图片自动更换-->
