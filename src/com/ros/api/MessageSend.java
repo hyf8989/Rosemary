@@ -128,6 +128,7 @@ public class MessageSend {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+		System.out.println("code : sendCode :"+code);
 		return code;
 	}
 	/**
@@ -154,6 +155,8 @@ public class MessageSend {
 		
 		return null;
 	}
+	
+	
 	public static StringBuilder getCode() {
 		String str="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 		StringBuilder sb=new StringBuilder(4);
@@ -164,15 +167,6 @@ public class MessageSend {
 		}
 		return sb;
 
-		
-
-		
-		 
-
-		 
-
-		
-		
 	}
 
 }
