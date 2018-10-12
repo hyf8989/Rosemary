@@ -12,7 +12,7 @@ public class UserServiceImpl implements UserService{
 	
 	  /*
 	   * 用户注册方法
-	   * 
+	   *  
 	   */
 	@Override
 	public boolean register(String userName) {
