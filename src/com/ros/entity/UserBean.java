@@ -11,7 +11,7 @@ public class UserBean {
 	private String createTime;
 	private String updateTime;
 	private String name;
-	private int userTel;
+	private String userTel;
 	private String userEmail;
 	public String getUserName() {
 		return userName;
@@ -43,10 +43,10 @@ public class UserBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getUserTel() {
+	public String getUserTel() {
 		return userTel;
 	}
-	public void setUserTel(int userTel) {
+	public void setUserTel(String userTel) {
 		this.userTel = userTel;
 	}
 	public String getUserEmail() {
@@ -58,7 +58,7 @@ public class UserBean {
 	public UserBean() {
 		// TODO Auto-generated constructor stub
 	}
-	public UserBean(String userName, String sex, String createTime, String updateTime, String name, int userTel,
+	public UserBean(String userName, String sex, String createTime, String updateTime, String name, String userTel,
 			String userEmail) {
 		super();
 		this.userName = userName;

@@ -15,16 +15,16 @@
 <div class="login-container">
 	<h1>用户登录</h1>
 	
-	<form action="/Rosemary/user.action" method="post" id="loginForm">
+	
 		<div>
-			<input type="text" name="userName" class="userName" placeholder="用户名" autocomplete="off"/>
-			<input type="hidden" name="op" value="login">
+			<input type="text" name="userName" id="userName"  placeholder="用户名" />
+			<input type="hidden" name="op" value="login" id="op">
 		</div>
 		<div>
-			<input type="password" name="userPwd" class="userPwd" placeholder="密码" oncontextmenu="return false" onpaste="return false" />
+			<input type="password" name="userPwd" id="userPwd" placeholder="密码"  />
 		</div>
-		<button id="submit" type="submit">登 录</button>
-	</form>
+		<button id="login" type="button">登 录</button><br/>
+	
 
 	<a href="register.jsp">
 		<button type="button" class="register-tis">还有没有账号？</button>
@@ -40,6 +40,50 @@
 <!--表单验证-->
 <script src="js/jquery.validate.min.js?var1.14.0"></script>
 
+ <script type="text/javascript" src="layui/layui.js">
+			
+		</script> 
+		
+<script>
+$(function(){
+	$("#login").click(function(){
+		  layui.use('layer', function() {
+				var layer = layui.layer;
+
+			});
+	   var userName=$("#userName").val();
+	   var op=$("#op").val();
+	   var userPwd=$("#userPwd").val();
+	   $.get("/Rosemary/user.action","userName="+userName+"&op="+op+"&userPwd="+userPwd,function(data,status){
+	      if(data=="登录成功"){
+	    	  layer.open({
+					title: "友情提醒",
+					skin: "layui-layer-lan",
+					content: "<span style='color:black;'>"+data+"</span>",
+					anim: 0,
+					btn: ['确定'],
+					yes: function(index, layero) {
+						location.href="index.jsp";
+					}
+					
+				});
+	      }
+	      else{
+	    	  layer.msg('<span style="color:black;">'+data+'</span>', {
+					icon:5,
+					time: 2000
+				});
+	    	  $("#userName").val("");
+	    	  $("#userPwd").val("");
+	    	  
+	      }
+	   
+	   });
+	 
+	
+	});
+	});
+</script>
 
 
 </body>

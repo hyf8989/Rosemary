@@ -9,7 +9,7 @@ public class UserDetailInfo {
 	private int Id;
 	private int userId;
 	private String name;
-	private int userTel;
+	private String userTel;
 	private String userEmail;
 	private String createTime;
 	private String updateTime;
@@ -31,10 +31,10 @@ public class UserDetailInfo {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getUserTel() {
+	public String getUserTel() {
 		return userTel;
 	}
-	public void setUserTel(int userTel) {
+	public void setUserTel(String userTel) {
 		this.userTel = userTel;
 	}
 	public String getUserEmail() {
@@ -60,7 +60,7 @@ public class UserDetailInfo {
 		return "UserDetailInfo [Id=" + Id + ", userId=" + userId + ", name=" + name + ", userTel=" + userTel
 				+ ", userEmail=" + userEmail + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
-	public UserDetailInfo(int id, int userId, String name, int userTel, String userEmail, String createTime,
+	public UserDetailInfo(int id, int userId, String name, String userTel, String userEmail, String createTime,
 			String updateTime) {
 		super();
 		Id = id;
@@ -75,7 +75,7 @@ public class UserDetailInfo {
 	public UserDetailInfo() {
 		// TODO Auto-generated constructor stub
 	}
-	public UserDetailInfo(int id, int userId, int userTel, String createTime, String updateTime) {
+	public UserDetailInfo(int id, int userId, String userTel, String createTime, String updateTime) {
 		super();
 		Id = id;
 		this.userId = userId;
@@ -83,5 +83,13 @@ public class UserDetailInfo {
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 	}
+	public UserDetailInfo(int userId, String userTel, String createTime, String updateTime) {
+		super();
+		this.userId = userId;
+		this.userTel = userTel;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
+	
 	
 }

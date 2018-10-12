@@ -196,6 +196,7 @@
 			 confirmPwd=$("#confirmPwd").val();
 			 phoneNumber=$("#phoneNumber").val();
 			 code=$("#code").val();
+			 
 			 //如果输入框存在空值，则弹窗提醒
 			if(flag==false || (userName!="" && password !="" && confirmPwd!="" && phoneNumber !="" && code !="")==false){
 				msg="信息必须全部正确填入";
@@ -225,23 +226,39 @@
 			    /*在这边进行数据库用户基本表的信息插入
 			       
 			    */
-			    $.get("/Rosemary/user.action","op=insert&userName="+userName+"&userPwd="+password+"&createTime="+currentdate+"&updateTime="+currentdate,function(data,status){
-			    	console.log(data);
+			    $.get("/Rosemary/user.action","op=insert&userName="+userName+"&userPwd="+password+"&createTime="+currentdate+"&updateTime="+currentdate+"&phoneNumber="+phoneNumber,function(data,status){
+			    	msg=data;
 			    });
 			    
-			
-				msg="注册成功！";
-				layer.open({
-					title: "友情提醒？",
-					skin: "layui-layer-molv",
-					content: "<span style='color:black;'>"+msg+"</span>",
-					anim: 0,
-					btn: ['OK，返回登录'],
-					yes: function(index, layero) {
-						location.href="login.jsp";
-					}
-					
-				});
+			    if(msg="注册成功"){
+			    	layer.open({
+						title: "友情提醒？",
+						skin: "layui-layer-molv",
+						content: "<span style='color:black;'>"+msg+"</span>",
+						anim: 0,
+						btn: ['OK，返回登录'],
+						yes: function(index, layero) {
+							location.href="login.jsp";
+						}
+						
+					});
+			    }
+			    else{
+			    	layer.open({
+						title: "友情提醒？",
+						skin: "layui-layer-lan",
+						content: "<span style='color:black;'>"+msg+"</span>",
+						anim: 0,
+						btn: ['我再试试'],
+						yes: function(index, layero) {
+							location.href="login.jsp";
+						}
+						
+					});
+			    	
+			    }
+				
+				
 				
 			}
 			

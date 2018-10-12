@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import com.ros.api.*;
 import com.ros.entity.UserBasicInfo;
+import com.ros.entity.UserDetailInfo;
 import com.ros.service.UserService;
 import com.ros.service_impl.UserServiceImpl;
 import com.ros.util.MD5Util;
@@ -88,11 +89,12 @@ public class UserServlet extends HttpServlet {
 			if(ub!=null) {
 				HttpSession session =request.getSession();
 				session.setAttribute("ub", ub);
-				out.print("<script>alert('登录成功');location.href='index/index.jsp'</script>");
+				out.print("登录成功");
+				out.close();
 			}
 			else {
-				out.print("<script>alert('登录失败');location.href='index/login.jsp'</script>");
-				
+				out.print("登录失败，用户名或者密码输入错误");
+				out.close();
 			}
 		}
 		//插入用户基本表（用户注册功能）
@@ -103,13 +105,22 @@ public class UserServlet extends HttpServlet {
 			
 			String createTime=request.getParameter("createTime");
 			String updateTime=createTime;
+			String phoneNumber=request.getParameter("phoneNumber");//得到传过来的用户联系方式
 			UserBasicInfo ub=new UserBasicInfo(userName, userPwd, createTime, updateTime);
-			boolean flag=us.insertUser(ub);
+			
+			boolean flag=us.insertUser(ub);//插入用户基本表
+			
+			
 			if(flag==true) {
-				msg="插入成功";
+				int userId=us.getUserBasicInfoByUserName(userName).getUserId();//获得刚注册的用户ID
+				UserDetailInfo uDI=new UserDetailInfo(userId, phoneNumber, createTime, updateTime);
+				if(us.insertUserDetail(uDI)) {
+					msg="注册成功";
+				}
+				
 			}
 			else {
-				msg="插入失败";
+				msg="注册失败";
 			}
 			out.print(msg);
 			out.close();
