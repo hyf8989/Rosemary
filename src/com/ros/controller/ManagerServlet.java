@@ -65,7 +65,7 @@ public class ManagerServlet extends HttpServlet {
 		Manager m = ms.login(adminName, adminPwd);
 		if (m == null) {
 			// 用户名或者密码错误
-			out.print("<script>alert('登录失败');location.href='../admin/login.jsp'</script>");
+			out.print("<script>alert('登录失败');location.href='/Rosemary/admin/login.jsp'</script>");
 		} else {
 			//1 登录成功，需要将用户登录的信息存储在session中.
 			//HttpSession session=request.getSession();

@@ -30,10 +30,14 @@ import com.ros.util.BaseDao;
 public class UserTest {
 	
 	public static void main(String[] args) {
-		UserService us=new UserServiceImpl();
+		/*UserService us=new UserServiceImpl();
 		
 		System.out.println(us.register("小黄"));
 		
+		*/
+		UserService us=new UserServiceImpl();
+		UserBasicInfo ub=us.login("admin33", "123");
+		System.out.println(ub.getUserName());
 		
 	}
 

@@ -15,7 +15,7 @@
 <div class="login-container">
 	<h1>用户登录</h1>
 	
-	<form action="" method="post" id="loginForm">
+	<form action="/Rosemary/user.action" method="post" id="loginForm">
 		<div>
 			<input type="text" name="userName" class="userName" placeholder="用户名" autocomplete="off"/>
 			<input type="hidden" name="op" value="login">

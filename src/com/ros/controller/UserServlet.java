@@ -1,12 +1,19 @@
 package com.ros.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import com.ros.api.*;
+import com.ros.entity.UserBasicInfo;
+import com.ros.service.UserService;
+import com.ros.service_impl.UserServiceImpl;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class UserInfo_Servlet
@@ -14,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/user.action")
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	UserService us=new UserServiceImpl();
+	
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,10 +43,53 @@ public class UserServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
-		
+
+		 PrintWriter out=response.getWriter();
+
 		if(op.equals("sendCode")) {
+			String phoneNumber=request.getParameter("phoneNumber");
+			MessageSend ms=new MessageSend();
+			StringBuilder code= ms.sendCode(phoneNumber);
+			HttpSession session=request.getSession();
+			session.setAttribute("code", code);
+			
+			System.out.println("doGet : code : sendCode :"+code);
+			out.print(code);
+			out.close();
+		
+			
+			
 			
 		}
+		else if (op.equals("register")) {
+			String userName=request.getParameter("userName");
+			
+			if(us.register(userName)==true) {
+				out.print("此用户名可用");
+				out.close();
+			}
+			else {
+				out.print("已经存在此用户！");
+				out.close();
+				
+			}
+			
+			
+		} 
+		
+		else if(op.equals("login")) {
+			String userName=request.getParameter("userName");
+			String userPwd=request.getParameter("userPwd");
+			UserBasicInfo ub=us.login(userName, userPwd);
+			if(ub!=null) {
+				out.print("<script>alert('登录成功');location.href='/Rosemary/index/index.jsp'</script>");
+			}
+			else {
+				out.print("<script>alert('登录失败');location.href='/Rosemary/index/login.jsp'</script>");
+				
+			}
+		}
+		
 		
 		
 	}
