@@ -336,6 +336,7 @@
 					}, 400);
 				}
 
+				
 				toggle = !toggle;
 			});
 		</script>
