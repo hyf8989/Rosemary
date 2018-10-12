@@ -2,6 +2,7 @@ package com.ros.service_impl;
 
 import com.ros.dao.UserDao;
 import com.ros.dao_impl.UserDaoImpl;
+import com.ros.entity.UserBasicInfo;
 import com.ros.service.UserService;
 
 public class UserServiceImpl implements UserService{
@@ -18,5 +19,14 @@ public class UserServiceImpl implements UserService{
 		
 		return ud.register(userName);
 	}
-
+	
+	/*
+	   * 用户登录方法
+	   * 
+	   */
+   @Override
+  public UserBasicInfo login(String userName, String userPwd) {
+	// TODO Auto-generated method stub
+	return ud.login(userName, userPwd);
+}
 }

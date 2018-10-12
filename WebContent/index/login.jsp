@@ -17,10 +17,11 @@
 	
 	<form action="" method="post" id="loginForm">
 		<div>
-			<input type="text" name="username" class="username" placeholder="用户名" autocomplete="off"/>
+			<input type="text" name="userName" class="userName" placeholder="用户名" autocomplete="off"/>
+			<input type="hidden" name="op" value="login">
 		</div>
 		<div>
-			<input type="password" name="password" class="password" placeholder="密码" oncontextmenu="return false" onpaste="return false" />
+			<input type="password" name="userPwd" class="userPwd" placeholder="密码" oncontextmenu="return false" onpaste="return false" />
 		</div>
 		<button id="submit" type="submit">登 录</button>
 	</form>

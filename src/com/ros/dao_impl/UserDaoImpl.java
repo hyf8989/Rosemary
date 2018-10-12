@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import com.ros.dao.UserDao;
 import com.ros.entity.UserBasicInfo;
 import com.ros.util.BaseDao;;
-
+/**
+ * 自定义UserDao接口的实现类：UserDaoImpl
+ * @author Administrator
+ *
+ */
 public class UserDaoImpl implements UserDao  {
 
 	/* (non-Javadoc)
@@ -14,7 +18,7 @@ public class UserDaoImpl implements UserDao  {
 	@Override
 	/*
 	 * 用户注册方法
-	 * para userName  用户名
+	 * @para userName  用户名
 	 */
 	public boolean register(String userName) {
 		// TODO Auto-generated method stub
@@ -26,6 +30,27 @@ public class UserDaoImpl implements UserDao  {
 		else {
 			return true;
 		}
+		
+	}
+	
+	
+	/**
+	 * 用户登录方法
+	 * @param userName 用户名
+	 *   @param userPwd 用户密码
+	 *   return UserBasicInfo类
+	 */
+	@Override
+	public UserBasicInfo login(String userName, String userPwd) {
+		String sql="select * from user_basicinfo where userName=? and userPwd=?";
+		ArrayList<UserBasicInfo> list=(ArrayList<UserBasicInfo>) BaseDao.select(sql, UserBasicInfo.class, userName,userPwd);
+		if(list.size()>0) {
+			return list.get(0);
+		}
+		else {
+			return null;
+		}
+		
 		
 	}
 
