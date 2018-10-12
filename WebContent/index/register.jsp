@@ -5,29 +5,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>jQuery背景切换注册登录模板</title>
+<title>注册</title>
 <link rel="stylesheet" href="css/style3.css" />
 <body>
 
 <div class="register-container">
 	<h1>用户注册</h1>
 	
-	<form action="" method="post" id="registerForm">
+	<form action="" method="post" >
 		<div>
-			<input type="text" name="username" class="username" placeholder="您的用户名" autocomplete="off"/>
+			<input type="text" name="username"  placeholder="您的用户名" />
 		</div>
 		<div>
-			<input type="password" name="password" class="password" placeholder="输入密码" oncontextmenu="return false" onpaste="return false" />
+			<input type="password" name="password" class="password" placeholder="输入密码"  />
 		</div>
 		<div>
-			<input type="password" name="confirm_password" class="confirm_password" placeholder="再次输入密码" oncontextmenu="return false" onpaste="return false" />
+			<input type="password" name="confirm_password" class="confirm_password" placeholder="再次输入密码"  />
 		</div>
 		<div>  
-		<input type="text" name="phone_number" class="phone_number" placeholder="输入手机号码" autocomplete="off" id="number"/>
-		<input type="button" class="sendCode"  value="点击发送验证码" onclick="" />
+		<input type="text" name="phone_number"  placeholder="输入手机号码"  id="phoneNumber"/>
+		
 		</div>
 		
-
+        <button id="send" type="button">点击发送验证码</button>
 		<button id="submit" type="submit">注 册</button>
 	</form>
 	<a href="login.jsp">
@@ -35,36 +35,29 @@
 	</a>
 
 </div>
-<script ></script>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
 
 <script type="text/javascript">
-$(function(){
-	var clock = '';
-	 var nums =60;
-	 var btn;
-	 function doLoop(){
-		 nums--;
-		 if(nums > 0){
-		  btn.value = nums+'秒后可重新获取';
-		 }else{
-		  clearInterval(clock); //清除js定时器
-		  btn.disabled = false;
-		  btn.value = '点击发送验证码';
-		  nums = 60; //重置时间
-		 }
+
+	 $(function(){
 		 
-	 }
-	 $(".sendCode").click(function(){
-		/*  btn = thisBtn;
-		 btn.disabled = true; //将按钮置为不可点击
-		 btn.value = nums+'秒后可重新获取';
-		 clock = setInterval(doLoop, 1000); //一秒执行一次  */
-		 alert(123);
-		 
-	 });
+		var phoneNumber=$("#phoneNumber").val();
+		
+	 $("#send").click(function(){
+		$(this).attr("disabled","disabled");//将按钮设为不可点击
+		
+		$.get("user.action",function(data,status){
+			 console.log(data);
+		});
+		
+	 })	 ;
 	 
+	 
+	 
+	 });
 	
-});
+
  
  
  
