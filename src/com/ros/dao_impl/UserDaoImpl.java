@@ -50,8 +50,19 @@ public class UserDaoImpl implements UserDao  {
 		else {
 			return null;
 		}
-		
-		
+
 	}
 
+	/**
+	 * 用户修改密码的方法
+	 * @param oldPwd 用户原来的密码
+	 *   @param userPwd 用户设置的新密码
+	 *   return true/用户密码更新成功   false/用户密码更新失败
+	 */
+	@Override
+	public boolean upatePwd(String oldPwd, String newPwd) {
+		String sql="update user_basicinfo set userPwd=? where userPwd=?";
+		
+		return BaseDao.execute(sql, oldPwd,newPwd)>0;
+	}
 }
