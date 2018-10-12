@@ -22,7 +22,7 @@
 		<div>
 			<input type="password" name="confirm_password" class="confirm_password" placeholder="再次输入密码" oncontextmenu="return false" onpaste="return false" />
 		</div>
-		<div>
+		<div>  
 		<input type="text" name="phone_number" class="phone_number" placeholder="输入手机号码" autocomplete="off" id="number"/>
 		 <button id="submit" value="点击发送验证码" onclick="sendCode(this)">点击发送验证码</button>
 		</div>
