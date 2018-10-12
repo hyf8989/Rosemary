@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebContent/admin/headnav.jsp=UTF-8
+encoding//src/com/ros/dao/UserDao.java=UTF-8
+encoding//src/com/ros/service_impl/UserServiceImpl.java=UTF-8
+encoding//src/com/ros/util/BaseDao.java=UTF-8
+encoding/<project>=UTF-8

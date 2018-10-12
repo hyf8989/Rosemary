@@ -8,10 +8,10 @@ import com.ros.util.MD5Util;
 
 public class UserServiceImpl implements UserService{
 
-	  UserDao ud=new UserDaoImpl();//实例化用户查询Dao对象
+	  UserDao ud=new UserDaoImpl();//瀹炰緥鍖栫敤鎴锋煡璇ao瀵硅薄
 	
 	  /*
-	   * 用户注册方法
+	   * 鐢ㄦ埛娉ㄥ唽鏂规硶
 	   * 
 	   */
 	@Override
@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	/*
-	   * 用户登录方法
+	   * 鐢ㄦ埛鐧诲綍鏂规硶
 	   * 
 	   */
    @Override
@@ -37,16 +37,17 @@ public boolean insertUser(UserBasicInfo ub) {
 	// TODO Auto-generated method stub
 	
 	return ud.insertUser(ub);
+}
 
    
    /**
-    * 用户修改密码的方法
+    * 鐢ㄦ埛淇敼瀵嗙爜鐨勬柟娉�
     * 
     */
    @Override
 public boolean updatePwd(String oldPwd, String newPwd) {
 
-	   //先将输入的密码进行加密
+	   //鍏堝皢杈撳叆鐨勫瘑鐮佽繘琛屽姞瀵�
 	   String oldPassword=MD5Util.getEncodeByMd5(oldPwd);
 	   String newPassword=MD5Util.getEncodeByMd5(newPwd);
 	return ud.upatePwd(oldPassword, newPassword);

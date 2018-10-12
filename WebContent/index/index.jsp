@@ -1879,6 +1879,7 @@
 					});
 
 				});
+				$("#userName").text("当前用户：${sessionScope.ub.userName}");
 
 			});
 		</script>

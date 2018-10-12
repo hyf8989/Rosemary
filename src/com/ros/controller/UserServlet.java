@@ -43,7 +43,7 @@ public class UserServlet extends HttpServlet {
 		//统一设置编码格式
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html");
+		response.setContentType("text/html;charset=utf-8");
 
 
 
@@ -83,13 +83,15 @@ public class UserServlet extends HttpServlet {
 		
 		else if(op.equals("login")) {
 			String userName=request.getParameter("userName");
-			String userPwd=request.getParameter("userPwd");
+			String userPwd=MD5Util.getEncodeByMd5(request.getParameter("userPwd"));
 			UserBasicInfo ub=us.login(userName, userPwd);
 			if(ub!=null) {
-				out.print("<script>alert('登录成功');location.href='/Rosemary/index/index.jsp'</script>");
+				HttpSession session =request.getSession();
+				session.setAttribute("ub", ub);
+				out.print("<script>alert('登录成功');location.href='index/index.jsp'</script>");
 			}
 			else {
-				out.print("<script>alert('登录失败');location.href='/Rosemary/index/login.jsp'</script>");
+				out.print("<script>alert('登录失败');location.href='index/login.jsp'</script>");
 				
 			}
 		}

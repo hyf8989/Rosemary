@@ -45,42 +45,22 @@
 								
 								<ul class="header-links hidden-xs">
 									<li>
-										<a class="login" href="../admin/login.html">
+										<a class="login" href="../admin/login.jsp">
 											我是管理员
 										</a>
 									</li>
 									<li>
-										<a class="login" href="register.html">注册</a>
+										<a class="login" href="register.jsp">注册</a>
 									</li>
 									<li>
-										<a class="login" href="login.html">登录</a>
+										<a class="login" href="login.jsp">登录</a>
 									</li>
 								</ul>
 								<div class="language">
-									<div class="current">
-										<span>语言</span>
+									<div >
+										<span id="userName"></span>
 									</div>
-									<ul class="lang">
-										<li class="selected"><img src="img/lang/1.jpg" alt="en" /><span>English</span></li>
-										<li><img src="img/lang/2.jpg" alt="ar" />
-											<a href="#" title=""><span>اللغة العربية</span></a>
-										</li>
-										<li><img src="img/lang/7.jpg" alt="hb" />
-											<a href="#" title=""><span>עִברִית</span></a>
-										</li>
-										<li><img src="img/lang/3.jpg" alt="es" />
-											<a href="#" title=""><span>Español</span></a>
-										</li>
-										<li><img src="img/lang/4.jpg" alt="ph" />
-											<a href="#" title=""><span>Pilipino</span></a>
-										</li>
-										<li><img src="img/lang/5.jpg" alt="fr" />
-											<a href="#" title=""><span>français</span></a>
-										</li>
-										<li><img src="img/lang/6.jpg" alt="sd" />
-											<a href="#" title=""><span>svensk</span></a>
-										</li>
-									</ul>
+									
 								</div>
 							</div>
 						</div>
