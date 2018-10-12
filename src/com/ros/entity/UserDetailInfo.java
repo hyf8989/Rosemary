@@ -75,4 +75,13 @@ public class UserDetailInfo {
 	public UserDetailInfo() {
 		// TODO Auto-generated constructor stub
 	}
+	public UserDetailInfo(int id, int userId, int userTel, String createTime, String updateTime) {
+		super();
+		Id = id;
+		this.userId = userId;
+		this.userTel = userTel;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
+	
 }

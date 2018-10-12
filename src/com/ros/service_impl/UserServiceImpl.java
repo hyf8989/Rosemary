@@ -29,4 +29,11 @@ public class UserServiceImpl implements UserService{
 	// TODO Auto-generated method stub
 	return ud.login(userName, userPwd);
 }
+
+@Override
+public boolean insertUser(UserBasicInfo ub) {
+	// TODO Auto-generated method stub
+	
+	return ud.insertUser(ub);
+}
 }

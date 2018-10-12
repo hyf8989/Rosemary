@@ -68,7 +68,7 @@
 		var passwordTest=/^\w{5}$/;//密码校验，必须为5位任意字符
 		var phoneTest=/^1\d{10}$/;//手机号正则表达式，规定由全为数字，1开头
   //用户名的输入校验
-		$("#userName").blur(function(){
+		$("#userName").change(function(){
 			userName=$("#userName").val();
 			//如果用户名校验格式不对，则弹窗提醒
 			if(userNameTest.test(userName)==false){
@@ -103,7 +103,7 @@
 			
 			
 		});
-		$("#password").blur(function(){
+		$("#password").change(function(){
 			if(passwordTest.test($(this).val())==false){
 				msg="密码必须是五位字符";
 				 layer.msg('<span style="color:black;">'+msg+'</span>', {
@@ -118,7 +118,7 @@
 			}
 		});
 		//重复输入密码失去焦点事件
-		$("#confirmPwd").blur(function(){
+		$("#confirmPwd").change(function(){
 			if($("#password").val()=="" || $(this).val()!=$("#password").val()){
 				msg="两次密码输入不一致或者密码为空";
 				layer.msg('<span style="color:black;">'+msg+'</span>', {
@@ -205,6 +205,31 @@
 				});
 			} 
 			else{
+				//获取系统当前时间 格式是：yyyy-MM-dd HH:MM:SS
+				var date = new Date();
+			    var seperator1 = "-";
+			    var seperator2 = ":";
+			    var month = date.getMonth() + 1;
+			    var strDate = date.getDate();
+			    if (month >= 1 && month <= 9) {
+			        month = "0" + month;
+			    }
+			    if (strDate >= 0 && strDate <= 9) {
+			        strDate = "0" + strDate;
+			    }
+			    //currentdate为当前系统时间
+			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+			            + " " + date.getHours() + seperator2 + date.getMinutes()
+			            + seperator2 + date.getSeconds();
+			    //获取系统当前时间 格式是：yyyy-MM-dd HH:MM:SS
+			    /*在这边进行数据库用户基本表的信息插入
+			       
+			    */
+			    $.get("/Rosemary/user.action","op=insert&userName="+userName+"&userPwd="+password+"&createTime="+currentdate+"&updateTime="+currentdate,function(data,status){
+			    	console.log(data);
+			    });
+			    
+			
 				msg="注册成功！";
 				layer.open({
 					title: "友情提醒？",
@@ -222,7 +247,8 @@
 			
 			
 		});
-	 //设置按钮可用
+	 
+	 
 	
 	 });
 	

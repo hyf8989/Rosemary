@@ -36,8 +36,9 @@ public class UserTest {
 		
 		*/
 		UserService us=new UserServiceImpl();
-		UserBasicInfo ub=us.login("admin33", "123");
-		System.out.println(ub.getUserName());
+		UserBasicInfo ub=new UserBasicInfo("大黄", "12345", "2018-10-11 20:11:06", "2018-10-11 20:11:06");
+		
+		System.out.println(us.insertUser(ub));
 		
 	}
 

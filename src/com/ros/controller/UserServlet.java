@@ -7,6 +7,7 @@ import com.ros.api.*;
 import com.ros.entity.UserBasicInfo;
 import com.ros.service.UserService;
 import com.ros.service_impl.UserServiceImpl;
+import com.ros.util.MD5Util;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -61,6 +62,7 @@ public class UserServlet extends HttpServlet {
 			
 			
 		}
+		//用户输完用户名离开焦点时对数据库的查询判断是否用户是否存在
 		else if (op.equals("register")) {
 			String userName=request.getParameter("userName");
 			
@@ -89,6 +91,28 @@ public class UserServlet extends HttpServlet {
 				
 			}
 		}
+		//插入用户基本表（用户注册功能）
+		else if(op.equals("insert")) {
+			String msg="";
+			String userName=request.getParameter("userName");
+			String userPwd=MD5Util.getEncodeByMd5(request.getParameter("userPwd"));//密码加密
+			
+			String createTime=request.getParameter("createTime");
+			String updateTime=createTime;
+			UserBasicInfo ub=new UserBasicInfo(userName, userPwd, createTime, updateTime);
+			boolean flag=us.insertUser(ub);
+			if(flag==true) {
+				msg="插入成功";
+			}
+			else {
+				msg="插入失败";
+			}
+			out.print(msg);
+			out.close();
+			
+			
+		}
+		
 		
 		
 		

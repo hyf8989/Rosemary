@@ -54,4 +54,16 @@ public class UserDaoImpl implements UserDao  {
 		
 	}
 
+/*
+ * 
+ * 用户注册判断成功时，进行用户基本表的插入
+ */
+	@Override
+	public boolean insertUser(UserBasicInfo ub) {
+		// TODO Auto-generated method stub
+		String sql="insert into user_basicinfo(userName,userPwd,createTime,updateTime) values (?,?,?,?)";
+		
+		return BaseDao.execute(sql, ub.getUserName(),ub.getUserPwd(),ub.getCreateTime(),ub.getUpdateTime())>0;
+	}
+
 }
