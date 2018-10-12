@@ -24,7 +24,7 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UserService us=new UserServiceImpl();
 	
-       
+        
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,6 +44,8 @@ public class UserServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
+
+
 
 		 PrintWriter out=response.getWriter();
 

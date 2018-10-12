@@ -29,13 +29,16 @@
 									</div>
 									<ul class="lang">
 										<li><img src="img/lang/2.jpg" alt="ar" />
-											<a href="personal.html" title=""><span>我的信息</span></a>
+											<a href="personal.jsp" title=""><span>我的信息</span></a>
 										</li>
 										<li><img src="img/lang/2.jpg" alt="ar" />
-											<a href="pwd.html" title=""><span>修改密码</span></a>
+											<a href="pwd.jsp" title=""><span>修改密码</span></a>
 										</li>
 										<li><img src="img/lang/7.jpg" alt="hb" />
-											<a href="myOrder.html" title=""><span>查看订单</span></a>
+											<a href="myOrder.jsp" title=""><span>查看订单</span></a>
+										</li>
+										<li><img src="img/lang/7.jpg" alt="hb" />
+											<a href="myAddress.jsp" title=""><span>收货地址</span></a>
 										</li>
 									</ul>
 								</div>

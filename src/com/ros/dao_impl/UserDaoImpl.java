@@ -61,9 +61,16 @@ public class UserDaoImpl implements UserDao  {
 	@Override
 	public boolean insertUser(UserBasicInfo ub) {
 		// TODO Auto-generated method stub
-		String sql="insert into user_basicinfo(userName,userPwd,createTime,updateTime) values (?,?,?,?)";
+		String sql="insert into user_basicinfo(userName,userPwd,createTime,updateTime) values (?,?,?)";
 		
 		return BaseDao.execute(sql, ub.getUserName(),ub.getUserPwd(),ub.getCreateTime(),ub.getUpdateTime())>0;
 	}
+
+
+@Override
+public boolean upatePwd(String oldPwd, String newPwd) {
+	// TODO Auto-generated method stub
+	return false;
+}
 
 }

@@ -4,6 +4,7 @@ import com.ros.dao.UserDao;
 import com.ros.dao_impl.UserDaoImpl;
 import com.ros.entity.UserBasicInfo;
 import com.ros.service.UserService;
+import com.ros.util.MD5Util;
 
 public class UserServiceImpl implements UserService{
 
@@ -26,14 +27,29 @@ public class UserServiceImpl implements UserService{
 	   */
    @Override
   public UserBasicInfo login(String userName, String userPwd) {
-	// TODO Auto-generated method stub
+	
 	return ud.login(userName, userPwd);
 }
+
 
 @Override
 public boolean insertUser(UserBasicInfo ub) {
 	// TODO Auto-generated method stub
 	
 	return ud.insertUser(ub);
+
+   
+   /**
+    * 用户修改密码的方法
+    * 
+    */
+   @Override
+public boolean updatePwd(String oldPwd, String newPwd) {
+
+	   //先将输入的密码进行加密
+	   String oldPassword=MD5Util.getEncodeByMd5(oldPwd);
+	   String newPassword=MD5Util.getEncodeByMd5(newPwd);
+	return ud.upatePwd(oldPassword, newPassword);
+
 }
 }
