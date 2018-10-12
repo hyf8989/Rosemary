@@ -18,7 +18,7 @@ import com.ros.service_impl.ManagerServiceImpl;
 /**
  * Servlet implementation class ManagerServlet
  */
-@WebServlet("/ManagerServlet")
+@WebServlet("/manager.action")
 public class ManagerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ManagerService ms = new ManagerServiceImpl();
@@ -51,6 +51,7 @@ public class ManagerServlet extends HttpServlet {
 			doLogin(request, response);
 		}
 	}
+	
 	protected void doLogin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -58,13 +59,13 @@ public class ManagerServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		// 用户登录
 		// 先获取用户名和密码
-		String adminName = request.getParameter("adminName");
-		String adminPwd = request.getParameter("adminPwd");
+		String adminName = request.getParameter("userName");
+		String adminPwd = request.getParameter("userPwd");
 
 		Manager m = ms.login(adminName, adminPwd);
 		if (m == null) {
 			// 用户名或者密码错误
-			out.print("<script>alert('登录失败');location.href='login.html'</script>");
+			out.print("<script>alert('登录失败');location.href='../admin/login.jsp'</script>");
 		} else {
 			//1 登录成功，需要将用户登录的信息存储在session中.
 			//HttpSession session=request.getSession();
@@ -75,7 +76,7 @@ public class ManagerServlet extends HttpServlet {
 			//使用response.addCookie
 			response.addCookie(cookie);
 			response.addCookie(cookie1);
-			out.print("<script>alert('登录成功');location.href='index.html'</script>");
+			out.print("<script>alert('登录成功');location.href='/Rosemary/admin/index.jsp'</script>");
 			
 		}
 	}
