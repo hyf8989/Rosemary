@@ -11,8 +11,11 @@ public class UserServiceImpl implements UserService{
 	  UserDao ud=new UserDaoImpl();//瀹炰緥鍖栫敤鎴锋煡璇ao瀵硅薄
 	
 	  /*
-	   * 鐢ㄦ埛娉ㄥ唽鏂规硶
-	   * 
+
+	   
+	   * 用户注册方法
+	   *  
+
 	   */
 	@Override
 	public boolean register(String userName) {
