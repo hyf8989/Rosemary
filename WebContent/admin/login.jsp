@@ -73,13 +73,13 @@
 					<input type="hidden" name="op" value="login">
 						<div class="input_outer">
 							<span class="u_user"></span>
-							 <input name="userName" class="text"
+							 <input name="adminName" class="text"
 								style="color: #FFFFFF !important" type="text"
 								placeholder="请输入账户">
 						</div>
 						<div class="input_outer">
 							<span class="us_uer"></span>
-							 <input name="userPwd" class="text"
+							 <input name="adminPwd" class="text"
 								style="color: #FFFFFF !important; position: absolute; z-index: 100;"
 								value="" type="password" placeholder="请输入密码">
 						</div>

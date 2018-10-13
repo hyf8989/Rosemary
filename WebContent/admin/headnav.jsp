@@ -191,7 +191,7 @@
 										<div class="profile_img">
 											<span class="prfil-img"><img src="images/in4.jpg" alt=""> </span>
 											<div class="user-name">
-												<p>Malorum</p>
+												<p>${sessionScope.m.adminName}</p>
 												<span>Administrator</span>
 											</div>
 											<i class="fa fa-angle-down"></i>

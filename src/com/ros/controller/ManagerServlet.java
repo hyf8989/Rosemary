@@ -59,8 +59,8 @@ public class ManagerServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		// 用户登录
 		// 先获取用户名和密码
-		String adminName = request.getParameter("userName");
-		String adminPwd = request.getParameter("userPwd");
+		String adminName = request.getParameter("adminName");
+		String adminPwd = request.getParameter("adminPwd");
 
 		Manager m = ms.login(adminName, adminPwd);
 		if (m == null) {
