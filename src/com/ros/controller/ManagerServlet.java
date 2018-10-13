@@ -2,6 +2,7 @@ package com.ros.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,17 +48,21 @@ public class ManagerServlet extends HttpServlet {
 		// 获取op
 		String op = request.getParameter("op");
 		if ("login".equals(op)) {
-			//调用验证登录的方法
+			// 调用验证登录的方法
 			doLogin(request, response);
-		}else if ("adminAdd".equals(op)) {
-			//调用添加管理员的方法
+		} else if ("adminAdd".equals(op)) {
+			// 调用添加管理员的方法
 			doAddManager(request, response);
-		}else if("adminUpdate".equals(op)) {
-			//调用修改管理员的方法
+		} else if ("adminUpdate".equals(op)) {
+			// 调用修改管理员的方法
 			doUpdateManager(request, response);
-		}else if("adminDel".equals(op)) {
-			//调用删除管理员的方法
+		} else if ("adminDel".equals(op)) {
+			// 调用删除管理员的方法
 			doDelManager(request, response);
+		} else if ("queryManager".equals(op)) {
+			List<Manager> list = ms.queryManager();
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("/admin/adminList.jsp").forward(request, response);
 		}
 	}
 
@@ -92,7 +97,7 @@ public class ManagerServlet extends HttpServlet {
 
 	protected void doAddManager(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		PrintWriter out = response.getWriter();
 		String adminName = request.getParameter("adminName");
 		String adminPwd = request.getParameter("adminPwd");
@@ -102,41 +107,45 @@ public class ManagerServlet extends HttpServlet {
 		boolean flag = ms.addManager(m);
 		if (flag) {
 			out.print("<script>alert('添加成功');location.href='/Rosemary/admin/adminList.jsp'</script>");
-		}else {
+		} else {
 			out.print("<script>alert('添加失败');location.href='/Rosemary/admin/adminAdd.jsp'</script>");
 		}
 	}
+
 	protected void doUpdateManager(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		PrintWriter out = response.getWriter();
-		/*String adminName = request.getParameter("adminName");
-		String adminPwd = request.getParameter("adminPwd");
-		String adminStatus = request.getParameter("adminStatus");
-		String adminLevel = request.getParameter("adminLevel");
-		Manager m = new Manager(adminName, adminPwd, Integer.parseInt(adminStatus), Integer.parseInt(adminLevel));
-		boolean flag = ms.addManager(m);
-		if (flag) {
-			out.print("<script>alert('添加成功');location.href='/Rosemary/admin/adminList.jsp'</script>");
-		}else {
-			out.print("<script>alert('添加失败');location.href='/Rosemary/admin/adminAdd.jsp'</script>");
-		}*/
+		/*
+		 * String adminName = request.getParameter("adminName"); String adminPwd =
+		 * request.getParameter("adminPwd"); String adminStatus =
+		 * request.getParameter("adminStatus"); String adminLevel =
+		 * request.getParameter("adminLevel"); Manager m = new Manager(adminName,
+		 * adminPwd, Integer.parseInt(adminStatus), Integer.parseInt(adminLevel));
+		 * boolean flag = ms.addManager(m); if (flag) { out.print(
+		 * "<script>alert('添加成功');location.href='/Rosemary/admin/adminList.jsp'</script>"
+		 * ); }else { out.print(
+		 * "<script>alert('添加失败');location.href='/Rosemary/admin/adminAdd.jsp'</script>"
+		 * ); }
+		 */
 	}
+
 	protected void doDelManager(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		PrintWriter out = response.getWriter();
-		/*String adminName = request.getParameter("adminName");
-		String adminPwd = request.getParameter("adminPwd");
-		String adminStatus = request.getParameter("adminStatus");
-		String adminLevel = request.getParameter("adminLevel");
-		Manager m = new Manager(adminName, adminPwd, Integer.parseInt(adminStatus), Integer.parseInt(adminLevel));
-		boolean flag = ms.addManager(m);
-		if (flag) {
-			out.print("<script>alert('添加成功');location.href='/Rosemary/admin/adminList.jsp'</script>");
-		}else {
-			out.print("<script>alert('添加失败');location.href='/Rosemary/admin/adminAdd.jsp'</script>");
-		}*/
+		/*
+		 * String adminName = request.getParameter("adminName"); String adminPwd =
+		 * request.getParameter("adminPwd"); String adminStatus =
+		 * request.getParameter("adminStatus"); String adminLevel =
+		 * request.getParameter("adminLevel"); Manager m = new Manager(adminName,
+		 * adminPwd, Integer.parseInt(adminStatus), Integer.parseInt(adminLevel));
+		 * boolean flag = ms.addManager(m); if (flag) { out.print(
+		 * "<script>alert('添加成功');location.href='/Rosemary/admin/adminList.jsp'</script>"
+		 * ); }else { out.print(
+		 * "<script>alert('添加失败');location.href='/Rosemary/admin/adminAdd.jsp'</script>"
+		 * ); }
+		 */
 	}
 
 	/**
