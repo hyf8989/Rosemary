@@ -12,23 +12,19 @@ import java.util.List;
 import org.apache.commons.beanutils.BeanUtils;
 
 /**
- * 鏁版嵁搴撴搷浣滅殑杈呭姪绫�
+ * 数据库操作的辅助类
  */
 public class BaseDao {
 
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-
-
-
-	private static final String URL = "jdbc:mysql://localhost:3306/rosemary?useunicode=true&characterEncoding=utf-8";
-
-	private static final String USER = "root"; // 鐢ㄦ埛鍚�
-	private static final String PASSWORD = "root";// 瀵嗙爜
+	private static final String URL = "jdbc:mysql://localhost:3306/jja1811?useunicode=true&characterEncoding=utf-8";
+	private static final String USER = "root"; // 用户名
+	private static final String PASSWORD = "123456";// 密码
 
 	/**
-	 * 鑾峰彇杩炴帴瀵硅薄
+	 * 获取连接对象
 	 * 
-	 * @return 杩炴帴瀵硅薄
+	 * @return 连接对象
 	 */
 	public static Connection getConn() {
 
@@ -36,24 +32,24 @@ public class BaseDao {
 		try {
 
 			Class.forName(DRIVER);
-			// 寰楀埌杩炴帴瀵硅薄
+			// 得到连接对象
 			conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
 		} catch (Exception e) {
-			throw new RuntimeException("鏁版嵁搴撹繛鎺ュけ璐�!", e);
+			throw new RuntimeException("数据库连接失败!", e);
 		}
 		return conn;
 	}
 
 	/**
-	 * 閲婃斁璧勬簮
+	 * 释放资源
 	 * 
 	 * @param rs
-	 *            缁撴灉闆�
+	 *            结果集
 	 * @param pstmt
-	 *            鍛戒护澶勭悊瀵硅薄
+	 *            命令处理对象
 	 * @param conn
-	 *            杩炴帴瀵硅薄
+	 *            连接对象
 	 */
 	public static void close(ResultSet rs, PreparedStatement pstmt, Connection conn) {
 		try {
@@ -67,12 +63,12 @@ public class BaseDao {
 				conn.close();
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException("閲婃斁璧勬簮澶辫触!", e);
+			throw new RuntimeException("释放资源失败!", e);
 		}
 	}
 
 	/**
-	 * 璁剧疆鍙傛暟
+	 * 设置参数
 	 * 
 	 * @param sql
 	 * @param conn
@@ -93,13 +89,13 @@ public class BaseDao {
 	}
 
 	/**
-	 * 閫氱敤鐨勬暟鎹簱(澧�,鍒�,鏀�)鎿嶄綔鏂规硶
+	 * 通用的数据库(增,删,改)操作方法
 	 * 
 	 * @param sql
-	 *            sql璇彞
+	 *            sql语句
 	 * @param param
-	 *            sql璇彞鍙傛暟
-	 * @return 鍙楀奖鍝嶈鏁�
+	 *            sql语句参数
+	 * @return 受影响行数
 	 */
 	public static int execute(String sql, Object... param) {
 		Connection conn = getConn();
@@ -111,7 +107,7 @@ public class BaseDao {
 	}
 
 	/**
-	 * 閫氱敤鐨勫鍒犳敼鎿嶄綔(浜嬪姟璁块棶)
+	 * 通用的增删改操作(事务访问)
 	 * 
 	 * @param sql
 	 * @param conn
@@ -124,23 +120,23 @@ public class BaseDao {
 			pstmt = setPstmt(sql, conn, pstmt, param);
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// 杩欓噷鏈�濂藉緱鍒板紓甯镐俊鎭�
+			// 这里最好得到异常信息
 			e.printStackTrace();
-			throw new RuntimeException("鏁版嵁搴撴搷浣滃け璐�!", e);
+			throw new RuntimeException("数据库操作失败!", e);
 		} finally {
 			close(null, pstmt, null);
 		}
 	}
 
 	/**
-	 * 閫氱敤鏌ヨ鏂规硶
+	 * 通用查询方法
 	 * 
 	 * @param sql
-	 *            瑕佹煡璇㈢殑sql璇彞
+	 *            要查询的sql语句
 	 * @param cla
-	 *            Class瀵硅薄
+	 *            Class对象
 	 * @param param
-	 *            鍙傛暟
+	 *            参数
 	 * @return
 	 */
 	public static Object select(String sql, Class cla, Object... param) {
@@ -153,7 +149,7 @@ public class BaseDao {
 	}
 
 	/**
-	 * 甯︿簨鍔＄殑鏌ヨ鏂规硶
+	 * 带事务的查询方法
 	 * 
 	 * @param sql
 	 * @param conn
@@ -169,22 +165,22 @@ public class BaseDao {
 			pstmt = setPstmt(sql, conn, pstmt, param);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				// ?rs 缁撴灉闆� cla Class瀵硅薄
-				// object鍏跺疄灏辨槸鏁版嵁琛ㄧ粨鏋勫搴旂殑涓�鏉″疄浣撹褰�,object灏辨槸閭ｄ釜瀹炰綋绫诲璞�
-				// 杩欎釜鏂规硶convert鏄皢缁撴灉闆嗗拰cla瀵硅薄杩涜杞崲
+				// ?rs 结果集 cla Class对象
+				// object其实就是数据表结构对应的一条实体记录,object就是那个实体类对象
+				// 这个方法convert是将结果集和cla对象进行转换
 				Object object = convert(rs, cla);
 				list.add(object);
 			}
 			return list;
 		} catch (SQLException e) {
-			throw new RuntimeException("鏁版嵁搴撴煡璇㈠け璐�!", e);
+			throw new RuntimeException("数据库查询失败!", e);
 		} finally {
 			close(rs, pstmt, null);
 		}
 	}
 
 	/**
-	 * 鑾峰彇鍗曚釜璁板綍鍊�,鏄崟涓褰曟敞鎰�,绫讳技count(1)
+	 * 获取单个记录值,是单个记录注意,类似count(1)
 	 * 
 	 * @param sql
 	 * @param param
@@ -200,7 +196,7 @@ public class BaseDao {
 	}
 
 	/**
-	 * 鑾峰彇鍗曚釜璁板綍 浜嬪姟
+	 * 获取单个记录 事务
 	 * 
 	 * @param sql
 	 * @param conn
@@ -216,7 +212,7 @@ public class BaseDao {
 	}
 
 	/**
-	 * 浜嬪姟澶勭悊鎿嶄綔
+	 * 事务处理操作
 	 * 
 	 * @param tran
 	 * @return
@@ -232,16 +228,16 @@ public class BaseDao {
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				throw new RuntimeException("鍥炴粴澶辫触!", e);
+				throw new RuntimeException("回滚失败!", e);
 			}
-			throw new RuntimeException("浜嬪姟鎵ц澶辫触", e);
+			throw new RuntimeException("事务执行失败", e);
 		} finally {
 			close(null, null, conn);
 		}
 	}
 
 	/**
-	 * 鏌ヨ缁撴灉鐨勮浆鎹�
+	 * 查询结果的转换
 	 * 
 	 * @param rs
 	 * @param cla
@@ -252,38 +248,38 @@ public class BaseDao {
 			if ("java.lang.Object".equals(cla.getName())) {
 				return rs.getObject(1);
 			}
-			// 鍒涘缓瀹炰綋绫荤殑瀹炰緥 Class绫诲璞＄殑鏂规硶锛屽垱寤烘寚瀹氬璞＄殑瀹炰緥
+			// 创建实体类的实例 Class类对象的方法，创建指定对象的实例
 			// new Goods(); new News(); new person(); new Users();
-			Object object = cla.newInstance();// new Users鐨勫璞� new Question瀵硅薄
-			//// 缁撴灉闆嗗ご淇℃伅瀵硅薄
+			Object object = cla.newInstance();// new Users的对象 new Question对象
+			//// 结果集头信息对象
 			ResultSetMetaData metaData = rs.getMetaData();
-			// 寰幆涓哄疄浣撶被鐨勫疄渚嬬殑灞炴�ц祴鍊� getColumnCount寰楀埌鍒楃殑涓暟
+			// 循环为实体类的实例的属性赋值 getColumnCount得到列的个数
 			for (int i = 1; i <= metaData.getColumnCount(); i++) {
-				// 鑾峰彇鍒楀悕
+				// 获取列名
 				String name = metaData.getColumnLabel(i);
-				//// 娉細鍒楀悕涓庡睘鎬у悕蹇呴』涓�鑷淬�傛渶濂介伒寰獑椹煎懡鍚嶆柟娉�. rs.getObject(i) 缁撴灉闆嗕腑鐨勬煡璇㈢粨鏋滃拰瀵硅薄鍖归厤
+				//// 注：列名与属性名必须一致。最好遵循骆驼命名方法. rs.getObject(i) 结果集中的查询结果和对象匹配
 				BeanUtils.setProperty(object, name, rs.getObject(i));
 			}
 			return object;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("灞炴�ц缃け璐�!", e);
+			throw new RuntimeException("属性设置失败!", e);
 		}
 	}
 
 	/**
-	 * 鍒嗛〉鎿嶄綔 mysql;
+	 * 分页操作 mysql;
 	 * 
 	 * @param sql
-	 *            sql璇彞 select * from users
+	 *            sql语句 select * from users
 	 * @param page
-	 *            椤电爜(1,2,3)
+	 *            页码(1,2,3)
 	 * @param pageSize
-	 *            姣忛〉鏄剧ず鐨勮褰曟暟
+	 *            每页显示的记录数
 	 * @param cla
-	 *            鎸囧畾绫诲瀷鐨刢lass
+	 *            指定类型的class
 	 * @param param
-	 *            鎸囧畾鍙傛暟
+	 *            指定参数
 	 * @return
 	 */
 	public static PageData getPage(String sql, Integer page, Integer pageSize, Class cla, Object... param) {
@@ -296,37 +292,37 @@ public class BaseDao {
 		if (pageSize == null || pageSize < 1) {
 			pageSize = 10;
 		}
-		// 鏌ヨ瀵瑰簲鐨勮褰曟暟鏈夊嚑鏉�
+		// 查询对应的记录数有几条
 		Integer count = Integer.parseInt(getFirst(selSql, param).toString());
 
 		int totalPage = count / pageSize;
-		// 鐪嬫槸鍚︽湁浣欐暟 47%10
+		// 看是否有余数 47%10
 		if (count % pageSize != 0) {
 			totalPage++;
 		}
 
-		// 濡傛灉鐢ㄦ埛浼犻�掔殑鍙傛暟 page 宸茬粡瓒呭嚭鎬婚〉鏁�
+		// 如果用户传递的参数 page 已经超出总页数
 		if (page > totalPage) {
-			// page搴旇涓烘渶鍚庝竴椤�
+			// page应该为最后一页
 			page = totalPage;
 		}
 
-		// 璁剧疆銆愯绠椼�� 璧峰浣嶇疆
-		// page 1=>绗竴椤� start =>0
-		// page 2 =>绗簩椤� start => 10
+		// 设置【计算】 起始位置
+		// page 1=>第一页 start =>0
+		// page 2 =>第二页 start => 10
 		int start = (page - 1) * pageSize;
-		// 瀹屾暣鐨勬煡璇㈣鍙�
+		// 完整的查询语句
 		selSql = sql + " limit " + start + "," + pageSize;
-		// 鎵ц鏌ヨ
+		// 执行查询
 		List list = (List) select(selSql, cla, param);
-		// 鍒涘缓PageData
+		// 创建PageData
 		PageData data = new PageData(list, count, pageSize, page);
-		// 杩斿洖鍊间负PageData
+		// 返回值为PageData
 		return data;
 	}
 
 	/**
-	 * 鍒嗛〉鎿嶄綔 sqlserver
+	 * 分页操作 sqlserver
 	 * 
 	 * @param page
 	 * @param pageSize
@@ -335,8 +331,8 @@ public class BaseDao {
 	 * @return
 	 */
 	public static PageData getPage(Integer page, Integer pageSize, Class cla, String identity) {
-		String name = cla.getName().substring(cla.getName().lastIndexOf(".") + 1);// 鏍规嵁鍛藉悕瑙勫垯浠庣被鍚嶈幏鍙栨暟鎹簱琛ㄥ悕
-		String selSql = "select count(*) from " + name;// 鑾峰彇鎬绘暟
+		String name = cla.getName().substring(cla.getName().lastIndexOf(".") + 1);// 根据命名规则从类名获取数据库表名
+		String selSql = "select count(*) from " + name;// 获取总数
 		if (page == null) {
 			page = 1;
 		}
@@ -346,7 +342,7 @@ public class BaseDao {
 		int start = (page - 1) * pageSize;
 		Integer count = Integer.parseInt(getFirst(selSql, null).toString());
 		selSql = "select top " + pageSize + " * from " + name + " where " + identity + " not in (select top " + start
-				+ " " + identity + " from " + name + " )"; // 鎷兼帴鏌ヨ璇彞
+				+ " " + identity + " from " + name + " )"; // 拼接查询语句
 		List list = (List) select(selSql, cla, null);
 		PageData data = new PageData(list, count, pageSize, page);
 		return data;
