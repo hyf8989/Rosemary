@@ -82,6 +82,7 @@ public class UserServlet extends HttpServlet {
 			
 		} 
 		
+		//用户登录
 		else if(op.equals("login")) {
 			String userName=request.getParameter("userName");
 			String userPwd=MD5Util.getEncodeByMd5(request.getParameter("userPwd"));
@@ -128,7 +129,22 @@ public class UserServlet extends HttpServlet {
 			
 		}
 		
-		
+		else if(op.equals("updatePwd")) {
+			String messge="";
+			String oldPassword=request.getParameter("oldPwd");
+			String newPassword=request.getParameter("newPwd");
+			boolean flag=us.updatePwd(oldPassword, newPassword);
+			
+			if(flag) {
+				messge="密码修改成功";
+			}
+			else {
+				messge="密码修改失败";
+			}
+			
+			out.print(messge);
+			out.close();
+		}
 		
 		
 	}

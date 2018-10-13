@@ -112,4 +112,5 @@ public boolean insertUserDetail(UserDetailInfo uDI) {
 	return flag;
 }
 
+
 }
