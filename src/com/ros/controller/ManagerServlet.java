@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import com.ros.entity.Manager;
 import com.ros.service.ManagerService;
 import com.ros.service_impl.ManagerServiceImpl;
@@ -45,20 +44,30 @@ public class ManagerServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		// 通过response的方法得到一个jspwriter
 		PrintWriter out = response.getWriter();
-		//获取op
+		// 获取op
 		String op = request.getParameter("op");
-		if("login".equals(op)) {
+		if ("login".equals(op)) {
+			//调用验证登录的方法
 			doLogin(request, response);
+		}else if ("adminAdd".equals(op)) {
+			//调用添加管理员的方法
+			doAddManager(request, response);
+		}else if("adminUpdate".equals(op)) {
+			//调用修改管理员的方法
+			doUpdateManager(request, response);
+		}else if("adminDel".equals(op)) {
+			//调用删除管理员的方法
+			doDelManager(request, response);
 		}
 	}
-	
+
 	protected void doLogin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		// 通过response的方法得到一个jspwriter
 		PrintWriter out = response.getWriter();
 		// 用户登录
-		// 先获取用户名和密码
+		// 先获取管理员账号和密码
 		String adminName = request.getParameter("adminName");
 		String adminPwd = request.getParameter("adminPwd");
 
@@ -67,18 +76,67 @@ public class ManagerServlet extends HttpServlet {
 			// 用户名或者密码错误
 			out.print("<script>alert('登录失败');location.href='/Rosemary/admin/login.jsp'</script>");
 		} else {
-			//1 登录成功，需要将用户登录的信息存储在session中.
-			//HttpSession session=request.getSession();
+			// 1 登录成功，需要将用户登录的信息存储在session中.
+			// HttpSession session=request.getSession();
 			request.getSession().setAttribute("m", m);
-			//将用户登录的信息存储在cookie
-			Cookie  cookie =new Cookie("adminName",m.getAdminName());
-			Cookie  cookie1 =new Cookie("adminPwd",adminPwd);
-			//使用response.addCookie
+			// 将用户登录的信息存储在cookie
+			Cookie cookie = new Cookie("adminName", m.getAdminName());
+			Cookie cookie1 = new Cookie("adminPwd", adminPwd);
+			// 使用response.addCookie
 			response.addCookie(cookie);
 			response.addCookie(cookie1);
 			out.print("<script>alert('登录成功');location.href='/Rosemary/admin/index.jsp'</script>");
-			
+
 		}
+	}
+
+	protected void doAddManager(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		PrintWriter out = response.getWriter();
+		String adminName = request.getParameter("adminName");
+		String adminPwd = request.getParameter("adminPwd");
+		String adminStatus = request.getParameter("adminStatus");
+		String adminLevel = request.getParameter("adminLevel");
+		Manager m = new Manager(adminName, adminPwd, Integer.parseInt(adminStatus), Integer.parseInt(adminLevel));
+		boolean flag = ms.addManager(m);
+		if (flag) {
+			out.print("<script>alert('添加成功');location.href='/Rosemary/admin/adminList.jsp'</script>");
+		}else {
+			out.print("<script>alert('添加失败');location.href='/Rosemary/admin/adminAdd.jsp'</script>");
+		}
+	}
+	protected void doUpdateManager(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		PrintWriter out = response.getWriter();
+		/*String adminName = request.getParameter("adminName");
+		String adminPwd = request.getParameter("adminPwd");
+		String adminStatus = request.getParameter("adminStatus");
+		String adminLevel = request.getParameter("adminLevel");
+		Manager m = new Manager(adminName, adminPwd, Integer.parseInt(adminStatus), Integer.parseInt(adminLevel));
+		boolean flag = ms.addManager(m);
+		if (flag) {
+			out.print("<script>alert('添加成功');location.href='/Rosemary/admin/adminList.jsp'</script>");
+		}else {
+			out.print("<script>alert('添加失败');location.href='/Rosemary/admin/adminAdd.jsp'</script>");
+		}*/
+	}
+	protected void doDelManager(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		PrintWriter out = response.getWriter();
+		/*String adminName = request.getParameter("adminName");
+		String adminPwd = request.getParameter("adminPwd");
+		String adminStatus = request.getParameter("adminStatus");
+		String adminLevel = request.getParameter("adminLevel");
+		Manager m = new Manager(adminName, adminPwd, Integer.parseInt(adminStatus), Integer.parseInt(adminLevel));
+		boolean flag = ms.addManager(m);
+		if (flag) {
+			out.print("<script>alert('添加成功');location.href='/Rosemary/admin/adminList.jsp'</script>");
+		}else {
+			out.print("<script>alert('添加失败');location.href='/Rosemary/admin/adminAdd.jsp'</script>");
+		}*/
 	}
 
 	/**

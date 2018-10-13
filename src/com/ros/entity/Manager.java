@@ -61,6 +61,14 @@ public class Manager {
 		this.adminStatus = adminStatus;
 		this.adminLevel = adminLevel;
 	}
+	
+	public Manager(String adminName, String adminPwd, int adminStatus, int adminLevel) {
+		super();
+		this.adminName = adminName;
+		this.adminPwd = adminPwd;
+		this.adminStatus = adminStatus;
+		this.adminLevel = adminLevel;
+	}
 
 	@Override
 	public String toString() {

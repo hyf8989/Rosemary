@@ -28,10 +28,10 @@
 							</a>
 							<ul id="menu-academico-sub">
 								<li id="menu-academico-avaliacoes">
-									<a href="userAdd.html">用户添加</a>
+									<a href="userAdd.jsp">用户添加</a>
 								</li>
 								<li id="menu-academico-avaliacoes">
-									<a href="userList.html">用户列表</a>
+									<a href="userList.jsp">用户列表</a>
 								</li>
 
 							</ul>
@@ -42,13 +42,13 @@
 							</a>
 							<ul id="menu-academico-sub">
 								<li id="menu-academico-avaliacoes">
-									<a href="goodsAdd.html">商品添加</a>
+									<a href="goodsAdd.jsp">商品添加</a>
 								</li>
 								<li id="menu-academico-avaliacoes">
-									<a href="goodsList.html">商品列表</a>
+									<a href="goodsList.jsp">商品列表</a>
 								</li>
 								<li id="menu-academico-avaliacoes">
-									<a href="portGoods.html">新品上架</a>
+									<a href="portGoods.jsp">新品上架</a>
 								</li>
 
 							</ul>
@@ -65,10 +65,10 @@
 							</a>
 							<ul id="menu-academico-sub">
 								<li id="menu-academico-avaliacoes">
-									<a href="adminAdd.html">管理员添加</a>
+									<a href="adminAdd.jsp">管理员添加</a>
 								</li>
 								<li id="menu-academico-avaliacoes">
-									<a href="adminList.html">管理员列表</a>
+									<a href="adminList.jsp">管理员列表</a>
 								</li>
 								
 							</ul>

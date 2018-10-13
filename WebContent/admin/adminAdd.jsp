@@ -64,33 +64,33 @@
 							<h2 class="agileits-icons-title">管理员添加界面</h2>
 							<br />
 							<br />
-							<form action="" style="margin-bottom: 40%;">
+							<form action="/Rosemary/manager.action" style="margin-bottom: 40%;">
 								<div class="form-group">
 									<label for="exampleInputEmail1">管理员账号：</label> <input
-										type="email" class="form-control" id="exampleInputEmail1"
+										type="email" name="adminName" class="form-control" id="exampleInputEmail1"
 										aria-describedby="emailHelp" placeholder="Enter email">
 									<small id="emailHelp" class="form-text text-muted">We'll
 										never share your email with anyone else.</small>
 								</div>
 								<div class="form-group">
 									<label for="exampleInputPassword1">密码:</label> <input
-										type="password" class="form-control"
+										type="password" name="adminPwd" class="form-control"
 										id="exampleInputPassword1" placeholder="Password">
 								</div>
 								<div class="form-group">
 									<label for="exampleInputAdminStatus">管理员状态:</label> <select
-										class="form-control" name="exampleInputAdminStatus">
+										class="form-control" name="adminStatus">
 										<option>请选择</option>
-										<option>锁定</option>
-										<option>解锁</option>
+										<option value="0">锁定</option>
+										<option value="1">解锁</option>
 									</select>
 								</div>
 								<div class="form-group">
 									<label for="exampleInputAdminLevel">管理员身份:</label> <select
-										class="form-control" name="exampleInputAdminLevel">
+										class="form-control" name="adminLevel">
 										<option>请选择</option>
-										<option>店铺管理员</option>
-										<option>系统管理员</option>
+										<option value="1">店铺管理员</option>
+										<option value="0">系统管理员</option>
 									</select>
 								</div>
 								<center>
@@ -99,7 +99,7 @@
 											id="exampleCheck1"> <label class="form-check-label"
 											for="exampleCheck1" style="margin-top: 40px;">确定添加</label>
 									</div>
-									<button type="button" class="btn btn-primary" id="adminAdd">添加管理员</button>
+									<button type="submit" class="btn btn-primary" id="adminAdd">添加管理员</button>
 								</center>
 							</form>
 
