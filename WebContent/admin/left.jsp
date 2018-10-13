@@ -54,7 +54,7 @@
 							</ul>
 						</li>
 						<li id="menu-academico">
-							<a href="orderList.html"><i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp;<span> 订单管理</span>
+							<a href="orderList.jsp"><i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp;<span> 订单管理</span>
 								<div class="clearfix"></div>
 							</a>
 

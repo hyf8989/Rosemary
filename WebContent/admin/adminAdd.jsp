@@ -65,6 +65,7 @@
 							<br />
 							<br />
 							<form action="/Rosemary/manager.action" style="margin-bottom: 40%;">
+							<input type="hidden" name="op" value="adminAdd">
 								<div class="form-group">
 									<label for="exampleInputEmail1">管理员账号：</label> <input
 										type="email" name="adminName" class="form-control" id="exampleInputEmail1"
