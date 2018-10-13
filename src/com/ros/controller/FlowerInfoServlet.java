@@ -2,6 +2,7 @@ package com.ros.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,12 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ros.entity.FlowerInfo;
+import com.ros.service.FlowerInfoService;
+import com.ros.service_impl.FlowerInfoServiceImpl;
+
 /**
  *   鲜花业务控制器
  */
 @WebServlet("/flower.do")
 public class FlowerInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	FlowerInfoService fIS=new FlowerInfoServiceImpl();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,7 +41,13 @@ public class FlowerInfoServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		 PrintWriter out=response.getWriter();
-		 
+		 if(op.equals("getFlowerInfoByLimit")) {
+			 ArrayList<FlowerInfo> list=fIS.getFlowerInfoByLimit();
+			  request.getSession().setAttribute("list", list);
+			 response.sendRedirect("/Rosemary/index/index.jsp");
+			
+		 }
+		
 		 
 
 

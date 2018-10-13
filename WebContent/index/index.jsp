@@ -1,6 +1,9 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${sessionScope.list eq null}">
+<script>location.href="/Rosemary/flower.do?op=getFlowerInfoByLimit";</script>
+</c:if>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -25,6 +28,7 @@
 	</head>
 
 	<body>
+	
 	<!-- header-start -->
 	<%@ include file="headhav.jsp" %>
 		<!-- header-end -->
@@ -116,14 +120,18 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="new-product wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+				<div class="new-product wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
 						<div class="new-carousel">
 						
-							<div class="col-md-12">
+				<c:forEach var="flower" items="${sessionScope.list }">
+				
+					<div class="col-md-12">
+						
+						
 								<!-- single-product-start -->
 								<div class="single-product">
 									<div class="single-product-img">
-										<a href="#" class="product-show"><img src="img/singlepro/红色康乃馨.jpg" alt="" /></a>
+										<a href="#" class="product-show"><img src="${flower.bPicture }" alt="" /></a>
 										<span class="sale-box">
                                                             <span class="sale">Sale</span>
 										</span>
@@ -133,7 +141,7 @@
 									</div>
 									<div class="single-product-content">
 										<div class="product-title">
-											<h5><a href="#">红色康乃馨</a></h5>
+											<h5><a href="#">${flower.flowerName}</a></h5>
 										</div>
 										<div class="rating">
 											<div class="star star-on"></div>
@@ -154,13 +162,20 @@
 									</div>
 								</div>
 								<!-- single-product-end -->
-							</div>
-							
 							
 						
-						</div>
+							
+							
+							</div>
+						
+					
+				
+				</c:forEach>
+				
+					</div>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 		<!-- new-product-area-end -->
@@ -1009,16 +1024,16 @@
 		
 
 		<script type="text/javascript">
-			
+			  
 				$("#userName").text(${sessionScope.ub.userName});  
 				layui.use('layer', function(){ 
 					  var layer = layui.layer;
-					  
-					  
+					    
+					   
 					});              
 					  	$(".product-show").click(function(){
-					  		 if(${sessionScope.userName eq null}){
-					  			
+					  		 if(${sessionScope.userName eq null}){ 
+					  		 	 
 					  			layer.open({ 
 					  	  			title:'友情提醒',
 					  	  			skin:"layui-layer-lan",
@@ -1036,7 +1051,7 @@
 					  		}
 					  		 
 					  		
-					  		
+					  		 
 					  		
 					  	
 					  	});
@@ -1044,7 +1059,7 @@
 				  
 				
          
-			});
+			
 		</script>
 
 	</body>
