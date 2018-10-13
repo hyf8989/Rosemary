@@ -135,7 +135,8 @@
 											<!-- single-product-start -->
 											<div class="single-product">
 												<div class="single-product-img">
-													<a href="#" class="product-show"><img src="img/singlepro/白玫瑰.jpg" alt="" /></a>
+												
+													<a href="#" class="product-show"><img src="img/singlepro/白玫瑰.jpg" alt="123" /></a>
 													<span class="sale-box">
                                                             <span class="sale">Sale</span>
 													</span>
@@ -171,7 +172,7 @@
 											<!-- single-product-start -->
 											<div class="single-product">
 												<div class="single-product-img">
-													<a href="#"><img src="img/singlepro/白色多头香水百合.jpg" alt="" /></a>
+													<a href="#" class="product-show"><img src="img/singlepro/白色多头香水百合.jpg" alt="" /></a>
 													<span class="sale-box">
                                                             <span class="sale">Sale</span>
 													</span>
@@ -1873,14 +1874,11 @@
 
 		<script type="text/javascript">
 			$(function() {
-				$("#search").click(function() {
-					$("#slider").css({
-						"display": "none"
-					});
-
-				});
-				$("#userName").text("当前用户：${sessionScope.ub.userName}");
-
+				$("#userName").text(${sessionScope.ub.userName});
+				
+				
+				
+         
 			});
 		</script>
 		<script>
@@ -1894,19 +1892,26 @@
   
 });              
   	$(".product-show").click(function(){
-  		layer.open({
-  			title:'友情提醒',
-  			skin:"layui-layer-lan",
-  			content:'<p>检测到您目前还没有登录</p>',
-  			btn:['转到登录界面','不了，我只是浏览商品'],
+  		if(${sessionScope.userName eq null}){
   			
-  			yes:function () {
-  				location.href='login.html';
-  			},
-  			btn2:function () {
-  				location.href="shop.html";
-  			}
-  		});
+  			layer.open({
+  	  			title:'友情提醒',
+  	  			skin:"layui-layer-lan",
+  	  			content:'<p>检测到您目前还没有登录</p>',
+  	  			btn:['转到登录界面','不了，我只是浏览商品'],
+  	  			
+  	  			yes:function () {
+  	  				location.href='login.jsp';
+  	  			},
+  	  			btn2:function () {
+  	  				
+  	  				location.href="productionDetail.jsp";
+  	  			}
+  	  		});
+  		}
+  		
+  		
+  		
   	
   	});
  

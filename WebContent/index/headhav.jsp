@@ -135,17 +135,17 @@
 								<nav>
 									<ul>
 										<li>
-											<a href="index.html">首页</a>
+											<a href="index.jsp">首页</a>
 										</li>
 
 										<li>
-											<a href="shop.html">购物</a>
+											<a href="shop.jsp">购物</a>
 										</li>
 										<li>
-											<a href="about.html">关于我们</a>
+											<a href="about.jsp">关于我们</a>
 										</li>
 										<li>
-											<a href="contact.html">联系我们</a>
+											<a href="contact.jsp">联系我们</a>
 										</li>
 									</ul>
 								</nav>
@@ -163,16 +163,16 @@
 								<nav id="mobile_menu_active">
 									<ul>
 										<li>
-											<a href="index.html">Home</a>
+											<a href="index.jsp">Home</a>
 										</li>
 										<li>
-											<a href="about.html">About</a>
+											<a href="about.jsp">About</a>
 										</li>
 										<li>
-											<a href="shop.html">Shop</a>
+											<a href="shop.jsp">Shop</a>
 										</li>
 										<li>
-											<a href="contact.html">contact</a>
+											<a href="contact.jsp">contact</a>
 										</li>
 									</ul>
 								</nav>

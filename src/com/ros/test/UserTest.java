@@ -31,19 +31,20 @@ import com.ros.util.BaseDao;
 public class UserTest {
 	
 	public static void main(String[] args) {
-		/*UserService us=new UserServiceImpl();
-		
+		UserService us=new UserServiceImpl();
 		System.out.println(us.register("小黄"));
 		
-		*/
-		UserService us=new UserServiceImpl();
+		/*System.out.println(us.register("小黄"));*/
+		
+		
 		/*UserBasicInfo ub=new UserBasicInfo("大黄", "12345", "2018-10-11 20:11:06", "2018-10-11 20:11:06");
 		
 		System.out.println(us.insertUser(ub));*/
 		/*UserBasicInfo ub=us.getUserBasicInfoByUserName("admin3");*/
-		UserDetailInfo uDI=new UserDetailInfo(1, "17720838367", "2018-10-13 00:37:10", "2018-10-13 00:37:10");
+		/*UserDetailInfo uDI=new UserDetailInfo(1, "17720838367", "2018-10-13 00:37:10", "2018-10-13 00:37:10");
 		
-		System.out.println(us.insertUserDetail(uDI));
+		System.out.println(us.insertUserDetail(uDI));*/
+	
 		
 	}
 

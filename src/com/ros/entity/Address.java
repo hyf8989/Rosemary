@@ -13,7 +13,7 @@ public class Address {
 	private String receiverCity;
 	private String receiverDistrict;
 	private String receiverName;
-	private int  receiverPhone;
+	private String  receiverPhone;
 	private String addressInfo;
 
 	
@@ -47,10 +47,10 @@ public class Address {
 	public void setReceiverName(String receiverName) {
 		this.receiverName = receiverName;
 	}
-	public int getReceiverPhone() {
+	public String getReceiverPhone() {
 		return receiverPhone;
 	}
-	public void setReceiverPhone(int receiverPhone) {
+	public void setReceiverPhone(String receiverPhone) {
 		this.receiverPhone = receiverPhone;
 	}
 	public String getReceiverProvince() {
@@ -102,7 +102,7 @@ public class Address {
 		// TODO Auto-generated constructor stub
 	}
 	public Address(int addressId, String userName, String receiverProvince, String receiverCity,
-			String receiverDistrict, String addressInfo, String receiverName, int receiverPhone, int receiverZip,
+			String receiverDistrict, String addressInfo, String receiverName, String receiverPhone, int receiverZip,
 			String createTime, String updateTime) {
 		super();
 		this.addressId = addressId;
