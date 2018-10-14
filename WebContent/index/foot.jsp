@@ -39,50 +39,14 @@
 											</li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3 col-xs-12">
-										<h4>My account</h4>
-										<ul class="toggle-footer">
-											<li>
-												<a title="My orders" href="#">My orders</a>
-											</li>
-											<li>
-												<a title="My credit slips" href="#"> My credit slips</a>
-											</li>
-											<li>
-												<a title="My addresses" href="#">My addresses</a>
-											</li>
-											<li>
-												<a title="My personal info" href="#">My personal info</a>
-											</li>
-										</ul>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-12">
-										<h4>category</h4>
-										<ul class="toggle-footer">
-											<li>
-												<a title="My orders" href="#">women</a>
-											</li>
-											<li>
-												<a title="My credit slips" href="#">men</a>
-											</li>
-											<li>
-												<a title="My addresses" href="#">category</a>
-											</li>
-											<li>
-												<a title="My personal info" href="#">equipment</a>
-											</li>
-											<li>
-												<a title="My personal info" href="#">watch</a>
-											</li>
-										</ul>
-									</div>
-									<div class="col-md-3  col-sm-3 col-xs-12">
-										<h4>Shop Location</h4>
+									
+									<div class="col-md-3  col-sm-3 col-xs-12 col-md-offset-6 col-sm-offset-6">
+										<h4>商铺地址</h4>
 										<div class="footer-contact">
-											<p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dignissim erat ut laoreet pharetra....
+											<p class="description">厦门
 											</p>
 											<p class="address add">
-												<span>No. 96, Jecica City, NJ 07305, New York, USA</span>
+												<span>吕岭路明发园小区</span>
 											</p>
 											<p class="phone add">
 												<span> 01234-567890</span>
@@ -121,7 +85,7 @@
 							</div>
 							<div class="col-md-6 col-sm-12 col-xs-12 address">
 								Copyright &copy; 2017.Company name All rights reserved.
-								<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+								<a target="_blank" href="">Rosemary</a>
 							</div>
 						</div>
 					</div>

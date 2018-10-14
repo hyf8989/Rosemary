@@ -19,5 +19,16 @@ public class FlowerInfoServiceImpl implements FlowerInfoService {
 		// TODO Auto-generated method stub
 		return fID.getFlowerInfoByLimit();
 	}
+	/**   
+	 * <p>Title: getFlowerInfoByPrice</p>   
+	 * <p>Description: </p>   
+	 * @return   
+	 * @see com.ros.service.FlowerInfoService#getFlowerInfoByPrice()   
+	 */
+	@Override
+	public ArrayList<FlowerInfo> getFlowerInfoByPrice() {
+		// TODO Auto-generated method stub
+		return fID.getFlowerInfoByPrice();
+	}
 
 }

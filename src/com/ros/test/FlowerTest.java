@@ -12,9 +12,9 @@ public class FlowerTest {
 
 	public static void main(String[] args) {
 		FlowerInfoService fIS=new FlowerInfoServiceImpl();
-		ArrayList<FlowerInfo> LIST =fIS.getFlowerInfoByLimit();
+		ArrayList<FlowerInfo> LIST =fIS.getFlowerInfoByPrice();
 		for (FlowerInfo flowerInfo : LIST) {
-			System.out.println(flowerInfo.getbPicture());
+			System.out.println(flowerInfo.getPrice());
 			
 		}
 	}

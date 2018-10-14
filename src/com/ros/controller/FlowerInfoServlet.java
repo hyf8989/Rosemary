@@ -41,11 +41,19 @@ public class FlowerInfoServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		 PrintWriter out=response.getWriter();
+		 //最新鲜花
 		 if(op.equals("getFlowerInfoByLimit")) {
 			 ArrayList<FlowerInfo> list=fIS.getFlowerInfoByLimit();
 			  request.getSession().setAttribute("list", list);
 			 response.sendRedirect("/Rosemary/index/index.jsp");
 			
+		 }
+		 //顶级鲜花
+		 else if(op.equals("getFlowerInfoByPrice")) {
+			 ArrayList<FlowerInfo> list=fIS.getFlowerInfoByPrice();
+			  request.getSession().setAttribute("list2", list);
+			 response.sendRedirect("/Rosemary/index/index.jsp");
+			 
 		 }
 		
 		 
