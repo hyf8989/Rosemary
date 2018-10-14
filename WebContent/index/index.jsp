@@ -171,8 +171,8 @@
 										<div class="product-action">
 											<button class="btn btn-default add-cart" title="加入购物车" >加入购物车</button>
 											<a class="add-wishlist" href="#" title="加入收藏夹"><i
-												class="fa fa-heart"></i></a> <a class="quick-view" href="#"
-												title="快速查看" data-toggle="modal" data-target="#myModal"><i
+												class="fa fa-heart"></i></a> <a class="quick-view look" href="#"
+												title="快速查看" data-toggle="modal" data-target="#myModal" ><i
 												class="fa fa-search"></i></a>
 										</div>
 									</div>
@@ -671,126 +671,8 @@
 	<!-- footer-start -->
 	<%@ include file="foot.jsp"%>
 	<!-- footer-end -->
-	<!-- Modal -->
-	<div id="myModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">
-					<div class="product-details">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-5 col-xs-12 col-sm-5">
-									<div class="picture-tab">
-										<ul class="pic-tabs">
-											<li class="active"><a data-toggle="tab" href="#pic11"><img
-													src="img/pro-tab/1.jpg" alt="" /></a></li>
-											<li><a data-toggle="tab" href="#pic12"><img
-													src="img/pro-tab/2.jpg" alt="" /></a></li>
-											<li><a data-toggle="tab" href="#pic13"><img
-													src="img/pro-tab/3.jpg" alt="" /></a></li>
-											<li><a data-toggle="tab" href="#pic14"><img
-													src="img/pro-tab/4.jpg" alt="" /></a></li>
-										</ul>
-										<div class="tab-content">
-											<div id="pic11" class="tab-pane fade in active">
-												<!-- single-product-start -->
-												<div class="single-product">
-													<div class="single-product-img">
-														<a href="#"><img src="img/singlepro/21.jpg" alt="" /></a>
-														<span class="sale-box"> <span class="sale">Sale</span>
-														</span> <span class="new-box"> <span class="new">New</span>
-														</span>
-													</div>
-												</div>
-												<!-- single-product-end -->
-											</div>
-											<div id="pic12" class="tab-pane fade">
-												<!-- single-product-start -->
-												<div class="single-product">
-													<div class="single-product-img">
-														<a href="#"><img src="img/singlepro/22.jpg" alt="" /></a>
-														<span class="sale-box"> <span class="sale">Sale</span>
-														</span> <span class="new-box"> <span class="new">New</span>
-														</span>
-													</div>
-												</div>
-												<!-- single-product-end -->
-											</div>
-											<div id="pic13" class="tab-pane fade">
-												<!-- single-product-start -->
-												<div class="single-product">
-													<div class="single-product-img">
-														<a href="#"><img src="img/singlepro/23.jpg" alt="" /></a>
-														<span class="sale-box"> <span class="sale">Sale</span>
-														</span> <span class="new-box"> <span class="new">New</span>
-														</span>
-													</div>
-												</div>
-												<!-- single-product-end -->
-											</div>
-											<div id="pic14" class="tab-pane fade">
-												<!-- single-product-start -->
-												<div class="single-product">
-													<div class="single-product-img">
-														<a href="#"><img src="img/singlepro/24.jpg" alt="" /></a>
-														<span class="sale-box"> <span class="sale">Sale</span>
-														</span> <span class="new-box"> <span class="new">New</span>
-														</span>
-													</div>
-												</div>
-												<!-- single-product-end -->
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-7 col-xs-12 col-sm-7">
-									<div class="product-details-info">
-										<h5 class="product-title">Feugiat justo lacinia</h5>
-										<div class="price-box">
-											<span class="price">£50.00</span> <span class="old-price">£70.00</span>
-										</div>
-										<div class="rating">
-											<div class="star star-on"></div>
-											<div class="star star-on"></div>
-											<div class="star star-on"></div>
-											<div class="star star-on"></div>
-											<div class="star"></div>
-										</div>
-										<div class="short-description">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing
-												elit. Nam fringilla augue nec est tristique auctor. Donec
-												non est at libero vulputate rutrum. Morbi ornare lectus quis
-												justo gravida semper. Nulla tellus mi, vulputate adipiscing
-												cursus eu, suscipit id nulla.</p>
-										</div>
-										<div class="add-cart">
-											<p class="quantity cart-plus-minus">
-												<label>Quantity</label> <input type="text" value="1" />
-											</p>
-											<div class="shop-add-cart">
-												<button>add to cart</button>
-											</div>
-										</div>
-										<div class="widget-icon">
-											<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-												class="fa fa-twitter"></i></a> <a href="#"><i
-												class="fa fa-linkedin"></i></a> <a href="#"><i
-												class="fa fa-google-plus"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- modal-end -->
+	
+
 	<!-- all js here -->
 	<!-- jquery latest version -->
 	<script src="js/vendor/jquery-1.12.0.min.js"></script>
@@ -832,7 +714,7 @@
 					  		//获取该鲜花的ID
 					  		var id=$(this).parents(".flower-show").attr("id");
 					  	console.log(id);
-					  		 
+					  		  
 					  		 if(${sessionScope.ub eq null}){ 
 					  		 	 
 					  			layer.open({ 
@@ -863,6 +745,7 @@
 					  		
 					  	
 					  	});
+				     
 				      
 				
 				  

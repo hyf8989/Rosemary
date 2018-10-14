@@ -82,7 +82,20 @@ $(function(){
 	 
 	
 	});
+	//键盘监听回车事件
+	$('#userPwd').bind('keyup', function(event) {
+
+		　　if (event.keyCode == "13") {
+
+		　　　　//回车执行查询 
+
+		　　　　$('#login').click();
+
+		　　}
+
+		});
 	});
+	
 </script>
 
 

@@ -44,7 +44,7 @@ public class UserTest {
 		Date date=new Date();
 		
 		String dateStr=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
-		
+		 
 		String newPwd="12346";
 		boolean flag=us.updatePwd(userName,dateStr, newPwd);
 	System.out.println(flag);
