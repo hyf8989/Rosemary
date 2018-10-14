@@ -152,6 +152,8 @@ public class UserServlet extends HttpServlet {
 			else{
 				messge="与原密码不一致" ;
 			}
+			out.print(messge);
+			out.close();
 			
 		}
 		

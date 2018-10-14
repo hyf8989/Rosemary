@@ -71,18 +71,20 @@
     	 
     	 $("#oldPwd").change(function(){
     		    var oldPwd=$(this).val();
-    			console.log(userName);
+    			console.log(oldPwd);
     			console.log(userPwd);
  				 $.get("/Rosemary/user.action","op=verifyPwd&userPwdInput="+oldPwd+"&userPwd="+userPwd,function(data,status){
  					   layer.msg('<span style="color:black;">'+data+'</span>', {
  							icon:6,
  							time: 1000
  						}); 
+ 					   
+ 					  
  					   if(data=="与原密码一致"){
  						   flag=true;
  					   }
  					   else{
- 						   $(this).val("");
+ 						   $("#oldPwd").val("");
  					   }
  					   
  				   });
@@ -139,7 +141,10 @@
 							anim: 0,
 							btn: ['OK'],
 							yes: function(index, layero) {
+								//记得清除session中存储的用户对象
+								<% session.removeAttribute("ub"); %>
 								location.href="login.jsp";
+								
 							}
 							
 						});

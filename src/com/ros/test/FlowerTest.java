@@ -20,8 +20,8 @@ public class FlowerTest {
 			System.out.println(flowerInfo.getPrice());
 			
 		}*/
-		FlowerInfoDao fIF=new FlowerInfoDaoImpl();
-		PageData<FlowerInfo> pd=fIF.queryFlowerInfoByPage(1, 2, "%%", 0, 1000, 1, 9, "flowerName", "desc");
+		FlowerInfoService fIS=new FlowerInfoServiceImpl();
+		PageData<FlowerInfo> pd=fIS.queryFlowerInfoByPage(1, 2, "%%", 0, 1000, 1, 9, "flowerName", "desc");
 	    System.out.println(pd.getTotal());
 	}
 }

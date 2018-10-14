@@ -165,6 +165,7 @@
 										<div class="tab-content">
 											<div role="tabpanel" class="tab-pane active fade in"
 												id="gried_view">
+												
 												<div class="col-md-4 col-sm-6 col-xs-12 mar-bot">
 													<!-- single-product-start -->
 													<div class="single-product">
@@ -205,7 +206,7 @@
 													</div>
 													<!-- single-product-end -->
 												</div>
-											</div>jihao
+											</div>
 											
 										</div>
 									</div>
