@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import com.ros.dao.UserDao;
 import com.ros.entity.UserBasicInfo;
 import com.ros.entity.UserDetailInfo;
-import com.ros.util.BaseDao;;
+import com.ros.util.BaseDao;
+import com.ros.util.MD5Util;;
 /**
  * 自定义UserDao接口的实现类：UserDaoImpl
  * @author Administrator
@@ -67,11 +68,21 @@ public class UserDaoImpl implements UserDao  {
 		return BaseDao.execute(sql, ub.getUserName(),ub.getUserPwd(),ub.getCreateTime(),ub.getUpdateTime())>0;
 	}
 
+/**
+ * 用户修改密码方法
+ *  @param 
+ *  @param userName 用户名
+ *  @param oldPwd 旧密码
+ *  @param updateTime 修改时间
 
+ *   @param newPwd 新密码
+ *   return boolean true/修改密码成功   false/修改密码失败
+ */
 @Override
-public boolean upatePwd(String oldPwd, String newPwd) {
-	// TODO Auto-generated method stub
-	return false;
+public boolean upatePwd(String userName,String updateTime, String newPwd) {
+	String sql="update user_basicinfo set userPwd=? ,updateTime=? where userName=?";
+
+	return BaseDao.execute(sql,newPwd,updateTime,userName)>0;
 }
 
 

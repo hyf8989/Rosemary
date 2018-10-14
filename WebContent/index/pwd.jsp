@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 	<head>
 		<meta charset="UTF-8">
 		<title>修改密码</title>
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/Rosemary/index/css/bootstrap.min.css" />
 	</head>
 
 	<body background="img/bg/bg01.jpg">
@@ -36,7 +37,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						 <button type="submit" class="btn btn-default" id="updateBtn">修改</button>
+						 <button type="button" class="btn btn-default" id="updateBtn">修改</button>
 						 <button type="reset" name="btn1" id="cancleBtn" class="btn btn-default">取消</button>
 					</div>
 				</div>
@@ -46,8 +47,13 @@
 	</div>
 	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
 </script>
+
+<script type="text/javascript" src="layui/layui.js"></script>
+
 <script type="text/javascript">
     $(function(){
+    	
+    	//弹出层的使用
     	 layui.use('layer', function() {
 				var layer = layui.layer;
 
@@ -55,8 +61,37 @@
     	 
     	 var flag=false;//默认flag值为false
     	 var msg="";//验证提示信息
-    	 var passwordTest=/^\w{5}$/;//密码校验，必须为5位任意字符
+    	 var passwordTest=/^\w{5}$/;//新密码校验，必须为5位任意字符
     	
+         //用户的用户名
+    	 var userName="${sessionScope.ub.userName}";
+    	//用户的初始密码
+    	var userPwd="${sessionScope.ub.userPwd}";
+    	
+    	 
+    	 $("#oldPwd").change(function(){
+    		    var oldPwd=$(this).val();
+    			console.log(userName);
+    			console.log(userPwd);
+ 				 $.get("/Rosemary/user.action","op=verifyPwd&userPwdInput="+oldPwd+"&userPwd="+userPwd,function(data,status){
+ 					   layer.msg('<span style="color:black;">'+data+'</span>', {
+ 							icon:6,
+ 							time: 1000
+ 						}); 
+ 					   if(data=="与原密码一致"){
+ 						   flag=true;
+ 					   }
+ 					   else{
+ 						   $(this).val("");
+ 					   }
+ 					   
+ 				   });
+ 			});
+ 	
+    	 
+    	 
+    	 
+    	 //新密码输入完成事件（注释记得写清楚 哦）
     	$("#newPwd1").change(function(){
 			if(passwordTest.test($(this).val())==false){
 				msg="密码必须是五位字符";
@@ -72,7 +107,7 @@
 			}
 		});
 		//重复输入密码失去焦点事件
-		$("#newPwd2").change(function(){
+		$("#newPwd2").blur(function(){
 			if($("#newPwd2").val()=="" || $(this).val()!=$("#newPwd1").val()){
 				msg="两次密码输入不一致或者密码为空";
 				layer.msg('<span style="color:black;">'+msg+'</span>', {
@@ -86,11 +121,14 @@
 				flag=true;
 			}
 		});
+		 
+		//点击修改密码按钮事件 .........(要不要打你)
+		$("#updateBtn").click(function(){
+			//获取用户输入的新密码
+			var pwd=$("#newPwd1").val();
 		
-		//点击修改密码按钮事件
-		$("#updateBtn").clik(function(){
 			if(flag==true){
-				  $.get("/Rosemary/user.action",function(data,status){
+				  $.get("/Rosemary/user.action","op=updatePwd&userName="+userName+"&userPwd="+pwd,function(data,status){
 				    	msg=data;
 				    });
 				  if(msg="密码修改成功"){
@@ -101,7 +139,7 @@
 							anim: 0,
 							btn: ['OK'],
 							yes: function(index, layero) {
-								location.href="index.jsp";
+								location.href="login.jsp";
 							}
 							
 						});
@@ -122,10 +160,15 @@
 			}
 		});
 	
-    });
-
+    
+		});
 
 </script>
+<script src="js/jquery.min.js"></script>
+<script src="js/common.js"></script>
+
+<!--表单验证-->
+<script src="js/jquery.validate.min.js?var1.14.0"></script>
 	</body>
 
 </html>

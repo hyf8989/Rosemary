@@ -2,6 +2,9 @@ package com.ros.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import com.ros.api.*;
 import com.ros.entity.UserBasicInfo;
@@ -129,12 +132,45 @@ public class UserServlet extends HttpServlet {
 			
 		}
 		
+		/**
+		 * 用户输入的旧密码的验证
+		 */
+		else if(op.equals("verifyPwd")) {
+			String messge="";
+			
+			//获取用户输入的旧密码
+			String userPwdInput=MD5Util.getEncodeByMd5(request.getParameter("userPwdInput"));
+	     
+	     
+			//获取用户的初始密码
+			String userPwd=request.getParameter("userPwd");
+			
+			
+			if(userPwd.equals(userPwdInput)) {
+				messge="与原密码一致" ;
+			}
+			else{
+				messge="与原密码不一致" ;
+			}
+			
+		}
+		
+		/**
+		 * 用户修改密码
+		 */
 		else if(op.equals("updatePwd")) {
 			String messge="";
-			String oldPassword=request.getParameter("oldPwd");
-			String newPassword=request.getParameter("newPwd");
-			boolean flag=us.updatePwd(oldPassword, newPassword);
+			//获取用户名
+			String userName=request.getParameter("userName");
+	
+            //获取当前时间
+			Date date=new Date();
 			
+			String dateStr=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+	
+			boolean flag=us.updatePwd(userName,dateStr, request.getParameter("userPwd"));
+			
+
 			if(flag) {
 				messge="密码修改成功";
 			}
@@ -144,8 +180,10 @@ public class UserServlet extends HttpServlet {
 			
 			out.print(messge);
 			out.close();
-		}
+	
 		
+		}
+			
 		
 	}
 

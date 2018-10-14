@@ -44,17 +44,21 @@ public boolean insertUser(UserBasicInfo ub) {
 }
 
    
-   /**
-    * 鐢ㄦ埛淇敼瀵嗙爜鐨勬柟娉�
-    * 
-    */
-   @Override
-public boolean updatePwd(String oldPwd, String newPwd) {
+/**
+ * 用户修改密码方法
+ *  @param 
+ *  @param userName 用户名
+ *  @param oldPwd 旧密码
+ *  @param updateTime 修改时间
 
-	   //鍏堝皢杈撳叆鐨勫瘑鐮佽繘琛屽姞瀵�
-	   String oldPassword=MD5Util.getEncodeByMd5(oldPwd);
+ *   @param newPwd 新密码
+ *   return boolean true/修改密码成功   false/修改密码失败
+ */
+   @Override
+public boolean updatePwd(String userName,String updateTime, String newPwd) {
+	  
 	   String newPassword=MD5Util.getEncodeByMd5(newPwd);
-	return ud.upatePwd(oldPassword, newPassword);
+	return ud.upatePwd(userName,updateTime,newPassword);
 
 }
 

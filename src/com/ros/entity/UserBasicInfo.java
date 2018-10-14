@@ -65,5 +65,11 @@ public class UserBasicInfo {
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 	}
+	public UserBasicInfo(String userName, String userPwd, String updateTime) {
+		super();
+		this.userName = userName;
+		this.userPwd = userPwd;
+		this.updateTime = updateTime;
+	}
 	
 }

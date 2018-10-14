@@ -9,13 +9,17 @@
 
 package com.ros.test;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import com.ros.entity.UserBasicInfo;
 import com.ros.entity.UserDetailInfo;
 import com.ros.service.UserService;
 import com.ros.service_impl.UserServiceImpl;
 import com.ros.util.BaseDao;
+import com.ros.util.MD5Util;
 
 /** 
 	 * ClassName: UserTest <br/> 
@@ -32,7 +36,23 @@ public class UserTest {
 	
 	public static void main(String[] args) {
 		UserService us=new UserServiceImpl();
-		System.out.println(us.register("小黄"));
+		
+		String userName="admin3";
+		
+	
+		
+		Date date=new Date();
+		
+		String dateStr=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+		
+		String newPwd="12346";
+		boolean flag=us.updatePwd(userName,dateStr, newPwd);
+	System.out.println(flag);
+	System.out.println(dateStr);
+		
+		
+		
+	/*	System.out.println(us.register("小黄"));*/
 		
 		/*System.out.println(us.register("小黄"));*/
 		
@@ -44,7 +64,7 @@ public class UserTest {
 		/*UserDetailInfo uDI=new UserDetailInfo(1, "17720838367", "2018-10-13 00:37:10", "2018-10-13 00:37:10");
 		
 		System.out.println(us.insertUserDetail(uDI));*/
-	
+
 		
 	}
 
