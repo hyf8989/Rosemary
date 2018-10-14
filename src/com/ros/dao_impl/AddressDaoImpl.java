@@ -20,17 +20,13 @@ public class AddressDaoImpl implements AddressDao {
 	 * return List<Address> Address对象集合
 	 */
 	@Override
-	public ArrayList<Address> queryAddressByUserName(String userName) {
+	public List<Address> queryAddressByUserName(String userName) {
 		
 	String sql="select a. addressId,b.userName, a.receiverProvince,a.receiverCity,a.receiverDistrict,a.addressInfo,a.receiverName,a.receiverPhone,a.receiverZip,a.createTime,a.updateTime from address_info a inner join user_basicinfo b on a.userId=b.userId where b.userName=? ";
-	ArrayList<Address> list=(ArrayList<Address>) BaseDao.select(sql, Address.class, userName);	
+	List<Address> list=(ArrayList<Address>) BaseDao.select(sql, Address.class, userName);	
 	
 	return list;
 	}
-	public static void main(String[] args) {
-		String sql="select a.addressId,b.userName, a.receiverProvince,a.receiverCity,a.receiverDistrict,a.addressInfo,a.receiverName,a.receiverPhone,a.receiverZip,a.createTime,a.updateTime from address_info a inner join user_basicinfo b on a.userId=b.userId where b.userName=? ";
-		ArrayList<Address> list=(ArrayList<Address>) BaseDao.select(sql, Address.class, "小黄");	
-		System.out.println(list.size());
-	}
+	
 
 }

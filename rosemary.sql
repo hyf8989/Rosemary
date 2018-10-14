@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50515
 File Encoding         : 65001
 
-Date: 2018-10-14 23:39:14
+Date: 2018-10-15 00:55:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,11 +32,13 @@ CREATE TABLE `address_info` (
   `createTime` datetime NOT NULL COMMENT '创建时间',
   `updateTime` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`addressId`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of address_info
 -- ----------------------------
+INSERT INTO `address_info` VALUES ('1', '明发园小区8号楼408室', '4', '张宇', '17720831234', '福建', '厦门', '湖里', '123456', '2018-10-16 00:43:43', '2018-10-11 00:43:49');
+INSERT INTO `address_info` VALUES ('2', '莆田学院凤达学生公寓F栋', '4', '李明', '17720834567', '福建', '莆田', '城厢', '456789', '2018-10-09 00:45:52', '2018-10-12 00:45:56');
 
 -- ----------------------------
 -- Table structure for admin

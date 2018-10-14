@@ -20,7 +20,7 @@ public class AddressServiceTest {
 		System.out.println(n);*/
 		
 		AddressDao ad=new AddressDaoImpl();
-		ArrayList<Address> list=ad.queryAddressByUserName("小黄");
+		List<Address> list=ad.queryAddressByUserName("小黄");
 		int n=list.size();
 		System.out.println(n);
 	}

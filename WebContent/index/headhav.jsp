@@ -39,7 +39,7 @@
 											<a href="myOrder.jsp" title=""><span>查看订单</span></a>
 										</li>
 										<li><img src="img/lang/7.jpg" alt="hb" />
-											<a href="myAddress.jsp" title=""><span>收货地址</span></a>
+											<a href="/Rosemary/address.do?op=myAddress&userName=${sessionScope.ub.userName}" title=""><span>收货地址</span></a>
 										</li>
 									</ul>
 								</div>

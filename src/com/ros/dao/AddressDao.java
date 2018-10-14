@@ -12,6 +12,6 @@ import com.ros.entity.Address;
 
 public interface AddressDao {
 
-	ArrayList<Address> queryAddressByUserName(String userName);//用户查询自己的收货地址
+	List<Address> queryAddressByUserName(String userName);//用户查询自己的收货地址
 	
 }
