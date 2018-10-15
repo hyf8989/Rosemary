@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.ros.dao.FlowerInfoDao;
 import com.ros.dao_impl.FlowerInfoDaoImpl;
 import com.ros.entity.FlowerInfo;
+import com.ros.entity.FlowerType;
 import com.ros.service.FlowerInfoService;
 import com.ros.util.PageData;
 /*
@@ -51,6 +52,14 @@ public class FlowerInfoServiceImpl implements FlowerInfoService {
 			int priceEnd, int typeId1, int typeId2, String sort, String sortType) {
 		// TODO Auto-generated method stub
 		return fID.queryFlowerInfoByPage(page, pageSize, keyword, priceStart, priceEnd, typeId1, typeId2, sort, sortType);
+	}
+	/* (non-Javadoc)
+	 * @see com.ros.service.FlowerInfoService#queryFlowerType()
+	 */
+	@Override
+	public ArrayList<FlowerType> queryFlowerType() {
+		// TODO Auto-generated method stub
+		return fID.queryFlowerType();
 	}
 
 }

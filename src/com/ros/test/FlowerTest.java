@@ -1,13 +1,18 @@
 package com.ros.test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.ros.dao.FlowerInfoDao;
 import com.ros.dao_impl.FlowerInfoDaoImpl;
 import com.ros.entity.FlowerInfo;
+import com.ros.entity.FlowerType;
+import com.ros.entity.UserBasicInfo;
 import com.ros.service.FlowerInfoService;
 import com.ros.service_impl.FlowerInfoServiceImpl;
+import com.ros.util.BaseDao;
 import com.ros.util.PageData;
+import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 /*
  * 鲜花测试类
  */
@@ -20,8 +25,18 @@ public class FlowerTest {
 			System.out.println(flowerInfo.getPrice());
 			
 		}*/
+		
+		
 		FlowerInfoService fIS=new FlowerInfoServiceImpl();
-		PageData<FlowerInfo> pd=fIS.queryFlowerInfoByPage(1, 2, "%%", 0, 1000, 1, 9, "flowerName", "desc");
+		String keyword="";
+		PageData<FlowerInfo> pd=fIS.queryFlowerInfoByPage(1, 2, "%"+keyword+"%", 0, 1000, 1, 9, "flowerName", "desc");
 	    System.out.println(pd.getTotal());
+		  ArrayList<FlowerType> list =fIS.queryFlowerType();
+		  for (FlowerType flowerType : list) {
+			System.out.println(flowerType.getTypeName());
+		}
+		/*String sql="select min(typeId) as typeId  from flower_type";
+		ArrayList<FlowerType> typeid=(ArrayList<FlowerType>) BaseDao.select(sql, FlowerType.class);
+		System.out.println(typeid.get(0).getTypeId());*/
 	}
 }

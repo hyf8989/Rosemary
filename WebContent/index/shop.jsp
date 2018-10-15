@@ -1,6 +1,15 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- 页面初始化加载，判断session是否存在鲜花类别的值 -->
+<c:if test="${sessionScope.flowerType eq null }">
+<script>location.href="/Rosemary/flower.do?op=queryFlowerType";</script>
+</c:if>
+<!-- 页面初始化加载，判断session是否存在分页鲜花的值 -->
+<c:if test="${sessionScope.FlowerInfo eq null }">
+<script>location.href="/Rosemary/flower.do?op=queryFlowerInfoByPage";</script>
+</c:if>
 <html>
 
 <head>
@@ -62,24 +71,13 @@
 						<div class="content-box">
 							<h2>鲜花类别</h2>
 							<ul>
-								<li><label class="check-label"> <a href="#">郁金香</a>
+							<c:forEach var="flowerType" items="${sessionScope.flowerType }">
+							
+							<li ><label class="check-label"> <a href="#" id="${flowerType.typeId}" class="flowerType">${flowerType.typeName}</a>
 								</label></li>
-								<li><label class="check-label"> <a href="#">玫瑰</a>
-								</label></li>
-								<li><label class="check-label"> <a href="#">康乃馨</a>
-								</label></li>
-								<li><label class="check-label"> <a href="#">邹菊</a>
-								</label></li>
-								<li><label class="check-label"> <a href="#">满天星</a>
-								</label></li>
-								<li><label class="check-label"> <a href="#">百合</a>
-								</label></li>
-								<li><label class="check-label"> <a href="#">迷迭香</a>
-								</label></li>
-								<li><label class="check-label"> <a href="#">桔梗花</a>
-								</label></li>
-								<li><label class="check-label"> <a href="#">扶郎</a>
-								</label></li>
+							</c:forEach>
+								
+								
 							</ul>
 						</div>
 						<div class="content-box">
@@ -165,12 +163,12 @@
 										<div class="tab-content">
 											<div role="tabpanel" class="tab-pane active fade in"
 												id="gried_view">
-												
-												<div class="col-md-4 col-sm-6 col-xs-12 mar-bot">
+                                                 <c:forEach var="flowerInfo" items="${sessionScope.FlowerInfo.data }">
+                                                 <div class="col-md-4 col-sm-6 col-xs-12 mar-bot">
 													<!-- single-product-start -->
 													<div class="single-product">
 														<div class="single-product-img">
-															<a href="#"> <img src="img/singlepro/a01.jpg" alt="" />
+															<a href="#"> <img src="${flowerInfo.sPicture }" alt="" />
 															</a> <span class="sale-box"> <span class="sale">Sale</span>
 															</span> <span class="new-box"> <span class="new">New</span>
 															</span>
@@ -178,7 +176,7 @@
 														<div class="single-product-content">
 															<div class="product-title">
 																<h5>
-																	<a href="#">粉色洋桔梗</a>
+																	<a href="#">${flowerInfo.flowerName }</a>
 																</h5>
 															</div>
 															<div class="rating">
@@ -189,8 +187,8 @@
 																<div class="star"></div>
 															</div>
 															<div class="price-box">
-																<span class="price">£400.00</span> <span
-																	class="old-price">£390.00</span>
+																<span class="price">${flowerInfo.price }</span> <span
+																	class="old-price">${flowerInfo.price+100}</span>
 															</div>
 															<div class="product-action">
 																<button class="button btn btn-default add-cart"
@@ -206,8 +204,12 @@
 													</div>
 													<!-- single-product-end -->
 												</div>
+                                                 
+                                                 
+                                                 </c:forEach>
+												
 											</div>
-											
+
 										</div>
 									</div>
 								</div>
@@ -326,6 +328,13 @@
 	<script src="js/plugins.js "></script>
 	<!-- main js -->
 	<script src="js/main.js "></script>
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
+<script>
+ $(".flowerType").click(function(){
+	 console.log($(this).attr("id"));
+ });
+</script>
 </body>
 </html>
 
