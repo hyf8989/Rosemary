@@ -87,8 +87,8 @@
 									<div id="slider-range"></div>
 									<div class="price_slider_amount">
 										<input type="text" id="amount" name="price"
-											placeholder="Add Your Price" /> <input type="submit"
-											value="范围">
+											placeholder="Add Your Price"  /> <input type="submit"
+											value="范围" >
 									</div>
 								</div>
 							</div>
@@ -133,12 +133,12 @@
 									</div>
 								</div>
 								<div class="sort-by hidden-xs">
-									<label>排序方式</label> <select>
+									<label>排序方式</label> <select id="sort">
 										<option value="#">最低价格</option>
 										<option value="#">最高价格</option>
 										<option value="#">鲜花名从A-Z</option>
 										<option value="#">鲜花名从Z-A</option>
-										<option selected="selected" value="#">--</option>
+										<option selected="selected" value="#"></option>
 									</select>
 								</div>
 								<div class="show hidden-xs">
@@ -398,7 +398,11 @@
 		    console.log($(this).attr("id"));//测试输出类别ID	
 		    $("#gried_view").empty();//测试empty（待改）
 			});
-			
+			//下拉框选中事件（模糊查询）
+			 $("#sort").change(function(){
+				 console.log($("#sort option:selected").text());
+				 
+			 });
 			
 		}); 
 	</script>

@@ -107,7 +107,7 @@ public class FlowerInfoServlet extends HttpServlet {
 		    	priceEnd=Integer.valueOf(request.getParameter("priceEnd"));
 		    }
 		    if(request.getParameter("sort")!=null) {
-		    	sort=request.getParameter("keyword");
+		    	sort=request.getParameter("sort");
 		    } 
 		    if(request.getParameter("sortType")!=null) {
 		    	sortType=request.getParameter("sortType");
