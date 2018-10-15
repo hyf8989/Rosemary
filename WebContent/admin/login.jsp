@@ -101,8 +101,8 @@
 	<script src="js/demo-1.js"></script>
 	<div style="text-align: center;"></div>
 	 <script type="text/javascript">
-		 document.getElementById("login").onclick = function() {
-			 location.href = "/manager.action"; 
+		 /* document.getElementById("login").onclick = function() {
+			 location.href = "/manager.action";  */
 			/* alert(1); */
 		} 
 		

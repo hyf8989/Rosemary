@@ -3,13 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- 页面初始化加载，判断session是否存在鲜花类别的值 -->
-<c:if test="${sessionScope.flowerType eq null }">
+ <c:if test="${sessionScope.flowerType eq null }">
 <script>location.href="/Rosemary/flower.do?op=queryFlowerType";</script>
-</c:if>
+</c:if> 
 <!-- 页面初始化加载，判断session是否存在分页鲜花的值 -->
-<c:if test="${sessionScope.FlowerInfo eq null }">
+ <%-- <c:if test="${sessionScope.FlowerInfo eq null }">
 <script>location.href="/Rosemary/flower.do?op=queryFlowerInfoByPage";</script>
-</c:if>
+</c:if>   --%>
 <html>
 
 <head>
@@ -71,13 +71,13 @@
 						<div class="content-box">
 							<h2>鲜花类别</h2>
 							<ul>
-							<c:forEach var="flowerType" items="${sessionScope.flowerType }">
+								 <c:forEach var="flowerType" items="${sessionScope.flowerType }">
 							
-							<li ><label class="check-label"> <a href="#" id="${flowerType.typeId}" class="flowerType">${flowerType.typeName}</a>
+							<li ><label class="check-label"> <a href="javascript:void(0);" id="${flowerType.typeId}" class="flowerType">${flowerType.typeName}</a>
 								</label></li>
-							</c:forEach>
-								
-								
+							</c:forEach> 
+
+
 							</ul>
 						</div>
 						<div class="content-box">
@@ -161,9 +161,9 @@
 									<div class="category-product">
 										<!-- Tab panes -->
 										<div class="tab-content">
-											<div role="tabpanel" class="tab-pane active fade in"
-												id="gried_view">
-                                                 <c:forEach var="flowerInfo" items="${sessionScope.FlowerInfo.data }">
+											<div role="tabpanel"
+												class="tab-pane active fade in flower-show" id="gried_view">
+												 <c:forEach var="flowerInfo" items="${sessionScope.FlowerInfo.data }">
                                                  <div class="col-md-4 col-sm-6 col-xs-12 mar-bot">
 													<!-- single-product-start -->
 													<div class="single-product">
@@ -206,8 +206,8 @@
 												</div>
                                                  
                                                  
-                                                 </c:forEach>
-												
+                                                 </c:forEach> 
+
 											</div>
 
 										</div>
@@ -329,12 +329,79 @@
 	<!-- main js -->
 	<script src="js/main.js "></script>
 	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
-</script>
-<script>
- $(".flowerType").click(function(){
-	 console.log($(this).attr("id"));
- });
-</script>
+		
+	</script>
+	<script>
+		
+		/*
+		进入页面即调用ajax方法后台查询所有鲜花
+		*/
+		 $(function() {
+			$.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage", function(
+					data, status) {
+          
+				var array = JSON.parse(data);
+				//遍历JSON对象，拼接字符串，显示鲜花
+				 $.each(array.data, function(index, obj) {
+					$("#gried_view").append('<div class="col-md-4 col-sm-6 col-xs-12 mar-bot">'+
+							<!-- single-product-start -->
+							'<div class="single-product">'+
+								'<div class="single-product-img">'+
+									'<a href="javacript:void(0);" class="flowershow"> <img  src="'+obj.sPicture+'" alt="'+obj.flowerId+'" />'+
+									'</a> <span class="sale-box"> <span class="sale">Sale</span>'+
+									'</span> <span class="new-box"> <span class="new">New</span>'+
+									'</span>'+
+								'</div>'+
+								'<div class="single-product-content">'+
+									'<div class="product-title">'+
+										'<h5>'+
+											'<a href="#">'+obj.flowerName+'</a>'+
+										'</h5>'+
+									'</div>'+
+									'<div class="rating">'+
+										'<div class="star star-on"></div>'+
+										'<div class="star star-on"></div>'+
+										'<div class="star star-on"></div>'+
+										'<div class="star star-on"></div>'+
+										'<div class="star"></div>'+
+									'</div>'+
+									'<div class="price-box">'+
+										'<span class="price">'+obj.price+'</span> <span'+
+											' class="old-price">'+(obj.price+100)+'</span>'+
+									'</div>'+
+									'<div class="product-action">'+
+										'<button class="button btn btn-default add-cart"'+
+											'title="add to cart">加入购物车</button>'+
+										'<a class="add-wishlist" href="#" title="add to wishlist">'+
+											'<i class="fa fa-heart"></i>'+
+										'</a> '+
+									'</div>'+
+								'</div>'+
+							'</div>'+
+							<!-- single-product-end -->
+						'</div>');
+                         
+					
+				}); 
+
+			});
+			
+			//点击图片时，获取图片ID
+			$(document).on("click",".flowershow",function(){
+				
+				console.log($(this).find("img").attr("alt"));//测试输出鲜花ID
+				
+				
+			});
+			//左侧花的类别标签点击事件（用于模糊查询）
+			$(".flowerType").click(function(){
+		    console.log($(this).attr("id"));//测试输出类别ID	
+		    $("#gried_view").empty();//测试empty（待改）
+			});
+			
+			
+		}); 
+	</script>
 </body>
 </html>
 

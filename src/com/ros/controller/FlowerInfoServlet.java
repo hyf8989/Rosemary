@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.ros.entity.FlowerInfo;
 import com.ros.entity.FlowerType;
 import com.ros.service.FlowerInfoService;
@@ -122,11 +123,15 @@ public class FlowerInfoServlet extends HttpServlet {
 		    	FlowerInfo=fIS.queryFlowerInfoByPage(page, pageSize, "%"+keyword+"%", priceStart, priceEnd,typeId , typeId, sort, sortType);
 		    	
 		    }
-		    //设置session对象存储花的数据
+		   /* //设置session对象存储花的数据
 		    request.getSession().setAttribute("FlowerInfo", FlowerInfo);
 		     //最后重定向到商品展示页面
 		    response.sendRedirect("/Rosemary/index/shop.jsp");
+		    */
+		    Gson gson = new Gson();
 		    
+		    String jsonStr=gson.toJson(FlowerInfo);
+		    out.print(jsonStr);
 		  
 		    
 		 }
