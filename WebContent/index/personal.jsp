@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,8 +15,9 @@
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="css/p-forms.css">
 <link href="css/style2.css" rel="stylesheet" type="text/css" media="all" />
- <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js">
-</script>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+ <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+
 </head>
 <body>
 <div class="content">
@@ -24,6 +26,12 @@
 			<div class="im-g">
 				<img src="images/img1.jpg" alt="">
 			</div>
+			
+		<c:if test="${sessionScope.list==null }">
+         <jsp:forward page="/ub.do&op=queryUserBean"></jsp:forward>
+         </c:if>
+         
+          <c:forEach var="userBean" items="${sessionScope.ubList}">
 			<form class="contact-forms wthree">
 				<!-- end /.header-->
 
@@ -31,28 +39,26 @@
 					<div class="first-line agileits">
 						<div class="span6 main-row">
 							<div class="input">								
-								用户名：<input type="text" id="userName" name="userName" placeholder="user name" required="">
+								用户名：<input type="text" id="userName" name="userName" value="${sessionScope.ub.userName}">
 							</div>
 						</div>
 						<div class="span6 main-row">
-							<div class="input">								
-								真实姓名：<input type="text" id="reaName" name="reaName" placeholder="really Name" required="">								
+							<div class="input">							
+								真实姓名：<input type="text" id="name" name="name" value="${userBean.name}">								
 							</div>
 						</div>
 					</div>
 					<!-- end name -->
-
 					<!-- start email phone -->
 					<div class="first-line agileits">
 						<div class="span6 main-row">
 							<div class="input">							
-								邮箱：<input type="email" placeholder="Email" id="email" name="email" required="">
+								邮箱：<input type="email" id="userEmail" name="userEmail" required="" value="${userBean.userEmail}">
 							</div>
 						</div>
 						<div class="span6 main-row">
-							<div class="input">
-								
-								电话：<input type="text" placeholder="Phone" id="phone" name="phone" required="">
+							<div class="input">								
+								电话：<input type="text" id="userTel" name="userTel" required="" value="${userBean.userTel}">
 							</div>
 						</div>
 					</div>
@@ -60,7 +66,7 @@
 					<div class="first-line agileits">
 						<div class="span8 main-row">
 							<div class="input">								
-								注册时间:<input type="text" id="createTime" placeholder="注册时间" name="createTime" required="">
+								注册时间:<input type="text" id="createTime" name="createTime" required="" value="${userBean.createTime}">
 							</div>
 						</div>						
 					</div>
@@ -70,7 +76,7 @@
 					<div class="first-line agileits">
 						<div class="span8 main-row">
 							<div class="input">								
-								更新时间:<input type="text" id="updateTime" placeholder="更新时间" name="updateTime" required="">
+								更新时间:<input type="text" id="updateTime" name="updateTime" required="" value="${userBean.updateTime}">
 							</div>
 						</div>
 						
@@ -86,15 +92,10 @@
 				</div>
 				<!-- end /.footer -->
 			</form>
+</c:forEach>
 		</div>
 </div>
-		<!-- Scripts -->
-		<script src="js/jquery.1.11.1.min.js"></script>
-		<script>
-			$(document).ready(function(){
-				// Phone masking
-				$('#phone').mask('(999) 999-9999', {placeholder:'x'});
-			});
-		</script>
+
+
 </body>
 </html>

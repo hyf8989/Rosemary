@@ -7,7 +7,6 @@ package com.ros.entity;
  */
 public class UserBean {
 	private String userName;
-	private String sex;
 	private String createTime;
 	private String updateTime;
 	private String name;
@@ -18,12 +17,6 @@ public class UserBean {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-	public String getSex() {
-		return sex;
-	}
-	public void setSex(String sex) {
-		this.sex = sex;
 	}
 	public String getCreateTime() {
 		return createTime;
@@ -58,11 +51,10 @@ public class UserBean {
 	public UserBean() {
 		// TODO Auto-generated constructor stub
 	}
-	public UserBean(String userName, String sex, String createTime, String updateTime, String name, String userTel,
+	public UserBean(String userName, String createTime, String updateTime, String name, String userTel,
 			String userEmail) {
 		super();
 		this.userName = userName;
-		this.sex = sex;
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 		this.name = name;
@@ -71,7 +63,7 @@ public class UserBean {
 	}
 	@Override
 	public String toString() {
-		return "UserBean [userName=" + userName + ", sex=" + sex + ", createTime=" + createTime + ", updateTime="
+		return "UserBean [userName=" + userName + ",createTime=" + createTime + ", updateTime="
 				+ updateTime + ", name=" + name + ", userTel=" + userTel + ", userEmail=" + userEmail + "]";
 	}
 	
