@@ -12,12 +12,6 @@
 <meta name="keywords" content="" />
 <script type="application/x-javascript">
 	
-	
-	
-	
-	
-	
-	
 		/* 	addEventListener("load", function() {
 				setTimeout(hideURLbar, 0);
 			}, false);
@@ -26,11 +20,6 @@
 				window.scrollTo(0, 1);
 			}
 		 */
-
-
-
-
-
 
 </script>
 <!-- Bootstrap Core CSS -->
@@ -383,6 +372,7 @@
 			});
 		});
 		$(".pwd-reset").click(function() {
+			 
 			layer.open({
 				title : "友情提醒？",
 				skin : "layui-layer-lan",
@@ -390,6 +380,7 @@
 				anim : 0,
 				btn : [ '确定', '取消' ],
 				yes : function(index, layero) {
+					location.href = "/Rosemary/manager.action?op=updateManagerPwd"; 
 					layer.msg('成功重置', {
 						icon : 6,
 						time : 3000

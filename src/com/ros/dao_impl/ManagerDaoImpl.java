@@ -46,7 +46,23 @@ public class ManagerDaoImpl implements ManagerDao {
 	@Override
 	public boolean delManager(int adminId) {
 		// TODO Auto-generated method stub
-		String sql = "delete from admin where adminId=?";
+		String sql = "delete from admin where adminName=?";
 		return BaseDao.execute(sql, adminId) > 0;
 	}
+	/**
+	 * 重置密码
+	 */
+	@Override
+	public boolean updateManagerPwd(String adminName) {
+		// TODO Auto-generated method stub
+		String sql = "UPDATE admin SET adminPwd='admin' WHERE adminName=?";
+		return BaseDao.execute(sql, adminName) > 0;
+	}
+	@Override
+	public boolean updateManagerStatus(String adminName) {
+		// TODO Auto-generated method stub
+		String sql = "UPDATE admin SET adminStatus='?' WHERE adminName=?";
+		return BaseDao.execute(sql, adminName) > 0;
+	}
+	
 }

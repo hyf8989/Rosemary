@@ -42,5 +42,10 @@ public class ManagerServiceImpl implements ManagerService {
 		// TODO Auto-generated method stub
 		return md.delManager(adminId);
 	}
-
+	
+	@Override
+	public boolean updateManagerPwd(String adminName) {
+		// TODO Auto-generated method stub
+		return md.updateManagerPwd(adminName);
+	}
 }

@@ -33,7 +33,16 @@ public interface ManagerDao {
 
 	// 显示管理员信息
 	List<Manager> queryManager();
-	//删除管理员
+
+	// 删除管理员
 	boolean delManager(int adminId);
+
+	// 重置密码
+	boolean updateManagerPwd(String adminName);
+
+	// 锁定管理员状态
+	boolean updateManagerStatus(String adminName);
+	
+
 
 }

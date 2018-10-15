@@ -16,4 +16,7 @@ public interface ManagerService {
 	
 	//删除管理员
 	boolean delManager(int adminId);
+	
+	// 重置密码
+	boolean updateManagerPwd(String adminName);
 }
