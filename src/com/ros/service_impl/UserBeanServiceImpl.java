@@ -10,10 +10,22 @@ import com.ros.service.UserBeanService;
 public class UserBeanServiceImpl implements UserBeanService {
 	private UserBeanDao ubd = new UserBeanDaoImpl();
 
+	/**
+	 * 查询个人信息
+	 */
 	@Override
-	public List<UserBean> getUsers(String userName) {
+	public List<UserBean> getUsersBean(int userId) {
 		// TODO Auto-generated method stub
-		return ubd.queryUsersBean(userName);
+		return ubd.queryUsersBean(userId);
+	}
+	
+	/**
+	 * 更新个人信息
+	 */
+	@Override
+	public boolean updateUsersBean(int userId) {
+		// TODO Auto-generated method stub
+		return ubd.updateUsers(userId);
 	}
 
 }

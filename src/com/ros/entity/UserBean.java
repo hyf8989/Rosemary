@@ -59,16 +59,6 @@ public class UserBean {
 	public UserBean() {
 		// TODO Auto-generated constructor stub
 	}
-	public UserBean(String userName, String createTime, String updateTime, String name, String userTel,
-			String userEmail) {
-		super();
-		this.userName = userName;
-		this.createTime = createTime;
-		this.updateTime = updateTime;
-		this.name = name;
-		this.userTel = userTel;
-		this.userEmail = userEmail;
-	}
 	
 	public UserBean(int userId, String userName, String createTime, String updateTime, String name, String userTel,
 			String userEmail) {

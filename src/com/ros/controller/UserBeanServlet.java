@@ -42,10 +42,10 @@ public class UserBeanServlet extends HttpServlet {
 		//获取参数
 		String op = request.getParameter("op");
 		if("queryUserBean".equals(op)) {
-			//获取当前用户名
-			String userName = request.getParameter("userName");
+			//获取当前用户id
+			int userId = Integer.parseInt(request.getParameter("userId"));
 			//调用service查询的方法
-			List<UserBean> list = ubs.getUsers(userName);
+			List<UserBean> list = ubs.getUsersBean(userId);
 			request.getSession().setAttribute("ubList",list);
 			response.sendRedirect("/Rosemary/index/personal.jsp");
 		}

@@ -10,7 +10,7 @@ import com.ros.entity.UserBean;
  */
 public interface UserBeanDao {
 	 //查询当前用户信息
-	 List<UserBean> queryUsersBean(String userName);
+	 List<UserBean> queryUsersBean(int userId);
 	 //修改用户信息
-	 boolean updateUsers(String userName);
+	 boolean updateUsers(int userId);
 }

@@ -10,6 +10,9 @@ import com.ros.entity.UserBean;
  *
  */
 public interface UserBeanService {
-	public List<UserBean> getUsers(String userName);//查询用户
+	//查询用户个人信息
+	public List<UserBean> getUsersBean(int userId);
+	//更新个人信息
+	public boolean updateUsersBean(int userId);
 
 }

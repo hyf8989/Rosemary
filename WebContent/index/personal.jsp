@@ -32,7 +32,7 @@
 				<img src="images/img1.jpg" alt="">
 			</div>
 
-			<c:if test="${sessionScope.list==null }">
+			<c:if test="${sessionScope.ubList==null }">
 				<jsp:forward page="/ub.do&op=queryUserBean"></jsp:forward>
 			</c:if>
 
@@ -45,7 +45,7 @@
 						<div class="span6 main-row">
 							<div class="input">
 								用户名：<input type="text" id="userName" name="userName"
-									value="${sessionScope.ub.userName}">
+									value="${userBean.userName}">
 							</div>
 						</div>
 						<div class="span6 main-row">

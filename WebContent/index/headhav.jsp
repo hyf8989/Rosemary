@@ -30,7 +30,7 @@
 									</div>
 									<ul class="lang">
 										<li><img src="img/lang/2.jpg" alt="ar" />
-											<a href="/Rosemary/ub.do?op=queryUserBean&userName=${sessionScope.ub.userName}" title=""><span>我的信息</span></a>
+											<a href="/Rosemary/ub.do?op=queryUserBean&userId=${sessionScope.ub.userId}" title=""><span>我的信息</span></a>
 										</li>
 										<li><img src="img/lang/2.jpg" alt="ar" />
 											<a href="pwd.jsp" title=""><span>修改密码</span></a>
