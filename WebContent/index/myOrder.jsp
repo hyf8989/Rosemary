@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -37,113 +38,32 @@
 		<!-- header-end -->
 
 		<div class="container">
+		<c:if test="${sessionScope.MyOrdersList==null }">
+				<jsp:forward page="/MyOrders.do&op=queryMyOrders"></jsp:forward>
+			</c:if>
+			
+			<c:forEach var="orders" items="${sessionScope.MyOrdersList }">
+			
 			<div style="margin-top: 20px; " class="row row1">
 				<ul>
 					<div style="clear: both;" class="col-md-12">
 						<div style="padding-top: 10px;padding-left:10px;float: left;">
 
-							<li><img src="img/singlepro/a01.jpg" / style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
+							<li><img src="${orders.sPicture}" style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
 						</div>
 						<div style="padding-top: 10px;padding-left:10px;float: left;">
-							<li>订单编号：0201810101859</li>
-							<li>订单状态：已发货。</li>							
-							<li>下单时间：2018.10.09 12:36:22；发货时间：2018.10.09 12:36:22</li>							
-							<li>单价：359；数量：1；邮费：10；实际付款：369</li>
-							<li>花名：粉色洋桔梗----描述：白色紫罗兰2扎、粉色洋桔梗1扎，斑春兰0.5扎. </li>							
-							<li>总费用：369</li>
-
+							<li>订单编号：${orders.orderId}</li>
+							<li>订单状态：${orders.orderStatus}</li>							
+							<li>下单时间：${orders.createTime} , 发货时间：${orders.sendTime}</li>							
+							<li>单价：${orders.price} , 数量：${orders.quantity} , 邮费：${orders.postage} , 实际付款：${orders.payment}</li>
+							<li>${orders.flowerName}----${orders.description}</li>							
+							<li>总费用：${orders.totalPrice}</li>
 						</div>
 					</div>
 				</ul>
 			</div>
-
-			<div class="row1 row">
-				<ul>
-					<div style="clear: both;" class="col-md-12">
-						<div style="padding-top: 10px;padding-left:10px;float: left;">
-							<li><img src="img/singlepro/a02.jpg" / style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
-						</div>
-						<div style="padding-top: 10px;padding-left:10px;float: left;">
-							<li>订单编号：0201810101010</li>
-							<li>订单状态：已收货。</li>
-							<li>到达时间：2018.10.09 12:36:22</li>
-							<li>戴安娜粉玫瑰----黛安娜玫瑰9枝，浅紫色勿忘我适量，栀子叶适量</li>
-							<li>数量：1</li>
-							<li>费用：128</li>
-						</div>
-					</div>
-				</ul>
-			</div>
-
-			<div class="row1 row">
-				<ul>
-					<div style="clear: both;" class="col-md-12">
-						<div style="padding-top: 10px;padding-left:10px;float: left;">
-							<li><img src="img/singlepro/a03.jpg" / style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
-						</div>
-						<div style="padding-top: 10px;padding-left:10px;float: left;">
-							<li>订单编号：0201810101011</li>
-							<li>订单状态：已签收。</li>
-							<li>签收时间：2018.10.09 12:36:22</li>
-							<li>香槟玫瑰----香槟玫瑰19枝，银叶菊1扎，绿色重瓣洋桔梗0.5扎，白色相思梅0.3扎</li>
-							<li>数量：12</li>
-							<li>费用：302</li>
-						</div>
-					</div>
-					<ul>
-						<div style="clear: both;" class="col-md-12">
-							<div style="padding-top: 5px;padding-left:10px;float: left;">
-								<li><img src="img/singlepro/a15.jpg" / style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
-							</div>
-							<div style="padding-top: 10px;padding-left:10px;float: left;">
-								<li>订单状态：已签收。</li>
-								<li>到达时间：2018.10.09 12:36:22</li>
-								<li>粉色满天星----一大扎粉色满天星饱满搭配</li>
-								<li>数量：1</li>
-								<li>费用：329</li>
-							</div>
-						</div>
-					</ul>
-				</ul>
-			</div>
-
-			<div class="row1 row">
-				<ul>
-					<div style="clear: both;" class="col-md-12">
-						<div style="padding-top: 10px;padding-left:10px;float: left;">
-							<li><img src="img/singlepro/a04.jpg" / style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
-						</div>
-						<div style="padding-top: 10px;padding-left:10px;float: left;">
-							<li>订单编号：0201810101012</li>
-							<li>订单状态：待发货。</li>
-							<li>预到达时间：2018.10.12 12:36:22</li>
-							<li>粉百合----粉百合2枝、红玫瑰9枝、叶上花1扎、红色康乃馨15枝、粉色洋桔梗0.5扎</li>
-							<li>数量：2</li>
-							<li>费用：286</li>
-						</div>
-					</div>
-				</ul>
-			</div>
-
-			<div class="row1 row">
-				<ul>
-					<div style="clear: both;" class="col-md-12">
-						<div style="padding-top: 10px;padding-left:10px;float: left;">
-							<li><img src="img/singlepro/a05.jpg" / style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
-						</div>
-						<div style="padding-top: 10px;padding-left:10px;float: left;">
-							<li>订单编号：0201810101013</li>
-							<li>订单状态：待发货。</li>
-							<li>签收时间：2018.10.12 12:36:22</li>
-							<li>白玫瑰----白百合2枝、雪山白玫瑰7枝、紫色洋桔梗3枝、栀子叶0.3扎、叶上白2枝、粉色绣球1枝</li>
-							<li>数量：2</li>
-							<li>费用：616</li>
-						</div>
-					</div>
-				</ul>
-			</div>
-	
-				
+     </c:forEach>
+						
       <!-- footer-start -->
 		<%@ include file="foot.jsp" %>
 		<!-- footer-end -->
