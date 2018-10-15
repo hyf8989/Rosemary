@@ -7,7 +7,7 @@ package com.ros.entity;
 public class Address {
 
 	private int addressId;
-	private String userName;
+	private int  userId;
 	
 	private String receiverProvince;
 	private String receiverCity;
@@ -15,9 +15,6 @@ public class Address {
 	private String receiverName;
 	private String  receiverPhone;
 	private String addressInfo;
-
-	
-	
 	private int receiverZip;
 	private String createTime;
 	private String updateTime;
@@ -35,12 +32,7 @@ public class Address {
 		this.addressInfo = addressInfo;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+	
 	public String getReceiverName() {
 		return receiverName;
 	}
@@ -75,12 +67,50 @@ public class Address {
 		return receiverZip;
 	}
 	
+	
+	public Address(int userId, String receiverProvince, String receiverCity, String receiverDistrict,
+			String receiverName, String receiverPhone, String addressInfo, int receiverZip, String createTime,
+			String updateTime) {
+		super();
+		this.userId = userId;
+		this.receiverProvince = receiverProvince;
+		this.receiverCity = receiverCity;
+		this.receiverDistrict = receiverDistrict;
+		this.receiverName = receiverName;
+		this.receiverPhone = receiverPhone;
+		this.addressInfo = addressInfo;
+		this.receiverZip = receiverZip;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
+	public Address(int addressId, int userId, String receiverProvince, String receiverCity, String receiverDistrict,
+			String receiverName, String receiverPhone, String addressInfo, int receiverZip, String createTime,
+			String updateTime) {
+		super();
+		this.addressId = addressId;
+		this.userId = userId;
+		this.receiverProvince = receiverProvince;
+		this.receiverCity = receiverCity;
+		this.receiverDistrict = receiverDistrict;
+		this.receiverName = receiverName;
+		this.receiverPhone = receiverPhone;
+		this.addressInfo = addressInfo;
+		this.receiverZip = receiverZip;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
 	@Override
 	public String toString() {
-		return "Address [addressId=" + addressId + ", addressInfo=" + addressInfo + ", userName=" + userName
-				+ ", receiverName=" + receiverName + ", receiverPhone=" + receiverPhone + ", receiverProvince="
-				+ receiverProvince + ", receiverCity=" + receiverCity + ", receiverDistrict=" + receiverDistrict
-				+ ", receiverZip=" + receiverZip + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+		return "Address [addressId=" + addressId + ", userId=" + userId + ", receiverProvince=" + receiverProvince
+				+ ", receiverCity=" + receiverCity + ", receiverDistrict=" + receiverDistrict + ", receiverName="
+				+ receiverName + ", receiverPhone=" + receiverPhone + ", addressInfo=" + addressInfo + ", receiverZip="
+				+ receiverZip + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public void setReceiverZip(int receiverZip) {
 		this.receiverZip = receiverZip;
@@ -101,21 +131,18 @@ public class Address {
 	public Address() {
 		// TODO Auto-generated constructor stub
 	}
-	public Address(int addressId, String userName, String receiverProvince, String receiverCity,
-			String receiverDistrict, String addressInfo, String receiverName, String receiverPhone, int receiverZip,
-			String createTime, String updateTime) {
+	public Address(String receiverProvince, String receiverCity, String receiverDistrict, String receiverName,
+			String receiverPhone, String addressInfo, int receiverZip, String updateTime,int addressId) {
 		super();
-		this.addressId = addressId;
-		this.userName = userName;
 		this.receiverProvince = receiverProvince;
 		this.receiverCity = receiverCity;
 		this.receiverDistrict = receiverDistrict;
-		this.addressInfo = addressInfo;
 		this.receiverName = receiverName;
 		this.receiverPhone = receiverPhone;
+		this.addressInfo = addressInfo;
 		this.receiverZip = receiverZip;
-		this.createTime = createTime;
 		this.updateTime = updateTime;
+		this.addressId = addressId;
 	}
 	
 	

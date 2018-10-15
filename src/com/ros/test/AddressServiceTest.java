@@ -1,10 +1,9 @@
 package com.ros.test;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import com.ros.dao.AddressDao;
-import com.ros.dao_impl.AddressDaoImpl;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.ros.entity.Address;
 import com.ros.service.AddressService;
 import com.ros.service_impl.AddressServiceImpl;
@@ -19,10 +18,21 @@ public class AddressServiceTest {
 		int n=list.size();
 		System.out.println(n);*/
 		
-		AddressDao ad=new AddressDaoImpl();
+	/*	AddressDao ad=new AddressDaoImpl();
 		List<Address> list=ad.queryAddressByUserName("小黄");
 		int n=list.size();
-		System.out.println(n);
+		System.out.println(n);*/
+		AddressService as=new AddressServiceImpl();
+		
+         Date date=new Date();
+		
+		String dateStr=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+		
+		Address address=new Address("福建省", "厦门", "湖里", "加菲", "15923456789", "明发园西区", 123456, dateStr,4);
+		
+		boolean flag=as.updateAddress(address);
+		
+		System.out.println(flag);
 	}
 
 }
