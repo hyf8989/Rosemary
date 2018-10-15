@@ -128,6 +128,7 @@ public class FlowerInfoServlet extends HttpServlet {
 		     //最后重定向到商品展示页面
 		    response.sendRedirect("/Rosemary/index/shop.jsp");
 		    */
+		    
 		    Gson gson = new Gson();
 		    
 		    String jsonStr=gson.toJson(FlowerInfo);

@@ -57,8 +57,28 @@ public class FlowerInfoDaoImpl implements FlowerInfoDao {
 	@Override
 	public PageData<FlowerInfo> queryFlowerInfoByPage(int page, int pageSize, String keyword,int priceStart,int priceEnd,int typeId1,int typeId2,String sort,String sortType) {
 		// TODO Auto-generated method stub
-		String sql="select flower_info.* from flower_info INNER JOIN flower_type on flower_info.typeId=flower_type.typeId  where flowerName like ? and stock >0 and (price BETWEEN ? and ?) and (flower_type.typeId BETWEEN (?) and (?) ) ORDER BY ? ?"; 
-		PageData<FlowerInfo> pd=BaseDao.getPage(sql, page, pageSize, FlowerInfo.class, keyword,priceStart,priceEnd,typeId1,typeId2,sort,sortType);
+		String sql="";
+		if(sort.equals("price")) {
+			if(sortType.equals("desc")) {
+				sql="select flower_info.* from flower_info INNER JOIN flower_type on flower_info.typeId=flower_type.typeId  where flowerName like ? and stock >0 and (price BETWEEN ? and ?) and (flower_type.typeId BETWEEN (?) and (?) ) ORDER BY price desc";
+			}
+			else {
+				sql="select flower_info.* from flower_info INNER JOIN flower_type on flower_info.typeId=flower_type.typeId  where flowerName like ? and stock >0 and (price BETWEEN ? and ?) and (flower_type.typeId BETWEEN (?) and (?) ) ORDER BY price asc";
+			}
+		}
+		else if(sortType.equals("createTime")) {
+			sql="select flower_info.* from flower_info INNER JOIN flower_type on flower_info.typeId=flower_type.typeId  where flowerName like ? and stock >0 and (price BETWEEN ? and ?) and (flower_type.typeId BETWEEN (?) and (?) ) ORDER BY createTime desc";
+		}
+		else {
+			if(sortType.equals("desc")) {
+				sql="select flower_info.* from flower_info INNER JOIN flower_type on flower_info.typeId=flower_type.typeId  where flowerName like ? and stock >0 and (price BETWEEN ? and ?) and (flower_type.typeId BETWEEN (?) and (?) ) ORDER BY flowerName desc";
+			}
+			else {
+				sql="select flower_info.* from flower_info INNER JOIN flower_type on flower_info.typeId=flower_type.typeId  where flowerName like ? and stock >0 and (price BETWEEN ? and ?) and (flower_type.typeId BETWEEN (?) and (?) ) ORDER BY flowerName asc";	
+			}
+		}
+	  
+		PageData<FlowerInfo> pd=BaseDao.getPage(sql, page, pageSize, FlowerInfo.class, keyword,priceStart,priceEnd,typeId1,typeId2);
 		return pd;
 	}
 

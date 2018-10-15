@@ -334,15 +334,13 @@
 	<script>
 		
 		/*
-		进入页面即调用ajax方法后台查询所有鲜花
+		 定义一个拼接字符串方法（用户页面输出）
 		*/
-		 $(function() {
-			$.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage", function(
-					data, status) {
-          
-				var array = JSON.parse(data);
-				//遍历JSON对象，拼接字符串，显示鲜花
-				 $.each(array.data, function(index, obj) {
+		function displayFlower(arr){
+			//每次输出之前先清空子节点。
+			$("#gried_view").empty();
+			 $.each(arr.data, function(index, obj) {
+				 
 					$("#gried_view").append('<div class="col-md-4 col-sm-6 col-xs-12 mar-bot">'+
 							<!-- single-product-start -->
 							'<div class="single-product">'+
@@ -380,13 +378,28 @@
 							'</div>'+
 							<!-- single-product-end -->
 						'</div>');
-                         
+                        
 					
 				}); 
+		}
+		
+		 $(function() {
+			 var typeId;//初始化花的类别编号。
+			 
+			 
+			 /*
+				进入页面即调用ajax方法后台查询所有鲜花
+				*/ 
+			$.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage", function(
+					data, status) {
+          
+				var array = JSON.parse(data);
+				displayFlower(array);
+				
 
 			});
 			
-			//点击图片时，获取图片ID
+			//点击图片时，获取图片ID（进入购物界面使用）
 			$(document).on("click",".flowershow",function(){
 				
 				console.log($(this).find("img").attr("alt"));//测试输出鲜花ID
@@ -395,16 +408,62 @@
 			});
 			//左侧花的类别标签点击事件（用于模糊查询）
 			$(".flowerType").click(function(){
-		    console.log($(this).attr("id"));//测试输出类别ID	
-		    $("#gried_view").empty();//测试empty（待改）
+				 typeId=$(this).attr("id");
+				 
+		    console.log(typeId);//测试输出类别ID	
+		    $.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage&typeId="+typeId, function(
+					data, status) {
+          
+				var array = JSON.parse(data);
+				console.log(array);
+				//调用拼接方法
+				 displayFlower(array); 
+				
+
+			});
+		   
 			});
 			//下拉框选中事件（模糊查询）
 			 $("#sort").change(function(){
-				 console.log($("#sort option:selected").text());
+				 var sort="";//初始化排序方式关键词
+				 var sortType="desc";//初始化排序方式（降序还是升序）
+				 var sortRoot=$("#sort option:selected").text();//获取选中的下拉框的值
+				 var selectedIndex=$("#sort ").get(0).selectedIndex;//获取选中的下拉框的索引
+				 
+				 //如果索引大于1，则为按花名排序
+				 if(selectedIndex>1){
+					 sort="flowerName";
+					 if(selectedIndex==2){
+						 //大于1且等于2，则按花名升序排序
+						 sortType="asc";
+					 }
+					 
+				 }
+				 else{
+					 sort="price"; 
+					 if(selectedIndex==0){
+						 sortType="asc";
+					 }
+				 }
+				 console.log("选中的值是："+sortRoot+",索引是："+selectedIndex+",排序是根据："+sort+",排序方式是："+sortType+",选中的类别编号是："+typeId);//测试输出
+				//调用ajax传参数，实现模糊查询（排序）
+				 $.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage&sort="+sort+"&sortType="+sortType+"&typeId="+typeId, function(
+							data, status) {
+		          
+						var array = JSON.parse(data);
+						console.log(array);
+						//调用拼接方法
+						 displayFlower(array); 
+						
+
+					});
+				
 				 
 			 });
+		
 			
 		}); 
+		
 	</script>
 </body>
 </html>

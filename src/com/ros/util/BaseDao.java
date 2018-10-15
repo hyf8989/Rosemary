@@ -11,11 +11,11 @@ import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-/**
+/** 
  * 数据库操作的辅助类
  */
 public class BaseDao {
-
+  
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://localhost:3306/rosemary?useunicode=true&characterEncoding=utf-8";
 	private static final String USER = "root"; // 用户名
