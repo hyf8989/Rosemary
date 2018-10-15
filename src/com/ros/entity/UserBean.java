@@ -6,12 +6,20 @@ package com.ros.entity;
  *
  */
 public class UserBean {
+	private int userId;
 	private String userName;
 	private String createTime;
 	private String updateTime;
 	private String name;
 	private String userTel;
 	private String userEmail;
+	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 	public String getUserName() {
 		return userName;
 	}
@@ -61,11 +69,24 @@ public class UserBean {
 		this.userTel = userTel;
 		this.userEmail = userEmail;
 	}
+	
+	public UserBean(int userId, String userName, String createTime, String updateTime, String name, String userTel,
+			String userEmail) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.name = name;
+		this.userTel = userTel;
+		this.userEmail = userEmail;
+	}
 	@Override
 	public String toString() {
-		return "UserBean [userName=" + userName + ",createTime=" + createTime + ", updateTime="
+		return "UserBean [userId=" + userId + ", userName=" + userName + ", createTime=" + createTime + ", updateTime="
 				+ updateTime + ", name=" + name + ", userTel=" + userTel + ", userEmail=" + userEmail + "]";
 	}
+	
 	
 	
 
