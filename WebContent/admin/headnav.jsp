@@ -189,10 +189,10 @@
 								<li class="dropdown profile_details_drop">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 										<div class="profile_img">
-											<span class="prfil-img"><img src="images/in4.jpg" alt=""> </span>
+											<span class="prfil-img"><img src="images/in.jpg" alt=""> </span>
 											<div class="user-name">
 												<p>${sessionScope.m.adminName}</p>
-												<span>Administrator</span>
+												<span>${sessionScope.m.adminLevel==1?"店铺管理员":"系统管理员"}</span>
 											</div>
 											<i class="fa fa-angle-down"></i>
 											<i class="fa fa-angle-up"></i>

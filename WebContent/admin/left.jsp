@@ -17,7 +17,7 @@
 				<div class="menu">
 					<ul id="menu">
 						<li>
-							<a href="index.html"><i class="fa fa-tachometer"></i>&nbsp;&nbsp; <span>主页</span>
+							<a href="index.jsp"><i class="fa fa-tachometer"></i>&nbsp;&nbsp; <span>主页</span>
 								<div class="clearfix"></div>
 							</a>
 						</li>

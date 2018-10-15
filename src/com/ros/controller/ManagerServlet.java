@@ -44,7 +44,7 @@ public class ManagerServlet extends HttpServlet {
 		// 设置页面的格式(预期响应的contentType)
 		response.setContentType("text/html;charset=utf-8");
 		// 通过response的方法得到一个jspwriter
-		PrintWriter out = response.getWriter();
+		//PrintWriter out = response.getWriter();
 		// 获取op
 		String op = request.getParameter("op");
 		if ("login".equals(op)) {
@@ -93,6 +93,7 @@ public class ManagerServlet extends HttpServlet {
 			out.print("<script>alert('登录成功');location.href='/Rosemary/admin/index.jsp'</script>");
 
 		}
+		out.close();
 	}
 
 	protected void doAddManager(HttpServletRequest request, HttpServletResponse response)
@@ -110,6 +111,7 @@ public class ManagerServlet extends HttpServlet {
 		} else {
 			out.print("<script>alert('添加失败');location.href='/Rosemary/admin/adminAdd.jsp'</script>");
 		}
+		out.close();
 	}
 
 	protected void doUpdateManager(HttpServletRequest request, HttpServletResponse response)
@@ -133,7 +135,7 @@ public class ManagerServlet extends HttpServlet {
 	protected void doDelManager(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		PrintWriter out = response.getWriter();
+		//PrintWriter out = response.getWriter();
 		/*
 		 * String adminName = request.getParameter("adminName"); String adminPwd =
 		 * request.getParameter("adminPwd"); String adminStatus =
