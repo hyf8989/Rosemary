@@ -3,6 +3,8 @@ package com.ros.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -52,6 +54,59 @@ public class AddressServlet extends HttpServlet {
 			
 			request.getSession().setAttribute("addressList", list);
 			response.sendRedirect("/Rosemary/index/myAddress.jsp");
+		}
+		
+		//用户添加收货地址
+		else if(op.equals("addAddress")) {
+			String mag="";
+			//获取用户编号
+			int userId=Integer.parseInt(request.getParameter("userId"));
+			
+			//获取输入的收货人姓名
+			String receiverName=request.getParameter("receiverName");
+			//获取输入的收货人电话
+			String receiverPhone=request.getParameter("receiverPhone");
+			//获取输入的省市区及详细地址
+			String receiverProvince=request.getParameter("receiverProv");
+			String receiverCity=request.getParameter("receiverCity");
+			String receiverDistrict=request.getParameter("receiverDistrict");
+			String addressInfo=request.getParameter("addressInfo");
+			
+			//获取输入的邮编
+			int receiverZip=Integer.parseInt(request.getParameter("receiverZip"));
+			
+			//获取当前时间并转换时间格式
+			 Date date=new Date();
+				
+		   String dateStr=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+			Address address=new Address(userId, receiverProvince, receiverCity, receiverDistrict, receiverName, receiverPhone, addressInfo, receiverZip, dateStr, dateStr);
+			
+			boolean flag=as.addAddress(address);
+			
+			if(flag) {
+				mag="收货地址添加成功";
+			}
+			else {
+				mag="收货地址添加失败";
+			}
+			
+			out.println(mag);
+			out.close();
+		}
+		
+		else if(op.equals("deleteAddress")) {
+			String mag="";
+			//获取地址信息的编号
+			int addressId=Integer.parseInt( request.getParameter("addressId"));
+		    boolean flag=as.deleteAddress(addressId);
+		    if(flag) {
+		    	mag="收货地址删除成功";
+		    }
+		    else {
+				mag="收货地址删除失败";
+			}
+		    out.print(mag);
+		    out.close();
 		}
 		
 	}

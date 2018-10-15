@@ -35,9 +35,9 @@ import com.ros.util.MD5Util;
 public class UserTest {
 	
 	public static void main(String[] args) {
-		UserService us=new UserServiceImpl();
+	UserService us=new UserServiceImpl();
 		
-		String userName="admin3";
+	/*	String userName="admin3";
 		
 	
 		
@@ -48,7 +48,7 @@ public class UserTest {
 		String newPwd="12346";
 		boolean flag=us.updatePwd(userName,dateStr, newPwd);
 	System.out.println(flag);
-	System.out.println(dateStr);
+	System.out.println(dateStr);*/
 		
 		
 		
@@ -65,7 +65,8 @@ public class UserTest {
 		
 		System.out.println(us.insertUserDetail(uDI));*/
 
-		
+		UserBasicInfo ub=us.getUserBasicInfoByUserName("admin5");
+		System.out.println(ub.getUserId());
 	}
 
 }
