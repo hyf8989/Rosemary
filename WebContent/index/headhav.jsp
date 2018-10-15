@@ -36,7 +36,7 @@
 											<a href="pwd.jsp" title=""><span>修改密码</span></a>
 										</li>
 										<li><img src="img/lang/7.jpg" alt="hb" />
-											<a href="myOrder.jsp" title=""><span>查看订单</span></a>
+											<a href="/Rosemary/MyOrders.do?op=queryMyOrders&userId=${sessionScope.ub.userId}" title=""><span>查看订单</span></a>
 										</li>
 										<li><img src="img/lang/7.jpg" alt="hb" />
 											<a href="/Rosemary/address.do?op=myAddress&userName=${sessionScope.ub.userName}" title=""><span>收货地址</span></a>
