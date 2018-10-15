@@ -5,9 +5,11 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import com.ros.api.*;
 import com.ros.entity.UserBasicInfo;
+import com.ros.entity.UserBean;
 import com.ros.entity.UserDetailInfo;
 import com.ros.service.UserService;
 import com.ros.service_impl.UserServiceImpl;
@@ -184,6 +186,10 @@ public class UserServlet extends HttpServlet {
 			out.close();
 	
 		
+		}else if(op.equals("queryUsersBean")) {
+			List<UserBean> list = us.queryUsersBean();
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("/admin/userList.jsp").forward(request, response);
 		}
 			
 		

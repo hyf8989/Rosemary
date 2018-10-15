@@ -1,6 +1,9 @@
 package com.ros.dao;
 
+import java.util.List;
+
 import com.ros.entity.UserBasicInfo;
+import com.ros.entity.UserBean;
 import com.ros.entity.UserDetailInfo;
 /**
  *UserDao 接口
@@ -17,7 +20,11 @@ public interface UserDao {
    boolean upatePwd(String userName,String updateTime,String newPwd);//用户修改密码
    public UserBasicInfo getUserBasicInfoByUserName(String userName);//根据用户名查询出用户信息
    public boolean insertUserDetail(UserDetailInfo uDI);//注册成功时同时插入用户详情表
- 
-   
+   /**
+       * @Title: queryUsersBean
+       * @Description: TODO(后台用户信息展示)
+       * @return List<UserBean>    返回类型 
+    */
+   List<UserBean> queryUsersBean();
 
 }
