@@ -156,11 +156,14 @@
 
 											</div>
 											<!-- 分页区域 -->
-										<div id="pageDiv"></div>
+										
 										<!-- 分页结束 -->
   										</div>
+  										
 									</div>
+									
 								</div>
+								<div id="pageDiv"></div>
 							</div>
 						</div>
 					</div>
@@ -337,7 +340,9 @@
 		 $(function() {
 			 var typeId;//初始化花的类别编号。
 			 var keyword;//初始化关键词（搜索框内容）
-			 console.log();
+			 var total;//初始化总搜索条数
+			 var page;//初始化当前页
+			 var pageSize;//初始化每页条数
 			
 			 
 			 
@@ -349,7 +354,11 @@
 					data, status) {
           
 				var array = JSON.parse(data);
+				total=array.total;
+				page=array.page;
+				pageSize=array.pageSize;
 				displayFlower(array);
+				pageshow();
 				
 
 			});
@@ -361,6 +370,23 @@
 				
 				
 			});
+			//输入框按下时的监听事件（进行模糊查询）
+		     $("#keyword").keyup(function(){
+		    	keyword=$(this).val(); 
+		    	$.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage&keyword="+keyword, function(
+						data, status) {
+	          
+					var array = JSON.parse(data);
+					total=array.total;
+					page=array.page;
+					pageSize=array.pageSize;
+					
+					displayFlower(array);
+					pageshow();
+
+				});
+		    	 
+		     });
 			//左侧花的类别标签点击事件（用于模糊查询）
 			$(".flowerType").click(function(){
 				 typeId=$(this).attr("id");
@@ -370,9 +396,13 @@
 					data, status) {
           
 				var array = JSON.parse(data);
+				total=array.total;
+				page=array.page;
+				pageSize=array.pageSize;
 				console.log('我是你点中花类别ID所查询出来对应的鲜花数据：'+array);
 				//调用拼接方法
 				 displayFlower(array); 
+				pageshow();
 				
 
 			});
@@ -402,7 +432,8 @@
 				 }
 				 console.log("下拉框选中的值是："+sortRoot+",索引是："+selectedIndex+",排序是根据："+sort+",排序方式是："+sortType+",选中的类别编号是："+typeId);//测试输出
 				//调用ajax传参数，实现模糊查询（排序）
-				 if(typeof(typeId)==true){
+				 if(typeof(typeId)==true){//如果左侧类别标签被点击的情况下，我们就传排序方式和类别编号过去服务端
+					 
 					 $.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage&sort="+sort+"&sortType="+sortType+"&typeId="+typeId, function(
 								data, status) {
 			          
@@ -414,17 +445,33 @@
 
 						});
 				 }
-				 else{
-					 $.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage&sort="+sort+"&sortType="+sortType, function(
-								data, status) {
-			          
-							var array = JSON.parse(data);
-							console.log('我是根据你选中下拉框的值排序chulai'+array);
-							//调用拼接方法
-							 displayFlower(array); 
-							
+				 else{//如果左侧类别标签未被点击的情况下，我们就判断输入框是不是有值。
+					 if(typeof(keyword)==true){//有值就传值进行模糊搜索
+						 $.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage&sort="+sort+"&sortType="+sortType+"&keyword="+keyword, function(
+									data, status) {
+				          
+								var array = JSON.parse(data);
+								console.log('我是根据你选中下拉框的值排序chulai'+array);
+								//调用拼接方法
+								 displayFlower(array); 
+								
 
-						});
+							});
+					 }
+					 else{//没有就认为用户未输入关键字，也未选中类别标签。 则默认是对所有鲜花进行我们的排序操作
+						 $.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage&sort="+sort+"&sortType="+sortType, function(
+									data, status) {
+				          
+								var array = JSON.parse(data);
+								console.log('我是根据你选中下拉框的值排序chulai'+array);
+								//调用拼接方法
+								 displayFlower(array); 
+								
+
+							});
+						 
+					 }
+					 
 					 
 				 }
 				 
@@ -435,37 +482,67 @@
 				
 				 
 			 });
+			//分页开始
+			function pageshow(){
+				
+				 layui.use(['laypage', 'layer'], function(){
+					  var laypage = layui.laypage
+					  ,layer = layui.layer;
+					  
+					//完整功能 
+					  laypage.render({
+					    elem: 'pageDiv'
+					    ,count: total,
+					    curr:page
+					   ,limit:pageSize
+					    ,layout: ['count', 'prev', 'page','limit','next', 'skip']
+					    ,jump: function(obj,first){
+					      console.log(obj);
+					      console.log(first);
+					    //首次不执行
+					      if(!first){
+					        //do something
+					        if(typeof(keyword)==true){
+					        	$.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage&page="+obj.curr+"&pageSize="+obj.limit+"&keyword="+keyword, function(
+										data, status) {
+					          
+									var array = JSON.parse(data);
+									
+									displayFlower(array);
+									
+									
+
+								});
+					        }
+					        else{
+					        	$.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage&page="+obj.curr+"&pageSize="+obj.limit, function(
+										data, status) {
+					          
+									var array = JSON.parse(data);
+									
+									displayFlower(array);
+									
+									
+
+								});
+					        	
+					        }
+					    	  
+					      }
+					    }
+					  });
+					 
+					});
+			}
+		
+			//分页结束
 		
 			
 		}); 
 		
 	</script>
 	<!-- 分页脚本 -->
-	<script>
-layui.use(['laypage', 'layer'], function(){
-  var laypage = layui.laypage
-  ,layer = layui.layer;
-  
-//完整功能 
-  laypage.render({
-    elem: 'pageDiv'
-    ,count: 24,
-    curr:1
-   ,limit:6
-    ,layout: ['count', 'prev', 'page','limit','next', 'skip']
-    ,jump: function(obj,first){
-      console.log(obj);
-      console.log(first);
-    //首次不执行
-      if(!first){
-        //do something
-    	  /* location.href="user.action?demand=queryUserByPage&page="+obj.curr+"&pageSize="+obj.limit; */
-      }
-    }
-  });
- 
-});
-</script>
+	
 </body>
 </html>
 
