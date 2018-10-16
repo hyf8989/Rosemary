@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.ros.dao_impl.UserBeanDaoImpl;
 import com.ros.entity.UserBasicInfo;
 import com.ros.entity.UserDetailInfo;
 import com.ros.service.UserService;
@@ -64,9 +65,11 @@ public class UserTest {
 		/*UserDetailInfo uDI=new UserDetailInfo(1, "17720838367", "2018-10-13 00:37:10", "2018-10-13 00:37:10");
 		
 		System.out.println(us.insertUserDetail(uDI));*/
-
+/*
 		UserBasicInfo ub=us.getUserBasicInfoByUserName("admin5");
-		System.out.println(ub.getUserId());
+		System.out.println(ub.getUserId());*/
+	   UserDetailInfo udi=new UserDetailInfo(5, "1546454", "2018-09-01 00:00:00", "2018-09-01 00:00:00");
+	    System.out.println(new UserBeanDaoImpl().updateUserDetailInfo(udi));
 	}
 
 }

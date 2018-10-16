@@ -71,5 +71,13 @@ public class UserBasicInfo {
 		this.userPwd = userPwd;
 		this.updateTime = updateTime;
 	}
+
+	public UserBasicInfo(String userName, String updateTime, int userId) {
+		// TODO Auto-generated constructor stub
+		super();
+		this.userName = userName;
+		this.updateTime = updateTime;
+		this.userId = userId;
+	}
 	
 }

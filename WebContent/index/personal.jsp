@@ -20,8 +20,7 @@
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="css/p-forms.css">
 <link href="css/style2.css" rel="stylesheet" type="text/css" media="all" />
-<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+
 
 </head>
 <body>
@@ -97,16 +96,63 @@
 					<!-- end /.content -->
 
 					<div class="footer">
-						<button id="exit" type="button" class="secondary-btn">关闭</button>
-						<button  id="update" type="submit" class="primary-btn">确认修改</button>
-
+						<button id="exit" name="exit" type="button" class="secondary-btn">关闭</button>
+						<button id="update" type="button" name="update"
+							class="primary-btn">确认修改</button>
 					</div>
 					<!-- end /.footer -->
 				</form>
 			</c:forEach>
 		</div>
 	</div>
+	<!-- 修改信息的单击事件 -->
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script type="text/javascript">
+		layui.use('layer', function() {
+			var msg;
+			var layer = layui.layer;
+		});
+		$("#update").click(
+				function() {
+					//获取当前用户编号
+					var userId = "${sessionScope.ub.userId}";
+					//获取输入的用户名
+					var userName = $("#userName").val();
+					var name = $("#name").val();
+					var userEmail = $("#userEmail").val();
+					var userTel = $("#userTel").val();
+					$.post("/Rosemary/ub.do",
+							"op=updateInfo&userId=" + userId + "&userName="
+									+ userName + "&name=" + name
+									+ "&userEmail=" + userEmail + "&userTel="
+									+ userTel, function(data, status) {
+								msg = data;
+							});
 
+					layer.open({
+						title : "温馨提醒",
+						skin : "layui-layer-molv",
+						content : "<span style='color:black;'>" + msg
+								+ "</span>",
+						anim : 0,
+						btn : [ 'OK' ],
+						yes : function(index, layero) {
+							layer.closeAll();
+							location.href = "/Rosemary/index/index.jsp";
+						}
+					});
+
+				});
+	</script>
+	<!-- 点击关闭按钮跳转到首页 -->
+	<script type="text/javascript">
+	
+	$("#exit").click(function () {
+		location.href = "/Rosemary/index/index.jsp";
+	});
+	</script>
 
 </body>
 </html>

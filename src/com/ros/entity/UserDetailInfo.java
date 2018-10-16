@@ -90,6 +90,15 @@ public class UserDetailInfo {
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 	}
+	public UserDetailInfo(String name, String userTel, String userEmail, int userId) {
+		// TODO Auto-generated constructor stub
+		super();
+		this.name = name;
+		this.userTel = userTel;
+		this.userEmail = userEmail;
+		this.userId = userId;
+	}
+	
 	
 	
 }

@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.ros.dao.UserBeanDao;
 import com.ros.dao_impl.UserBeanDaoImpl;
+import com.ros.entity.UserBasicInfo;
 import com.ros.entity.UserBean;
+import com.ros.entity.UserDetailInfo;
 import com.ros.service.UserBeanService;
 
 public class UserBeanServiceImpl implements UserBeanService {
@@ -18,14 +20,13 @@ public class UserBeanServiceImpl implements UserBeanService {
 		// TODO Auto-generated method stub
 		return ubd.queryUsersBean(userId);
 	}
-	
+
 	/**
-	 * 更新个人信息
+	 * 更新用户信息
 	 */
 	@Override
-	public boolean updateUsersBean(int userId) {
+	public boolean updateUserDetailInfo(UserDetailInfo udi) {
 		// TODO Auto-generated method stub
-		return ubd.updateUsers(userId);
+		return ubd.updateUserDetailInfo(udi);
 	}
-
 }
