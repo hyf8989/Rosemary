@@ -22,22 +22,23 @@
 		 */
 
 </script>
+<%-- ${pageContext.request.contextPath}/ --%>
 <!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="${pageContext.request.contextPath}/admin/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />
-<link rel="stylesheet" href="css/morris.css" type="text/css" />
-<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+<link href="${pageContext.request.contextPath}/admin/css/style.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/morris.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/layui/css/layui.css" />
 
 <!-- Graph CSS -->
-<link href="css/font-awesome.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/admin/css/font-awesome.css" rel="stylesheet">
 <!-- jQuery -->
-<script src="js/jquery-2.1.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/admin/js/jquery-2.1.4.min.js"></script>
 <!-- //jQuery -->
 <!-- tables -->
-<link rel="stylesheet" type="text/css" href="css/table-style.css" />
-<link rel="stylesheet" type="text/css" href="css/basictable.css" />
-<script type="text/javascript" src="js/jquery.basictable.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/css/table-style.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/css/basictable.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/jquery.basictable.min.js"></script>
 
 </script>
 <script type="text/javascript">
@@ -74,7 +75,7 @@
 <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700'
 	rel='stylesheet' type='text/css'>
 <!-- lined-icons -->
-<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/icon-font.min.css" type='text/css' />
 <!-- //lined-icons -->
 </head>
 
@@ -148,7 +149,7 @@
 											<c:forEach items="${requestScope.list}" var="m">
 
 												<tr class="table-row">
-													<td class="table-img"><img src="images/in.jpg" alt="">
+													<td class="table-img"><img src="${pageContext.request.contextPath}/admin/images/in.jpg" alt="">
 													</td>
 													<td class="table-text">
 														<h6>${m.adminName}</h6>
@@ -322,11 +323,11 @@
 				});
 	</script>
 	<!--js -->
-	<script src="js/jquery.nicescroll.js"></script>
-	<script src="js/scripts.js"></script>
+	<script src="${pageContext.request.contextPath}/admin/js/jquery.nicescroll.js"></script>
+	<script src="${pageContext.request.contextPath}/admin/js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/admin/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/admin/layui/layui.js" charset="utf-8"></script>
 
 
 	<!-- /Bootstrap Core JavaScript -->
@@ -357,6 +358,7 @@
 
 		});
 		$(".layui-btn-normal").click(function() {
+			var adminName =$(this).parents("tr").find("h6").text();
 			layer.open({
 				title : "友情提醒？",
 				skin : "layui-layer-lan",
@@ -364,15 +366,22 @@
 				anim : 0,
 				btn : [ '确定', '取消' ],
 				yes : function(index, layero) {
-					layer.msg('成功释放用户权限', {
+					$.get("/Rosemary/manager.action","op=clearManagerStatus&adminName=" + adminName, function(data, status) {
+						layer.msg(data, {
+							icon : 4,
+							time : 3000
+						});
+						location.reload(true);
+					}); 
+					/* layer.msg('成功释放用户权限', {
 						icon : 6,
 						time : 3000
-					});
+					}); */
 				}
 			});
 		});
 		$(".pwd-reset").click(function() {
-			 
+			var adminName =$(this).parents("tr").find("h6").text();
 			layer.open({
 				title : "友情提醒？",
 				skin : "layui-layer-lan",
@@ -380,24 +389,37 @@
 				anim : 0,
 				btn : [ '确定', '取消' ],
 				yes : function(index, layero) {
-					location.href = "/Rosemary/manager.action?op=updateManagerPwd"; 
-					layer.msg('成功重置', {
+					//...ajax请求
+					//location.href = "/Rosemary/manager.action?op=updateManagerPwd"; 
+					$.get("/Rosemary/manager.action","op=updateManagerPwd&adminName=" + adminName, function(data, status) {
+						layer.msg(data, {
 						icon : 6,
 						time : 3000
 					});
+						location.reload(true);
+					}); 
+					//var adminName =$(this).parents("tr").find("h6").text();
+					//location.href = "/Rosemary/manager.action?op=updateManagerPwd&adminName=" + adminName;
+					
 				}
 			});
 		});
 		$(".layui-btn-danger").click(function() {
+			//console.log($(this).parents("tr").find("span").text());
+			var adminName =$(this).parents("tr").find("h6").text();
 			layer.confirm("请问是否确定锁定？", {
 				btn : [ "确定", "取消" ],
 				icon : 4
 			//按钮
 			}, function(index) {
-				layer.msg('锁定', {
-					icon : 4,
-					time : 3000
-				});
+				$.get("/Rosemary/manager.action","op=lockManagerStatus&adminName=" + adminName, function(data, status) {
+					layer.msg(data, {
+						icon : 4,
+						time : 3000
+					});
+					location.reload(true);
+				}); 
+				
 				layer.close(index);
 			}, function() {
 

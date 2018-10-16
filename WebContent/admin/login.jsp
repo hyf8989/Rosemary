@@ -102,9 +102,9 @@
 	<div style="text-align: center;"></div>
 	 <script type="text/javascript">
 		 /* document.getElementById("login").onclick = function() {
-			 location.href = "/manager.action";  */
-			/* alert(1); */
-		} 
+			 location.href = "/manager.action";  
+			
+		} */
 		
 	</script> 
 	
