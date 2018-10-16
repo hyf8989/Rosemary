@@ -41,7 +41,10 @@ public interface ManagerDao {
 	boolean updateManagerPwd(String adminName);
 
 	// 锁定管理员状态
-	boolean updateManagerStatus(String adminName);
+	boolean lockManagerStatus(String adminName);
+	
+	// 解锁管理员状态
+	boolean clearManagerStatus(String adminName);
 	
 
 

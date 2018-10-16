@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import com.ros.entity.Manager;
 import com.ros.service.ManagerService;
 import com.ros.service_impl.ManagerServiceImpl;
+import com.ros.util.MD5Util;
 
 /**
  * Servlet implementation class ManagerServlet
@@ -59,10 +61,42 @@ public class ManagerServlet extends HttpServlet {
 		} else if ("adminDel".equals(op)) {
 			// 调用删除管理员的方法
 			doDelManager(request, response);
-		} else if ("queryManager".equals(op)) {
+			
+		} else if ("queryManager".equals(op)) {//显示所有管理员
 			List<Manager> list = ms.queryManager();
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/admin/adminList.jsp").forward(request, response);
+		}else if("updateManagerPwd".equals(op)) {
+			PrintWriter out = response.getWriter();
+			String adminName = request.getParameter("adminName");
+			boolean flag = ms.updateManagerPwd(adminName);
+			if(flag) {
+				out.print("重置成功");
+			}else {
+				out.print("重置失败");
+			}
+			out.close();
+			//request.getRequestDispatcher("/admin/adminList.jsp").forward(request, response);
+		}else if("lockManagerStatus".equals(op)) {
+			PrintWriter out = response.getWriter();
+			String adminName = request.getParameter("adminName");
+			boolean flag = ms.lockManagerStatus(adminName);
+			if(flag) {
+				out.print("锁定");
+			}else {
+				out.print("锁定失败");
+			}
+			out.close();
+		}else if("clearManagerStatus".equals(op)) {
+			PrintWriter out = response.getWriter();
+			String adminName = request.getParameter("adminName");
+			boolean flag = ms.clearManagerStatus(adminName);
+			if(flag) {
+				out.print("解锁");
+			}else {
+				out.print("解锁失败");
+			}
+			out.close();
 		}
 	}
 
@@ -101,7 +135,7 @@ public class ManagerServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		String adminName = request.getParameter("adminName");
-		String adminPwd = request.getParameter("adminPwd");
+		String adminPwd = MD5Util.getEncodeByMd5(request.getParameter("adminPwd"));
 		String adminStatus = request.getParameter("adminStatus");
 		String adminLevel = request.getParameter("adminLevel");
 		Manager m = new Manager(adminName, adminPwd, Integer.parseInt(adminStatus), Integer.parseInt(adminLevel));
