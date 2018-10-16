@@ -43,9 +43,11 @@ public class FlowerTest {
 	    
 		/*PageData<FlowerInfo> pd=new FlowerInfoServiceImpl().queryFlowerInfoByPage(1, 6, "%%", 0, 1000, 1, 9, "price", "asc");
 		System.out.println(pd.getData().get(0).getFlowerId());*/
-String sql="select * from flower_info order by ?";
+/*String sql="select * from flower_info order by ?";
 ArrayList<FlowerInfo> list=(ArrayList<FlowerInfo>) BaseDao.select(sql, FlowerInfo.class, "flowerName");
-		System.out.println(list.get(0).getFlowerId());
+		System.out.println(list.get(0).getFlowerId());*/
+		FlowerInfo flower=fIS.getFlowerInfoById(5);
+		System.out.println(flower.getFlowerName());
 		
 	}
 }

@@ -11,4 +11,5 @@ public interface FlowerInfoDao {
     public ArrayList<FlowerInfo> getFlowerInfoByPrice();//前台展示顶级鲜花
     public PageData<FlowerInfo> queryFlowerInfoByPage(int page, int pageSize, String keyword,int priceStart,int priceEnd,int typeId1,int typeId2,String sort,String sortType);//主页显示所有鲜花
     public ArrayList<FlowerType> queryFlowerType();//获取当前所有花的类别
+    public FlowerInfo getFlowerInfoById(int flowerId);//根据鲜花ID获得鲜花的信息（生成一个鲜花实体类对象）
 }

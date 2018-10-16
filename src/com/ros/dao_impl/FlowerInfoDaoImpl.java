@@ -97,4 +97,16 @@ public class FlowerInfoDaoImpl implements FlowerInfoDao {
 		
 	}
 
+	/* 
+	 * 根据传进来的鲜花编号获得该鲜花的所有信息
+	 */
+	@Override
+	public FlowerInfo getFlowerInfoById(int flowerId) {
+		// TODO Auto-generated method stub
+		String sql="select * from flower_info where flowerId=?";
+	ArrayList<FlowerInfo> list=(ArrayList<FlowerInfo>)BaseDao.select(sql, FlowerInfo.class, flowerId);
+	
+		return list.get(0);
+	}
+
 }
