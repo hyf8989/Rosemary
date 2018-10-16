@@ -99,7 +99,7 @@
 						<div class="col-md-5 col-sm-6 hidden-xs">
 							<div class="search-box">
 								<form action="#">
-									<input class="form-control search-form" type="text" placeholder="请输入商品关键字搜索" />
+									<input class="form-control search-form" type="text" placeholder="请输入商品关键字搜索"   id="keyword"/>
 									<button class="search-button" value="Search" id="search" type="submit"><i class="fa fa-search"></i></button>
 								</form>
 							</div>

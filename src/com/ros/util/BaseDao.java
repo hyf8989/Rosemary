@@ -307,6 +307,10 @@ public class BaseDao {
 			page = totalPage;
 		}
 
+		if (page<1) {
+			// page应该为最后一页
+			page = 1;
+		}
 		// 设置【计算】 起始位置
 		// page 1=>第一页 start =>0
 		// page 2 =>第二页 start => 10

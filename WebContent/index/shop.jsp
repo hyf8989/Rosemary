@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="css/font-awesome.min.css" />
 <!-- Custom CSS -->
 <link href="style.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
 
 
 </head>
@@ -141,20 +142,8 @@
 										<option selected="selected" value="#"></option>
 									</select>
 								</div>
-								<div class="show hidden-xs">
-									<label>显示</label> <select>
-										<option value="#">24</option>
-										<option selected="selected" value="#">12</option>
-									</select> <span>每页</span>
-								</div>
-								<div class="shop-breadcrumb">
-									<ul>
-										<li class="active"><a href="#">1</a></li>
-										<li><a href="#">2</a></li>
-										<li><a href="#">3</a></li>
-										<li><a href="#">></a></li>
-									</ul>
-								</div>
+								
+								
 							</div>
 							<div class="shop-category-product">
 								<div class="row">
@@ -163,54 +152,13 @@
 										<div class="tab-content">
 											<div role="tabpanel"
 												class="tab-pane active fade in flower-show" id="gried_view">
-												 <c:forEach var="flowerInfo" items="${sessionScope.FlowerInfo.data }">
-                                                 <div class="col-md-4 col-sm-6 col-xs-12 mar-bot">
-													<!-- single-product-start -->
-													<div class="single-product">
-														<div class="single-product-img">
-															<a href="#"> <img src="${flowerInfo.sPicture }" alt="" />
-															</a> <span class="sale-box"> <span class="sale">Sale</span>
-															</span> <span class="new-box"> <span class="new">New</span>
-															</span>
-														</div>
-														<div class="single-product-content">
-															<div class="product-title">
-																<h5>
-																	<a href="#">${flowerInfo.flowerName }</a>
-																</h5>
-															</div>
-															<div class="rating">
-																<div class="star star-on"></div>
-																<div class="star star-on"></div>
-																<div class="star star-on"></div>
-																<div class="star star-on"></div>
-																<div class="star"></div>
-															</div>
-															<div class="price-box">
-																<span class="price">${flowerInfo.price }</span> <span
-																	class="old-price">${flowerInfo.price+100}</span>
-															</div>
-															<div class="product-action">
-																<button class="button btn btn-default add-cart"
-																	title="add to cart">加入购物车</button>
-																<a class="add-wishlist" href="#" title="add to wishlist">
-																	<i class="fa fa-heart"></i>
-																</a> <a class="quick-view" href="#" title="quick view"
-																	data-toggle="modal" data-target="#myModal"> <i
-																	class="fa fa-search"></i>
-																</a>
-															</div>
-														</div>
-													</div>
-													<!-- single-product-end -->
-												</div>
-                                                 
-                                                 
-                                                 </c:forEach> 
+												<!-- 商品展示区域 -->
 
 											</div>
-
-										</div>
+											<!-- 分页区域 -->
+										<div id="pageDiv"></div>
+										<!-- 分页结束 -->
+  										</div>
 									</div>
 								</div>
 							</div>
@@ -331,8 +279,11 @@
 	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
 		
 	</script>
+	 <script type="text/javascript" src="layui/layui.js">
+			
+		</script> 
 	<script>
-		
+		 
 		/*
 		 定义一个拼接字符串方法（用户页面输出）
 		*/
@@ -385,6 +336,10 @@
 		
 		 $(function() {
 			 var typeId;//初始化花的类别编号。
+			 var keyword;//初始化关键词（搜索框内容）
+			 console.log();
+			
+			 
 			 
 			 
 			 /*
@@ -402,7 +357,7 @@
 			//点击图片时，获取图片ID（进入购物界面使用）
 			$(document).on("click",".flowershow",function(){
 				
-				console.log($(this).find("img").attr("alt"));//测试输出鲜花ID
+				console.log("我是你点击鲜花的id"+$(this).find('img').attr('alt'));//测试输出鲜花ID
 				
 				
 			});
@@ -410,12 +365,12 @@
 			$(".flowerType").click(function(){
 				 typeId=$(this).attr("id");
 				 
-		    console.log(typeId);//测试输出类别ID	
+		    console.log("我是花类别的ID："+typeId);//测试输出类别ID	
 		    $.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage&typeId="+typeId, function(
 					data, status) {
           
 				var array = JSON.parse(data);
-				console.log(array);
+				console.log('我是你点中花类别ID所查询出来对应的鲜花数据：'+array);
 				//调用拼接方法
 				 displayFlower(array); 
 				
@@ -445,18 +400,38 @@
 						 sortType="asc";
 					 }
 				 }
-				 console.log("选中的值是："+sortRoot+",索引是："+selectedIndex+",排序是根据："+sort+",排序方式是："+sortType+",选中的类别编号是："+typeId);//测试输出
+				 console.log("下拉框选中的值是："+sortRoot+",索引是："+selectedIndex+",排序是根据："+sort+",排序方式是："+sortType+",选中的类别编号是："+typeId);//测试输出
 				//调用ajax传参数，实现模糊查询（排序）
-				 $.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage&sort="+sort+"&sortType="+sortType+"&typeId="+typeId, function(
-							data, status) {
-		          
-						var array = JSON.parse(data);
-						console.log(array);
-						//调用拼接方法
-						 displayFlower(array); 
-						
+				 if(typeof(typeId)==true){
+					 $.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage&sort="+sort+"&sortType="+sortType+"&typeId="+typeId, function(
+								data, status) {
+			          
+							var array = JSON.parse(data);
+							console.log('我是根据你选中下拉框的值排序chulai'+array);
+							//调用拼接方法
+							 displayFlower(array); 
+							
 
-					});
+						});
+				 }
+				 else{
+					 $.get("/Rosemary/flower.do", "op=queryFlowerInfoByPage&sort="+sort+"&sortType="+sortType, function(
+								data, status) {
+			          
+							var array = JSON.parse(data);
+							console.log('我是根据你选中下拉框的值排序chulai'+array);
+							//调用拼接方法
+							 displayFlower(array); 
+							
+
+						});
+					 
+				 }
+				 
+					 
+					 
+				
+				 
 				
 				 
 			 });
@@ -465,6 +440,32 @@
 		}); 
 		
 	</script>
+	<!-- 分页脚本 -->
+	<script>
+layui.use(['laypage', 'layer'], function(){
+  var laypage = layui.laypage
+  ,layer = layui.layer;
+  
+//完整功能 
+  laypage.render({
+    elem: 'pageDiv'
+    ,count: 24,
+    curr:1
+   ,limit:6
+    ,layout: ['count', 'prev', 'page','limit','next', 'skip']
+    ,jump: function(obj,first){
+      console.log(obj);
+      console.log(first);
+    //首次不执行
+      if(!first){
+        //do something
+    	  /* location.href="user.action?demand=queryUserByPage&page="+obj.curr+"&pageSize="+obj.limit; */
+      }
+    }
+  });
+ 
+});
+</script>
 </body>
 </html>
 
