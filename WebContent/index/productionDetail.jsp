@@ -261,10 +261,10 @@
 				   	<div style="background-color:rgb(240,239,239);width:300px;height: 50px;margin-top:10px;">
 				   	 <span>价格：</span><strong style="color:red;font-size:20px;line-height:50px;">￥	${sessionScope.flower.price}</strong>
 				 	<br/><br/>  
-				 	<span>数量：</span><input id="flower-quantity" value="1" type="number" name="points" min="1" max="${sessionScope.flower.stock }" />
+				 	<span>数量：</span><input id="quantity" value="1" type="number" name="points" min="1" max="${sessionScope.flower.stock }" />
 				   		<br/><br/><br/><br/>
-				   	<div style="margin-top:50px;"><button type="button" class="layui-btn layui-btn-lg">加入购物车</button>
-				   	   <button type="button" class="layui-btn layui-btn-lg ">购买</button>
+				   	<div style="margin-top:50px;"><button type="button" id="addToCart" class="layui-btn layui-btn-lg">加入购物车</button>
+				   	   <button type="button" id="" class="layui-btn layui-btn-lg ">购买</button>
 				   	</div>
 				   
 				  
@@ -328,70 +328,8 @@
 					</div>
 				
 				 </div>
-				  	 <div class="row">
-				 	
-				 	
-					<div style="clear: both;" class="col-md-12">
-						<ul>
-						
-						<div style="padding-top: 10px;padding-left:10px;float: left;">
-							
-							<li><img src="img/blog/3.jpg" / style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
-						</div>
-						<div style="padding-top: 10px;padding-left:10px;float: left;">
-							
-							
-							
-							<li>首先要表扬的是客服，超级耐心，服务态度很好，对我提的小要求都给予满足。<br />不能及时送达，会耽误事。最后要表扬的是花的质量、品相出乎意料的好。 </li>
-							
-							<li><img src="img/banner/粉百合.jpg" alt="" width="50px;" height="10px" />
-							<img src="img/banner/粉百合.jpg" alt="" width="50px;" height="10px" />
-							<div style="margin-left: 80%;">
-							
-							<a href="">查看回复</a>&nbsp;
-							<a href="">评论</a>	
-							</div>
-							</li>
-							<br />
-							<li>下单时间：2018.10.09 12:36:22</li>
-
-						</div>
-						</ul>
-					</div>
-				
-				 </div>
-				  	 	 <div class="row">
-				 	
-				 	
-					<div style="clear: both;" class="col-md-12">
-						<ul>
-						
-						<div style="padding-top: 10px;padding-left:10px;float: left;">
-							
-							<li><img src="img/blog/3.jpg" / style="width: 100px;height: 100px;"></li>&nbsp;&nbsp;
-						</div>
-						<div style="padding-top: 10px;padding-left:10px;float: left;">
-							
-							
-							
-							<li>首先要表扬的是客服，超级耐心，服务态度很好，对我提的小要求都给予满足。<br />不能及时送达，会耽误事。最后要表扬的是花的质量、品相出乎意料的好。 </li>
-							
-							<li><img src="img/banner/粉百合.jpg" alt="" width="50px;" height="10px" />
-							<img src="img/banner/粉百合.jpg" alt="" width="50px;" height="10px" />
-							<div style="margin-left: 80%;">
-							
-							<a href="">查看回复</a>&nbsp;
-							<a href="">评论</a>	
-							</div>
-							</li>
-							<br />
-							<li>下单时间：2018.10.09 12:36:22</li>
-
-						</div>
-						</ul>
-					</div>
-				
-				 </div>
+				  	
+				  	 	
 				 </div>
 				
 				 <!-- 面板的显示结束-->
@@ -412,10 +350,27 @@
     
       $(function(){
     	//弹出层的使用
- 		 layui.use('layer', function() {
- 				var layer = layui.layer;
+  		 layui.use('layer', function() {
+  				var layer = layui.layer;
 
- 			});
+  			});
+    	  //点击加入购物车时传递鲜花编号参数,进入服务端
+    	  $("#addToCart").click(function(){
+    		  var quantity=$("#quantity").val();//获取购买商品数量
+    		  
+    		  var flowerId=${sessionScope.flower.flowerId};//获取鲜花编号
+    		   //发送ajax请求到购物车服务层
+    		  $.get("/Rosemary/cart.do","op=addToCart&flowerId="+flowerId+"&quantity="+quantity,function(data,status){
+    			  layer.msg('<span style="color:black;">'+data+'</span>', {
+  					icon:6,
+  					time: 2000
+  				});
+    			 
+    		  });
+    		 
+    		  
+    	  }); 
+    	
     	  
       	//点击查看留言事件
     	  $("#getMessage").click(function(){
@@ -438,13 +393,13 @@
       				layer.msg('<span style="color:black;">您这个数量有点多哈，本店暂时库存不足</span>', {
     					icon:5,
     					time: 3000
-    				});
+    				}); 
           			$(this).val("1");
       			}
       			
       		}
       		
-      	});
+      	}); 
       	
       	
       });

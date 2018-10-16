@@ -716,7 +716,7 @@
 					  	console.log(id);
 					  		  
 					  		 if(${sessionScope.ub eq null}){ 
-					  		 	 
+					  		 	  
 					  			layer.open({ 
 					  	  			title:'友情提醒',
 					  	  			skin:"layui-layer-lan",

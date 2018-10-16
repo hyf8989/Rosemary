@@ -46,8 +46,15 @@ public class FlowerTest {
 /*String sql="select * from flower_info order by ?";
 ArrayList<FlowerInfo> list=(ArrayList<FlowerInfo>) BaseDao.select(sql, FlowerInfo.class, "flowerName");
 		System.out.println(list.get(0).getFlowerId());*/
-		FlowerInfo flower=fIS.getFlowerInfoById(5);
-		System.out.println(flower.getFlowerName());
+		/*FlowerInfo flower=fIS.getFlowerInfoById(5);
+		System.out.println(flower.getFlowerName());*/
+		/*HashMap<Integer, FlowerInfo> map=new HashMap<>();
+		FlowerInfo flower=new FlowerInfo(1, "123", 100, "456", "789", "00", "0", 1, 500, "1", "1");
+		map.put(1,flower);
+		FlowerInfo a=map.get(1);
+		 a.setFlowerId(5);
+		System.out.println(map.get(1).getFlowerId());*/
+		
 		
 	}
 }

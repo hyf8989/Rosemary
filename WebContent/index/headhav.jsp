@@ -108,7 +108,7 @@
 						<!-- 购物车 -->
 						<div class="col-md-3 col-xs-4 col-sm-6">
 							<div class="shopping-cart">
-								<a class="cart" href="#" title="view shopping cart"><span class="hidden-xs">购物车<br><small>3件商品 - ￥199.00</small></span></a>
+								<a class="cart" href="cart.jsp" title="view shopping cart"><span class="hidden-xs">购物车<br><small>3件商品 - ￥199.00</small></span></a>
 								<div class="top-cart-content">
 									
 									<div class="media header-middle-checkout last-child">
