@@ -93,7 +93,7 @@
 					<div class="row">
 						<div class="col-md-4 col-sm-12 col-xs-8">
 							<div class="logo">
-								<a href="index.html"><img src="img/logo.png" alt="" /></a>
+								<a href="#"><img src="img/logo.png" alt="" /></a>
 							</div>
 						</div>
 						<div class="col-md-5 col-sm-6 hidden-xs">
@@ -104,23 +104,13 @@
 								</form>
 							</div>
 						</div>
+						<c:if test="${sessionScope.ub ne null }">
+						<!-- 购物车 -->
 						<div class="col-md-3 col-xs-4 col-sm-6">
 							<div class="shopping-cart">
 								<a class="cart" href="#" title="view shopping cart"><span class="hidden-xs">购物车<br><small>3件商品 - ￥199.00</small></span></a>
 								<div class="top-cart-content">
-									<div class="media header-middle-checkout">
-										<div class="media-left check-img">
-											<a href="#"><img src="img/cart/粉色满天星.jpg" alt="" /></a>
-										</div>
-										<div class="media-body checkout-content">
-											<h4 class="media-heading">
-                                                    <span class="cart-count">1</span>
-                                                    <a href="#">粉色满天星</a>
-                                                    <span class="btn-remove checkout-remove" title="remove this product from my cart"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                                </h4>
-											<p>￥ 78.15</p>
-										</div>
-									</div>
+									
 									<div class="media header-middle-checkout last-child">
 										<div class="media-left check-img">
 											<a href="#"><img src="img/cart/紫色小雏菊.jpg" alt="" /></a>
@@ -144,6 +134,10 @@
 								</div>
 							</div>
 						</div>
+						<!-- 购物车 -->
+						
+						</c:if>
+						
 					</div>
 				</div>
 			</div>

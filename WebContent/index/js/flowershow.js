@@ -10,7 +10,7 @@
 							<!-- single-product-start -->
 							'<div class="single-product">'+
 								'<div class="single-product-img">'+
-									'<a href="javacript:void(0);" class="flowershow"> <img  src="'+obj.sPicture+'" alt="'+obj.flowerId+'" />'+
+									'<a href="/Rosemary/flower.do?op=Gotodetail&flowerId='+obj.flowerId+'" class="flowershow"  > <img  src="'+obj.sPicture+'" alt="'+obj.flowerId+'" />'+
 									'</a> <span class="sale-box"> <span class="sale">Sale</span>'+
 									'</span> <span class="new-box"> <span class="new">New</span>'+
 									'</span>'+
@@ -75,12 +75,16 @@
 			});
 			
 			//点击图片时，获取图片ID（进入购物界面使用）
-			$(document).on("click",".flowershow",function(){
-				
-				console.log("我是你点击鲜花的id"+$(this).find('img').attr('alt'));//测试输出鲜花ID
-				
-				
-			});
+			function goDetail(){
+				$(document).on("click",".flowershow",function(){
+					
+					console.log("我是你点击鲜花的id"+$(this).find('img').attr('alt'));//测试输出鲜花ID
+					location.href="https://www.baidu.com";
+					
+					
+				});
+			}
+			
 			//输入框按下时的监听事件（进行模糊查询）
 		     $("#keyword").keyup(function(){
 		    	keyword=$(this).val(); 
@@ -149,9 +153,13 @@
 								data, status) {
 			          
 							var array = JSON.parse(data);
+							total=array.total;
+							page=array.page;
+							pageSize=array.pageSize;
 							console.log('我是根据你选中下拉框的值排序chulai'+array);
 							//调用拼接方法
 							 displayFlower(array); 
+							 pageshow();
 							
 
 						});
@@ -162,10 +170,13 @@
 									data, status) {
 				          
 								var array = JSON.parse(data);
+								total=array.total;
+								page=array.page;
+								pageSize=array.pageSize;
 								console.log('我是根据你选中下拉框的值排序chulai'+array);
 								//调用拼接方法
 								 displayFlower(array); 
-								
+								pageshow();
 
 							});
 					 }
@@ -174,10 +185,13 @@
 									data, status) {
 				          
 								var array = JSON.parse(data);
+								total=array.total;
+								page=array.page;
+								pageSize=array.pageSize;
 								console.log('我是根据你选中下拉框的值排序chulai'+array);
 								//调用拼接方法
 								 displayFlower(array); 
-								
+								 pageshow();
 
 							});
 						 

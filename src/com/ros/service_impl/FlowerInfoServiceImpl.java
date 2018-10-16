@@ -53,13 +53,21 @@ public class FlowerInfoServiceImpl implements FlowerInfoService {
 		// TODO Auto-generated method stub
 		return fID.queryFlowerInfoByPage(page, pageSize, keyword, priceStart, priceEnd, typeId1, typeId2, sort, sortType);
 	}
-	/* (non-Javadoc)
-	 * @see com.ros.service.FlowerInfoService#queryFlowerType()
+	/* 
+	 *查询所有鲜花的类别
 	 */
 	@Override
 	public ArrayList<FlowerType> queryFlowerType() {
 		// TODO Auto-generated method stub
 		return fID.queryFlowerType();
+	}
+	/* 
+	 * 根据鲜花的ID获得鲜花的所有信息
+	 */
+	@Override
+	public FlowerInfo getFlowerInfoById(int flowerId) {
+		// TODO Auto-generated method stub
+		return fID.getFlowerInfoById(flowerId);
 	}
 
 }

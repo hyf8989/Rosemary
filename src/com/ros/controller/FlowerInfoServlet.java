@@ -136,6 +136,14 @@ public class FlowerInfoServlet extends HttpServlet {
 		  
 		    
 		 }
+		 //点击鲜花，进入鲜花详情页
+		 else if(op.equals("Gotodetail")) {
+			 int flowerId=Integer.valueOf(request.getParameter("flowerId"));//获得传进来的鲜花编号
+			 FlowerInfo flower=fIS.getFlowerInfoById(flowerId);//调用服务方法，查询该编号下的鲜花信息，并生成一个鲜花实体类
+			 request.getSession().setAttribute("flower", flower);//使用session对象存储一个鲜花对象的值
+			 response.sendRedirect("/Rosemary/index/productionDetail.jsp");
+			 
+		 }
 		
 		 
 

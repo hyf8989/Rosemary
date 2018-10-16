@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -20,10 +21,11 @@
 		<link rel="stylesheet" type="text/css" href=""/>
 		<!-- Custom CSS -->
 		<link href="style.css" rel="stylesheet">
+		<link href="layui/css/layui.css" rel="stylesheet">
 		
             <style type="text/css">
              #messageContent{
-             	display: none;
+             	
              }	
             </style>
 	</head>
@@ -249,18 +251,22 @@
 				 <div class="container">
 				 <div class="row">
 				 	<div style="margin-top: 50px;">
-				 		<div class="col-md-3" >
-				 	<img src="img/banner/粉百合.jpg"/>
+				 		<div class="col-md-3" style="height:350px;" >
+				 	<img src="${sessionScope.flower.bPicture }"/>
 				 </div>	
 				 <div class="col-md-9">
-				 	<h3> 我是粉百合，点我购买吧</h3>
+				 	<h3> ${sessionScope.flower.flowerName }</h3>
 				 
 				 
-				   	<div style="background-color:pink;width:300px;height: 50px;">
-				   	 <span>价格：</span><strong>￥	200.00</strong>
-				 	
-				   		
-				   	
+				   	<div style="background-color:rgb(240,239,239);width:300px;height: 50px;margin-top:10px;">
+				   	 <span>价格：</span><strong style="color:red;font-size:20px;line-height:50px;">￥	${sessionScope.flower.price}</strong>
+				 	<br/><br/>  
+				 	<span>数量：</span><input id="flower-quantity" value="1" type="number" name="points" min="1" max="${sessionScope.flower.stock }" />
+				   		<br/><br/><br/><br/>
+				   	<div style="margin-top:50px;"><button type="button" class="layui-btn layui-btn-lg">加入购物车</button>
+				   	   <button type="button" class="layui-btn layui-btn-lg ">购买</button>
+				   	</div>
+				   
 				  
 				 	
 				 </div>
@@ -398,10 +404,45 @@
 		<!-- footer-end -->
 		</div>
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="layui/layui.js">
+			
+		</script>
     <script type="text/javascript">
+    
+    
       $(function(){
-      	$("#getMessage").click(function(){
+    	//弹出层的使用
+ 		 layui.use('layer', function() {
+ 				var layer = layui.layer;
+
+ 			});
+    	  
+      	//点击查看留言事件
+    	  $("#getMessage").click(function(){
       		$("#messageContent").slideToggle("slow");
+      		
+      	});
+      	$("#flower-quantity").change(function(){
+      		var numberTest=/^[0-9]*$/;//限制数量只能是数字输入
+      		
+      		if(numberTest.test($(this).val())==false){//如果输入不是数字，则消息提示，并且将文本框默认值设置为1
+      			layer.msg('<span style="color:black;">数量只能输入数字哦！</span>', {
+					icon:4,
+					time: 1000
+				});
+      			$(this).val("1");
+      			
+      		}
+      		else{//如果输入的数字大于库存，则消息提示，并且将文本框默认值设为1
+      			if($(this).val()>${sessionScope.flower.stock}){
+      				layer.msg('<span style="color:black;">您这个数量有点多哈，本店暂时库存不足</span>', {
+    					icon:5,
+    					time: 3000
+    				});
+          			$(this).val("1");
+      			}
+      			
+      		}
       		
       	});
       	

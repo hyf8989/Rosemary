@@ -13,4 +13,5 @@ public interface FlowerInfoService {
 	public ArrayList<FlowerInfo> getFlowerInfoByPrice();//前台展示顶级鲜花
 	public PageData<FlowerInfo> queryFlowerInfoByPage(int page, int pageSize, String keyword,int priceStart,int priceEnd,int typeId1,int typeId2,String sort,String sortType);//主页分页显示所有鲜花
 	public ArrayList<FlowerType> queryFlowerType();//查询当前所有花类
+	public FlowerInfo getFlowerInfoById(int flowerId);//根据鲜花编号获得鲜花的所有信息
 }
