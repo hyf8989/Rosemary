@@ -44,7 +44,7 @@ public class AddressServlet extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		
 		//展示用户收货地址
-		if(op.equals("myAddress")) {
+		if("myAddress".equals(op)) {
 			
 			//获取用户登录的用户名
 			String userName=request.getParameter("userName");
@@ -57,13 +57,14 @@ public class AddressServlet extends HttpServlet {
 		}
 		
 		//用户添加收货地址
-		else if(op.equals("addAddress")) {
+		else if("addAddress".equals(op)) {
 			String mag="";
 			//获取用户编号
 			int userId=Integer.parseInt(request.getParameter("userId"));
 			
 			//获取输入的收货人姓名
 			String receiverName=request.getParameter("receiverName");
+		
 			//获取输入的收货人电话
 			String receiverPhone=request.getParameter("receiverPhone");
 			//获取输入的省市区及详细地址
@@ -94,7 +95,7 @@ public class AddressServlet extends HttpServlet {
 			out.close();
 		}
 		
-		else if(op.equals("deleteAddress")) {
+		else if("deleteAddress".equals(op)) {
 			String mag="";
 			//获取地址信息的编号
 			int addressId=Integer.parseInt( request.getParameter("addressId"));
@@ -107,6 +108,37 @@ public class AddressServlet extends HttpServlet {
 			}
 		    out.print(mag);
 		    out.close();
+		}
+		
+		else if("updateAddress".equals(op)){
+			String meg="";
+			//获取界面中传递过来的值
+			int addressId=Integer.parseInt(request.getParameter("addressId"));
+			String receiverName=request.getParameter("receiverName");
+			
+			String receiverPhone=request.getParameter("receiverPhone");
+			String receiverProv=request.getParameter("receiverProv");
+			String receiverCity=request.getParameter("receiverCity");
+			String receiverDistrict=request.getParameter("receiverDistrict");
+			String detailAddress=request.getParameter("detailAddress");
+			int  receiverZip=Integer.parseInt(request.getParameter("receiverZip"));
+			
+			//当前时间
+			 Date date=new Date();
+			 String dateStr=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+		 
+		Address address=new Address(receiverProv, receiverCity, receiverDistrict, receiverName, receiverPhone, detailAddress, receiverZip, dateStr, addressId);
+			boolean flag=as.updateAddress(address);
+			
+			if(flag) {
+				meg="修改收货地址成功";
+			}
+			else {
+				meg="修改收货地址失败";
+			}
+			
+			out.println(meg);
+			out.close();
 		}
 		
 	}

@@ -75,8 +75,11 @@
 						<div class="layui-card-header">我的收货地址</div>
 						<div class="layui-card-body">
 							<ul>
-							 <input type="hidden" name="addressId" id="addressId" value="${address.addressId }" />
-								<li><label>收货人姓名：</label><label id="Name">${address.receiverName}</label></li>
+							 
+								<li>
+								<input type="hidden" name="addressId" id="addressId" value="${address.addressId }" />
+								<label>收货人姓名：</label><label class="Name">${address.receiverName}</label>
+								</li>
 
 								<li><label>联系方式：</label><label id="Phone">${address.receiverPhone}</label></li>
 								<li><label id="Province">${address.receiverProvince}</label><label id="City">${address.receiverCity}</label></li>
@@ -86,13 +89,13 @@
 								<li><label>更新时间：</label><label id="update">${address.updateTime}</label></li>
 								<li style="text-align: right;">
 								
-										<a class="update" ><i class="layui-icon layui-icon-edit" id="modal-674804" href="#modal-container-133227" data-toggle="modal"></i></a> 
+										<a class="update" ><i class="layui-icon layui-icon-edit" id="modal-674804" data-target="#modal-container-133227" data-toggle="modal"></i></a> 
 										
 										<a href="javascript:void(0);"  class="del"><i
 										class="layui-icon layui-icon-delete "></i> </a> 
 										
-									<a id="modal-674807" data-toggle="modal" href="#modal-container-133228">
-									<i class="layui-icon layui-icon-add-1" ></i></a>
+									<a >
+									<i class="layui-icon layui-icon-add-1" id="modal-674807" data-toggle="modal" data-target="#modal-container-133228"></i></a>
 								</li>
 
 							</ul>
@@ -212,6 +215,7 @@
 								<form action="#" method="post">
 									<div class="icon1">
 										<i class="layui-icon layui-icon-user" aria-hidden="true"></i>
+										<input type="hidden" name="raddressId" id="raddressId"/>
 										<input style="width: 350px;height:30px" type="text" placeholder="收货人姓名" id="rName" name="rName"
 											required="" value=""/>
 									</div>
@@ -219,7 +223,7 @@
 									<div class="icon1">
 										<i class="layui-icon layui-icon-cellphone-fine "
 											aria-hidden="true"></i> 
-											<input style="width: 350px;height:30px" type="text" placeholder="收货人联系电话" name="rphone"  id="rphone" required="" />
+											<input style="width: 350px;height:30px" type="text" placeholder="收货人联系电话" name="rPhone"  id="rPhone" required="" />
 									</div>
 									<div class="icon1">
 										
@@ -246,7 +250,7 @@
 									
 									<div class="icon1">
 										<i class="layui-icon layui-icon-tabs" aria-hidden="true"></i>
-										<input style="width: 350px;height:30px" type="text" placeholder="邮编" name="rzip" id="rzip" required="" />
+										<input style="width: 350px;height:30px" type="text" placeholder="邮编" name="rZip" id="rZip" required="" />
 									</div>
 
 
@@ -411,18 +415,24 @@
 			$(".selectProv").on(
 					"change",
 					function() {
+						
+						
+						
 						$(".selectCity").children("option").detach();
 						$(".selectCity").append("<option>请选择市区</option>");
-						var indexProv = $(".selectProv>option:selected")
-								.index();//取得选中的想的数组下标0
+						//var indexProv=0;// = $(".selectProv>option:selected")
+								//.index();//取得选中的想的数组下标0
+								var indexProv = $(this).get(0).selectedIndex;
+								//console.log("index: "+$(this).get(0).selectedIndex);
 						if (indexProv > 0) {
 							for (var i = 0; i < city[indexProv].length; i++) {
 								$(".selectCity").append(
 										"<option value="+city[indexProv][i]+">" + city[indexProv][i]
 												+ "</option>");
 							}
-							console.log($(".selectProv>option:selected").val()
-									+ $(".selectCity>option:first").val());
+							//console.log($(".selectProv>option:selected").val()
+									//+ $(".selectCity>option:first").val());
+							console.log($(this).val());
 						} else {
 							console.log("请选择省份");
 						}
@@ -430,8 +440,9 @@
 			$(".selectCity").on(
 					"change",
 					function() {
-						console.log($(".selectProv>option:selected").val()
-								+ $(".selectCity>option:selected").val());
+						//console.log($(".selectProv>option:selected").val()
+								//+ $(".selectCity>option:selected").val());
+						console.log($(this).val());
 					});
 			
 			
@@ -533,38 +544,113 @@
 			
 			//编辑图标的单击事件
 			$(".update").click(function(){
+				//获取地址信息编号
+				var addressId=$(this).parents("ul").find("li").eq(0).find("#addressId").val();
 				
+				//取得用户名
+				var name= $(this).parents("ul").find("li").eq(0).find("label").eq(1).text();
+				console.log(name);
 				
-				  //获取地址信息编号
-				 var addressId=$("#addressId").val();
-				 
-				
-			
+				//获取电话
+			   var phone=$(this).parents("ul").find("li").eq(1).find("label").eq(1).text();
 			  
-			  
+				//获取省
+				var province=$(this).parents("ul").find("li").eq(2).find("label").eq(0).text();
+				//获取市
+				var city=$(this).parents("ul").find("li").eq(2).find("label").eq(1).text();
+				
+				//获取区
+				var district=$(this).parents("ul").find("li").eq(3).find("label").eq(0).text();
+				//获取详细地址
+				var info=$(this).parents("ul").find("li").eq(3).find("label").eq(1).text();
+				//获取邮编
+				var zip=$(this).parents("ul").find("li").eq(4).find("label").eq(1).text();
+				
+		
 				//将原本的地址信息展示在模态窗口中
-				$("#rName").val($("#Name").text());
-				
-				var province=$("#Province").text()+"省";
-				
-				$("#rphone").val($("#Phone").text());
-				$(".selectProv").val($("#Province").val());
-			
-				$(".selectCity").val($("#City").val());
-				$("#rDistrict").val($("#District").text());
-				$("#rdetailAddress").val($("#Info").text());
-				$("#rzip").val($("#Zip").text()); 
-				
-				
-				$(".selectProv option").each(function(){
+				$("#raddressId").val(addressId);
+				$("#rName").val(name);
+				$("#rPhone").val(phone);
+				$("#rDistrict").val(district);
+				$("#rdetailAddress").val(info);
+				$("#rZip").val(zip);
+				//将省份设置为被选中
+			   $(".selectProv option").each(function(){
 					if($(this).text()==province){
 						$(this).attr("selected","selected");
 						
 					}
 				  	
-				});
-			
+				}); 
+			//将城市显示在下拉框中
+				$(".selectCity").append("<option selected='selected'>"+city+"</option>")
 				
+				
+				
+		
+			});
+		
+			//在模态窗口中点击修改按钮触发的事件
+			$("#updateBtn").click(function(){
+				//获取用户输入的信息
+				
+				var addressId=$("#raddressId").val();
+				console.log(addressId);
+				var receiverName=$("#rName").val();
+				console.log(receiverName);
+				
+				var receiverPhone=$("#rPhone").val();
+				console.log(receiverPhone);
+				var receiverProv=$(".selectProv").val();
+				console.log(receiverProv);
+				var receiverCity=$(".selectCity").val();
+				console.log(receiverCity);
+				var receiverDistrict=$("#rDistrict").val();
+				console.log(receiverDistrict);
+		     	var detailAddress=$("#rdetailAddress").val();
+		     	console.log(detailAddress);
+				var receiverZip=$("#rZip").val();
+				console.log(receiverZip);
+				
+				 $.get("/Rosemary/address.do","op=updateAddress&addressId="+addressId+"&receiverName="+receiverName+
+						"&receiverPhone="+receiverPhone+
+						"&receiverProv="+receiverProv+
+						"&receiverCity="+receiverCity+
+						"&receiverDistrict="+receiverDistrict+
+						"&detailAddress="+detailAddress+
+						"&receiverZip="+receiverZip,function(data,status){
+					if(data="修改收货地址成功"){
+						
+							layer.open({
+									title: "友情提醒",
+									skin: "layui-layer-molv",
+									content: "<span style='color:black;'>"+data+"</span>",
+									anim: 0,
+									btn: ['OK'],
+									yes: function(index, layero) {
+										location.href="/Rosemary/address.do?op=myAddress&userName=${sessionScope.ub.userName}";
+									}
+									
+								});
+							
+					}
+					
+					else{
+					
+							layer.open({
+									title: "友情提醒",
+									skin: "layui-layer-molv",
+									content: "<span style='color:black;'>"+data+"</span>",
+									anim: 0,
+									btn: ['OK'],
+									yes: function(index, layero) {
+										location.href="myAddress.jsp";
+									}
+									
+								});
+						
+					}
+				}); 
 				
 			});
 			
