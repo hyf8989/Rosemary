@@ -5,6 +5,7 @@ import java.util.List;
 import com.ros.dao.ManagerDao;
 import com.ros.entity.Manager;
 import com.ros.util.BaseDao;
+import com.ros.util.PageData;
 
 public class ManagerDaoImpl implements ManagerDao {
 	/**
@@ -42,7 +43,14 @@ public class ManagerDaoImpl implements ManagerDao {
 		List<Manager> list = (List<Manager>) BaseDao.select("select  * from admin", Manager.class);
 		return list;
 	}
-
+	
+	@Override
+	public PageData<Manager> queryManagerByPage(int page, int pageSize, String keywords) {
+		// TODO Auto-generated method stub
+		String sql = "select  * from admin where adminName like ?";
+		PageData<Manager> pd = BaseDao.getPage(sql, page, pageSize, Manager.class, "%" + keywords + "%");
+		return pd;
+	}
 	/**
 	 * 实现ManagerDao中的删除方法
 	 */
@@ -80,5 +88,13 @@ public class ManagerDaoImpl implements ManagerDao {
 		String sql = "UPDATE admin SET adminStatus='1' WHERE adminName=?";
 
 		return BaseDao.execute(sql, adminName) > 0;
+	}
+	
+	public static void main(String[] args) {
+		
+		new ManagerDaoImpl().queryManagerByPage(1, 1, "a");
+		
+		
+		
 	}
 }

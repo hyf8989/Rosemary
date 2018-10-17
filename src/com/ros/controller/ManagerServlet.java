@@ -16,6 +16,7 @@ import com.ros.entity.Manager;
 import com.ros.service.ManagerService;
 import com.ros.service_impl.ManagerServiceImpl;
 import com.ros.util.MD5Util;
+import com.ros.util.PageData;
 
 /**
  * Servlet implementation class ManagerServlet
@@ -63,9 +64,35 @@ public class ManagerServlet extends HttpServlet {
 			doDelManager(request, response);
 			
 		} else if ("queryManager".equals(op)) {//显示所有管理员
-			List<Manager> list = ms.queryManager();
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("/admin/adminList.jsp").forward(request, response);
+			/*List<Manager> list = ms.queryManager();
+			request.setAttribute("list", list);*/
+			int page =1;//默认第一页
+			int pageSize = 2;//默认每页显示10条
+			//如果用户传递的参数不为空
+			if(request.getParameter("page")!=null)
+			{
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+			
+			if(request.getParameter("pageSize")!=null)
+			{
+				pageSize = Integer.parseInt(request.getParameter("pageSize"));
+			}
+			
+			//增加了模糊查询的部分;
+			String keywords="";
+			if(request.getParameter("keywords")!=null)
+			{
+				keywords = request.getParameter("keywords");
+			}
+			PageData<Manager> pd = ms.queryManagerByPage(page, pageSize, keywords);
+			//request.setAttribute("pd", pd);
+			//需要将每次模糊查询的关键字传递回来给jsp
+			//request.setAttribute("keywords", keywords);
+			request.getSession().setAttribute("pd", pd);
+			request.getSession().setAttribute("keywords", keywords);
+			//request.getRequestDispatcher("/admin/adminList.jsp").forward(request, response);
+			response.sendRedirect("/Rosemary/admin/adminList.jsp");
 		}else if("updateManagerPwd".equals(op)) {
 			PrintWriter out = response.getWriter();
 			String adminName = request.getParameter("adminName");
@@ -119,11 +146,11 @@ public class ManagerServlet extends HttpServlet {
 			// HttpSession session=request.getSession();
 			request.getSession().setAttribute("m", m);
 			// 将用户登录的信息存储在cookie
-			Cookie cookie = new Cookie("adminName", m.getAdminName());
+			/*Cookie cookie = new Cookie("adminName", m.getAdminName());
 			Cookie cookie1 = new Cookie("adminPwd", adminPwd);
 			// 使用response.addCookie
 			response.addCookie(cookie);
-			response.addCookie(cookie1);
+			response.addCookie(cookie1);*/
 			out.print("<script>alert('登录成功');location.href='/Rosemary/admin/index.jsp'</script>");
 
 		}

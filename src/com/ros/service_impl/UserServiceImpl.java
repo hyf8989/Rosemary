@@ -107,4 +107,10 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return ud.queryUsersBean();
 	}
+	
+	@Override
+	public boolean addUsers(UserBasicInfo ub) {
+		// TODO Auto-generated method stub
+		return ud.addUsers(ub);
+	}
 }

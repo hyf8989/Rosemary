@@ -25,4 +25,5 @@ public interface UserService {
 	 * @return List<UserBean> 返回类型
 	 */
 	List<UserBean> queryUsersBean();
+	public boolean addUsers(UserBasicInfo ub);// 后台添加用户
 }

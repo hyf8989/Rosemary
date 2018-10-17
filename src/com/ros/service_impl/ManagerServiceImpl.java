@@ -8,6 +8,7 @@ import com.ros.dao_impl.ManagerDaoImpl;
 import com.ros.entity.Manager;
 import com.ros.service.ManagerService;
 import com.ros.util.MD5Util;
+import com.ros.util.PageData;
 
 public class ManagerServiceImpl implements ManagerService {
 	ManagerDao md = new ManagerDaoImpl();
@@ -36,6 +37,12 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<Manager> queryManager() {
 		// TODO Auto-generated method stub
 		return md.queryManager();
+	}
+	
+	@Override
+	public PageData<Manager> queryManagerByPage(int page, int pageSize, String keywords) {
+		// TODO Auto-generated method stub
+		return md.queryManagerByPage(page, pageSize, keywords);
 	}
 	/**
 	 * 实现ManagerDao删除管理员的方法

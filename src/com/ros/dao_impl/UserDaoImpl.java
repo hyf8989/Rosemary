@@ -147,4 +147,14 @@ public class UserDaoImpl implements UserDao {
 		String sql = "select * from user_basicinfo a INNER JOIN user_detailsinfo b on a.userId=b.userId";
 		return (List<UserBean>) BaseDao.select(sql, UserBean.class);
 	}
+	
+	/**
+	 * 后台添加用户
+	 */
+	@Override
+	public boolean addUsers(UserBasicInfo ubi) {
+		// TODO Auto-generated method stub
+		String sql = "insert into user_basicinfo(userName,userPwd,createTime,updateTime) values (?,?,?,?)";
+		return BaseDao.execute(sql, ubi.getUserName(),ubi.getUserPwd(),ubi.getCreateTime(),ubi.getUpdateTime())>0;
+	}
 }
