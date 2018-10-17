@@ -85,11 +85,11 @@ public class ManagerServlet extends HttpServlet {
 			{
 				keywords = request.getParameter("keywords");
 			}
-			PageData<Manager> pd = ms.queryManagerByPage(page, pageSize, keywords);
+			PageData<Manager> pdm = ms.queryManagerByPage(page, pageSize, keywords);
 			//request.setAttribute("pd", pd);
 			//需要将每次模糊查询的关键字传递回来给jsp
 			//request.setAttribute("keywords", keywords);
-			request.getSession().setAttribute("pd", pd);
+			request.getSession().setAttribute("pdm", pdm);
 			request.getSession().setAttribute("keywords", keywords);
 			//request.getRequestDispatcher("/admin/adminList.jsp").forward(request, response);
 			response.sendRedirect("/Rosemary/admin/adminList.jsp");

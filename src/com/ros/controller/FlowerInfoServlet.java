@@ -165,8 +165,8 @@ public class FlowerInfoServlet extends HttpServlet {
 				{
 					keywords = request.getParameter("keywords");
 				}
-				PageData<FlowerInfo> pd = fIS.queryFlowerByPage(page, pageSize, keywords);
-				request.getSession().setAttribute("pd", pd);
+				PageData<FlowerInfo> pdf = fIS.queryFlowerByPage(page, pageSize, keywords);
+				request.getSession().setAttribute("pdf", pdf);
 				request.getSession().setAttribute("keywords", keywords);
 				response.sendRedirect("/Rosemary/admin/goodsList.jsp");
 		 }

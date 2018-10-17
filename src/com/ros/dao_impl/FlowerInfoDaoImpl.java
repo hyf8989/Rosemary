@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.ros.dao.FlowerInfoDao;
 import com.ros.entity.FlowerInfo;
 import com.ros.entity.FlowerType;
-import com.ros.entity.Manager;
+
 import com.ros.util.BaseDao;
 import com.ros.util.PageData;
 

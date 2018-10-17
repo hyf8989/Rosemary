@@ -142,11 +142,11 @@
 										<th>操作</th>
 									</tr>
 									<tbody>
-										<c:if test="${sessionScope.pd == null}">
+										<c:if test="${sessionScope.pdm == null}">
 											<jsp:forward page="../manager.action?op=queryManager"></jsp:forward>
 										</c:if>
-										<c:if test="${sessionScope.pd != null}">
-											<c:forEach items="${sessionScope.pd.data}" var="m">
+										<c:if test="${sessionScope.pdm != null}">
+											<c:forEach items="${sessionScope.pdm.data}" var="m">
 
 												<tr class="table-row">
 													<td class="table-img"><img src="${pageContext.request.contextPath}/admin/images/in.jpg" alt="">
@@ -339,9 +339,9 @@
 			//完整功能 
 			laypage.render({
 			    elem: 'pageDiv'
-			    ,count:${pd.total} ,
-			    curr:${pd.page}
-			   ,limit:${pd.pageSize}
+			    ,count:${pdm.total} ,
+			    curr:${pdm.page}
+			   ,limit:${pdm.pageSize}
 			    ,layout: ['count', 'prev', 'page','limit','next', 'skip']
 			    ,jump: function(obj,first){
 					console.log(obj);
