@@ -144,6 +144,32 @@ public class FlowerInfoServlet extends HttpServlet {
 			 response.sendRedirect("/Rosemary/index/productionDetail.jsp");
 			 
 		 }
+		 //后台商品分页
+		else if (op.equals("queryFlowerByPage")) {
+				int page =1;//默认第一页
+				int pageSize = 2;//默认每页显示10条
+				//如果用户传递的参数不为空
+				if(request.getParameter("page")!=null)
+				{
+					page = Integer.parseInt(request.getParameter("page"));
+				}
+				
+				if(request.getParameter("pageSize")!=null)
+				{
+					pageSize = Integer.parseInt(request.getParameter("pageSize"));
+				}
+				
+				//增加了模糊查询的部分;
+				String keywords="";
+				if(request.getParameter("keywords")!=null)
+				{
+					keywords = request.getParameter("keywords");
+				}
+				PageData<FlowerInfo> pd = fIS.queryFlowerByPage(page, pageSize, keywords);
+				request.getSession().setAttribute("pd", pd);
+				request.getSession().setAttribute("keywords", keywords);
+				response.sendRedirect("/Rosemary/admin/goodsList.jsp");
+		 }
 		
 		 
 

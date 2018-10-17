@@ -43,7 +43,9 @@ public class ManagerDaoImpl implements ManagerDao {
 		List<Manager> list = (List<Manager>) BaseDao.select("select  * from admin", Manager.class);
 		return list;
 	}
-	
+	/**
+	 * 管理员信息分页展示
+	 */
 	@Override
 	public PageData<Manager> queryManagerByPage(int page, int pageSize, String keywords) {
 		// TODO Auto-generated method stub
