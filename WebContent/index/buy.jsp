@@ -356,6 +356,7 @@
 		    	var payment=$("#payment span").text();
 		    	console.log("支付类型是："+val+",运费是"+postage+",订单编号是："+orderId+",订单状态是:"+orderStatus+",用户编号是："+userId+",订单类型是："+orderType+",收货人地址是"+address+",总费用是："+payment);
 		    	 
+		    	
 		     });
 		      
 		    
