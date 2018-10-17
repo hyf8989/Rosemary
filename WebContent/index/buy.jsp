@@ -355,7 +355,61 @@
 		    	//获得需要付款的总费用
 		    	var payment=$("#payment span").text();
 		    	console.log("支付类型是："+val+",运费是"+postage+",订单编号是："+orderId+",订单状态是:"+orderStatus+",用户编号是："+userId+",订单类型是："+orderType+",收货人地址是"+address+",总费用是："+payment);
-		    	 
+		    	//判断用户当前操作是否有误，订单数据不能缺失
+		    	if(val==null || postage==null|| orderId==null || address==null || userId ==null || payment==null ){
+		    		layer.msg('<span style="color:black;">当前操作异常</span>', {
+						icon:5,
+						time: 2000
+					}); 
+		    		
+		    	}
+		    	//如果操作正常，则向服务端发起请求
+		    	else{
+		    		$.get("/Rosemary/order.do","op=createOrder&postage="+postage+
+			    			"&orderId="+orderId+
+			    			"&orderStatus="+orderStatus+
+			    			"&userId="+userId+"&orderType="+orderType+"&address="+address+"&payment="+payment,
+			    	         function(data,status){
+		    			//如果服务端生成订单操作正常，则向客户端返回正确的信息，提示用户进入支付界面
+		    			if(data=="成功生成订单！点击确定去支付这笔订单吧"){
+		    				layer.open({
+								title: "友情提醒",
+								skin: "layui-layer-lan",
+								content: "<span style='color:black;'>"+data+"</span>",
+								anim: 0,
+								btn: ['剁手去~~'],
+								yes: function(index, layero) {
+									location.href="https://www.baidu.com";
+								}
+								
+								
+							});
+		    				
+		    			}
+		    			//如果操作失败，则返回操作失败的信息
+		    			else{
+		    				layer.open({
+								title: "友情提醒",
+								skin: "layui-layer-lan",
+								content: "<span style='color:black;'>订单异常，请重新刷新页面试试</span>",
+								anim: 0,
+								btn: ['我再试试'],
+								yes: function(index, layero) {
+									location.reload();
+								}
+								
+								
+							});
+		    				
+		    				
+		    			}
+			    		    
+			    	});
+		    		
+		    	}
+		    	
+		    	
+		    	
 		    	
 		     });
 		      

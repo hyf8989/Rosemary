@@ -53,10 +53,14 @@ public class CartServlet extends HttpServlet {
 				//记得要存放进session里
 				 request.getSession().setAttribute("cart", cart);
 			 }
+			 
 			 //获取传过来的鲜花编号
         	 int flowerId=Integer.valueOf(request.getParameter("flowerId"));
         	 //获取传过来的购买数量
-        	 int quantity=Integer.valueOf(request.getParameter("quantity"));
+        	 int quantity=1;
+        	 if(request.getParameter("quantity")!=null) {
+        		 quantity=Integer.valueOf(request.getParameter("quantity")) ;
+        	 }
 			 //通过ID查找到鲜花信息，实例化鲜花对象
         	 FlowerInfo flower=fIS.getFlowerInfoById(flowerId);
 			 //创建购物项对象

@@ -97,6 +97,20 @@ public class Orders {
 		this.updateTime = updateTime;
 	}
 	
+	
+	public Orders(int orderId, int userId, double payment, double postage, String address, int orderType,
+			int orderStatus, String createTime, String updateTime) {
+		super();
+		this.orderId = orderId;
+		this.userId = userId;
+		this.payment = payment;
+		this.postage = postage;
+		this.address = address;
+		this.orderType = orderType;
+		this.orderStatus = orderStatus;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
 	public Orders() {
 		// TODO Auto-generated constructor stub
 	}
