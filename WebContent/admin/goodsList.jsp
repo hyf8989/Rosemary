@@ -11,23 +11,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <script type="application/x-javascript">
-	
-	
-	
-	
-	
+
 			addEventListener("load", function() {
 				setTimeout(hideURLbar, 0);
 			}, false);
 
 			function hideURLbar() {
 				window.scrollTo(0, 1);
-			}
-		
-
-
-
-
+			}		
 </script>
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
@@ -116,11 +107,11 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:if test="${sessionScope.pdf == null}">
+									<c:if test="${sessionScope.pd == null}">
 										<jsp:forward page="../flower.do?op=queryFlowerByPage"></jsp:forward>
 									</c:if>
-									<c:if test="${sessionScope.pdf != null}">
-										<c:forEach items="${sessionScope.pdf.data}" var="goods">
+									<c:if test="${sessionScope.pd != null}">
+										<c:forEach items="${sessionScope.pd.data}" var="goods">
 											<tr>
 												<td>${goods.flowerId}</td>
 												<td>${goods.flowerName}</td>
@@ -131,7 +122,6 @@
 														class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
 													<button class="layui-btn layui-btn-radius layui-btn-danger">删除
 													</button></td>
-
 											</tr>
 										</c:forEach>
 									</c:if>
@@ -145,7 +135,6 @@
 												class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
 											<button class="layui-btn layui-btn-radius layui-btn-danger">删除
 											</button></td>
-
 									</tr>
 									<tr>
 										<td>3</td>
@@ -157,7 +146,6 @@
 												class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
 											<button class="layui-btn layui-btn-radius layui-btn-danger">删除
 											</button></td>
-
 									</tr>
 									<tr>
 										<td>4</td>
@@ -169,7 +157,6 @@
 												class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
 											<button class="layui-btn layui-btn-radius layui-btn-danger">删除
 											</button></td>
-
 									</tr>
 									<tr>
 										<td>5</td>
@@ -181,7 +168,6 @@
 												class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
 											<button class="layui-btn layui-btn-radius layui-btn-danger">删除
 											</button></td>
-
 									</tr> -->
 								</tbody>
 							</table>
@@ -190,10 +176,8 @@
 						<!---728x90--->
 
 						<div id="pageDiv" style="text-align: center"></div>
-
 					</div>
 					<!-- //tables -->
-
 				</div>
 				<!-- script-for sticky-nav -->
 				<script>
@@ -207,7 +191,6 @@
 								$(".header-main").removeClass("fixed");
 							}
 						});
-
 					});
 				</script>
 				<!-- /script-for sticky-nav -->
@@ -261,9 +244,9 @@
 			//完整功能 
 			laypage.render({
 			    elem: 'pageDiv'
-			    ,count:${pdf.total} ,
-			    curr:${pdf.page}
-			   ,limit:${pdf.pageSize}
+			    ,count:${pd.total} ,
+			    curr:${pd.page}
+			   ,limit:${pd.pageSize}
 			    ,layout: ['count', 'prev', 'page','limit','next', 'skip']
 			    ,jump: function(obj,first){
 					console.log(obj);
