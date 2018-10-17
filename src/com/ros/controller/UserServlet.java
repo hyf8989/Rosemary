@@ -191,7 +191,27 @@ public class UserServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/admin/userList.jsp").forward(request, response);
 		}
-			
+		/**
+		 * 后台添加用户
+		 */
+		else if("addUser".equals(op)) {
+			String msg="";
+			String userName=request.getParameter("userName");
+			String userPwd=MD5Util.getEncodeByMd5(request.getParameter("userPwd"));//密码加密	
+			 //获取当前时间
+			Date date=new Date();
+			String createTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+			String updateTime=createTime;
+			UserBasicInfo ub=new UserBasicInfo(userName, userPwd, createTime, updateTime);		
+			boolean flag=us.insertUser(ub);//插入用户基本表
+			if(flag) {
+				msg="添加成功";
+			}else {
+				msg="添加失败";
+			}
+			out.print(msg);
+			out.close();
+		}
 		
 	}
 
