@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+<embed src="music/七里香.mp3" autostart="true" loop="true" hidden="true"></embed>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
