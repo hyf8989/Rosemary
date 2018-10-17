@@ -17,7 +17,7 @@
 <link href="${pageContext.request.contextPath}/admin/css/style.css" rel='stylesheet' type='text/css' />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/morris.css" type="text/css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/layui/css/layui.css" />
-
+<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
 <!-- Graph CSS -->
 <link href="${pageContext.request.contextPath}/admin/css/font-awesome.css" rel="stylesheet">
 <!-- jQuery -->
@@ -108,22 +108,19 @@
 										<th>操作</th>
 									</tr>
 									<tbody>
-										<%-- <c:if test="${sessionScope.pdm == null}">
-											<jsp:forward page="../manager.action?op=queryManager"></jsp:forward>
-										</c:if>
-										<c:if test="${sessionScope.pdm != null}">
-											<c:forEach items="${sessionScope.pdm.data}" var="m"> --%>
+						<c:if test="${sessionScope.typeList==null }">
+				             <jsp:forward page="/type.do&op=queryTypes"></jsp:forward>
+			              </c:if>
+											<c:forEach items="${sessionScope.typeList}" var="type"> 
 
 												<tr class="table-row">													
-													<td class="table-text">
-														<h6>编号</h6>
-													</td>
-													<td class="table-text"><h6>类名</h6></td>
-													<td><span class="fam">创建时间</span></td>
-													<td><span class="fam">更新时间</span></td>
+													<td class="table-text"><h6>${type.typeId}</h6></td>
+													<td class="table-text"><h6>${type.typeName}</h6></td>
+													<td><span class="fam">${type.createTime}</span></td>
+													<td><span class="fam">${type.updateTime}</span></td>
 
 													<td>
-													<button class="layui-btn layui-btn-radius pwd-reset" id="upType"
+													<button class="layui-btn layui-btn-radius pwd-reset layui-btn-normal" id="update"
 															style="margin-left: 20%;">编辑</button>
 														
 														<button class="layui-btn layui-btn-radius layui-btn-danger" id="delType">删除</button>
@@ -131,9 +128,8 @@
 													</td>
 												</tr>
 
-											<%-- </c:forEach>
+											 </c:forEach>
 
-										</c:if> --%>
 									</tbody>
 								</table>
 							</div>
@@ -155,12 +151,6 @@
 							</div>
 						</div>
 					</div>
-
-
-
-
-
-
 
 				</div>
 			</div>
@@ -197,44 +187,21 @@
 	<!--/sidebar-menu-->
 	<%@ include file="left.jsp"%>
 	<div class="clearfix"></div>
-	
-	<!-- <script>
-		var toggle = true;
 
-		$(".sidebar-icon").click(
-				function() {
-					if (toggle) {
-						$(".page-container").addClass("sidebar-collapsed")
-								.removeClass("sidebar-collapsed-back");
-						$("#menu span").css({
-							"position" : "absolute"
-						});
-					} else {
-						$(".page-container").removeClass("sidebar-collapsed")
-								.addClass("sidebar-collapsed-back");
-						setTimeout(function() {
-							$("#menu span").css({
-								"position" : "relative"
-							});
-						}, 400);
-					}
-
-					toggle = !toggle;
-				});
-	</script> -->
-	<!--js -->
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/admin/js/jquery.nicescroll.js"></script>
 	<script src="${pageContext.request.contextPath}/admin/js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->
 	<script src="${pageContext.request.contextPath}/admin/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/admin/layui/layui.js" charset="utf-8"></script>
-
+<script type="text/javascript" src="js/jquery.basictable.min.js"></script>
+<script type="text/javascript" src="layui/layui.js" charset="utf-8">
 
 	<!-- /Bootstrap Core JavaScript -->
 	<script>
+
 		 layui.use([ 'laypage', 'layer' ], function() {
 			var laypage = layui.laypage, layer = layui.layer;
-
 			//完整功能 
 			laypage.render({
 			    elem: 'pageDiv'
@@ -248,7 +215,7 @@
 					//首次不执行
 					if (!first) {
 						//do something
-						location.href = "/Rosemary/manager.action?op=queryManager&page="
+						location.href = "/Rosemary/type.do?op=queryTypes&page="
 								+ obj.curr + "&pageSize=" + obj.limit
 								+ "&keywords="
 								+ document.getElementById("keywords").value;
@@ -257,29 +224,62 @@
 			});
 
 		}); 
-		$(".layui-btn-normal").click(function() {
-			var adminName =$(this).parents("tr").find("h6").text();
-			layer.open({
-				title : "友情提醒？",
-				skin : "layui-layer-lan",
-				content : "<span>确定要解锁吗？</span>",
-				anim : 0,
-				btn : [ '确定', '取消' ],
-				yes : function(index, layero) {
-					$.get("/Rosemary/manager.action","op=clearManagerStatus&adminName=" + adminName, function(data, status) {
-						layer.msg(data, {
-							icon : 4,
-							time : 3000
-						});
-						location.reload(true);
-					}); 
-					/* layer.msg('成功释放用户权限', {
-						icon : 6,
-						time : 3000
-					}); */
-				}
+
+			layui.use('layer', function() {
+				var msg;
+				var layer = layui.layer;
 			});
-		});
+
+		/* 编辑按钮弹出层 */
+		$(".layui-btn-normal").click(
+			function() {
+			var msg="";
+			//获取当前行的第一个td
+            var typeId = $(this).parents("tr").find("td").eq(0).text();
+			var typeName = $(this).parents("tr").find("td").eq(1).text();
+			var createTime = $(this).parents("tr").find("td").eq(2).text();
+			var updateTime = $(this).parents("tr").find("td").eq(3).text();
+
+							layer.open({
+										type : 1,
+										title : "更改类型",
+										anim : 1,
+										area : [ '600px', '600px' ],
+										offset : "auto",
+										shadeClose : true,
+										closeBtn : 1,
+										content : "<div class='modal-body'> 编号： <input type='text' disabled='disabled' name='typeId' id='typeId' style='width:300px;height:30px; margin-left:40px;margin-bottom:20px;' value=''></div>"
+										+"<div class='modal-body'> 类名: <input type='text' name='typeName' id='typeName' style='width:300px;height:30px;margin-left:65px;margin-bottom:30px;' value=''>"
+										+"<button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' style='margin-left:20%;margin-right:20px;' id='upType'>更新</button>"
+										+"<button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' margin-top:100px; id='close'>取消</div>"
+									});
+							//用jq代码信息显示在content元素中
+							$("#typeId").val(typeId);
+							$("#typeName").val(typeName);
+							
+				$("#upType").click(function name() {																
+							//获取当前类型编号
+							var userId = $("#typeId").val();
+							//获取输入的类型名
+							var typeName = $("#typeName").val();							
+							$.get("/Rosemary/type.do",
+									"op=updType&typeId=" + typeId + "&typeName="
+											+ typeName, function(data, status) {										
+										layer.open({
+											title : "温馨提醒",
+											skin : "layui-layer-molv",
+											content : "<span style='color:black;'>" + data+ "</span>",
+											anim : 0,
+											btn : [ 'OK' ],
+											yes : function(index, layero) {
+												layer.closeAll();
+												location.href = "/Rosemary/admin/typeList.jsp";
+											}
+										}); 
+									}); 														
+							});								
+						});
+		
 		$(".pwd-reset").click(function() {
 			var adminName =$(this).parents("tr").find("h6").text();
 			layer.open({
@@ -304,27 +304,7 @@
 				}
 			});
 		});
-		$(".layui-btn-danger").click(function() {
-			//console.log($(this).parents("tr").find("span").text());
-			var adminName =$(this).parents("tr").find("h6").text();
-			layer.confirm("请问是否确定锁定？", {
-				btn : [ "确定", "取消" ],
-				icon : 4
-			//按钮
-			}, function(index) {
-				$.get("/Rosemary/manager.action","op=lockManagerStatus&adminName=" + adminName, function(data, status) {
-					layer.msg(data, {
-						icon : 4,
-						time : 3000
-					});
-					location.reload(true);
-				}); 
-				
-				layer.close(index);
-			}, function() {
 
-			});
-		});
 	</script>
 	<%@ include file="foot.jsp"%>
 </body>

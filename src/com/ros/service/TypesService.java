@@ -10,6 +10,7 @@ import com.ros.entity.Types;
  *
  */
 public interface TypesService {
-	public List<Types> getTypes(int typeId);//显示类型
+	public List<Types> getTypes();//显示类型
+	public boolean updateType(Types t);//更新类型
 
 }

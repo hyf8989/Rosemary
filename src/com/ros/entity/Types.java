@@ -45,6 +45,14 @@ public class Types {
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 	}
+	
+	
+	public Types(int typeId, String typeName, String updateTime) {
+		super();
+		this.typeId = typeId;
+		this.typeName = typeName;
+		this.updateTime = updateTime;
+	}
 	@Override
 	public String toString() {
 		return "Types [typeId=" + typeId + ", typeName=" + typeName + ", createTime=" + createTime + ", updateTime="

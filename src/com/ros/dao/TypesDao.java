@@ -10,6 +10,7 @@ import com.ros.entity.Types;
  *
  */
 public interface TypesDao {
-	List<Types> queryType(int typeId);//查询所有类型
+	List<Types> queryType();//查询所有类型
+	boolean updateType(Types t);//修改类型
 
 }

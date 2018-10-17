@@ -15,10 +15,17 @@ public class TypesDaoImpl implements TypesDao {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Types> queryType(int typeId) {
+	public List<Types> queryType() {
 		// TODO Auto-generated method stub
 		String sql = "SELECT * FROM flower_type";
 		return (List<Types>) BaseDao.select(sql, Types.class);
+	}
+	
+	@Override
+	public boolean updateType(Types t) {
+		// TODO Auto-generated method stub
+		String sql = "UPDATE flower_type set typeName=?,updateTime=? WHERE typeId=?";
+		return BaseDao.execute(sql, t.getTypeName(),t.getUpdateTime(),t.getTypeId())>0;
 	}
 
 }

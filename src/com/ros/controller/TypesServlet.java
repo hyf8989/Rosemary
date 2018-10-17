@@ -2,6 +2,8 @@ package com.ros.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -47,13 +49,30 @@ public class TypesServlet extends HttpServlet {
 		// 获取参数
 		String op = request.getParameter("op");
 		if("queryTypes".equals(op)) {
-			//获取编号
-			int typeId = Integer.parseInt(request.getParameter("typeId"));
 			//调用TypesService方法
-			List<Types> list = ts.getTypes(typeId);
+			List<Types> list = ts.getTypes();
 			request.getSession().setAttribute("typeList",list);
 			response.sendRedirect("/Rosemary/admin/typeList.jsp");
-		}
+		}else if("updType".equals(op)) {
+			String meg="";
+			//获取各个参数
+			int typeId=Integer.parseInt(request.getParameter("typeId"));
+			String typeName=request.getParameter("typeName");			
+			//当前时间
+			 Date date=new Date();
+			 String updateTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+			 Types t = new Types(typeId,typeName,updateTime);
+			 boolean flag = ts.updateType(t);
+			 if(flag) {
+					meg="修改鲜花类型成功";
+				}
+				else {
+					meg="修改鲜花类型失败";
+				}
+				
+				out.println(meg);
+				out.close();
+			}
 	}
 
 	/**

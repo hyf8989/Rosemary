@@ -48,6 +48,9 @@
 									<a href="goodsList.jsp">商品列表</a>
 								</li>
 								<li id="menu-academico-avaliacoes">
+									<a href="/Rosemary/type.do?op=queryTypes">商品类型</a>
+								</li>
+								<li id="menu-academico-avaliacoes">
 									<a href="portGoods.jsp">新品上架</a>
 								</li>
 

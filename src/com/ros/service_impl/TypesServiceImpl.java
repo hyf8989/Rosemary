@@ -15,9 +15,15 @@ public class TypesServiceImpl implements com.ros.service.TypesService {
 	 * return List<Types> 类型类
 	 */
 	@Override
-	public List<Types> getTypes(int typeId) {
+	public List<Types> getTypes() {
 		// TODO Auto-generated method stub
-		return td.queryType(typeId);
+		return td.queryType();
+	}
+	
+	@Override
+	public boolean updateType(Types t) {
+		// TODO Auto-generated method stub
+		return td.updateType(t);
 	}
 
 }
