@@ -324,7 +324,7 @@
 		    	$("#payment span").text(postage+${sessionScope.cart.totalPrice});
 		    	
 		    	 
-		    }) ;
+		    }) ; 
 		   //地址下拉框选中事件
       $("#addressConfirm").change(function(){
     	var tel=  $(this).find("option:selected").attr("id");//地址下拉框选中之后，返回收货手机号码
@@ -379,7 +379,7 @@
 								anim: 0,
 								btn: ['剁手去~~'],
 								yes: function(index, layero) {
-									location.href="https://www.baidu.com";
+									location.href="/Rosemary/index.jsp";
 								}
 								
 								

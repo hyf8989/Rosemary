@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+	  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>支付宝电脑网站支付</title>
+<title>Rosemary支付宝结算页面</title>
 <style>
 * {
 	margin: 0;
@@ -193,8 +194,16 @@ h2 {
 </head>
 <body text=#000000 bgColor="#ffffff" leftMargin=0 topMargin=4>
 	<header class="am-header">
-	<h1>支付宝电脑网站支付体验入口页</h1>
+	<h1>Rosemary支付宝结算页面</h1>
 	</header>
+	<c:if test="${sessionScope.orderEnd eq null }">
+	 <div style="margin-top:300px;">
+	 <h1 style="text-align:center;">
+	        您当前没有任何支付款项
+	 </h1>
+	 </div>
+	</c:if>
+	<c:if test="${sessionScope.orderEnd ne null }">
 	<div id="main">
 		<div id="tabhead" class="tab-head">
 			<h2 id="tab1" class="selected" name="tab">付 款</h2>
@@ -207,19 +216,19 @@ h2 {
 			target="_blank">
 			<div id="body1" class="show" name="divcontent">
 				<dl class="content">
-					<dt>商户订单号 ：</dt>
+					<dt>商户订单号 </dt>
 					<dd>
-						<input id="WIDout_trade_no" name="WIDout_trade_no" />
+						<input id="WIDout_trade_no" name="WIDout_trade_no"  />
 					</dd>
 					<hr class="one_line">
-					<dt>订单名称 ：</dt>
+					<dt>订单名称 ：鲜花</dt>
 					<dd>
 						<input id="WIDsubject" name="WIDsubject" />
 					</dd>
 					<hr class="one_line">
 					<dt>付款金额 ：</dt>
 					<dd>
-						<input id="WIDtotal_amount" name="WIDtotal_amount" />
+						<input id="WIDtotal_amount" name="WIDtotal_amount"  />
 					</dd>
 					<hr class="one_line">
 					<dt>商品描述：</dt>
@@ -360,11 +369,13 @@ h2 {
 			</ul>
 		</div>
 	</div>
+	</c:if>
+	
 </body>
 <script language="javascript">
 	var tabs = document.getElementsByName('tab');
 	var contents = document.getElementsByName('divcontent');
-	
+	document.getElementById("WIDout_trade_no").value="{sessionScope.orderEnd.orderId}";
 	(function changeTab(tab) {
 	    for(var i = 0, len = tabs.length; i < len; i++) {
 	        tabs[i].onmouseover = showTab;
@@ -393,9 +404,9 @@ h2 {
 		sNow += String(vNow.getMinutes());
 		sNow += String(vNow.getSeconds());
 		sNow += String(vNow.getMilliseconds());
-		document.getElementById("WIDout_trade_no").value =  sNow;
+		document.getElementById("WIDout_trade_no").value =  "${sessionScope.orderEnd.orderId }";
 		document.getElementById("WIDsubject").value = "测试";
-		document.getElementById("WIDtotal_amount").value = "0.01";
+		document.getElementById("WIDtotal_amount").value = "${sessionScope.orderEnd.payment }0";
 	}
 	GetDateNow();
 </script>

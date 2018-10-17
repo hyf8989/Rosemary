@@ -75,15 +75,7 @@
 			});
 			
 			//点击图片时，获取图片ID（进入购物界面使用）
-			function goDetail(){
-				$(document).on("click",".flowershow",function(){
-					
-					console.log("我是你点击鲜花的id"+$(this).find('img').attr('alt'));//测试输出鲜花ID
-					location.href="https://www.baidu.com";
-					
-					
-				});
-			}
+			
 			
 			//输入框按下时的监听事件（进行模糊查询）
 		     $("#keyword").keyup(function(){

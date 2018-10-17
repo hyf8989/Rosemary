@@ -77,4 +77,12 @@ public class FlowerInfoServiceImpl implements FlowerInfoService {
 			// TODO Auto-generated method stub
 			return fID.queryFlowerByPage(page, pageSize, keywords);
 		}
+	/**   
+	 修改鲜花库存
+	 */
+	@Override
+	public boolean setFlowerStockByFlowerId(int flowerId, int stock) {
+		// TODO Auto-generated method stub
+		return fID.setFlowerStockByFlowerId(flowerId, stock);
+	}
 }

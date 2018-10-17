@@ -11,7 +11,7 @@
  Target Server Version : 50515
  File Encoding         : 65001
 
- Date: 16/10/2018 01:52:04
+ Date: 18/10/2018 02:04:48
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,13 @@ CREATE TABLE `address_info`  (
   `createTime` datetime NOT NULL COMMENT '创建时间',
   `updateTime` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`addressId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of address_info
+-- ----------------------------
+INSERT INTO `address_info` VALUES (1, '莆田学院', 5, '谢佳榕', '17720838367', '福建省', '莆田市', '城厢区', '26+5', '2018-10-17 22:08:20', '2018-10-17 22:08:22');
+INSERT INTO `address_info` VALUES (2, '凤城镇', 5, '谢佳榕', '17720838367', '福建省', '泉州市', '安溪县', '362400', '2018-10-17 22:09:38', '2018-10-17 22:09:41');
 
 -- ----------------------------
 -- Table structure for admin
@@ -47,20 +53,6 @@ CREATE TABLE `admin`  (
   `adminStatus` int(255) NULL DEFAULT 1 COMMENT '管理员状态：0 :锁定 1：解锁;',
   `adminLevel` int(255) NULL DEFAULT 0 COMMENT '管理员身份：0：系统管理员 1：店铺管理员',
   PRIMARY KEY (`adminId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Table structure for cart
--- ----------------------------
-DROP TABLE IF EXISTS `cart`;
-CREATE TABLE `cart`  (
-  `Id` int(11) NOT NULL AUTO_INCREMENT COMMENT '购物车编号',
-  `userId` int(11) NOT NULL COMMENT '用户编号',
-  `flowerId` int(11) NOT NULL COMMENT '花编号',
-  `quantity` int(255) NULL DEFAULT NULL COMMENT '数量',
-  `createTime` datetime NOT NULL COMMENT '创建时间',
-  `updateTime` datetime NOT NULL COMMENT '修改时间',
-  PRIMARY KEY (`Id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
@@ -172,7 +164,20 @@ CREATE TABLE `order_info`  (
   `quantity` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '数量',
   `totalPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '总价',
   PRIMARY KEY (`orderInfoId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of order_info
+-- ----------------------------
+INSERT INTO `order_info` VALUES (36, 3, 20183422, '1', 302.00);
+INSERT INTO `order_info` VALUES (37, 3, 20184335, '1', 302.00);
+INSERT INTO `order_info` VALUES (38, 3, 20180923, '3', 906.00);
+INSERT INTO `order_info` VALUES (39, 3, 20181989, '1', 302.00);
+INSERT INTO `order_info` VALUES (40, 3, 20180560, '1', 302.00);
+INSERT INTO `order_info` VALUES (41, 3, 20186765, '2', 604.00);
+INSERT INTO `order_info` VALUES (42, 3, 20188004, '2', 604.00);
+INSERT INTO `order_info` VALUES (43, 3, 20187761, '1', 302.00);
+INSERT INTO `order_info` VALUES (44, 3, 20184434, '1', 302.00);
 
 -- ----------------------------
 -- Table structure for orders
@@ -191,6 +196,19 @@ CREATE TABLE `orders`  (
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '收货地址',
   PRIMARY KEY (`orderId`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES (20180560, 5, 0, '2018-10-18 01:36:33', 10, '2018-10-18 01:36:33', NULL, 312, 1, '福建省莆田市城厢区莆田学院');
+INSERT INTO `orders` VALUES (20180923, 5, 0, '2018-10-18 01:25:19', 0, '2018-10-18 01:25:19', NULL, 906, 1, '福建省泉州市安溪县凤城镇');
+INSERT INTO `orders` VALUES (20181989, 5, 0, '2018-10-18 01:32:21', 10, '2018-10-18 01:32:21', NULL, 312, 1, '福建省莆田市城厢区莆田学院');
+INSERT INTO `orders` VALUES (20183422, 5, 0, '2018-10-18 01:13:07', 0, '2018-10-18 01:13:07', NULL, 302, 1, '福建省泉州市安溪县凤城镇');
+INSERT INTO `orders` VALUES (20184335, 5, 0, '2018-10-18 01:16:59', 10, '2018-10-18 01:16:59', NULL, 312, 1, '福建省莆田市城厢区莆田学院');
+INSERT INTO `orders` VALUES (20184434, 5, 1, '2018-10-18 02:02:16', 10, '2018-10-18 02:02:16', NULL, 312, 1, '福建省莆田市城厢区莆田学院');
+INSERT INTO `orders` VALUES (20186765, 5, 0, '2018-10-18 01:38:54', 10, '2018-10-18 01:38:54', NULL, 614, 1, '福建省莆田市城厢区莆田学院');
+INSERT INTO `orders` VALUES (20187761, 5, 1, '2018-10-18 01:52:56', 10, '2018-10-18 01:52:56', NULL, 312, 1, '福建省莆田市城厢区莆田学院');
+INSERT INTO `orders` VALUES (20188004, 5, 1, '2018-10-18 01:49:09', 10, '2018-10-18 01:49:09', NULL, 614, 1, '福建省莆田市城厢区莆田学院');
 
 -- ----------------------------
 -- Table structure for user_basicinfo

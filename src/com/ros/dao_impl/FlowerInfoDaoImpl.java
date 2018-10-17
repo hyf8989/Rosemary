@@ -125,4 +125,19 @@ public class FlowerInfoDaoImpl implements FlowerInfoDao {
 		return pd;
 	}
 
+	/**   
+	 * 修改鲜花库存  
+	 */
+	@Override
+	public boolean setFlowerStockByFlowerId(int flowerId,int stock) {
+		// TODO Auto-generated method stub
+		String sql="update flower_info set stock=? where flowerId=?";
+		boolean flag=false;
+		if(BaseDao.execute(sql, stock,flowerId)>0) {
+			flag=true;
+			
+		}
+		return flag;
+	}
+
 }

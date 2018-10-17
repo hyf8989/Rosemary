@@ -58,13 +58,13 @@
 										<a class="login" href="register.jsp">注册</a>
 									</li>
 									<li>
-										<a class="login" href="login.jsp">登录</a>
+										<a class="login" href="login.jsp" >登录</a>
 									</li>
 									
 									</c:if>
 									<c:if test="${sessionScope.ub ne null}">
 									<li>
-										<a class="login" href="register.jsp">退出登录</a>
+										<a class="login" href="login.jsp">退出登录</a>
 									</li>
 									</c:if>
 									
@@ -198,5 +198,6 @@
 			<!-- mobile-menu-area-end -->
 		</header>
 		<!-- header-end -->
+		
 </body>
 </html>

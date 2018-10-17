@@ -56,6 +56,20 @@ public class OrderInfo {
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-    
+    /**   
+	 * 无参构造
+	 */
+	public OrderInfo() {
+		// TODO Auto-generated constructor stub
+	}
+	public OrderInfo(int flowerId, int orderId, int quantity, double totalPrice) {
+		super();
+		this.flowerId = flowerId;
+		this.orderId = orderId;
+		this.quantity = quantity;
+		this.totalPrice = totalPrice;
+	}
+	
+	
     
 }

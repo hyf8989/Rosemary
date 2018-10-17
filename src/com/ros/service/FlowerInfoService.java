@@ -14,12 +14,6 @@ public interface FlowerInfoService {
 	public PageData<FlowerInfo> queryFlowerInfoByPage(int page, int pageSize, String keyword,int priceStart,int priceEnd,int typeId1,int typeId2,String sort,String sortType);//主页分页显示所有鲜花
 	public ArrayList<FlowerType> queryFlowerType();//查询当前所有花类
 	public FlowerInfo getFlowerInfoById(int flowerId);//根据鲜花编号获得鲜花的所有信息
-	/**
-	    * @Description: TODO(后台商品信息展示分页)
-	    * @param  page
-	    * @param  pageSize
-	    * @param  keywords
-	    * @return PageData<FlowerInfo>    返回类型
-	 */
+	public boolean setFlowerStockByFlowerId(int flowerId,int stock);//修改鲜花库存
 	PageData<FlowerInfo> queryFlowerByPage(int page,int pageSize,String keywords);
 }

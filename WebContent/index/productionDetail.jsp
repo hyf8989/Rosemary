@@ -377,7 +377,7 @@
       		$("#messageContent").slideToggle("slow");
       		
       	});
-      	$("#flower-quantity").change(function(){
+      	$("#quantity").change(function(){
       		var numberTest=/^[0-9]*$/;//限制数量只能是数字输入
       		
       		if(numberTest.test($(this).val())==false){//如果输入不是数字，则消息提示，并且将文本框默认值设置为1
@@ -389,7 +389,7 @@
       			
       		}
       		else{//如果输入的数字大于库存，则消息提示，并且将文本框默认值设为1
-      			if($(this).val()>${sessionScope.flower.stock}){
+      			if($(this).val()>100){
       				layer.msg('<span style="color:black;">您这个数量有点多哈，本店暂时库存不足</span>', {
     					icon:5,
     					time: 3000

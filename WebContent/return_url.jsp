@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>电脑网站支付return_url</title>
+<title>电脑网站支付</title>
 </head>
 <%@ page import="java.util.*"%>
 <%@ page import="java.util.Map"%>
@@ -48,11 +48,11 @@
 	
 		//支付宝交易号
 		String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
-	
+	  
 		//付款金额
 		String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"),"UTF-8");
 		
-		out.println("<script>alert('恭喜您，支付成功');location.href='https://www.baidu.com';</script>");
+		out.println("<script>location.href='order.do?op=success&orderId='"+out_trade_no+";</script>");
 	}else {
 		out.println("验签失败");
 	}
