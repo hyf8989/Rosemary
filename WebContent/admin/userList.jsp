@@ -13,6 +13,7 @@
 <script type="application/x-javascript">
 	
 	
+	
 			addEventListener("load", function() {
 				setTimeout(hideURLbar, 0);
 			}, false);
@@ -21,6 +22,7 @@
 				window.scrollTo(0, 1);
 			}
 		
+
 
 </script>
 <!-- Bootstrap Core CSS -->
@@ -97,7 +99,7 @@
 
 					<div class="agile-tables">
 						<div class="w3l-table-info">
-							<h2>用户基本信息表</h2>
+							<h2>用户信息表</h2>
 							<table id="table">
 								<thead>
 									<tr>
@@ -123,9 +125,9 @@
 												<td>${ub.userTel}</td>
 												<td>${ub.userEmail}</td>
 												<td><button
-														class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
-													<button class="layui-btn layui-btn-radius layui-btn-danger">删除
-													</button></td>
+														class="layui-btn layui-btn-radius layui-btn-normal"
+														id="updateBtn" name="updateBtn">编辑</button>&nbsp;
+													<button class="layui-btn layui-btn-radius layui-btn-danger">删除</button></td>
 
 											</tr>
 
@@ -200,6 +202,7 @@
 				});
 	</script>
 	<!--js -->
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 	<script src="js/jquery.nicescroll.js"></script>
 	<script src="js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->
@@ -208,7 +211,6 @@
 	<script>
 		layui.use([ 'laypage', 'layer' ], function() {
 			var laypage = layui.laypage, layer = layui.layer;
-
 			//完整功能 
 			laypage.render({
 				elem : 'pageDiv',
@@ -226,13 +228,20 @@
 					}
 				}
 			});
-
 		});
-		$(".layui-btn-normal")
-				.click(
-						function() {
-							layer
-									.open({
+		
+		/* 编辑按钮弹出层 */
+		$(".layui-btn-normal").click(
+			function() {
+			var msg="";
+			//获取当前行的第一个td
+            var userId = $(this).parents("tr").find("td").eq(0).text();
+			var userName = $(this).parents("tr").find("td").eq(1).text();
+			var name = $(this).parents("tr").find("td").eq(2).text();
+			var userTel = $(this).parents("tr").find("td").eq(3).text();
+			var userEmail = $(this).parents("tr").find("td").eq(4).text();
+
+							layer.open({
 										type : 1,
 										title : "更改用户",
 										anim : 1,
@@ -240,10 +249,51 @@
 										offset : "auto",
 										shadeClose : true,
 										closeBtn : 1,
-										content : " <div class='modal-body'> 用户名： <input type='text' disabled='disabled' name='userName' style='width:300px;margin-left:30px;margin-bottom:20px;'> </div><div class='modal-body'>电话：<input type='text' name='userPwd'  style='width:300px;margin-left:55px;margin-bottom:30px;'></div> <div class='modal-body'>邮箱： <input type='text' name='userLevel' style='width:300px;margin-left:50px;margin-bottom:30px;'> </div><div class='modal-body'>姓名：  <input type='text' name='userState' style='width:300px;margin-left:50px;margin-bottom:30px;'><input type='hidden' name='userId' style='width:300px;margin-left:15px;margin-bottom:30px;'><br/><button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' style='margin-left:20%;margin-right:20px;'>更新</button><button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' margin-top:100px;>取消</div>"
-
+										content : "<div class='modal-body'> 用户名： <input type='text' disabled='disabled' name='userName' id='userName' style='width:300px;height:30px; margin-left:40px;margin-bottom:20px;' value=''></div>"
+										+"<div class='modal-body'> 姓名: <input type='text' name='name' id='name' style='width:300px;height:30px;margin-left:65px;margin-bottom:30px;' value=''>" 										
+										+"<div class='modal-body'>电话: <input type='text' name='userTel' id='userTel' style='width:300px;height:30px;margin-left:50px;margin-bottom:30px;' value=''></div>"
+										+"<div class='modal-body'>邮箱: <input type='text' name='userEmail' id='userEmail' style='width:300px;height:30px;margin-left:50px;margin-bottom:30px;' value=''></div>"
+										+"<input type='hidden' name='userId' id='userId' style='width:300px;margin-left:15px;margin-bottom:30px;'><br/>"
+										+"<button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' style='margin-left:20%;margin-right:20px;' id='upUser'>更新</button>"
+										+"<button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' margin-top:100px; id='close'>取消</div>"
 									});
+							//用jq代码信息显示在content元素中
+							$("#userId").val(userId);
+							$("#userName").val(userName);
+							$("#name").val(name);
+							$("#userTel").val(userTel);
+							$("#userEmail").val(userEmail);
+							
+				$("#upUser").click(function name() {																
+							//获取当前用户编号
+							var userId = $("#userId").val();
+							console.log(userId);
+							//获取输入的用户名
+							var userName = $("#userName").val();
+							var name = $("#name").val();
+							var userEmail = $("#userEmail").val();
+							var userTel = $("#userTel").val();							
+							$.get("/Rosemary/ub.do",
+									"op=updateInfo&userId=" + userId + "&userName="
+											+ userName + "&name=" + name
+											+ "&userEmail=" + userEmail + "&userTel="
+											+ userTel, function(data, status) {										
+										layer.open({
+											title : "温馨提醒",
+											skin : "layui-layer-molv",
+											content : "<span style='color:black;'>" + data+ "</span>",
+											anim : 0,
+											btn : [ 'OK' ],
+											yes : function(index, layero) {
+												layer.closeAll();
+												location.href = "/Rosemary/admin/userList.jsp";
+											}
+										}); 
+									}); 														
+							});								
 						});
+
+		
 		$(".layui-btn-danger").click(function() {
 			layer.open({
 				title : "友情提醒？",
