@@ -3,15 +3,19 @@ package com.ros.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import com.ros.api.*;
+import com.ros.dao_impl.UserDaoImpl;
+import com.ros.entity.Address;
 import com.ros.entity.UserBasicInfo;
 import com.ros.entity.UserBean;
 import com.ros.entity.UserDetailInfo;
 import com.ros.service.UserService;
+import com.ros.service_impl.AddressServiceImpl;
 import com.ros.service_impl.UserServiceImpl;
 import com.ros.util.MD5Util;
 
@@ -92,8 +96,21 @@ public class UserServlet extends HttpServlet {
 			String userName=request.getParameter("userName");
 			String userPwd=MD5Util.getEncodeByMd5(request.getParameter("userPwd"));
 			UserBasicInfo ub=us.login(userName, userPwd);
+			
+			
+			
+			
+			
+			
+			
 			if(ub!=null) {
+				//获取用户所有收货地址
+				AddressServiceImpl aSI=new AddressServiceImpl();
+				
+				ArrayList<Address> addressList=(ArrayList<Address>) aSI.getAddressByuserName(userName);
+				
 				HttpSession session =request.getSession();
+				session.setAttribute("addressList", addressList);
 				session.setAttribute("ub", ub);
 				out.print("登录成功");
 				out.close();

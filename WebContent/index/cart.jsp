@@ -31,6 +31,9 @@
 				
 				margin-bottom: 10px;
 			}
+			.layui-table tr:hover{
+			 background: linear-gradient(#fff,#aaa);
+			}
 		</style>
 	</head>
 
@@ -48,46 +51,60 @@
 		</h1>
 		
 		</c:if>
-		<c:if test="${not empty sessionScope.cart.cartItems }">
-		<c:forEach var="item" items="${ sessionScope.cart.cartItems}">
-		<div style="margin-top: 20px; " class="row row1">
-				<ul>
-					<div style="clear: both;" class="col-md-12">
-						<div style="padding-top: 10px;float: left;border:solid palegoldenrod;" class="col-md-3">
-                              <div style="float: left;height:135px;overflow:hidden;" class="col-md-6" >
-                              	
-							<li><img src="${item.flower.sPicture }" id="" style="width: 100px;height: 100px;" ></li>&nbsp;&nbsp;
-							</div>
-							<div style="float: left;height:135px;overflow:hidden;" class="col-md-6">${item.flower.description }	</div>
-						</div>
-						<div style="padding-top: 10px;padding-right:2px;height: 135px;float: left;border:solid palegoldenrod;" class="col-md-3">
-							<label>价格 :${item.total }</label>
-						</div>
-						<div style="padding-top: 10px;padding-right:2px;height: 135px;float: left;border:solid palegoldenrod;" class="col-md-3">
-<div class="layui-btn-group">
-  <button class="layui-btn layui-btn-primary layui-btn-sm">
-    <i class="layui-icon">-</i>
-  </button>
-  
-   <input type="text" name="title" required  lay-verify="required"  autocomplete="off" class="layui-input" style="width: 100px;height: 30px;">
-  
-  <button class="layui-btn layui-btn-primary layui-btn-sm">
-    <i class="layui-icon">+</i>
-  </button>
-</div>
-						</div>
-						<div style="padding-top: 10px;padding-right:2px;height: 135px;float: left;border:solid palegoldenrod;" class="col-md-3">
+		<c:if test="${not empty sessionScope.cart.cartItems }">	
+		<table class="layui-table " lay-skin="line" lay-size="lg" lay-even>
+									<tr>
+										<th>商品图</th>
+										<th>花名</th>
+										<th>数量</th>
+										<th>小计</th>
+										<th><span style="color:black;margin-left:50%;">操作</span></th>
+									</tr>
+									<tbody>
+										
+									
+											<c:forEach var="item" items="${ sessionScope.cart.cartItems}">
+									<tr class="table-row" >
+													<td class="table-img" id="${item.flower.flowerId}"><img src="${item.flower.sPicture }" alt="">
+													</td>
+													<td class="table-text">
+														<h6>${item.flower.flowerName}</h6>
+													</td>
+													<td><input type="text" style="color:black;width:30px;" value="${item.quantity}" /><button style="margin-left:5px;" class="layui-btn layui-btn-sm plus">
+    <i class="layui-icon">&#xe654;</i>
+  </button><button style="margin-left:5px;" class="layui-btn layui-btn-sm sub" >
+    <i class="layui-icon" style="font:bold 10px;">--</i></td>
+													<td><span class="fam">${item.total}</span></td>
 
-							 <button class="layui-btn layui-btn-primary layui-btn-sm">
-    <i class="layui-icon">&#xe640;</i>
-  </button>
-						</div>
-					</div>
-				</ul>
-			</div>
-			</c:forEach>
-		</c:if>
-		<span>${sessionScope.cart.totalPrice}</span>
+													<td>
+
+														<button class="layui-btn layui-btn-radius pwd-reset"
+															style="margin-left: 20%;margin-right:20%;">移除</button>
+														<button
+															class="layui-btn layui-btn-radius layui-btn-danger">购买</button>
+														
+													</td>
+												</tr>
+												</c:forEach>
+
+										<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td>总价<span style="color:red;">：${sessionScope.cart.totalPrice }</span><button type="button" class="layui-btn layui-btn-radius layui-btn-danger check-out" style="margin-left:35%;">去结算</button></td>
+										</tr>
+
+										
+									</tbody>
+								</table>
+			</c:if>
+		
+		
+		
+			
+	
+		
 			
 			</div>
 	</body>
@@ -96,6 +113,11 @@
 			
 		</script>
 		<script>
-		console.log("${sessionScope.cart.cartItems}");
+		  $(function(){
+			  $(".check-out").click(function(){
+				 location.href="buy.jsp"; 
+			  });
+			  
+		  });
 		</script>
 </html>
