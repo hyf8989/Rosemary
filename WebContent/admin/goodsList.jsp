@@ -107,11 +107,11 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:if test="${sessionScope.pd == null}">
+									<c:if test="${sessionScope.pdf == null}">
 										<jsp:forward page="../flower.do?op=queryFlowerByPage"></jsp:forward>
 									</c:if>
-									<c:if test="${sessionScope.pd != null}">
-										<c:forEach items="${sessionScope.pd.data}" var="goods">
+									<c:if test="${sessionScope.pdf != null}">
+										<c:forEach items="${sessionScope.pdf.data}" var="goods">
 											<tr>
 												<td>${goods.flowerId}</td>
 												<td>${goods.flowerName}</td>
@@ -244,9 +244,9 @@
 			//完整功能 
 			laypage.render({
 			    elem: 'pageDiv'
-			    ,count:${pd.total} ,
-			    curr:${pd.page}
-			   ,limit:${pd.pageSize}
+			    ,count:${pdf.total} ,
+			    curr:${pdf.page}
+			   ,limit:${pdf.pageSize}
 			    ,layout: ['count', 'prev', 'page','limit','next', 'skip']
 			    ,jump: function(obj,first){
 					console.log(obj);
