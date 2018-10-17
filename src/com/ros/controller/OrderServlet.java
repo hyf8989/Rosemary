@@ -66,6 +66,7 @@ public class OrderServlet extends HttpServlet {
 			 String updateTime=format.format(new Date()); 
 			 //实例化订单对象用来对数据库订单表进行插入
 			 Orders orders=new Orders(orderId, userId, payment, postage, address, orderType, orderStatus, createTime, updateTime);
+			 
 			 if(orderService.createOrder(orders)==true) {
 				 msg="成功生成订单！点击确定去支付这笔订单吧";
 				 out.print(msg);
