@@ -3,6 +3,7 @@ package com.ros.service;
 import java.util.List;
 
 import com.ros.entity.Manager;
+import com.ros.util.PageData;
 
 public interface ManagerService {
 	// 管理员登陆
@@ -13,6 +14,9 @@ public interface ManagerService {
 
 	// 显示管理员信息
 	List<Manager> queryManager();
+	
+	//分页显示管理员
+	PageData<Manager> queryManagerByPage(int page,int pageSize,String keywords);
 
 	// 删除管理员
 	boolean delManager(int adminId);

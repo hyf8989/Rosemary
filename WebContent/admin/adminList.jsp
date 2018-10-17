@@ -94,7 +94,7 @@
 				</ol>
 				<!-- tab content -->
 				<div class="col-md-12 tab-content tab-content-in w3">
-					<div class="tab-pane text-style active" id="tab1">
+					<div class="tab-pane text-style active" id="tab1" style="margin-bottom: 2%">
 						<div class="inbox-right">
 
 							<div class="mailbox-content">
@@ -142,11 +142,11 @@
 										<th>操作</th>
 									</tr>
 									<tbody>
-										<c:if test="${requestScope.list == null}">
+										<c:if test="${sessionScope.pd == null}">
 											<jsp:forward page="../manager.action?op=queryManager"></jsp:forward>
 										</c:if>
-										<c:if test="${requestScope.list != null}">
-											<c:forEach items="${requestScope.list}" var="m">
+										<c:if test="${sessionScope.pd != null}">
+											<c:forEach items="${sessionScope.pd.data}" var="m">
 
 												<tr class="table-row">
 													<td class="table-img"><img src="${pageContext.request.contextPath}/admin/images/in.jpg" alt="">
@@ -175,6 +175,7 @@
 									</tbody>
 								</table>
 							</div>
+							<div id="pageDiv" style="text-align: center"></div>
 						</div>
 					</div>
 					<div class="tab-pane text-style" id="tab2">
@@ -283,22 +284,22 @@
 	</script>
 	<!-- /script-for sticky-nav -->
 	<!--inner block start here-->
-	<div class="inner-block">
-		<!-- page  block-->
+	<!-- <div class="inner-block">
+		page  block
 		<div id="pageDiv" style="text-align: center">111</div>
-	</div>
+	</div> -->
 	<!--inner block end here-->
 	<!--copy rights start here-->
-	<%@ include file="foot.jsp"%>
+	<%-- <%@ include file="foot.jsp"%> --%>
 	<!--COPY rights end here-->
-	</div>
-	</div>
+	
+	
 	<!--//content-inner-->
 	<!--/sidebar-menu-->
 	<%@ include file="left.jsp"%>
 	<div class="clearfix"></div>
-	</div>
-	<script>
+	
+	<!-- <script>
 		var toggle = true;
 
 		$(".sidebar-icon").click(
@@ -321,7 +322,7 @@
 
 					toggle = !toggle;
 				});
-	</script>
+	</script> -->
 	<!--js -->
 	<script src="${pageContext.request.contextPath}/admin/js/jquery.nicescroll.js"></script>
 	<script src="${pageContext.request.contextPath}/admin/js/scripts.js"></script>
@@ -332,23 +333,23 @@
 
 	<!-- /Bootstrap Core JavaScript -->
 	<script>
-		layui.use([ 'laypage', 'layer' ], function() {
+		 layui.use([ 'laypage', 'layer' ], function() {
 			var laypage = layui.laypage, layer = layui.layer;
 
 			//完整功能 
 			laypage.render({
-				elem : 'pageDiv',
-				count : 12,
-				curr : 1,
-				limit : 5,
-				layout : [ 'count', 'prev', 'page', 'limit', 'next', 'skip' ],
-				jump : function(obj, first) {
+			    elem: 'pageDiv'
+			    ,count:${pd.total} ,
+			    curr:${pd.page}
+			   ,limit:${pd.pageSize}
+			    ,layout: ['count', 'prev', 'page','limit','next', 'skip']
+			    ,jump: function(obj,first){
 					console.log(obj);
 					console.log(first);
 					//首次不执行
 					if (!first) {
 						//do something
-						location.href = "manager.action?op=queryManager&page="
+						location.href = "/Rosemary/manager.action?op=queryManager&page="
 								+ obj.curr + "&pageSize=" + obj.limit
 								+ "&keywords="
 								+ document.getElementById("keywords").value;
@@ -356,7 +357,7 @@
 				}
 			});
 
-		});
+		}); 
 		$(".layui-btn-normal").click(function() {
 			var adminName =$(this).parents("tr").find("h6").text();
 			layer.open({
@@ -426,6 +427,7 @@
 			});
 		});
 	</script>
+	<%@ include file="foot.jsp"%>
 </body>
 
 </html>

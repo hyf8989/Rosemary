@@ -15,8 +15,8 @@
 
 							<!--search-box-->
 							<div class="w3-search-box">
-								<form action="#" method="post">
-									<input type="text" placeholder="Search..." required="">
+								<form action="../manager.action" method="post">
+									<input type="text" placeholder="Search..." name="keywords" id="keywords" value="${keywords}" required="">
 									<input type="submit" value="">
 								</form>
 							</div>
@@ -207,7 +207,7 @@
 											<a href="#"><i class="fa fa-user"></i> Profile</a>
 										</li>
 										<li>
-											<a href="#"><i class="fa fa-sign-out"></i> Logout</a>
+											<a href="/Rosemary/admin/login.jsp"><i class="fa fa-sign-out"></i> Logout</a>
 										</li>
 									</ul>
 								</li>

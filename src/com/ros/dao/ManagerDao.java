@@ -12,6 +12,7 @@ package com.ros.dao;
 import java.util.List;
 
 import com.ros.entity.Manager;
+import com.ros.util.PageData;
 
 /**
  * ClassName: ManagerDao <br/>
@@ -33,6 +34,9 @@ public interface ManagerDao {
 
 	// 显示管理员信息
 	List<Manager> queryManager();
+	
+	//显示管理员分页
+	PageData<Manager> queryManagerByPage(int page,int pageSize,String keywords);
 
 	// 删除管理员
 	boolean delManager(int adminId);
