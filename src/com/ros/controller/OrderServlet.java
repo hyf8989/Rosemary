@@ -3,6 +3,7 @@ package com.ros.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -22,6 +23,7 @@ import com.ros.service.FlowerInfoService;
 import com.ros.service.MyOrdersService;
 import com.ros.service_impl.FlowerInfoServiceImpl;
 import com.ros.service_impl.MyOrdersServiceImpl;
+import com.ros.util.PageData;
 
 /**
  * 订单控制器
@@ -155,6 +157,27 @@ public class OrderServlet extends HttpServlet {
 			response.sendRedirect("/Rosemary/index/cart.jsp");	
 				
 			}
+		 }
+		 //根据传递过来的用户ID查询对应的订单（查看订单操作）
+		 
+		 else if(op.equals("queryOrderByUserId")) {
+			 int page=1;//默认当前页1
+			 int pageSize=4;//默认每页4条
+			//获取传递过来的用户编号
+			 int userId=Integer.valueOf(request.getParameter("userId"));
+			 if(request.getParameter("page")!=null) {
+				 page=Integer.valueOf(request.getParameter("page"));
+			 }
+			 if(request.getParameter("pageSize")!=null) {
+				 pageSize=Integer.valueOf(request.getParameter("pageSize"));
+			 }
+			 //调用接口实现类的方法，查询出该用户的所有订单
+		  PageData<Orders> pd=	 orderService.queryOrderByUserId(userId, page, pageSize);
+		   //存储进session
+		   request.getSession().setAttribute("orders", pd);
+		   //重定向到订单页面
+		   response.sendRedirect("/Rosemary/index/myOrder.jsp");
+		   
 		 }
 	}
 

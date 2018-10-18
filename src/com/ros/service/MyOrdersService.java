@@ -1,10 +1,12 @@
 package com.ros.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.ros.entity.MyOrders;
+
 import com.ros.entity.OrderInfo;
 import com.ros.entity.Orders;
+import com.ros.util.PageData;
 
 /**
  * 自定义Service接口MyOrdersService
@@ -13,8 +15,7 @@ import com.ros.entity.Orders;
  */
 public interface MyOrdersService {
 
-	//查询订单记录
-	List<MyOrders> getMyOrdersByUserId(int userId);
+	public PageData<Orders>  queryOrderByUserId(int userId,int page,int pageSize);//用户编号查询订单信息
 	public boolean createOrder(Orders orders);//订单表的生成
 	public boolean InsertOrderInfo(OrderInfo orderInfo);//订单详情表的插入
 	public Orders getOrderInfoByOrderId(int orderId);//根据订单编号查询订单信息

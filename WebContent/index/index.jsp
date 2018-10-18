@@ -55,15 +55,15 @@
 					<div class="middle-text">
 						<div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s"
 							data-wow-delay="0s">
-							<h1>The Best Fashion</h1>
+							<h1>故事的小黄花</h1>
 						</div>
 						<div class="cap-title wow bounceInRight" data-wow-duration="1.2s"
 							data-wow-delay="0.2s">
-							<h3>Save Your Time and Money</h3>
+							<h3>从出生那年就飘着</h3>
 						</div>
 						<div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s"
 							data-wow-delay=".5s">
-							<a href="#">Shop Now</a>
+							<a href="#">童年的荡秋千</a>
 						</div>
 					</div>
 				</div>
@@ -75,15 +75,15 @@
 					<div class="middle-text">
 						<div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s"
 							data-wow-delay="0s">
-							<h1>The Best Fashion</h1>
+							<h1>随记忆</h1>
 						</div>
 						<div class="cap-title wow bounceInRight" data-wow-duration="1.2s"
 							data-wow-delay="0.2s">
-							<h3>Save Your Time and Money</h3>
+							<h3>一直晃到现在</h3>
 						</div>
 						<div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s"
 							data-wow-delay=".5s">
-							<a href="#">立即购买</a>
+							<a href="javascript:void(0)">Rosemary</a>
 						</div>
 					</div>
 				</div>
@@ -704,16 +704,19 @@
 	<script type="text/javascript" >	
 	layui.use('layer', function(){ 
 		  var layer = layui.layer;
+		 
 		    
 		    
 		});   
+	
 	      //鲜花图片点击事件
 		  	$(".product-show").click(function(){
+		  		
 		  		//获取该鲜花的ID
 		  		var id=$(this).parents(".flower-show").attr("id");
 		  	console.log(id);
 		  		    
-		  		 if(${sessionScope.ub eq null}){  
+		  		 if(${sessionScope.ub eq null}){   
 		  		 	     
 		  			layer.open({ 
 		  	  			title:'友情提醒',
@@ -746,6 +749,7 @@
 	     
 	    //当用户点击添加购物车事件时  
 	$(".add-cart").click(function(){
+		
 		//获取鲜花的ID
 		var id=$(this).parents(".flower-show").attr("id");
 		//数量默认为1（点击一次，添加一次）
@@ -754,11 +758,13 @@
 		var userName="${sessionScope.ub.userName}";
 		if(userName){
 			$.get("/Rosemary/cart.do","op=addToCart&flowerId="+id+"&quantity="+quantity,function(data,status){
-    			  layer.msg('<span style="color:black;">'+data+'</span>', {
+				
+				 layer.msg('<span style="color:black;">'+data+'</span>', {
   					icon:6,
   					time: 2000
-  				});
-    			window.location.reload();//刷新当前页面
+  				});  
+			
+    			 window.location.reload();//刷新当前页面 */
     		  });
 			
 		}
@@ -774,7 +780,7 @@
 					location.href="login.jsp";
 				}
 				
-			});
+			}); 
 		}
 		 
 		

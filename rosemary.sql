@@ -11,7 +11,7 @@
  Target Server Version : 50515
  File Encoding         : 65001
 
- Date: 18/10/2018 02:04:48
+ Date: 19/10/2018 00:23:14
 */
 
 SET NAMES utf8mb4;
@@ -161,7 +161,7 @@ CREATE TABLE `order_info`  (
   `orderInfoId` int(11) NOT NULL AUTO_INCREMENT COMMENT '订单明细表编号',
   `flowerId` int(11) NOT NULL COMMENT '花编号',
   `orderId` int(11) NOT NULL COMMENT '订单表编号',
-  `quantity` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '数量',
+  `quantity` int(255) NULL DEFAULT NULL COMMENT '数量',
   `totalPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '总价',
   PRIMARY KEY (`orderInfoId`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
@@ -169,15 +169,15 @@ CREATE TABLE `order_info`  (
 -- ----------------------------
 -- Records of order_info
 -- ----------------------------
-INSERT INTO `order_info` VALUES (36, 3, 20183422, '1', 302.00);
-INSERT INTO `order_info` VALUES (37, 3, 20184335, '1', 302.00);
-INSERT INTO `order_info` VALUES (38, 3, 20180923, '3', 906.00);
-INSERT INTO `order_info` VALUES (39, 3, 20181989, '1', 302.00);
-INSERT INTO `order_info` VALUES (40, 3, 20180560, '1', 302.00);
-INSERT INTO `order_info` VALUES (41, 3, 20186765, '2', 604.00);
-INSERT INTO `order_info` VALUES (42, 3, 20188004, '2', 604.00);
-INSERT INTO `order_info` VALUES (43, 3, 20187761, '1', 302.00);
-INSERT INTO `order_info` VALUES (44, 3, 20184434, '1', 302.00);
+INSERT INTO `order_info` VALUES (36, 3, 20183422, 1, 302.00);
+INSERT INTO `order_info` VALUES (37, 3, 20184335, 1, 302.00);
+INSERT INTO `order_info` VALUES (38, 3, 20180923, 3, 906.00);
+INSERT INTO `order_info` VALUES (39, 3, 20181989, 1, 302.00);
+INSERT INTO `order_info` VALUES (40, 3, 20180560, 1, 302.00);
+INSERT INTO `order_info` VALUES (41, 3, 20186765, 2, 604.00);
+INSERT INTO `order_info` VALUES (42, 3, 20188004, 2, 604.00);
+INSERT INTO `order_info` VALUES (43, 3, 20187761, 1, 302.00);
+INSERT INTO `order_info` VALUES (44, 3, 20184434, 1, 302.00);
 
 -- ----------------------------
 -- Table structure for orders
