@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<embed src="music/七里香.mp3" autostart="true" loop="true" hidden="true"></embed>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -199,6 +199,26 @@
 			<!-- mobile-menu-area-end -->
 		</header>
 		<!-- header-end -->
-		
+	<div id="audioBox"> 
+<script type="text/javascript"> 
+window.onload = function(){ 
+var arr = ["music/晴天.mp3"];               //把需要播放的歌曲从后往前排，这里已添加两首音乐，可继续添加多个音乐 
+var myAudio = new Audio(); 
+myAudio.preload = true; 
+myAudio.controls = true; 
+myAudio.src = arr.pop();         //每次读数组最后一个元素 
+myAudio.addEventListener('ended', playEndedHandler, false); 
+myAudio.play(); 
+document.getElementById("audioBox").appendChild(myAudio); 
+myAudio.loop = false;//禁止循环，否则无法触发ended事件 
+function playEndedHandler(){ 
+myAudio.src = arr.pop(); 
+myAudio.play(); 
+console.log(arr.length); 
+!arr.length && myAudio.removeEventListener('ended',playEndedHandler,false);//只有一个元素时解除绑定 
+} 
+} 
+</script> 
+</div>
 </body>
 </html>

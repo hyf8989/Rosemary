@@ -28,7 +28,7 @@ public class MessageDaoImpl implements MessageDao {
 	 */
 @Override
 	public PageData<Message> queryMessageByPage(int page, int pageSize, String keywords) {
-		String sql="select a.messageId,a.content,a.flowerId,a.publishTime,b.userName from leave_message a INNER JOIN user_basicinfo b ON a.userId=b.userId where a.content like ?";
+		String sql="select a.messageId,a.content,a.flowerId,a.publishTime,b.userName,c.flowerName from leave_message a INNER JOIN user_basicinfo b ON a.userId=b.userId inner join flower_info c on a.flowerId=c.flowerId  where a.content like ?";
 		PageData<Message> pageData=BaseDao.getPage(sql,page, pageSize, Message.class, "%"+keywords+"%");
 		
 		return pageData;

@@ -37,6 +37,12 @@
 							</ul>
 						</li>
 						<li id="menu-academico">
+							<a href="orderList.jsp"><i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp;<span> 留言信息</span>
+								<div class="clearfix"></div>
+							</a>
+
+						</li>
+						<li id="menu-academico">
 							<a href="#"><i class="layui-icon layui-icon-snowflake" aria-hidden="true"></i>&nbsp;<span> 商品管理</span> <span class="fa fa-angle-right" style="float: right"></span>
 								<div class="clearfix"></div>
 							</a>
@@ -62,6 +68,7 @@
 							</a>
 
 						</li>
+						
 						<li id="menu-academico">
 							<a href="#"><i class="layui-icon layui-icon-chat" aria-hidden="true"></i>&nbsp;<span> 系统管理</span><span class="fa fa-angle-right" style="float: right"></span>
 								<div class="clearfix"></div>
