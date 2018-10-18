@@ -328,7 +328,7 @@
 		    	 $("#postage").text(postage);//设置运费显示标签的文本为所计算出来的运费值
 		    	$("#payment span").text(postage+${sessionScope.cart.totalPrice});
 		    	
-		    	 
+		    	  
 		    }) ;  
 		   //地址下拉框选中事件
       $("#addressConfirm").change(function(){

@@ -699,93 +699,93 @@
 		</script>
 	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
 </script>
+ 
 
-
-	<script type="text/javascript">
+	<script type="text/javascript" >	
+	layui.use('layer', function(){ 
+		  var layer = layui.layer;
+		    
+		    
+		});   
+	      //鲜花图片点击事件
+		  	$(".product-show").click(function(){
+		  		//获取该鲜花的ID
+		  		var id=$(this).parents(".flower-show").attr("id");
+		  	console.log(id);
+		  		    
+		  		 if(${sessionScope.ub eq null}){  
+		  		 	     
+		  			layer.open({ 
+		  	  			title:'友情提醒',
+		  	  			skin:"layui-layer-lan",
+		  	  			content:'<p>检测到您目前还没有登录</p>',
+		  	  			btn:['转到登录界面','不了，我只是浏览商品'],
+		  	  			 
+		  	  			yes:function () {
+		  	  				location.href='login.jsp';
+		  	  			},
+		  	  			btn2:function () {
+		  	  				
+		  	  				location.href="/Rosemary/flower.do?op=Gotodetail&flowerId="+id;
+		  	  			}
+		  	  		}); 
+		  		}
+		  		 else{   
+		  			 /*
+		  			 待更改
+		  			 */
+		  			location.href="/Rosemary/flower.do?op=Gotodetail&flowerId="+id; 
+		  			 
+		  		 }
+		  		 
+		  		
+		  		 
+		  		
+		  	
+		  	});
+	     
+	    //当用户点击添加购物车事件时  
+	$(".add-cart").click(function(){
+		//获取鲜花的ID
+		var id=$(this).parents(".flower-show").attr("id");
+		//数量默认为1（点击一次，添加一次）
+		var quantity=1;
+		//获取用户名
+		var userName="${sessionScope.ub.userName}";
+		if(userName){
+			$.get("/Rosemary/cart.do","op=addToCart&flowerId="+id+"&quantity="+quantity,function(data,status){
+    			  layer.msg('<span style="color:black;">'+data+'</span>', {
+  					icon:6,
+  					time: 2000
+  				});
+    			window.location.reload();//刷新当前页面
+    		  });
+			
+		}
+		else{
+			
+			layer.open({
+				title: "友情提醒？",
+				skin: "layui-layer-molv",
+				content: "<span style='color:black;'>还没登录可不能加入购物车哦！</span>",
+				anim: 0,
+				btn: ['那我还是去登录吧'],
+				yes: function(index, layero) {
+					location.href="login.jsp";
+				}
+				
+			});
+		}
+		 
+		
+	});
+	</script>
 			  
 				
-				layui.use('layer', function(){ 
-					  var layer = layui.layer;
-					    
-					   
-					});   
-				      //鲜花图片点击事件
-					  	$(".product-show").click(function(){
-					  		//获取该鲜花的ID
-					  		var id=$(this).parents(".flower-show").attr("id");
-					  	console.log(id);
-					  		  
-					  		 if(${sessionScope.ub eq null}){  
-					  		 	     
-					  			layer.open({ 
-					  	  			title:'友情提醒',
-					  	  			skin:"layui-layer-lan",
-					  	  			content:'<p>检测到您目前还没有登录</p>',
-					  	  			btn:['转到登录界面','不了，我只是浏览商品'],
-					  	  			 
-					  	  			yes:function () {
-					  	  				location.href='login.jsp';
-					  	  			},
-					  	  			btn2:function () {
-					  	  				
-					  	  				location.href="/Rosemary/flower.do?op=Gotodetail&flowerId="+id;
-					  	  			}
-					  	  		}); 
-					  		}
-					  		 else{ 
-					  			 /*
-					  			 待更改
-					  			 */
-					  			location.href="/Rosemary/flower.do?op=Gotodetail&flowerId="+id; 
-					  			 
-					  		 }
-					  		 
-					  		
-					  		 
-					  		
-					  	
-					  	});
-				     
-				    //当用户点击添加购物车事件时  
-				$(".add-cart").click(function(){
-					//获取鲜花的ID
-					var id=$(this).parents(".flower-show").attr("id");
-					//数量默认为1（点击一次，添加一次）
-					var quantity=1;
-					//获取用户名
-					var userName="${sessionScope.ub.userName}";
-					if(userName){
-						$.get("/Rosemary/cart.do","op=addToCart&flowerId="+id+"&quantity="+quantity,function(data,status){
-		  	    			  layer.msg('<span style="color:black;">'+data+'</span>', {
-		  	  					icon:6,
-		  	  					time: 2000
-		  	  				});
-		  	    			 
-		  	    		  });
-						
-					}
-					else{
-						
-						layer.open({
-							title: "友情提醒？",
-							skin: "layui-layer-molv",
-							content: "<span style='color:black;'>还没登录可不能加入购物车哦！</span>",
-							anim: 0,
-							btn: ['那我还是去登录吧'],
-							yes: function(index, layero) {
-								location.href="login.jsp";
-							}
-							
-						});
-					}
-					
-					
-				});
-				  
+			
 				
          
-			
-		</script>
+		
 
 </body>
 

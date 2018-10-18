@@ -6,7 +6,7 @@
 			$("#gried_view").empty();
 			 $.each(arr.data, function(index, obj) {
 				 
-					$("#gried_view").append('<div class="col-md-4 col-sm-6 col-xs-12 mar-bot">'+
+					$("#gried_view").append('<div class="col-md-4 col-sm-6 col-xs-12 mar-bot" id="'+obj.flowerId+'">'+
 							<!-- single-product-start -->
 							'<div class="single-product">'+
 								'<div class="single-product-img">'+
@@ -33,7 +33,7 @@
 											' class="old-price">'+(obj.price+100)+'</span>'+
 									'</div>'+
 									'<div class="product-action">'+
-										'<button class="button btn btn-default add-cart"'+
+										'<button class="button btn btn-default add-cart cart-add"'+
 											'title="add to cart">加入购物车</button>'+
 										'<a class="add-wishlist" href="#" title="add to wishlist">'+
 											'<i class="fa fa-heart"></i>'+
@@ -74,7 +74,40 @@
 
 			});
 			
-			//点击图片时，获取图片ID（进入购物界面使用）
+			//点击添加购物车时，获取图片ID
+			$(document).on('click','.cart-add',function(){
+			  var id=  $(this).parents(".mar-bot").attr("id");	
+				//数量默认为1（点击一次，添加一次）
+				var quantity=1;
+				//获取用户名
+				var userName="${sessionScope.ub.userName}";
+				if(userName){
+					$.get("/Rosemary/cart.do","op=addToCart&flowerId="+id+"&quantity="+quantity,function(data,status){
+	  	    			  layer.msg('<span style="color:black;">'+data+'</span>', {
+	  	  					icon:6,
+	  	  					time: 2000
+	  	  				});
+	  	    			 window.location.reload();//刷新当前页面
+	  	    		  });
+					
+				}
+				else{
+					
+					layer.open({
+						title: "友情提醒？",
+						skin: "layui-layer-molv",
+						content: "<span style='color:black;'>还没登录可不能加入购物车哦！</span>",
+						anim: 0,
+						btn: ['那我还是去登录吧'],
+						yes: function(index, layero) {
+							location.href="login.jsp";
+						}
+						
+					});
+				}
+			
+				
+			});
 			
 			
 			//输入框按下时的监听事件（进行模糊查询）

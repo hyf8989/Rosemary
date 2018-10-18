@@ -91,6 +91,37 @@ public class CartServlet extends HttpServlet {
         	 
         	 
          }
+         //增加减少购物项数量的操作
+         else if(op.equals("updateQuantity")) {
+        	 //获得用户传进来的购物项的数量
+        	 
+        	int newQuantity=Integer.valueOf(request.getParameter("newQuantity"));
+        	//获得用户需要进行加减数量的鲜花编号
+        	int flowerId=Integer.valueOf(request.getParameter("flowerId"));
+        	//先取得当前购物车对象
+        	Cart cart =(Cart) request.getSession().getAttribute("cart");
+        	//先取出所有的购物项，方便进行判断
+        	Collection<CartItem> item=cart.getCartItems();
+        	boolean flag=false;
+        	//遍历
+        	 for (CartItem cartItem : item) {
+        		 //如果找到对应的购物项
+        		 
+				if(cartItem.getFlower().getFlowerId()==flowerId) {
+					//直接设置数量
+				 cartItem.setQuantity(newQuantity);
+				 flag=true;
+					
+				}
+			}
+        	
+        	if(flag==true) {
+        	 out.print("操作成功");
+        		out.close();
+        	}
+        	 
+        	 
+         }
 		 
 		 
 	}
