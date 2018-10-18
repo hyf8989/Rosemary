@@ -4,7 +4,7 @@
 <html>
 
 	<head>
-		<title>userAdd</title>
+		<title>flowerAdd</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="keywords" content="" />
@@ -73,18 +73,47 @@
 										<input type="text" class="form-control" id="exampleInputDescription" placeholder="请输花的描述">
 									</div>
 									<div class="form-group">
-										<!--<label for="exampleInputWords">商品寓意:</label>
-										<input type="text" class="form-control" id="exampleInputWords" placeholder="请输花的寓意">-->
+										<label for="exampleInputWords">商品小图:</label>
+										<!-- <input type="text" class="form-control" id="exampleInputWords" placeholder="请输花的寓意"> -->
 										<img src="" width="" height="" id="img1" />
 										<br />
-										<input type="file" name="photo" id="photo" accept="image/jpeg" />
+										<input type="file" name="sphoto" id="sphoto" accept="image/jpeg" />
+									</div>
+									<div class="form-group">
+										<label for="exampleInputWords">商品大图:</label>
+										<!-- <input type="text" class="form-control" id="exampleInputWords" placeholder="请输花的寓意"> -->
+										<img src="" width="" height="" id="img2" />
+										<br />
+										<input type="file" name="bphoto" id="bphoto" accept="image/jpeg" />
+									</div>
+									<div class="form-group">
+										<label for="exampleInputDescription">所属类型:</label>
+										<select class="form-control input-sm" id="zt" onchange="DoSelectZT()">
+													<option value="0" selected="selected">郁金香</option>
+													<option value="1">玫瑰</option>
+													<option value="2">康乃馨</option>
+													<option value="3">邹菊</option>
+													<option value="4">满天星</option>
+													<option value="5">百合</option>
+													<option value="6">迷迭香</option>
+													<option value="7">桔梗花</option>
+													<option value="8">扶郎花</option>													
+												</select>
 									</div>
 
 									<script type="text/javascript">
 										//当file发生改变的时候onchange
 										/*讲用户选择的图片 赋值给img对象*/
-										document.getElementById("photo").onchange = function fun() {
+										document.getElementById("sphoto").onchange = function fun() {
 											document.getElementById("img1").src = URL.createObjectURL(this.files[0]);
+										}
+									</script>
+									
+									<script type="text/javascript">
+										//当file发生改变的时候onchange
+										/*讲用户选择的图片 赋值给img对象*/
+										document.getElementById("bphoto").onchange = function fun() {
+											document.getElementById("img2").src = URL.createObjectURL(this.files[0]);
 										}
 									</script>
 									<center>

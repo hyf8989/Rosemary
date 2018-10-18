@@ -95,10 +95,10 @@
 				<!-- tab content -->
 				<div class="col-md-12 tab-content tab-content-in w3">
 					<div class="tab-pane text-style active" id="tab1" style="margin-bottom: 2%">
-						<div class="inbox-right">
+						<!-- <div class="inbox-right"> -->
 
 							<div class="mailbox-content">
-								<div class="mail-toolbar clearfix">
+								<!-- <div class="mail-toolbar clearfix">
 									<div class="float-left">
 										<div class="btn-group m-r-sm mail-hidden-options"
 											style="display: inline-block;">
@@ -116,8 +116,8 @@
 										</div>
 
 
-									</div>
-									<div class="float-right">
+									</div> -->
+									<!-- <div class="float-right">
 										<div class="dropdown">
 											<a href="#" title="" class="btn btn-default"
 												data-toggle="dropdown" aria-expanded="false">
@@ -130,9 +130,9 @@
 
 
 									</div>
-
+ -->
 								</div>
-
+								<h2>管理员信息表</h2>
 								<table class="layui-table ">
 									<tr>
 										<th>头像</th>
@@ -178,7 +178,7 @@
 							<div id="pageDiv" style="text-align: center"></div>
 						</div>
 					</div>
-					<div class="tab-pane text-style" id="tab2">
+					<!-- <div class="tab-pane text-style" id="tab2">
 						<div class="inbox-right">
 
 							<div class="mailbox-content">
@@ -255,7 +255,7 @@
 
 							</div>
 						</div>
-					</div>
+					</div> -->
 
 
 

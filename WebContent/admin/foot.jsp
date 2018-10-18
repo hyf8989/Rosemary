@@ -9,8 +9,8 @@
 <body>
 <div class="copyrights">
 						<p>Copyright &copy; 2018.Company name All rights reserved.
-							<a href="" target="_blank" title="">Rosemary</a> - Collect from
-							<a href="" title="" target="_blank">Join us</a>
+							<a href="index.jsp" target="_blank" title="">Rosemary</a> - Collect from
+							<a href="/Rosemary/index/about.jsp" title="" target="_blank">Join us</a>
 						</p>
 					</div>
 </body>

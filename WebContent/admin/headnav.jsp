@@ -15,7 +15,7 @@
 
 							<!--search-box-->
 							<div class="w3-search-box">
-								<form action="../manager.action" method="post">
+								<form action="" method="post">
 									<input type="text" placeholder="Search..." name="keywords" id="keywords" value="${keywords}" required="">
 									<i class="layui-icon layui-icon-search" id="search" name="search"></i>  
 								</form>

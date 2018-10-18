@@ -18,9 +18,9 @@
 			}
 		</script>
 		<style>
-		span{
+		/* span{
 			font-size:20px;
-		}
+		} */
 			
 		</style>
 		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
