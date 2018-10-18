@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.ros.entity.*"  %>
+ <%@ page import="java.util.*"%>
+      <%@ page import="java.text.*" %>
 <html>
 <head>
 <embed src="music/七里香.mp3" autostart="true" loop="true" hidden="true"></embed> 
@@ -106,28 +109,43 @@
 							</div>
 						</div>
 						<c:if test="${sessionScope.ub ne null }">
+						<!-- 获得当前购物车下所有商品数量的总和 -->
+						<%
+		  int quantity=0;
+		 Cart cart=(Cart)session.getAttribute("cart");
+		 Collection<CartItem> item=cart.getCartItems();
+		 for (CartItem cartItem : item) {
+				quantity+=cartItem.getQuantity();
+			}
+		%>
+		<!--  -->
 						<!-- 购物车 -->
 						<div class="col-md-3 col-xs-4 col-sm-6">
 							<div class="shopping-cart">
-								<a class="cart" href="cart.jsp" title="view shopping cart"><span class="hidden-xs">购物车<br><small>3件商品 - ￥199.00</small></span></a>
+								<a class="cart" href="cart.jsp" title="view shopping cart"><span class="hidden-xs">购物车<br><small><%=quantity %>件商品 - ￥${sessionScope.cart.totalPrice }</small></span></a>
 								<div class="top-cart-content">
-									
+									<!-- 购物车缩略 -->
+									<c:forEach var="cartSmall" items="${sessionScope.cart.cartItems }" >
 									<div class="media header-middle-checkout last-child">
 										<div class="media-left check-img">
-											<a href="#"><img src="img/cart/紫色小雏菊.jpg" alt="" /></a>
+											<a href="#"><img src="${cartSmall.flower.sPicture }" alt="" /></a>
 										</div>
 										<div class="media-body checkout-content">
 											<h4 class="media-heading">
                                                     <span class="cart-count">2</span>
-                                                    <a href="#">紫色小雏菊</a>
+                                                    <a href="#">${cartSmall.flower.flowerName }</a>
                                                     <span class="btn-remove checkout-remove" title="remove this product from my cart"><i class="fa fa-times" aria-hidden="true"></i></span>
                                                 </h4>
-											<p>￥120.85</p>
+											<p>￥${cartSmall.total }</p>
 										</div>
-									</div>
+									</div> 
+									
+									</c:forEach>
+									
+									<!-- 购物车缩略 -->
 									<div class="cart-total">
 										<span>总价</span>
-										<span><b>￥199.00</b></span>
+										<span><b>￥${sessionScope.cart.totalPrice }</b></span>
 									</div>
 									<div class="checkout">
 										<a href="#"><span>结算<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span></a>

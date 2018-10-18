@@ -732,7 +732,7 @@
 					  	  			}
 					  	  		}); 
 					  		}
-					  		 else{ 
+					  		 else{   
 					  			 /*
 					  			 待更改
 					  			 */
@@ -760,7 +760,7 @@
 		  	  					icon:6,
 		  	  					time: 2000
 		  	  				});
-		  	    			 
+		  	    			window.location.reload();//刷新当前页面
 		  	    		  });
 						
 					}
