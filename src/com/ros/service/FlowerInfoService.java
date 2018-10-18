@@ -1,6 +1,7 @@
 package com.ros.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ros.entity.FlowerInfo;
 import com.ros.entity.FlowerType;
@@ -16,4 +17,5 @@ public interface FlowerInfoService {
 	public FlowerInfo getFlowerInfoById(int flowerId);//根据鲜花编号获得鲜花的所有信息
 	public boolean setFlowerStockByFlowerId(int flowerId,int stock);//修改鲜花库存
 	PageData<FlowerInfo> queryFlowerByPage(int page,int pageSize,String keywords);
+	List<FlowerInfo> queryFlowerInfo();
 }
