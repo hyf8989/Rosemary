@@ -264,7 +264,7 @@
 				 	<span>数量：</span><input id="quantity" value="1" type="number" name="points" min="1" max="${sessionScope.flower.stock }" />
 				   		<br/><br/><br/><br/>
 				   	<div style="margin-top:50px;"><button type="button" id="addToCart" class="layui-btn layui-btn-lg">加入购物车</button>
-				   	   <button type="button" id="" class="layui-btn layui-btn-lg ">购买</button>
+				   	  
 				   	</div>
 				   
 				  
@@ -349,6 +349,7 @@
     
     
       $(function(){
+    	  
     	//弹出层的使用
   		 layui.use('layer', function() {
   				var layer = layui.layer;
@@ -356,17 +357,39 @@
   			});
     	  //点击加入购物车时传递鲜花编号参数,进入服务端
     	  $("#addToCart").click(function(){
+    		  var userName="${sessionScope.ub.userName}";
+    		  
     		  var quantity=$("#quantity").val();//获取购买商品数量
     		  
     		  var flowerId=${sessionScope.flower.flowerId};//获取鲜花编号
     		   //发送ajax请求到购物车服务层
-    		  $.get("/Rosemary/cart.do","op=addToCart&flowerId="+flowerId+"&quantity="+quantity,function(data,status){
-    			  layer.msg('<span style="color:black;">'+data+'</span>', {
-  					icon:6,
-  					time: 2000
-  				});
-    			 
-    		  });
+    		   //如果用户还未登录，则不执行加入购物车操作
+    		   if(!userName){
+    			   layer.open({
+						title: "友情提醒？",
+						skin: "layui-layer-molv",
+						content: "<span style='color:black;'>还没登录可不能加入购物车哦！</span>",
+						anim: 0,
+						btn: ['那我还是去登录吧'],
+						yes: function(index, layero) {
+							location.href="login.jsp";
+						}
+						
+					});
+    			   
+    		   }
+    		  //如果已经登录，则可以执行加入购物车操作
+    		   else{
+    			   
+    			   $.get("/Rosemary/cart.do","op=addToCart&flowerId="+flowerId+"&quantity="+quantity,function(data,status){
+    	    			  layer.msg('<span style="color:black;">'+data+'</span>', {
+    	  					icon:6,
+    	  					time: 2000
+    	  				});
+    	    			 
+    	    		  });
+    		   }
+    		 
     		 
     		  
     	  }); 
