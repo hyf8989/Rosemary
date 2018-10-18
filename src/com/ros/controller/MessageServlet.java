@@ -79,7 +79,6 @@ public class MessageServlet extends HttpServlet {
 				keywords = request.getParameter("keywords");
 			}
 			PageData<Message> pdm=ms.getAllMessageByPage(page, pageSize, keywords);
-			System.out.println(pdm);
 			request.getSession().setAttribute("messagePage", pdm);
 			response.sendRedirect("/Rosemary/admin/message.jsp");
 		}

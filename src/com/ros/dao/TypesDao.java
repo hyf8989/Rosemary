@@ -1,8 +1,7 @@
 package com.ros.dao;
 
-import java.util.List;
-
 import com.ros.entity.Types;
+import com.ros.util.PageData;
 
 /**
  * 自定义鲜花类型接口TypesDao
@@ -10,7 +9,8 @@ import com.ros.entity.Types;
  *
  */
 public interface TypesDao {
-	List<Types> queryType();//查询所有类型
+	PageData<Types> queryType(int page,int pageSize,String keywords);//分页查询所有类型
 	boolean updateType(Types t);//修改类型
+	boolean delType(int typeId);//删除类型
 
 }

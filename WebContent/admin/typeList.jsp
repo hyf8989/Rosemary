@@ -29,7 +29,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/jquery.basictable.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#table').basictable();
+		$('#table').basictable(); 
 
 		$('#table-breakpoint').basictable({
 			breakpoint : 768
@@ -82,22 +82,7 @@
 				<div class="col-md-12 tab-content tab-content-in w3">
 					<div class="tab-pane text-style active" id="tab1" style="margin-bottom: 2%">
 						<div class="inbox-right">
-						<h2>鲜花类型</h2>
-									<div class="float-right">
-										<div class="dropdown">
-											<a href="#" title="" class="btn btn-default"
-												data-toggle="dropdown" aria-expanded="false">
-										</div>
-
-										<div class="btn-group">
-											<a class="btn btn-default"><i class="fa fa-angle-left"></i></a>
-											<a class="btn btn-default"><i class="fa fa-angle-right"></i></a>
-										</div>
-
-
-									</div>
-
-								</div>
+						<h2>鲜花类型</h2>	</div>
 
 								<table class="layui-table ">
 									<tr>
@@ -120,16 +105,13 @@
 													<td><span class="fam">${type.updateTime}</span></td>
 
 													<td>
-													<button class="layui-btn layui-btn-radius pwd-reset layui-btn-normal" id="update"
+													<button class="layui-btn layui-btn-radius layui-btn-normal" id="update" name="update"
 															style="margin-left: 20%;">编辑</button>
 														
-														<button class="layui-btn layui-btn-radius layui-btn-danger" id="delType">删除</button>
-
+														<button class="layui-btn layui-btn-radius layui-btn-danger" id="delete" name="delete">删除</button>
 													</td>
 												</tr>
-
 											 </c:forEach>
-
 									</tbody>
 								</table>
 							</div>
@@ -154,8 +136,6 @@
 
 				</div>
 			</div>
-		</div>
-	</div>
 	<!-- script-for sticky-nav -->
 	<script>
 		$(document).ready(function() {
@@ -187,27 +167,25 @@
 	<!--/sidebar-menu-->
 	<%@ include file="left.jsp"%>
 	<div class="clearfix"></div>
-
-<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/admin/js/jquery.nicescroll.js"></script>
 	<script src="${pageContext.request.contextPath}/admin/js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->
 	<script src="${pageContext.request.contextPath}/admin/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/admin/layui/layui.js" charset="utf-8"></script>
-<script type="text/javascript" src="js/jquery.basictable.min.js"></script>
-<script type="text/javascript" src="layui/layui.js" charset="utf-8">
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
 
 	<!-- /Bootstrap Core JavaScript -->
 	<script>
-
 		 layui.use([ 'laypage', 'layer' ], function() {
 			var laypage = layui.laypage, layer = layui.layer;
 			//完整功能 
 			laypage.render({
 			    elem: 'pageDiv'
-			    ,count:${pdm.total} ,
-			    curr:${pdm.page}
-			   ,limit:${pdm.pageSize}
+			    ,count:${typePage.total} ,
+			    curr:${typePage.page}
+			   ,limit:${typePage.pageSize}
 			    ,layout: ['count', 'prev', 'page','limit','next', 'skip']
 			    ,jump: function(obj,first){
 					console.log(obj);
@@ -222,90 +200,102 @@
 					}
 				}
 			});
+		}); 		
+	</script>
+	
+	<script type="text/javascript">
 
-		}); 
+	/* 编辑按钮弹出层 */
+	layui.use([ 'laypage', 'layer' ], function() {
+			var laypage = layui.laypage, layer = layui.layer;});
+$(".layui-btn-normal").click(
+	function() {
+	var msg="";
+	//获取当前行的第一个td
+    var typeId = $(this).parents("tr").find("td").eq(0).text();
+	var typeName = $(this).parents("tr").find("td").eq(1).text();
+	var createTime = $(this).parents("tr").find("td").eq(2).text();
+	var updateTime = $(this).parents("tr").find("td").eq(3).text();
 
-			layui.use('layer', function() {
-				var msg;
-				var layer = layui.layer;
-			});
-
-		/* 编辑按钮弹出层 */
-		$(".layui-btn-normal").click(
-			function() {
-			var msg="";
+					layer.open({
+								type : 1,
+								title : "更改类型",
+								anim : 1,
+								area : [ '400px', '370px' ],
+								offset : "auto",
+								shadeClose : true,
+								closeBtn : 1,
+								content : "<div class='modal-body'> 编号： <input type='text' disabled='disabled' name='typeId' id='typeId' style='width:230px;height:30px; margin-left:40px;margin-bottom:20px;' value=''></div>"
+								+"<div class='modal-body'> 类名: <input type='text' name='typeName' id='typeName' style='width:230px;height:30px;margin-left:50px;margin-bottom:30px;' value=''> </br>" 									
+								+"<button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' style='margin-left:20%;margin-right:20px;' id='uptype' name='uptype'>更新</button>"
+								+"<button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' margin-top:100px; id='close'>取消</div>"
+							});
+					//用jq代码信息显示在content元素中
+					$("#typeId").val(typeId);
+					$("#typeName").val(typeName);
+					
+		$("#uptype").click(function name() {																
+					//获取当前类型编号
+					var typeId = $("#typeId").val();
+					//获取输入的用户名
+					var typeName = $("#typeName").val();						
+					$.get("/Rosemary/type.do",
+							"op=updType&typeId=" + typeId + "&typeName="
+									+ typeName, function(data, status) {										
+								layer.open({
+									title : "温馨提醒",
+									skin : "layui-layer-molv",
+									content : "<span style='color:black;'>" + data+ "</span>",
+									anim : 0,
+									btn : [ 'OK' ],
+									yes : function(index, layero) {
+										layer.closeAll();
+										location.href = "/Rosemary/type.do?op=queryTypes";
+									}
+								}); 
+							}); 														
+					});								
+				});	
+	</script>
+	
+	<script type="text/javascript">
+	/* 删除 */
+	 layui.use([ 'laypage', 'layer' ], function() {
+			var laypage = layui.laypage, layer = layui.layer;});
+	$("#delete").click(function () {
 			//获取当前行的第一个td
             var typeId = $(this).parents("tr").find("td").eq(0).text();
-			var typeName = $(this).parents("tr").find("td").eq(1).text();
-			var createTime = $(this).parents("tr").find("td").eq(2).text();
-			var updateTime = $(this).parents("tr").find("td").eq(3).text();
-
-							layer.open({
-										type : 1,
-										title : "更改类型",
-										anim : 1,
-										area : [ '600px', '600px' ],
-										offset : "auto",
-										shadeClose : true,
-										closeBtn : 1,
-										content : "<div class='modal-body'> 编号： <input type='text' disabled='disabled' name='typeId' id='typeId' style='width:300px;height:30px; margin-left:40px;margin-bottom:20px;' value=''></div>"
-										+"<div class='modal-body'> 类名: <input type='text' name='typeName' id='typeName' style='width:300px;height:30px;margin-left:65px;margin-bottom:30px;' value=''>"
-										+"<button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' style='margin-left:20%;margin-right:20px;' id='upType'>更新</button>"
-										+"<button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' margin-top:100px; id='close'>取消</div>"
-									});
-							//用jq代码信息显示在content元素中
-							$("#typeId").val(typeId);
-							$("#typeName").val(typeName);
-							
-				$("#upType").click(function name() {																
-							//获取当前类型编号
-							var userId = $("#typeId").val();
-							//获取输入的类型名
-							var typeName = $("#typeName").val();							
-							$.get("/Rosemary/type.do",
-									"op=updType&typeId=" + typeId + "&typeName="
-											+ typeName, function(data, status) {										
-										layer.open({
-											title : "温馨提醒",
-											skin : "layui-layer-molv",
-											content : "<span style='color:black;'>" + data+ "</span>",
-											anim : 0,
-											btn : [ 'OK' ],
-											yes : function(index, layero) {
-												layer.closeAll();
-												location.href = "/Rosemary/admin/typeList.jsp";
-											}
-										}); 
-									}); 														
-							});								
-						});
-		
-		$(".pwd-reset").click(function() {
-			var adminName =$(this).parents("tr").find("h6").text();
-			layer.open({
-				title : "友情提醒？",
-				skin : "layui-layer-lan",
-				content : "<span>确定重置该管理员密码？（密码默认为admin）</span>",
-				anim : 0,
-				btn : [ '确定', '取消' ],
-				yes : function(index, layero) {
-					//...ajax请求
-					//location.href = "/Rosemary/manager.action?op=updateManagerPwd"; 
-					$.get("/Rosemary/manager.action","op=updateManagerPwd&adminName=" + adminName, function(data, status) {
-						layer.msg(data, {
-						icon : 6,
-						time : 3000
+			console.log(typeId);
+            layer.open({
+				title: "温馨提示",
+				skin: "layui-layer-molv",
+				content: "<span style='color:black;'>删除后将无法恢复数据，您确定要删除吗？</span>",
+				anim: 0,
+				btn: ['OK','NOT'],
+				yes: function(index, layero) {
+					$.get("/Rosemary/type.do","op=delType&typeId="+typeId,function(data,status){
+						if(data="类型删除成功"){
+						layer.open({
+								title: "友情提醒",
+								skin: "layui-layer-molv",
+								content: "<span style='color:black;'>"+data+"</span>",
+								anim: 0,
+								btn: ['OK'],
+								yes: function(index, layero) {
+									location.href="/Rosemary/type.do?op=queryTypes";
+								}
+								
+							});
+						}
 					});
-						location.reload(true);
-					}); 
-					//var adminName =$(this).parents("tr").find("h6").text();
-					//location.href = "/Rosemary/manager.action?op=updateManagerPwd&adminName=" + adminName;
-					
+				},
+				btn2:function(index,layero){
+					location.href="/Rosemary/type.do?op=queryTypes";
 				}
-			});
-		});
-
+			}); 		
+	});
 	</script>
+	
 	<%@ include file="foot.jsp"%>
 </body>
 

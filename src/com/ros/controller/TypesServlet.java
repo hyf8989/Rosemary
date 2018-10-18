@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ros.entity.Types;
 import com.ros.service.TypesService;
 import com.ros.service_impl.TypesServiceImpl;
+import com.ros.util.PageData;
 
 /**
  * Servlet implementation class TypesServlet
@@ -49,16 +50,34 @@ public class TypesServlet extends HttpServlet {
 		// 获取参数
 		String op = request.getParameter("op");
 		if("queryTypes".equals(op)) {
+			int page =1;//默认第一页
+			int pageSize = 3;//默认每页显示3条
+			//如果用户传递的参数不为空
+			if(request.getParameter("page")!=null)
+			{
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+			
+			if(request.getParameter("pageSize")!=null)
+			{
+				pageSize = Integer.parseInt(request.getParameter("pageSize"));
+			}
+			//模糊查询
+			String keywords="";
+			if(request.getParameter("keywords")!=null)
+			{
+				keywords = request.getParameter("keywords");
+			}
 			//调用TypesService方法
-			List<Types> list = ts.getTypes();
-			request.getSession().setAttribute("typeList",list);
+			PageData<Types> pdt=ts.getTypes(page, pageSize, keywords);
+			request.getSession().setAttribute("typePage",pdt);
 			response.sendRedirect("/Rosemary/admin/typeList.jsp");
 		}else if("updType".equals(op)) {
 			String meg="";
 			//获取各个参数
 			int typeId=Integer.parseInt(request.getParameter("typeId"));
 			String typeName=request.getParameter("typeName");			
-			//当前时间
+			//获取当前时间
 			 Date date=new Date();
 			 String updateTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
 			 Types t = new Types(typeId,typeName,updateTime);
@@ -72,7 +91,20 @@ public class TypesServlet extends HttpServlet {
 				
 				out.println(meg);
 				out.close();
+			}else if("delType".equals(op)) {
+				String msg="";
+				//获取typeId参数
+				int typeId=Integer.parseInt(request.getParameter("typeId"));
+				boolean flag = ts.deleteType(typeId);
+				if(flag) {
+					msg="删除成功";
+				}else {
+					msg="删除失败";
+				}
+				out.println(msg);
+				out.close();
 			}
+		
 	}
 
 	/**

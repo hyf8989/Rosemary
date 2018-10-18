@@ -267,7 +267,6 @@
 				$("#upUser").click(function name() {																
 							//获取当前用户编号
 							var userId = $("#userId").val();
-							console.log(userId);
 							//获取输入的用户名
 							var userName = $("#userName").val();
 							var name = $("#name").val();
