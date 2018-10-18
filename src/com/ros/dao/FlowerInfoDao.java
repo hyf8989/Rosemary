@@ -1,6 +1,7 @@
 package com.ros.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ros.entity.FlowerInfo;
 import com.ros.entity.FlowerType;
@@ -14,4 +15,5 @@ public interface FlowerInfoDao {
     public FlowerInfo getFlowerInfoById(int flowerId);//根据鲜花ID获得鲜花的信息（生成一个鲜花实体类对象）
     public boolean setFlowerStockByFlowerId(int flowerId,int stock);//根据鲜花编号更改鲜花库存
     PageData<FlowerInfo> queryFlowerByPage(int page,int pageSize,String keywords);
+    List<FlowerInfo> queryFlowerInfo();
 }

@@ -1,6 +1,8 @@
 package com.ros.dao_impl;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 import com.ros.dao.FlowerInfoDao;
 import com.ros.entity.FlowerInfo;
@@ -120,9 +122,16 @@ public class FlowerInfoDaoImpl implements FlowerInfoDao {
 	@Override
 	public PageData<FlowerInfo> queryFlowerByPage(int page, int pageSize, String keywords) {
 		// TODO Auto-generated method stub
-		String sql = "select  * from flower_info where flowerName like ?";
+		String sql = "select * from flower_info where flowerName like ?";
 		PageData<FlowerInfo> pd = BaseDao.getPage(sql, page, pageSize, FlowerInfo.class, "%" + keywords + "%");
 		return pd;
+	}
+	@Override
+	public List<FlowerInfo> queryFlowerInfo() {
+		// TODO Auto-generated method stub
+		String sql = "select * from flower_info";
+		List<FlowerInfo> list = (List<FlowerInfo>)BaseDao.select(sql, FlowerInfo.class);
+		return list;
 	}
 
 	/**   

@@ -3,6 +3,7 @@ package com.ros.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -170,6 +171,15 @@ public class FlowerInfoServlet extends HttpServlet {
 				request.getSession().setAttribute("keywords", keywords);
 				response.sendRedirect("/Rosemary/admin/goodsList.jsp");
 		 }
+		 //后台商品添加
+		else if(op.equals("goodsAdd")) {
+			List<FlowerInfo> lfi = fIS.queryFlowerInfo();
+			Gson gson = new Gson();
+			String str = gson.toJson(lfi);
+			out = response.getWriter();
+			out.println(str);
+			out.close();
+		}
 		
 		 
 
