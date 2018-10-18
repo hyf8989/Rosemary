@@ -71,11 +71,16 @@
 		<!-- header-end --> 
 
 		<div class="container"> 
-		<div style="margin-top:10px;"><h3>确认收货信息</h3><h4 style="color:red;">商铺定位（福建厦门）</h4></div>
+		<div style="margin-top:10px;"><h3 style="float:left;s">确认收货信息</h3>
+		<button class="layui-btn layui-btn-radius addressAdd" style="margin-left:10px;" type="button" >新增收货地址</button>
+		<h4 style="color:red;clear:both;">商铺定位（福建厦门）</h4>
+		
+		
+		</div>
 	
 		<hr/> 
 		
-		<div style="boder:solid #ccffff;">
+		<div style="boder:solid #ccffff;clear:both;">
 		
 		 <label>
 		<!-- 根据当前用户编号查询出用户所有收货地址 -->
@@ -317,14 +322,14 @@
 		    $("#addressConfirmFinal2").click(function(){
 		    	
 		    	 
-		    	
+		    	 
 		    	 
 		    	 $("#postage").fadeIn();//淡入运费计算
 		    	 $("#postage").text(postage);//设置运费显示标签的文本为所计算出来的运费值
 		    	$("#payment span").text(postage+${sessionScope.cart.totalPrice});
 		    	
 		    	 
-		    }) ; 
+		    }) ;  
 		   //地址下拉框选中事件
       $("#addressConfirm").change(function(){
     	var tel=  $(this).find("option:selected").attr("id");//地址下拉框选中之后，返回收货手机号码
@@ -335,6 +340,12 @@
     	  
     	  
       });
+		   
+		   //点击新增地址按钮的事件
+		   $(".addressAdd").click(function(){
+			  location.href="/Rosemary/address.do?op=myAddress&userName=${sessionScope.ub.userName}"; 
+			   
+		   });
 		   
 		   //当点击提交订单按钮时的按钮事件
 		     $(".order-submit").click(function(){

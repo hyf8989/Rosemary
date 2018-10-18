@@ -78,6 +78,19 @@ public class CartServlet extends HttpServlet {
         	  out.print("成功加入购物车！");
 			 out.close();
 		 }
+         //移除购物项操作
+         else if(op.equals("removeCartItem")) {
+        	 //获取传递过来的购物项的鲜花编号
+        	int flowerId=Integer.valueOf(request.getParameter("flowerId"));
+        	//实例化购物车对象（session）
+        	 Cart cart=(Cart) request.getSession().getAttribute("cart");
+        	 //移除购物项操作
+        	 cart.removeCartItem(flowerId);
+        	  out.print("好东西还很多，客官好好逛逛");
+        	  out.close();
+        	 
+        	 
+         }
 		 
 		 
 	}
