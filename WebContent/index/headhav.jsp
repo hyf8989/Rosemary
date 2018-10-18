@@ -113,6 +113,9 @@
 						<%
 		  int quantity=0;
 		 Cart cart=(Cart)session.getAttribute("cart");
+		 if(cart==null){
+			 cart=new Cart();
+		 }
 		 Collection<CartItem> item=cart.getCartItems();
 		 for (CartItem cartItem : item) {
 				quantity+=cartItem.getQuantity();
