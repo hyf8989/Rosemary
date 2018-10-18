@@ -40,5 +40,15 @@ public class TypesDaoImpl implements TypesDao {
 		String sql = "DELETE from flower_type WHERE typeId=?";
 		return BaseDao.execute(sql, typeId)>0;
 	}
+	
+	/**
+	 * 增加类型
+	 */
+	@Override
+	public boolean addType(Types t) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO flower_type(typeName,createTime,updateTime) VALUES(?,?,?)";
+		return BaseDao.execute(sql, t.getTypeName(),t.getCreateTime(),t.getUpdateTime())>0;
+	}
 
 }

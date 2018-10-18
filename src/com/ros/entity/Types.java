@@ -58,6 +58,12 @@ public class Types {
 		return "Types [typeId=" + typeId + ", typeName=" + typeName + ", createTime=" + createTime + ", updateTime="
 				+ updateTime + "]";
 	}
+	public Types(String typeName, String createTime, String updateTime) {
+		super();
+		this.typeName = typeName;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
 	
 
 }

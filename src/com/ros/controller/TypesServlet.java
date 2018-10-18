@@ -51,7 +51,7 @@ public class TypesServlet extends HttpServlet {
 		String op = request.getParameter("op");
 		if("queryTypes".equals(op)) {
 			int page =1;//默认第一页
-			int pageSize = 3;//默认每页显示3条
+			int pageSize = 2;//默认每页显示3条
 			//如果用户传递的参数不为空
 			if(request.getParameter("page")!=null)
 			{
@@ -70,7 +70,8 @@ public class TypesServlet extends HttpServlet {
 			}
 			//调用TypesService方法
 			PageData<Types> pdt=ts.getTypes(page, pageSize, keywords);
-			request.getSession().setAttribute("typePage",pdt);
+			request.getSession().setAttribute("pdt",pdt);
+			request.getSession().setAttribute("keywords", keywords);
 			response.sendRedirect("/Rosemary/admin/typeList.jsp");
 		}else if("updType".equals(op)) {
 			String meg="";
@@ -103,6 +104,23 @@ public class TypesServlet extends HttpServlet {
 				}
 				out.println(msg);
 				out.close();
+			}else if("addType".equals(op)) {
+				String msg="";
+				String typeId = request.getParameter("typeId");
+				String typeName = request.getParameter("typeName");
+				//获取当前时间并转换时间格式
+				Date date=new Date();	
+			    String createTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+			    String updateTime=createTime;
+			    Types t = new Types(typeName,createTime,updateTime);
+			    boolean flag = ts.addType(t);
+			    if(flag) {
+					msg="添加成功";
+				}else {
+					msg="添加失败";
+				}
+				out.print(msg);
+				out.close();   
 			}
 		
 	}

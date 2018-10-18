@@ -36,5 +36,14 @@ public class TypesServiceImpl implements com.ros.service.TypesService {
 		// TODO Auto-generated method stub
 		return td.delType(typeId);
 	}
+	
+	/**
+	 * 增加类型
+	 */
+	@Override
+	public boolean addType(Types t) {
+		// TODO Auto-generated method stub
+		return td.addType(t);
+	}
 
 }

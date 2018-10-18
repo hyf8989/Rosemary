@@ -82,7 +82,8 @@
 				<div class="col-md-12 tab-content tab-content-in w3">
 					<div class="tab-pane text-style active" id="tab1" style="margin-bottom: 2%">
 						<div class="inbox-right">
-						<h2>鲜花类型</h2>	</div>
+					<h2>鲜花类型</h2>
+						</div>
 
 								<table class="layui-table ">
 									<tr>
@@ -93,10 +94,10 @@
 										<th>操作</th>
 									</tr>
 									<tbody>
-						<c:if test="${sessionScope.typeList==null }">
-				             <jsp:forward page="/type.do&op=queryTypes"></jsp:forward>
+						<c:if test="${sessionScope.pdt==null }">
+				             <jsp:forward page="../type.do?op=queryTypes"></jsp:forward>
 			              </c:if>
-											<c:forEach items="${sessionScope.typeList}" var="type"> 
+											<c:forEach items="${sessionScope.pdt.data}" var="type"> 
 
 												<tr class="table-row">													
 													<td class="table-text"><h6>${type.typeId}</h6></td>
@@ -116,21 +117,6 @@
 								</table>
 							</div>
 							<div id="pageDiv" style="text-align: center"></div>
-						</div>
-					</div>
-					<div class="tab-pane text-style" id="tab2">
-						<div class="inbox-right">
-
-							<div class="mailbox-content">
-								<div class="mail-toolbar clearfix">
-									<div class="float-right">
-										<button	class="layui-btn  layui-btn-normal" id="addType">添加</button>
-
-									</div>
-
-								</div>
-
-							</div>
 						</div>
 					</div>
 
@@ -178,18 +164,17 @@
 
 	<!-- /Bootstrap Core JavaScript -->
 	<script>
+	/* 分页 */
 		 layui.use([ 'laypage', 'layer' ], function() {
 			var laypage = layui.laypage, layer = layui.layer;
 			//完整功能 
 			laypage.render({
 			    elem: 'pageDiv'
-			    ,count:${typePage.total} ,
-			    curr:${typePage.page}
-			   ,limit:${typePage.pageSize}
+			    ,count:${pdt.total} ,
+			    curr:${pdt.page}
+			   ,limit:${pdt.pageSize}
 			    ,layout: ['count', 'prev', 'page','limit','next', 'skip']
 			    ,jump: function(obj,first){
-					console.log(obj);
-					console.log(first);
 					//首次不执行
 					if (!first) {
 						//do something
@@ -200,14 +185,24 @@
 					}
 				}
 			});
-		}); 		
+		}); 	
+	
+			<!-- 点击搜索框旁的搜索按钮的单击 -->
+			$("#search").click(function(){
+				 location.href = "/Rosemary/type.do?op=queryTypes&page="
+						+ ${pdt.total}+ "&pageSize=" + ${pdt.total}
+						+ "&keywords="
+						+ document.getElementById("keywords").value;
+						document.getElementById("keywords").text("");
+			});
+			
 	</script>
 	
 	<script type="text/javascript">
 
-	/* 编辑按钮弹出层 */
 	layui.use([ 'laypage', 'layer' ], function() {
 			var laypage = layui.laypage, layer = layui.layer;});
+	/* 编辑按钮事件 */
 $(".layui-btn-normal").click(
 	function() {
 	var msg="";
@@ -261,11 +256,10 @@ $(".layui-btn-normal").click(
 	<script type="text/javascript">
 	/* 删除 */
 	 layui.use([ 'laypage', 'layer' ], function() {
-			var laypage = layui.laypage, layer = layui.layer;});
+			var laypage = layui.laypage, layer = layui.layer;});	
 	$("#delete").click(function () {
-			//获取当前行的第一个td
-            var typeId = $(this).parents("tr").find("td").eq(0).text();
-			console.log(typeId);
+			//获取当前行的第一个tr的td
+			var typeId = $(this).parents("tr").find("td").eq(0).text();
             layer.open({
 				title: "温馨提示",
 				skin: "layui-layer-molv",
@@ -295,7 +289,7 @@ $(".layui-btn-normal").click(
 			}); 		
 	});
 	</script>
-	
+		
 	<%@ include file="foot.jsp"%>
 </body>
 

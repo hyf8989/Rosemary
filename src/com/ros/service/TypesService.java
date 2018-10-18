@@ -12,5 +12,6 @@ public interface TypesService {
 	public PageData<Types> getTypes(int page, int pageSize, String keywords);//显示类型
 	public boolean updateType(Types t);//更新类型
 	public boolean deleteType(int typeId);//类型删除
+	public boolean addType(Types t);//增加类型
 
 }

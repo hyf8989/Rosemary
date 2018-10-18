@@ -12,5 +12,6 @@ public interface TypesDao {
 	PageData<Types> queryType(int page,int pageSize,String keywords);//分页查询所有类型
 	boolean updateType(Types t);//修改类型
 	boolean delType(int typeId);//删除类型
+	boolean addType(Types t);//增加类型
 
 }

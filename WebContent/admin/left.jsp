@@ -37,7 +37,7 @@
 							</ul>
 						</li>
 						<li id="menu-academico">
-							<a href="orderList.jsp"><i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp;<span> 留言信息</span>
+							<a href="message.jsp"><i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp;<span> 留言信息</span>
 								<div class="clearfix"></div>
 							</a>
 
@@ -55,6 +55,9 @@
 								</li>
 								<li id="menu-academico-avaliacoes">
 									<a href="/Rosemary/type.do?op=queryTypes">商品类型</a>
+								</li>
+								<li id="menu-academico-avaliacoes">
+									<a href="typeAdd.jsp">类型添加</a>
 								</li>
 								<li id="menu-academico-avaliacoes">
 									<a href="portGoods.jsp">新品上架</a>
