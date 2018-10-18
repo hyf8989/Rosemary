@@ -160,8 +160,10 @@
 			  });
 			  //点击增加数量图标时的事件
 			  $(".plus").click(function(){
+				  //获取点击按钮时，对应商品的原有数量
 				 var quantity= $(this).parents("td").find("input").val();
-				  console.log(quantity);
+				 
+				 
 				  
 			  });
 			  
