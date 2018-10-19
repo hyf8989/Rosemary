@@ -77,6 +77,9 @@
 <!-- lined-icons -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/icon-font.min.css" type='text/css' />
 <!-- //lined-icons -->
+<style type="text/css">
+
+</style>
 </head>
 
 <body>
@@ -90,50 +93,14 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="index.html">后台首页</a><i
 						class="fa fa-angle-right"></i>管理员管理<i class="fa fa-angle-right"></i>管理员列表</li>
-
 				</ol>
-				<!-- tab content -->
-				<div class="col-md-12 tab-content tab-content-in w3">
-					<div class="tab-pane text-style active" id="tab1" style="margin-bottom: 2%">
-						<!-- <div class="inbox-right"> -->
+				<div class="agile-grids">
+					<!-- tables -->
 
-							<div class="mailbox-content">
-								<!-- <div class="mail-toolbar clearfix">
-									<div class="float-left">
-										<div class="btn-group m-r-sm mail-hidden-options"
-											style="display: inline-block;">
-
-											<div class="btn-group">
-												<a class="btn btn-default dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false"><i
-													class="fa fa-tags"></i> <span class="caret"></span></a>
-												<ul class="dropdown-menu dropdown-menu-right" role="menu">
-													<li><a href="#">系统管理员</a></li>
-													<li><a href="#">店铺管理员</a></li>
-
-												</ul>
-											</div>
-										</div>
-
-
-									</div> -->
-									<!-- <div class="float-right">
-										<div class="dropdown">
-											<a href="#" title="" class="btn btn-default"
-												data-toggle="dropdown" aria-expanded="false">
-										</div>
-
-										<div class="btn-group">
-											<a class="btn btn-default"><i class="fa fa-angle-left"></i></a>
-											<a class="btn btn-default"><i class="fa fa-angle-right"></i></a>
-										</div>
-
-
-									</div>
- -->
-								</div>
-								<h2>管理员信息表</h2>
-								<table class="layui-table ">
+					<div class="agile-tables">
+						<div class="w3l-table-info">
+							<h2>管理员信息表</h2>
+							<table class="layui-table ">
 									<tr>
 										<th>头像</th>
 										<th>用户名</th>
@@ -174,98 +141,44 @@
 										</c:if>
 									</tbody>
 								</table>
-							</div>
-							<div id="pageDiv" style="text-align: center"></div>
 						</div>
+
+						<!---728x90--->
+
+						<div id="pageDiv" style="text-align: center"></div>
+
 					</div>
-					<!-- <div class="tab-pane text-style" id="tab2">
-						<div class="inbox-right">
-
-							<div class="mailbox-content">
-								<div class="mail-toolbar clearfix">
-									<div class="float-left">
-										<div class="btn-group m-r-sm mail-hidden-options"
-											style="display: inline-block;">
-											<div class="btn-group">
-												<a class="btn btn-default dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false"><i
-													class="fa fa-folder"></i> <span class="caret"></span></a>
-												<ul class="dropdown-menu dropdown-menu-right" role="menu">
-													<li><a href="#">Social</a></li>
-													<li><a href="#">Forums</a></li>
-													<li><a href="#">Updates</a></li>
-
-													<li><a href="#">Spam</a></li>
-													<li><a href="#">Trash</a></li>
-
-													<li><a href="#">New</a></li>
-												</ul>
-											</div>
-											<div class="btn-group">
-												<a class="btn btn-default dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false"><i
-													class="fa fa-tags"></i> <span class="caret"></span></a>
-												<ul class="dropdown-menu dropdown-menu-right" role="menu">
-													<li><a href="#">Work</a></li>
-													<li><a href="#">Family</a></li>
-													<li><a href="#">Social</a></li>
-
-													<li><a href="#">Primary</a></li>
-													<li><a href="#">Promotions</a></li>
-													<li><a href="#">Forums</a></li>
-												</ul>
-											</div>
-										</div>
-
-
-									</div>
-									<div class="float-right">
-										<div class="dropdown">
-											<a href="#" title="" class="btn btn-default"
-												data-toggle="dropdown" aria-expanded="false"> <i
-												class="fa fa-cog icon_8"></i> <i
-												class="fa fa-chevron-down icon_8"></i>
-												<div class="ripple-wrapper"></div></a>
-											<ul class="dropdown-menu float-right">
-												<li><a href="#" title=""> <i
-														class="fa fa-pencil-square-o icon_9"></i> Edit
-												</a></li>
-												<li><a href="#" title=""> <i
-														class="fa fa-calendar icon_9"></i> Schedule
-												</a></li>
-												<li><a href="#" title=""> <i
-														class="fa fa-download icon_9"></i> Download
-												</a></li>
-
-												<li><a href="#" class="font-red" title=""> <i
-														class="fa fa-times" icon_9=""></i> Delete
-												</a></li>
-											</ul>
-										</div>
-
-										<div class="btn-group">
-											<a class="btn btn-default"><i class="fa fa-angle-left"></i></a>
-											<a class="btn btn-default"><i class="fa fa-angle-right"></i></a>
-										</div>
-
-
-									</div>
-
-								</div>
-
-							</div>
-						</div>
-					</div> -->
-
-
-
-
-
-
+					<!-- //tables -->
 
 				</div>
+				<!-- script-for sticky-nav -->
+				<script>
+					$(document).ready(function() {
+						var navoffeset = $(".header-main").offset().top;
+						$(window).scroll(function() {
+							var scrollpos = $(window).scrollTop();
+							if (scrollpos >= navoffeset) {
+								$(".header-main").addClass("fixed");
+							} else {
+								$(".header-main").removeClass("fixed");
+							}
+						});
+
+					});
+				</script>
+				<!-- /script-for sticky-nav -->
+				<!--inner block start here-->
+				<div class="inner-block"></div>
+				<!--inner block end here-->
+				<!--copy rights start here-->
+				<%@ include file="foot.jsp"%>
+				<!--COPY rights end here-->
 			</div>
 		</div>
+		<!--//content-inner-->
+		<!--/sidebar-menu-->
+		<%@ include file="left.jsp"%>
+		<div class="clearfix"></div>
 	</div>
 	<!-- script-for sticky-nav -->
 	<script>
@@ -296,7 +209,7 @@
 	
 	<!--//content-inner-->
 	<!--/sidebar-menu-->
-	<%@ include file="left.jsp"%>
+	<%-- <%@ include file="left.jsp"%> --%>
 	<div class="clearfix"></div>
 	
 	<!-- <script>
@@ -427,7 +340,7 @@
 			});
 		});
 	</script>
-	<%@ include file="foot.jsp"%>
+	
 </body>
 
 </html>

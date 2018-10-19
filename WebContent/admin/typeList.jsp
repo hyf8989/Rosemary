@@ -75,17 +75,15 @@
 				<!--heder end here-->
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="index.html">后台首页</a><i
-						class="fa fa-angle-right"></i>管理员管理<i class="fa fa-angle-right"></i>类型列表</li>
-
+						class="fa fa-angle-right"></i>商品管理<i class="fa fa-angle-right"></i>商品类型管理</li>
 				</ol>
-				<!-- tab content -->
-				<div class="col-md-12 tab-content tab-content-in w3">
-					<div class="tab-pane text-style active" id="tab1" style="margin-bottom: 2%">
-						<div class="inbox-right">
-					<h2>鲜花类型</h2>
-						</div>
+				<div class="agile-grids">
+					<!-- tables -->
 
-								<table class="layui-table ">
+					<div class="agile-tables">
+						<div class="w3l-table-info">
+							<h2>鲜花类型</h2>
+							<table class="layui-table ">
 									<tr>
 										<th>编号</th>
 										<th>类型名</th>
@@ -115,13 +113,46 @@
 											 </c:forEach>
 									</tbody>
 								</table>
-							</div>
-							<div id="pageDiv" style="text-align: center"></div>
+								
 						</div>
+
+						<!---728x90--->
+
+						<div id="pageDiv" style="text-align: center"></div>
+
 					</div>
+					<!-- //tables -->
 
 				</div>
+				<!-- script-for sticky-nav -->
+				<script>
+					$(document).ready(function() {
+						var navoffeset = $(".header-main").offset().top;
+						$(window).scroll(function() {
+							var scrollpos = $(window).scrollTop();
+							if (scrollpos >= navoffeset) {
+								$(".header-main").addClass("fixed");
+							} else {
+								$(".header-main").removeClass("fixed");
+							}
+						});
+
+					});
+				</script>
+				<!-- /script-for sticky-nav -->
+				<!--inner block start here-->
+				<div class="inner-block"></div>
+				<!--inner block end here-->
+				<!--copy rights start here-->
+				<%@ include file="foot.jsp"%>
+				<!--COPY rights end here-->
 			</div>
+		</div>
+		<!--//content-inner-->
+		<!--/sidebar-menu-->
+		<%@ include file="left.jsp"%>
+		<div class="clearfix"></div>
+	</div>
 	<!-- script-for sticky-nav -->
 	<script>
 		$(document).ready(function() {
@@ -151,7 +182,7 @@
 	
 	<!--//content-inner-->
 	<!--/sidebar-menu-->
-	<%@ include file="left.jsp"%>
+	
 	<div class="clearfix"></div>
 	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/admin/js/jquery.nicescroll.js"></script>
@@ -290,7 +321,7 @@ $(".layui-btn-normal").click(
 	});
 	</script>
 		
-	<%@ include file="foot.jsp"%>
+	
 </body>
 
 </html>
