@@ -250,10 +250,13 @@ public class OrderServlet extends HttpServlet {
 		}
 		 //根据订单编号获取订单详细信息
 		 else if("getOrderDetailInfo".equals(op)) {
+			 //获取订单编号
 			 int orderId=Integer.parseInt(request.getParameter("orderId"));
+			 //调用服务层的方法
 			 List<OrderInfo_Re_FlowerInfo> list=orderService.queryOrderDetailInfoByOrderId(orderId);
-		    request.getSession().setAttribute("orderDetailInfo", list);
-		    response.sendRedirect("/Rosemary/admin/orderList.jsp");
+			 Gson gson=new Gson(); 
+			 out.print(gson.toJson(list));
+			 out.close();
 		 
 		 }
 	}

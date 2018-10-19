@@ -182,8 +182,8 @@
 
 						<!-- 订单详情按钮 遮罩层开始 -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-							aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
+							aria-labelledby="myModalLabel" aria-hidden="true" >
+							<div class="modal-dialog" style="width:800px;">
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal"
@@ -204,19 +204,13 @@
 													<th>单价</th>
 													<th>数量</th>
 													<th>小计</th>
+													<th>发货时间</th>
 												</tr>
 											</thead>
-											<tbody>
-												<tr>
-													<td>贤心</td>
-													<td>2016-11-29</td>
-													<td>人生就像是一场修行</td>
-												</tr>
-												<tr>
-													<td>许闲心</td>
-													<td>2016-11-28</td>
-													<td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-												</tr>
+											
+											<tbody id="tbody-modal">
+												
+										
 											</tbody>
 										</table>
 
@@ -422,12 +416,22 @@
 					}
 				}
 			});
-
+ 
 		});
 			//订单详情按钮的单击事件
 			$(".btn-detail").click(function(){
 				var orderId=$(this).parents("tr").find("td").eq(0).text();
-				console.log(orderId);
+				$.get("/Rosemary/order.do","op=getOrderDetailInfo&orderId="+orderId,function(data,status){
+					var array=JSON.parse(data);
+					$.each(array,function(index,od){
+						$("#tbody-modal").append('<tr><td>'+od.flowerName+'</td><td>'+od.price+'</td><td>'+od.quantity+'</td><td>'+od.totalPrice+'</td><td>'+od.sendTime+'</td></tr>');
+								
+								
+								
+								
+							
+					});
+				});
 				
 			});
 
@@ -490,32 +494,32 @@
 			});
 		});
 			//下拉框选中事件
-			/* $("#status").change(function(){
+				 $("#status").change(function(){ 
 				var statusVal=$(this).find("option:selected").val();
 				$.get("/Rosemary/order.do","op=orderQueryByStatus&statusVal="+statusVal,function(data,status){
-					var array=gson.toJson();
+					var array=JSON.parse(data);
 					$.each(array,function(index,order){
-						$("tbody").append("<tr>"+
+						$("tbody").append/* ("<tr>"+
 								"<td>"+order.orderId +"</td>"+
 								"<td>"+order.userName +"</td>"+
 								
-								<c:choose>
-									<c:when test='order.orderStatus==0'>
+								"<c:choose>"+
+									"<c:when test='"+order.orderStatus==0+"'>"+
 										"<td>未付款</td>"+
-									</c:when>
-									<c:when test='order.orderStatus==1'>
+									"</c:when>"+
+									"<c:when test='"+order.orderStatus==1+"'>"+
 										"<td>已付款</td>"+
-									</c:when>
-									<c:when test='order.orderStatus==2'>
+									"</c:when>"+
+									"<c:when test='"+order.orderStatus==2+"'>"+
 										"<td>未发货</td>"+
-									</c:when>
-									<c:when test='order.orderStatus==3 '>
+									"</c:when>"+
+									"<c:when test='"+order.orderStatus==3+" '>"+
 										"<td>已发货</td>"+
-									</c:when>
-									<c:otherwise>
+									"</c:when>"+
+									"<c:otherwise>"+
 										"<td>交易成功</td>"+
-									</c:otherwise>
-								</c:choose>
+									"</c:otherwise>"+
+								"</c:choose>"+
 
 
 								"<td>"+order.address +"</td>"+
@@ -527,11 +531,11 @@
 									"<button class='layui-btn layui-btn-radius layui-btn-danger'>修改"+
 									"</button></td>"+
 
-							"</tr>");
+							"</tr>"); */
 					});
 					
 				});
-			});  */
+			});  
 			//搜索按钮的单击事件
 			$("#search").click(function(){
 				location.href = "/Rosemary/order.do?op=showOrdersPage&page="

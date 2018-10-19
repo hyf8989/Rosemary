@@ -15,7 +15,7 @@ public class OrderInfo_Re_FlowerInfo {
 	  private String quantity;//对应订单项的购买数量
 	  
 	  private double totalPrice;//订单项的小计
-	  private String sendTime;//订单的发时间
+	  private String sendTime;//订单的发货时间
 	public String getSendTime() {
 		return sendTime;
 	}
