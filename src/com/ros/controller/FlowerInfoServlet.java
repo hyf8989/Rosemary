@@ -180,11 +180,7 @@ public class FlowerInfoServlet extends HttpServlet {
 			out.println(str);
 			out.close();
 		}
-		
-		 
-
-
-		
+	
 	}
 
 	/**

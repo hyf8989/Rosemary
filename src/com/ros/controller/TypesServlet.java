@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.ros.entity.FlowerInfo;
 import com.ros.entity.Types;
 import com.ros.service.TypesService;
 import com.ros.service_impl.TypesServiceImpl;
@@ -122,6 +124,16 @@ public class TypesServlet extends HttpServlet {
 				out.print(msg);
 				out.close();   
 			}
+		 //后台新品发布，选择类型
+		else if("load".equals(op)) {
+			//ajax请求将花类型加载在select中
+			response.setContentType("text/html");
+			List<Types> list = ts.getType();
+			Gson gson = new Gson();
+			out.println(gson.toJson(list));
+			out.close();
+			
+		}
 		
 	}
 

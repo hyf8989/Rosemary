@@ -1,5 +1,7 @@
 package com.ros.dao_impl;
 
+import java.util.List;
+
 import com.ros.dao.TypesDao;
 import com.ros.entity.Types;
 import com.ros.util.BaseDao;
@@ -49,6 +51,14 @@ public class TypesDaoImpl implements TypesDao {
 		// TODO Auto-generated method stub
 		String sql = "INSERT INTO flower_type(typeName,createTime,updateTime) VALUES(?,?,?)";
 		return BaseDao.execute(sql, t.getTypeName(),t.getCreateTime(),t.getUpdateTime())>0;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Types> queryType() {
+		// TODO Auto-generated method stub
+		String sql = "SELECT typeId,typeName,createTime,updateTime FROM flower_type";
+		return (List<Types>) BaseDao.select(sql, Types.class);
 	}
 
 }

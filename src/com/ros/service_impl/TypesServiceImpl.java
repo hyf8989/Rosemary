@@ -1,5 +1,7 @@
 package com.ros.service_impl;
 
+import java.util.List;
+
 import com.ros.dao.TypesDao;
 import com.ros.dao_impl.TypesDaoImpl;
 import com.ros.entity.Types;
@@ -46,4 +48,9 @@ public class TypesServiceImpl implements com.ros.service.TypesService {
 		return td.addType(t);
 	}
 
+	@Override
+	public List<Types> getType() {
+		// TODO Auto-generated method stub
+		return td.queryType();
+	}
 }

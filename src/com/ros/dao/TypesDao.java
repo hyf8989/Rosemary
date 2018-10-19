@@ -1,5 +1,7 @@
 package com.ros.dao;
 
+import java.util.List;
+
 import com.ros.entity.Types;
 import com.ros.util.PageData;
 
@@ -13,5 +15,6 @@ public interface TypesDao {
 	boolean updateType(Types t);//修改类型
 	boolean delType(int typeId);//删除类型
 	boolean addType(Types t);//增加类型
+	List<Types> queryType();
 
 }

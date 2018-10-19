@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -88,8 +89,9 @@
 									</div>
 									<div class="form-group">
 										<label for="exampleInputDescription">所属类型:</label>
-										<select class="form-control input-sm" id="zt" onchange="DoSelectZT()">
-													<option value="0" selected="selected">郁金香</option>
+										<!-- 需要选择类型 -->
+										<select class="form-control" id="opType" name="opType" style="height: 35px">
+													<!-- <option value="0" selected="selected">郁金香</option>
 													<option value="1">玫瑰</option>
 													<option value="2">康乃馨</option>
 													<option value="3">邹菊</option>
@@ -97,7 +99,7 @@
 													<option value="5">百合</option>
 													<option value="6">迷迭香</option>
 													<option value="7">桔梗花</option>
-													<option value="8">扶郎花</option>													
+													<option value="8">扶郎花</option>	 -->												
 												</select>
 									</div>
 
@@ -162,7 +164,7 @@
 			<div class="clearfix"></div>
 		</div>
 
-		<script>
+<!-- 		<script>
 			var toggle = true;
 
 			$(".sidebar-icon").click(function() {
@@ -182,7 +184,7 @@
 
 				toggle = !toggle;
 			});
-		</script>
+		</script> -->
 		<!--js -->
 		<script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
 		
@@ -192,12 +194,10 @@
 		<script src="js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 				layui.use('layer', function(){
-  var layer = layui.layer;
-  
-  
+                var layer = layui.layer;    
 });              
   $("#publishGoods").click(function(){
-             layer.open({
+            layer.open({
             title:"友情提醒？",
             skin:"layui-layer-molv",
             content:"<span>确定上传新商品吗？</span>",
@@ -209,15 +209,20 @@
              btn2:function(index,layero){
              	layer.close();
              }
-             });
-            
-
+             });           
 			});
-
-
-
 		</script>
-
+<script type="text/javascript">
+$(function () {
+	$.get("type.do?op=load",function(data){	    		
+		//得到的data是一个string类型满足 json格式
+		var arr = JSON.parse(data);	    		
+		$.each(data.list,function(i,t){	    			
+			$("#opType").append("<option value="+t.typeNId+">"+t.typeName+"</option>");
+		});   		
+	});	
+});
+</script>
 
 		<!-- /Bootstrap Core JavaScript -->
 
