@@ -40,7 +40,7 @@
 	<%@ include file="headhav.jsp"%>
 	<!-- header-end -->
 	<!-- slider-start -->
-	<div class="slider-container" id="slider">
+	<div class="slider-container" id="slider"  >
 		<div class="slider">
 			<!-- Slider Image -->
 			<div id="mainslider" class="nivoSlider slider-image">

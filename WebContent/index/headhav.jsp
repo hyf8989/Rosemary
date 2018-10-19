@@ -136,7 +136,7 @@
 										</div>
 										<div class="media-body checkout-content">
 											<h4 class="media-heading">
-												<span class="cart-count">2</span> <a href="#">${cartSmall.flower.flowerName }</a>
+												<span class="cart-count">${cartSmall.quantity }</span> <a href="#">${cartSmall.flower.flowerName }</a>
 												<span class="btn-remove checkout-remove"
 													title="remove this product from my cart"><i
 													class="fa fa-times" aria-hidden="true"></i></span>

@@ -1,5 +1,11 @@
-﻿/*
-		 定义一个拼接字符串方法（用户页面输出）
+﻿
+
+
+
+
+/*
+		
+ 定义一个拼接字符串方法（用户页面输出）
 		*/
 		function displayFlower(arr){
 			//每次输出之前先清空子节点。
@@ -86,9 +92,19 @@
 	  	    			  layer.msg('<span style="color:black;">'+data+'</span>', {
 	  	  					icon:6,
 	  	  					time: 2000
-	  	  				});
-	  	    			 window.location.reload();//刷新当前页面
+	  	  				}); 
+	  	    			
 	  	    		  });
+				 
+				 
+					setTimeout(function(){//两秒后跳转
+					     
+					    window.location.reload();
+						   
+					  },2000);
+  
+
+
 					
 				}
 				else{

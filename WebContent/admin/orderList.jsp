@@ -1,14 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page autoFlush="true" buffer="1094kb"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>>
+<html>
+>
 
-	<head>
-		<title>Tabels</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="keywords" content="" />
-		<script type="application/x-javascript">
+<head>
+<title>Tabels</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript">
+	
+	
+	
+	
+	
+	
+	
 			addEventListener("load", function() {
 				setTimeout(hideURLbar, 0);
 			}, false);
@@ -16,27 +26,34 @@
 			function hideURLbar() {
 				window.scrollTo(0, 1);
 			}
-		</script>
-		<!-- Bootstrap Core CSS -->
-		<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-		<!-- Custom CSS -->
-		<link href="css/style.css" rel='stylesheet' type='text/css' />
-		<link rel="stylesheet" href="css/morris.css" type="text/css" />
-		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+		
 
-		<!-- Graph CSS -->
-		<link href="css/font-awesome.css" rel="stylesheet">
-		<!-- jQuery -->
-		<script src="js/jquery-2.1.4.min.js"></script>
-		<!-- //jQuery -->
-		<!-- tables -->
-		<link rel="stylesheet" type="text/css" href="css/table-style.css" />
-		<link rel="stylesheet" type="text/css" href="css/basictable.css" />
 
-		<script type="text/javascript" src="js/jquery.basictable.min.js"></script>
-		<script type="text/javascript" src="layui/layui.js" charset="utf-8">
+
+
+
+
+</script>
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="css/morris.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+
+<!-- Graph CSS -->
+<link href="css/font-awesome.css" rel="stylesheet">
+<!-- jQuery -->
+<script src="js/jquery-2.1.4.min.js"></script>
+<!-- //jQuery -->
+<!-- tables -->
+<link rel="stylesheet" type="text/css" href="css/table-style.css" />
+<link rel="stylesheet" type="text/css" href="css/basictable.css" />
+
+<script type="text/javascript" src="js/jquery.basictable.min.js"></script>
+<script type="text/javascript" src="layui/layui.js" charset="utf-8">
 		</script>
-		<script type="text/javascript">
+<script type="text/javascript">
 			$(document).ready(function() {
 				$('#table').basictable();
 
@@ -63,205 +80,260 @@
 				});
 			});
 		</script>
-		<style type="text/css">
-			.orderDetail{
-				display: none;
-			}
+<style type="text/css">
+.orderDetail {
+	display: none;
+}
+</style>
+<!-- //tables -->
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400'
+	rel='stylesheet' type='text/css' />
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700'
+	rel='stylesheet' type='text/css'>
+<!-- lined-icons -->
+<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
+<!-- //lined-icons -->
+</head>
 
-		</style>
-		<!-- //tables -->
-		<link href='http://fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css' />
-		<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-		<!-- lined-icons -->
-		<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
-		<!-- //lined-icons -->
-	</head>
+<body>
+	<div class="page-container">
+		<!--/content-inner-->
+		<div class="left-content">
+			<div class="mother-grid-inner">
+				<!--header start here-->
+				<%@ include file="headnav.jsp"%>
+				<!--heder end here-->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">后台首页</a><i
+						class="fa fa-angle-right"></i>订单管理<i class="fa fa-angle-right"></i>订单表</li>
+				</ol>
+				<div class="agile-grids">
+					<!-- tables -->
 
-	<body>
-		<div class="page-container">
-			<!--/content-inner-->
-			<div class="left-content">
-				<div class="mother-grid-inner">
-					<!--header start here-->
-					<%@ include file="headnav.jsp" %>
-					<!--heder end here-->
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item">
-							<a href="index.html">后台首页</a><i class="fa fa-angle-right"></i>订单管理<i class="fa fa-angle-right"></i>订单表</li>
-					</ol>
-					<div class="agile-grids">
-						<!-- tables -->
+					<div class="agile-tables">
+						<div class="w3l-table-info">
+							<h2>订单表</h2>
+							<table id="table">
+								<thead>
 
-						<div class="agile-tables">
-							<div class="w3l-table-info">
-								<h2>订单表</h2>
-								<table id="table">
-									<thead>
+									<th>订单编号</th>
+									<th>用户名</th>
+									<th><select class="form-control input-sm" id="status">
+											<option value="5" selected="selected">全部状态</option>
+											<option value="0">未付款</option>
+											<option value="1">已付款</option>
+											<option value="2">未发货</option>
+											<option value="3">已发货</option>
+											<option value="4">交易成功</option>
+									</select></th>
+									<th>地址</th>
+                                    <th>下单时间</th>
 									
-											<th>订单编号</th>
-											<th>用户编号</th>
-											<th>
-												<select class="form-control input-sm" id="zt" onchange="DoSelectZT()">
-													<option value="0" selected="selected">全部状态</option>
-													<option value="1">待付款</option>
-													<option value="2">送货完毕</option>
-													<option value="3">今日配送</option>
-													<option value="4">待评价</option>
-													<option value="-1">已取消</option>
-												</select>
-											</th>
-											<th>地址</th>
-											<th>下单时间</th>
-											<th>操作</th>
-										
-									</thead>
 
+									<th>操作</th>
+
+								</thead>
+								<c:if test="${sessionScope.orders==null }">
+
+									<jsp:forward page="../order.do?op=showOrdersPage"></jsp:forward>
+								</c:if>
+								<c:forEach var="order" items="${sessionScope.orders.data }">
 									<tbody>
 										<tr>
-											<td>SO1001</td>
-											<td>1 </td>
-											<td>待付款</td>
-											<td>思明</td>
-											<td>2018-10-10</td>
-											<td><button   class="layui-btn layui-btn-radius layui-btn-normal btn-detail">订单详情</button>&nbsp;<button class="layui-btn layui-btn-radius layui-btn-danger">删除 </button></td>
+											<td>${order.orderId }</td>
+											<td>${order.userName }</td>
+											<!-- 对订单的状态进行判断显示值 -->
+											<c:choose>
+												<c:when test="${order.orderStatus==0 }">
+													<td>未付款</td>
+												</c:when>
+												<c:when test="${order.orderStatus==1 }">
+													<td>已付款</td>
+												</c:when>
+												<c:when test="${order.orderStatus==2 }">
+													<td>未发货</td>
+												</c:when>
+												<c:when test="${order.orderStatus==3 }">
+													<td>已发货</td>
+												</c:when>
+												<c:otherwise>
+													<td>交易成功</td>
+												</c:otherwise>
+											</c:choose>
+
+
+                                            <td>${order.address }</td>
+											<td>${order.createTime }</td>
+
+											<td><button
+													class="layui-btn layui-btn-radius layui-btn-normal btn-detail"
+													data-toggle="modal" data-target="#myModal" id="detail">订单详情</button>&nbsp;
+												<button class="layui-btn layui-btn-radius layui-btn-danger"
+													data-toggle="modal" data-target="#myModalupdate"
+													id="update">修改</button></td>
 
 										</tr>
-										<tr class="orderDetail">
-											<td>订单编号</td>
-											<td>花束</td>
-											<td>真实姓名</td>
-											<td>订单状态</td>
-											<td>订单类型</td>
-											<td>总金额</td>
-											</tr>
-											<tr class="orderDetail">
-												<td>201805089</td>
-											<td>蓝色妖姬</td>
-											<td>李宇</td>
-											<td>已送达</td>
-											<td>销售订单</td>
-											<td>厦门市湖里区</td>
-											
-											</tr>
-											
-											
-									
-										
-										
-										<tr>
-											<td>SO1002</td>
-											<td>2 </td>
-											<td>今日配送</td>
-											<td>湖里</td>
-											<td>2018-10-10</td>
-											<td><button  class="layui-btn btn-detail layui-btn-radius layui-btn-normal">订单详情</button>&nbsp;<button class="layui-btn layui-btn-radius layui-btn-danger">删除 </button></td>
-										</tr>
-										<tr class="orderDetail">
-											<td>订单编号</td>
-											<td>花束</td>
-											<td>真实姓名</td>
-											<td>订单状态</td>
-											<td>订单类型</td>
-										
-											<td>总金额</td>
-											</tr>
-											<tr class="orderDetail">
-												<td>201805089</td>
-											<td>蓝色妖姬</td>
-											<td>李宇</td>
-											<td>已送达</td>
-											<td>销售订单</td>
-											<td>厦门市湖里区</td>
-											
-											</tr>
-										<tr>
-											<td>SO1003</td>
-											<td>3 </td>
-											<td>送货完毕</td>
-											<td>同安</td>
-											<td>2018-10-10</td>
-											<td><button class="layui-btn btn-detail layui-btn-radius layui-btn-normal">订单详情</button>&nbsp;<button class="layui-btn layui-btn-radius layui-btn-danger">删除 </button></td>
-										</tr>
-										<tr class="orderDetail">
-											<td>订单编号</td>
-											<td>花束</td>
-											<td>真实姓名</td>
-											<td>订单状态</td>
-											<td>订单类型</td>
-										
-											<td>总金额</td>
-											</tr>
-											<tr class="orderDetail">
-												<td>201805089</td>
-											<td>蓝色妖姬</td>
-											<td>李宇</td>
-											<td>已送达</td>
-											<td>销售订单</td>
-											<td>厦门市湖里区</td>
-											
-											</tr>
 
-										<tr>
-											<td>SO1004</td>
-											<td>4 </td>
-											<td>待评价</td>
-											<td>海沧</td>
-											<td>2018-10-10</td>
-											<td><button class="layui-btn btn-detail layui-btn-radius layui-btn-normal">订单详情</button>&nbsp;<button class="layui-btn layui-btn-radius layui-btn-danger">删除 </button></td>
-										</tr>
-										<tr class="orderDetail">
-											<td>订单编号</td>
-											<td>花束</td>
-											<td>真实姓名</td>
-											<td>订单状态</td>
-											<td>订单类型</td>
-										
-											<td>总金额</td>
-											</tr>
-											<tr class="orderDetail">
-												<td>201805089</td>
-											<td>蓝色妖姬</td>
-											<td>李宇</td>
-											<td>已送达</td>
-											<td>销售订单</td>
-											<td>厦门市湖里区</td>
-											
-											</tr>
-										<tr>
-											<td>SO1005</td>
-											<td>5 </td>
-											<td>已取消</td>
-											<td>翔安</td>
-											<td>2018-10-10</td>
-											<td><button class="layui-btn btn-detail layui-btn-radius layui-btn-normal">订单详情</button>&nbsp;<button class="layui-btn layui-btn-radius layui-btn-danger">删除 </button></td>
-										</tr>
-										<tr class="orderDetail">
-											<td>订单编号</td>
-											<td>花束</td>
-											<td>真实姓名</td>
-											<td>订单状态</td>
-											<td>订单类型</td>
-										
-											<td>总金额</td>
-											</tr>
-											<tr class="orderDetail">
-												<td>201805089</td>
-											<td>蓝色妖姬</td>
-											<td>李宇</td>
-											<td>已送达</td>
-											<td>销售订单</td>
-											<td>厦门市湖里区</td>
-											
-											</tr>
 									</tbody>
-								</table>
+								</c:forEach>
+							</table>
+						</div>
+
+						<!-- 订单详情按钮 遮罩层开始 -->
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+							aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">&times;</button>
+										<h2 class="modal-title" id="myModalLabel">订单详情</h2>
+									</div>
+									<div class="modal-body">
+
+										<table class="layui-table">
+											<colgroup>
+												<col width="150">
+												<col width="200">
+												<col>
+											</colgroup>
+											<thead>
+												<tr>
+													<th>花束名</th>
+													<th>单价</th>
+													<th>数量</th>
+													<th>小计</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>贤心</td>
+													<td>2016-11-29</td>
+													<td>人生就像是一场修行</td>
+												</tr>
+												<tr>
+													<td>许闲心</td>
+													<td>2016-11-28</td>
+													<td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+												</tr>
+											</tbody>
+										</table>
+
+									</div>
+									<!-- /.modal-content -->
+								</div>
+								<!-- /.modal -->
 							</div>
 
-							<!---728x90--->
+						</div>
+						<!--订单详情按钮 遮罩层结束 -->
 
-							<div id="pageDiv" style="text-align: center"></div>
+
+						<!-- 修改按钮遮罩层开始 -->
+						<div class="modal fade" id="myModalupdate" tabindex="-1"
+							role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">&times;</button>
+										<h2 class="modal-title">修改订单信息</h2>
+									</div>
+									<div class="modal-body">
+
+										<div class="layui-form-item">
+											<label class="layui-form-label" style="width: 100px;">订单编号：</label>
+
+											<div class="layui-input-block ">
+												<input type="text" name="orderId" required
+													lay-verify="required" id="orderID" autocomplete="off"
+													class="layui-input">
+											</div>
+
+										</div>
+
+
+										<div class="layui-form-item">
+											<label class="layui-form-label" style="width: 100px;">用户名：</label>
+											<div class="layui-input-block">
+												<input type="text" name="userName" required
+													lay-verify="required" id="uName" autocomplete="off"
+													class="layui-input">
+											</div>
+
+										</div>
+										<div class="layui-form-item">
+											<label class="layui-form-label" style="width: 100px;">订单状态：</label>
+											<div class="layui-input-block">
+												<select name="ostatus" id="ostatus" lay-verify="">
+													<option value="5" selected="selected">全部状态</option>
+													<option value="0">未付款</option>
+													<option value="1">已付款</option>
+													<option value="2">未发货</option>
+													<option value="3">已发货</option>
+													<option value="4">交易成功</option>
+												</select>
+											</div>
+
+										</div>
+										<div class="layui-form-item">
+											<label class="layui-form-label" style="width: 100px;">地址：</label>
+											<div class="layui-input-block">
+												<input type="text" name="address" required
+													lay-verify="required" id="oaddress" autocomplete="off"
+													class="layui-input">
+											</div>
+
+										</div>
+										<div class="layui-form-item">
+											<label class="layui-form-label" style="width: 100px;">下单时间：</label>
+											<div class="layui-input-block">
+												<input type="text" name="time" required
+													lay-verify="required" id="otime" autocomplete="off"
+													class="layui-input">
+											</div>
+
+										</div>
+										<div class="layui-form-item">
+											<label class="layui-form-label" style="width: 100px;">订单金额：</label>
+											<div class="layui-input-block">
+												<input type="text" name="payment" required
+													lay-verify="required" id="opayment" autocomplete="off"
+													class="layui-input">
+											</div>
+
+										</div>
+
+										<div class="layui-form-item">
+											<label class="layui-form-label" style="width: 100px;">发货时间：</label>
+											<div class="layui-input-block">
+												<input type="date" name="sendTime" required
+													lay-verify="required" id="sendTime" autocomplete="off"
+													class="layui-input">
+											</div>
+
+										</div>
+
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">关闭</button>
+										<button type="button" class="btn btn-primary" id="updateOrder">提交更改</button>
+									</div>
+									<!-- /.modal-content -->
+								</div>
+								<!-- /.modal -->
+							</div>
 
 						</div>
+						<!-- 修改按钮遮罩层结束 -->
+
+						<!---728x90--->
+
+						<div id="pageDiv" style="text-align: center"></div>
+
+
 						<!-- //tables -->
 
 					</div>
@@ -282,18 +354,16 @@
 					</script>
 					<!-- /script-for sticky-nav -->
 					<!--inner block start here-->
-					<div class="inner-block">
-
-					</div>
+					<div class="inner-block"></div>
 					<!--inner block end here-->
 					<!--copy rights start here-->
-					<%@ include file="foot.jsp" %>
+					<%@ include file="foot.jsp"%>
 					<!--COPY rights end here-->
 				</div>
 			</div>
 			<!--//content-inner-->
 			<!--/sidebar-menu-->
-			<%@ include file="left.jsp" %>
+			<%@ include file="left.jsp"%>
 			<div class="clearfix"></div>
 		</div>
 		<script>
@@ -317,92 +387,161 @@
 				toggle = !toggle;
 			});
 		</script>
+
 		<!--js -->
 		<script src="js/jquery.nicescroll.js"></script>
 		<script src="js/scripts.js"></script>
 		<!-- Bootstrap Core JavaScript -->
 		<script src="js/bootstrap.min.js"></script>
 		<!-- /Bootstrap Core JavaScript -->
-		<script>
-			layui.use(['laypage', 'layer'], function() {
-				var laypage = layui.laypage,
-					layer = layui.layer;
-
-				//完整功能 
-				laypage.render({
-					elem: 'pageDiv',
-					count: 5,
-					curr: 1,
-					limit: 5,
-					layout: ['count', 'prev', 'page', 'limit', 'next', 'skip'],
-					jump: function(obj, first) {
-						console.log(obj);
-						console.log(first);
-						//首次不执行
-						if(!first) {
-							//do something
-							location.href = "";
-						}
-					}
-				});
-
-			});
-			/*$(".layui-btn-normal").click(function() {
-				layer.open({
-					type: 1,
-					title: "更改用户",
-					anim: 1,
-					area: ['600px', '600px'],
-					offset: "auto",
-					shadeClose: true,
-					closeBtn: 1,
-					content: " <div class='modal-body'> 用户名： <input type='text' disabled='disabled' name='userName' style='width:300px;margin-left:30px;margin-bottom:20px;'> </div><div class='modal-body'>电话：<input type='text' name='userPwd'  style='width:300px;margin-left:55px;margin-bottom:30px;'></div> <div class='modal-body'>邮箱： <input type='text' name='userLevel' style='width:300px;margin-left:50px;margin-bottom:30px;'> </div><div class='modal-body'>姓名：  <input type='text' name='userState' style='width:300px;margin-left:50px;margin-bottom:30px;'><input type='hidden' name='userId' style='width:300px;margin-left:15px;margin-bottom:30px;'><br/><button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' style='margin-left:20%;margin-right:20px;'>更新</button><button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' margin-top:100px;>取消</div>"
-
-				});
-			});*/
-		</script>
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-		<script type="text/javascript">
-			/*$(function() {
-				$("#btn1").click(function () {
-					$("#table1").toggle("slow");
-				});
-			});*/
-			$(function(){
-             $(".btn-detail").click(function () {
-					/*$(".orderDetail").toggle("slow");*/
-				var index=	$(this).parents("tr").index();
+		<script>
+		
+		$(function(){ 
+       	
+		layui.use([ 'laypage', 'layer' ], function() {
+			var laypage = layui.laypage, layer = layui.layer;
 
-				var index1=index+2;
-				var index2=index+3;
-				console.log(index2);
-				$("table tr").eq(index1).toggle("slow");
-				$("table tr").eq(index2).toggle("slow");
-
-
-				/*
-				$("table").find("tr").eq(index1).toggle("slow");
-				$("table").find("tr").eq(index2).toggle("slow");*/
-				});
-
-			});
-			$(".layui-btn-danger").click(function() {
-				layer.open({
-					title: "确定删除吗？",
-					skin: "layui-layer-lan",
-					content: "<span>删除了可就找不回来了哦？</span>",
-					anim: 0,
-					btn: ['确定', '取消'],
-					yes: function(index, layero) {
-						layer.msg('删除成功', {
-							icon: 5,
-							time: 3000
-						});
+			//完整功能 
+			laypage.render({
+			    elem: 'pageDiv'
+			    ,count:${orders.total} ,
+			    curr:${orders.page}
+			   ,limit:${orders.pageSize}
+			    ,layout: ['count', 'prev', 'page','limit','next', 'skip']
+			    ,jump: function(obj,first){
+					console.log(obj);
+					console.log(first);
+					//首次不执行
+					if (!first) {
+						//do something
+						location.href = "/Rosemary/message.do?op=showAllMessagePage&page="
+							+ obj.curr + "&pageSize=" + obj.limit
+							+ "&keywords="
+							+ document.getElementById("keywords").value;
 					}
-				});
+				}
 			});
 
+		});
+			//订单详情按钮的单击事件
+			$(".btn-detail").click(function(){
+				var orderId=$(this).parents("tr").find("td").eq(0).text();
+				console.log(orderId);
+				
+			});
+
+			//修改按钮的单击事件
+			$("#update").click(function() {
+				
+			console.log($(this).index());
+				//获取表格中的信息
+   			 var orderId=$(this).parents("tr").find("td").eq(0).text();
+   			 var userName=$(this).parents("tr").find("td").eq(1).text();
+   			 var orderStatus=$(this).parents("tr").find("td").eq(2).text();
+   			 var address=$(this).parents("tr").find("td").eq(3).text();
+   			 var time=$(this).parents("tr").find("td").eq(4).text();
+   			 var payment=$(this).parents("tr").find("td").eq(5).text();
+   			
+				 //将表格中的数据展示在模态窗口中
+				$("#orderID").val(orderId);
+				$("#uName").val(userName);
+			//将原来的订单状态设置为选中状态
+				$("#ostatus option").each(function(){
+					 if($(this).text()==orderStatus){
+						$(this).attr("selected","selected");
+					}
+					
+				});
+				$("#oaddress").val(address);
+				$("#otime").val(time);
+				$("#opayment").val(payment);
+				//将订单编号、用户名、下单时间、订单金额设置为不可操作状态
+				$("#orderID").prop("disabled",true);
+				$("#uName").prop("disabled",true);
+				$("#otime").prop("disabled",true);
+				$("#opayment").prop("disabled",true);
+			});
+			
+		//修改信息模态窗口中的更新按钮的单击事件
+		$("#updateOrder").click(function(){
+			//获取订单编号
+		var orderId=$("#orderID").val();
+			//获取输入的订单状态、地址、发货状态
+			var orderStatus=$("#ostatus").find("option:selected").val();
+			
+			var address=$("#oaddress").val();
+			var sendTime=$("#sendTime").val();
+			$.get("/Rosemary/order.do","op=updateOrder&orderId="+orderId+"&orderStatus="+orderStatus+"&address="+address+"&sendTime="+sendTime,function(data,status){
+				//如果得到的信息提示为信息更新成功，则弹出窗口提示用户信息更新成功
+				if(data="订单信息更新成功啦~(*^▽^*)"){
+					 layer.msg('<span style="color:black;">'+data+'</span>', {
+							icon:6,
+							time: 1000
+						});
+				}
+				//如果得到的信息提示为信息更新失败，则弹出窗口提示用户信息更新失败
+				else{
+					 layer.msg('<span style="color:black;">'+data+'</span>', {
+							icon:1,
+							time: 1000
+						});
+				}
+			});
+		});
+			//下拉框选中事件
+			/* $("#status").change(function(){
+				var statusVal=$(this).find("option:selected").val();
+				$.get("/Rosemary/order.do","op=orderQueryByStatus&statusVal="+statusVal,function(data,status){
+					var array=gson.toJson();
+					$.each(array,function(index,order){
+						$("tbody").append("<tr>"+
+								"<td>"+order.orderId +"</td>"+
+								"<td>"+order.userName +"</td>"+
+								
+								<c:choose>
+									<c:when test='order.orderStatus==0'>
+										"<td>未付款</td>"+
+									</c:when>
+									<c:when test='order.orderStatus==1'>
+										"<td>已付款</td>"+
+									</c:when>
+									<c:when test='order.orderStatus==2'>
+										"<td>未发货</td>"+
+									</c:when>
+									<c:when test='order.orderStatus==3 '>
+										"<td>已发货</td>"+
+									</c:when>
+									<c:otherwise>
+										"<td>交易成功</td>"+
+									</c:otherwise>
+								</c:choose>
+
+
+								"<td>"+order.address +"</td>"+
+								"<td>"+order.createTime +"</td>"+
+								"<td>"+order.payment+"</td>"+
+								"<td><button"+
+										"class='layui-btn layui-btn-radius layui-btn-normal btn-detail'"+
+										"data-toggle='modal' data-target='#myModal' id='detail'>订单详情</button>&nbsp;"+
+									"<button class='layui-btn layui-btn-radius layui-btn-danger'>修改"+
+									"</button></td>"+
+
+							"</tr>");
+					});
+					
+				});
+			});  */
+			//搜索按钮的单击事件
+			$("#search").click(function(){
+				location.href = "/Rosemary/order.do?op=showOrdersPage&page="
+					+ ${orders.page} + "&pageSize=" +${orders.pageSize}
+					+ "&keywords="
+					+ document.getElementById("keywords").value;
+			});
+			
+		});
 		</script>
-	</body>
+</body>
 
 </html>

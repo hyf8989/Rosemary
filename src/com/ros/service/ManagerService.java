@@ -18,8 +18,8 @@ public interface ManagerService {
 	//分页显示管理员
 	PageData<Manager> queryManagerByPage(int page,int pageSize,String keywords);
 
-	// 删除管理员
-	boolean delManager(int adminId);
+	/*// 删除管理员
+	boolean delManager(int adminId);*/
 
 	// 重置密码
 	boolean updateManagerPwd(String adminName);
@@ -29,4 +29,7 @@ public interface ManagerService {
 
 	// 管理员状态解锁
 	boolean clearManagerStatus(String adminName);
+	
+	//根据管理员名称查询管理员
+	Manager queryManager(String adminName);
 }

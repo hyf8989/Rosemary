@@ -38,8 +38,8 @@ public interface ManagerDao {
 	//显示管理员分页
 	PageData<Manager> queryManagerByPage(int page,int pageSize,String keywords);
 
-	// 删除管理员
-	boolean delManager(int adminId);
+	/*// 删除管理员
+	boolean delManager(int adminId);*/
 
 	// 重置密码
 	boolean updateManagerPwd(String adminName);
@@ -49,6 +49,9 @@ public interface ManagerDao {
 	
 	// 解锁管理员状态
 	boolean clearManagerStatus(String adminName);
+	
+	//根据管理员名称查询管理员
+	Manager queryManager(String adminName);
 	
 
 

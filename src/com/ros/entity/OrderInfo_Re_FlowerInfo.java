@@ -13,7 +13,15 @@ public class OrderInfo_Re_FlowerInfo {
 	  private String sPicture;//鲜花小图
 	  private int  orderId;//所属订单编号
 	  private String quantity;//对应订单项的购买数量
+	  
 	  private double totalPrice;//订单项的小计
+	  private String sendTime;//订单的发时间
+	public String getSendTime() {
+		return sendTime;
+	}
+	public void setSendTime(String sendTime) {
+		this.sendTime = sendTime;
+	}
 	public String getFlowerName() {
 		return flowerName;
 	}
@@ -50,10 +58,23 @@ public class OrderInfo_Re_FlowerInfo {
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+	
+	public OrderInfo_Re_FlowerInfo(String flowerName, double price, String sPicture, int orderId, String quantity,
+			double totalPrice, String sendTime) {
+		super();
+		this.flowerName = flowerName;
+		this.price = price;
+		this.sPicture = sPicture;
+		this.orderId = orderId;
+		this.quantity = quantity;
+		this.totalPrice = totalPrice;
+		this.sendTime = sendTime;
+	}
 	@Override
 	public String toString() {
 		return "OrderInfo_Re_FlowerInfo [flowerName=" + flowerName + ", price=" + price + ", sPicture=" + sPicture
-				+ ", orderId=" + orderId + ", quantity=" + quantity + ", totalPrice=" + totalPrice + "]";
+				+ ", orderId=" + orderId + ", quantity=" + quantity + ", totalPrice=" + totalPrice + ", sendTime="
+				+ sendTime + "]";
 	}
 	public OrderInfo_Re_FlowerInfo(String flowerName, double price, String sPicture, int orderId, String quantity,
 			double totalPrice) {
@@ -66,6 +87,8 @@ public class OrderInfo_Re_FlowerInfo {
 		this.totalPrice = totalPrice;
 	}
 	  
-	  
+	  public OrderInfo_Re_FlowerInfo() {
+		// TODO Auto-generated constructor stub
+	}
 
 }
