@@ -37,7 +37,7 @@
 							</ul>
 						</li>
 						<li id="menu-academico">
-							<a href="message.jsp"><i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp;<span> 留言信息</span>
+							<a href="/Rosemary/message.do?op=showAllMessagePage"><i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp;<span> 留言信息</span>
 								<div class="clearfix"></div>
 							</a>
 
@@ -66,7 +66,7 @@
 							</ul>
 						</li>
 						<li id="menu-academico">
-							<a href="orderList.jsp"><i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp;<span> 订单管理</span>
+							<a href="/Rosemary/order.do?op=showOrdersPage"><i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp;<span> 订单管理</span>
 								<div class="clearfix"></div>
 							</a>
 

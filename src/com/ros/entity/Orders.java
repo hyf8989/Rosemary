@@ -8,6 +8,7 @@ public class Orders {
 
 	private int orderId;//订单编号
 	private int userId;//用户编号
+	private String userName;//用户名
 	private double payment;//总费用
 	private double postage;//运费
 	private String sendTime;//发货时间
@@ -76,11 +77,32 @@ public class Orders {
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	public Orders(int orderId, String userName, double payment, double postage, String sendTime, String address,
+			int orderType, int orderStatus, String createTime) {
+		super();
+		this.orderId = orderId;
+		this.userName = userName;
+		this.payment = payment;
+		this.postage = postage;
+		this.sendTime = sendTime;
+		this.address = address;
+		this.orderType = orderType;
+		this.orderStatus = orderStatus;
+		this.createTime = createTime;
+	}
 	@Override
 	public String toString() {
-		return "Orders [orderId=" + orderId + ", userId=" + userId + ", payment=" + payment + ", postage=" + postage
-				+ ", sendTime=" + sendTime + ", address=" + address + ", orderType=" + orderType + ", orderStatus="
-				+ orderStatus + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+		return "Orders [orderId=" + orderId + ", userId=" + userId + ", userName=" + userName + ", payment=" + payment
+				+ ", postage=" + postage + ", sendTime=" + sendTime + ", address=" + address + ", orderType="
+				+ orderType + ", orderStatus=" + orderStatus + ", createTime=" + createTime + ", updateTime="
+				+ updateTime + "]";
 	}
 	public Orders(int orderId, int userId, double payment, double postage, String sendTime, String address,
 			int orderType, int orderStatus, String createTime, String updateTime) {

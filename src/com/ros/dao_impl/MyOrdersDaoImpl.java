@@ -6,6 +6,7 @@ import java.util.List;
 import com.ros.dao.MyOrdersDao;
 
 import com.ros.entity.OrderInfo;
+import com.ros.entity.OrderInfo_Re_FlowerInfo;
 import com.ros.entity.Orders;
 import com.ros.util.BaseDao;
 import com.ros.util.PageData;
@@ -88,4 +89,61 @@ public class MyOrdersDaoImpl implements MyOrdersDao {
 	  
 	}
 
+	/**
+	 * 
+	 * 查询所有的订单记录
+	 *  @param page 当前页码
+	 *  @param pageSize 每页的记录的条数
+	 *  @param keywords 关键词
+	 *  return PageData<Orders> 
+	 */
+	 
+		@Override
+		public PageData<Orders> queryOrdersByPage(int page, int pageSize, String keywords) {
+			String sql="SELECT a.orderId,b.userName,a.orderStatus,a.address,a.createTime,a.payment from orders a INNER JOIN user_basicinfo b  ON a.userId = b.userId WHERE a.orderId LIKE binary ? OR b.userName LIKE binary ? or a.address like binary ? or a.createTime like binary ?";
+			PageData<Orders> pdo=(PageData<Orders>)BaseDao.getPage(sql,page, pageSize, Orders.class, "%"+keywords+"%","%"+keywords+"%","%"+keywords+"%","%"+keywords+"%");
+			
+			return pdo;
+		}
+		
+		/**
+		 * 
+		 * 根据订单状态查询订单记录
+		 *  @param status 订单状态
+		 *  return List<Orders> 
+		 */
+		 
+		@Override
+		public List<Orders> orderQueryByStatus(int status) {
+			String sql="SELECT a.orderId,b.userName,a.orderStatus,a.address,a.createTime,a.payment from orders a INNER JOIN user_basicinfo b  ON a.userId = b.userId WHERE a.orderStatus=?";
+			List<Orders> list=(List<Orders>)BaseDao.select(sql, Orders.class, status);
+			
+			return list;
+		}
+		/**
+		 * 根据订单编号更改订单信息
+		 *  @param orderId 订单编号
+		 *  @param orderStatus 订单状态
+		 *  @param address 地址
+		 *  @param sendTime 发货时间
+		 *  return true/更新成功 false/更新失败
+		 */
+		@Override
+		public boolean updateOrder(int orderId, int orderStatus, String address, String sendTime) {
+			String sql="update orders set orderStatus=?,address=?,sendTime=? where orderId=?";
+			
+			return BaseDao.execute(sql, orderStatus,address,sendTime,orderId)>0;
+		}
+		/**
+		 * 根据订单编号获取订单中的鲜花等详情
+		 *  @param orderId 订单编号
+		 *  return List<OrderInfo_Re_FlowerInfo> 订单详情信息对象的集合
+		 */
+		@Override
+		public List<OrderInfo_Re_FlowerInfo> queryOrderDetailInfoByOrderId(int orderId) {
+			String sql="SELECT b.flowerName,b.price,a.totalPrice,a.quantity,c.sendTime FROM order_info a INNER JOIN flower_info b ON a.flowerId=b.flowerId INNER JOIN orders c ON c.orderId =a.orderId WHERE c.orderId=?";
+			List<OrderInfo_Re_FlowerInfo> list=(List<OrderInfo_Re_FlowerInfo>)BaseDao.select(sql, OrderInfo_Re_FlowerInfo.class, orderId);
+			
+			return list;
+		}
 }

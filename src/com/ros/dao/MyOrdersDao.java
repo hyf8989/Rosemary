@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import com.ros.entity.OrderInfo;
+import com.ros.entity.OrderInfo_Re_FlowerInfo;
 import com.ros.entity.Orders;
 import com.ros.util.PageData;
 
@@ -20,4 +21,8 @@ public interface MyOrdersDao {
 	public boolean InsertOrderInfo(OrderInfo orderInfo);//对订单详情表进行插入
     public Orders getOrderInfoByOrderId(int orderId);//根据订单ID查询出该条订单所有信息
     public boolean setOrderStatus(int orderId);//支付成功之后，对订单状态设置为已付款
+    public PageData<Orders> queryOrdersByPage(int page,int pageSize,String keywords);//查询所有的订单记录并分页、模糊查找(后台)
+    List<Orders> orderQueryByStatus(int status);//根据订单状态查询订单信息（后台）
+    boolean updateOrder(int orderId,int orderStatus,String address,String sendTime);//根据订单编号更改订单信息（后台）
+    List<OrderInfo_Re_FlowerInfo> queryOrderDetailInfoByOrderId(int orderId);//根据订单编号查询订单的鲜花等详情信息
 }

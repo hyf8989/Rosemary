@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,9 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.catalina.ha.backend.CollectedInfo;
 
+import com.google.gson.Gson;
 import com.ros.entity.Cart;
 import com.ros.entity.CartItem;
 import com.ros.entity.OrderInfo;
+import com.ros.entity.OrderInfo_Re_FlowerInfo;
 import com.ros.entity.Orders;
 import com.ros.service.FlowerInfoService;
 import com.ros.service.MyOrdersService;
@@ -178,6 +181,80 @@ public class OrderServlet extends HttpServlet {
 		   //重定向到订单页面
 		   response.sendRedirect("/Rosemary/index/myOrder.jsp");
 		   
+		 }
+		 
+		 //展示所有的订单并分页、模糊查询（后台）
+		 else if("showOrdersPage".equals(op)) {
+			 int page =1;//默认第一页
+				int pageSize = 2;//默认每页显示10条
+				//如果用户传递的参数不为空
+				if(request.getParameter("page")!=null)
+				{
+					page = Integer.parseInt(request.getParameter("page"));
+				}
+				
+				if(request.getParameter("pageSize")!=null)
+				{
+					pageSize = Integer.parseInt(request.getParameter("pageSize"));
+				}
+				
+				//增加了模糊查询的部分;
+				String keywords="";
+				if(request.getParameter("keywords")!=null)
+				{
+					keywords = request.getParameter("keywords");
+				}
+				PageData<Orders> pdm=orderService.getOrderByPage(page, pageSize, keywords);
+				
+				request.getSession().setAttribute("orders", pdm);
+				response.sendRedirect("/Rosemary/admin/orderList.jsp");
+		}
+		 //根据订单状态查询订单信息
+		 else if("orderQueryByStatus".equals(op)) {
+			 String mString="暂时还没有该状态的订单";
+			 //获取订单管理表界面传递过来的订单状态
+			int statusVal=Integer.parseInt(request.getParameter("statusVal"));
+			//调用服务层的方法
+			List<Orders> list=orderService.getOrderByStatus(statusVal);
+			
+			//若查询到的结果集里有记录，则将结果集传到orderList.jsp界面
+			if(list.size()>0) {
+				Gson gson=new Gson();
+				out.print(gson.toJson(list));
+				
+			}
+			//若查询到的结果集没有记录则将mString传到orderList.jsp界面
+			out.print(mString);
+			out.close();
+			
+		}
+		 
+		 else if ("updateOrder".equals(op)) {
+			 String mString="";
+			 //获取jsp界面传递过来的订单编号、订单状态、地址、发货时间
+			int orderId=Integer.parseInt(request.getParameter("orderId"));
+			int orderStatus= Integer.parseInt(request.getParameter("orderStatus"));
+			String address=request.getParameter("address");
+			String sendTime=request.getParameter("sendTime");
+			//调用服务层的方法
+			boolean flag=orderService.updateOrder(orderId, orderStatus, address, sendTime);
+			//判断订单信息是否更新成功
+			if(flag) {
+				mString="订单信息更新成功啦~(*^▽^*)";
+			}
+			else {
+				mString="订单信息更新失败(ಥ﹏ಥ)";
+			}
+			out.print(mString);
+			out.close();
+		}
+		 //根据订单编号获取订单详细信息
+		 else if("getOrderDetailInfo".equals(op)) {
+			 int orderId=Integer.parseInt(request.getParameter("orderId"));
+			 List<OrderInfo_Re_FlowerInfo> list=orderService.queryOrderDetailInfoByOrderId(orderId);
+		    request.getSession().setAttribute("orderDetailInfo", list);
+		    response.sendRedirect("/Rosemary/admin/orderList.jsp");
+		 
 		 }
 	}
 

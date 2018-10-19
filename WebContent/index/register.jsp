@@ -78,7 +78,7 @@
 					icon:4,
 					time: 1000
 				});
-				
+				 $(this).val("");
 				
 			}
 			//如果格式正确，则通过AJAX传值到Userservlet进行后台判断是或否存在这个用户名

@@ -7,6 +7,7 @@ import com.ros.dao.MyOrdersDao;
 import com.ros.dao_impl.MyOrdersDaoImpl;
 
 import com.ros.entity.OrderInfo;
+import com.ros.entity.OrderInfo_Re_FlowerInfo;
 import com.ros.entity.Orders;
 import com.ros.service.MyOrdersService;
 import com.ros.util.PageData;
@@ -67,4 +68,54 @@ public class MyOrdersServiceImpl implements MyOrdersService {
 		return mod.queryOrderByUserId( userId, page, pageSize);
 	}
 
+	/**
+	 * 
+	 * 查询所有的订单记录
+	 *  @param page 当前页码
+	 *  @param pageSize 每页的记录的条数
+	 *  @param keywords 关键词
+	 *  return PageData<Orders> 
+	 */
+@Override
+public PageData<Orders> getOrderByPage(int page, int pageSize, String keywords) {
+	// TODO Auto-generated method stub
+	return mod.queryOrdersByPage(page, pageSize, keywords);
+}
+
+/**
+ * 
+ * 根据订单状态查询订单记录
+ *  @param status 订单状态
+ *  return List<Orders> 
+ */
+	@Override
+	public List<Orders> getOrderByStatus(int status) {
+		// TODO Auto-generated method stub
+		return mod.orderQueryByStatus(status);
+	}
+	
+	/**
+	 * 根据订单编号更改订单信息
+	 *  @param orderId 订单编号
+	 *  @param orderStatus 订单状态
+	 *  @param address 地址
+	 *  @param sendTime 订发货时间
+	 *  return true/更新成功 false/更新失败
+	 */
+	@Override
+	public boolean updateOrder(int orderId, int orderStatus, String address, String sendTime) {
+		// TODO Auto-generated method stub
+		return mod.updateOrder(orderId, orderStatus, address, sendTime);
+	}
+	
+	/**
+	 * 根据订单编号更改订单信息
+	 *  @param orderId 订单编号
+	 *  return List<OrderInfo_Re_FlowerInfo> 订单详情信息对象的集合
+	 */
+	@Override
+	public List<OrderInfo_Re_FlowerInfo> queryOrderDetailInfoByOrderId(int orderId) {
+		// TODO Auto-generated method stub
+		return mod.queryOrderDetailInfoByOrderId(orderId);
+	}
 }
