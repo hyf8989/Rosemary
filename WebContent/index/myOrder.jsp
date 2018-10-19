@@ -131,7 +131,8 @@ $(function(){
 	}); 
 	
 	$(".order-search").click(function(){
-		
+		  
+	console.log($(this).parents("tr").find("td").eq(0).text())	;
 	});
 });
 

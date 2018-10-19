@@ -177,86 +177,7 @@
 	<%@ include file="foot.jsp"%>
 	<!-- footer-end -->
 	<!-- Modal -->
-	<div id="myModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">
-					<div class="product-details">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-5 col-xs-12 col-sm-5">
-									<div class="picture-tab">
-										<ul class="pic-tabs">
-											<li class="active"><a data-toggle="tab" href="#pic11"><img
-													src="img/pro-tab/a01.jpg" alt="" /></a></li>
-
-										</ul>
-										<div class="tab-content">
-											<div id="pic11" class="tab-pane fade in active">
-												<!-- single-product-start -->
-												<div class="single-product">
-													<div class="single-product-img">
-														<a href="#"> <img src="img/singlepro/a01.jpg" " />
-														</a> <span class="sale-box "> <span class="sale ">Sale</span>
-														</span> <span class="new-box "> <span class="new ">New</span>
-														</span>
-													</div>
-												</div>
-												<!-- single-product-end -->
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-7 col-xs-12 col-sm-7 ">
-									<div class="product-details-info ">
-										<h5 class="product-title ">粉色洋桔梗</h5>
-										<div class="price-box ">
-											<span class="price ">£359.00</span> <span class="old-price ">£390.00</span>
-										</div>
-										<div class="rating ">
-											<div class="star star-on "></div>
-											<div class="star star-on "></div>
-											<div class="star star-on "></div>
-											<div class="star star-on "></div>
-											<div class="star "></div>
-										</div>
-										<div class="short-description ">
-											<p>花语：洋桔梗是真诚不变的爱，纯洁、无邪、漂亮、感动，富于感情。</p>
-											<p>材
-												料：白色紫罗兰2扎（紫罗兰花期为3-6月，其他月份用白色金鱼花或者白色桔梗替代）、粉色洋桔梗1扎，斑春兰0.5扎（斑春兰如缺货可用尤加利替代）.
-											</p>
-											<p>包 装：矮身圆肚玻璃花瓶系丝带.</p>
-										</div>
-										<div class="add-cart ">
-											<p class="quantity cart-plus-minus ">
-												<label>数量</label> <input type="text " value="1 " />
-											</p>
-											<div class="shop-add-cart ">
-												<button>加入购物车</button>
-											</div>
-										</div>
-										<div class="widget-icon ">
-											<a href="# "> <i class="fa fa-facebook "></i>
-											</a> <a href="# "> <i class="fa fa-twitter "></i>
-											</a> <a href="# "> <i class="fa fa-linkedin "></i>
-											</a> <a href="# "> <i class="fa fa-google-plus "></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	<!-- modal-end -->
 	<!-- all js here -->
 	<!-- jquery latest version -->
@@ -285,11 +206,11 @@
 	 <script type="text/javascript" src="layui/layui.js">
 			
 		</script> 
-	<script src="js/flowershow.js" type="text/javascript" charset="utf-8"><!--页面显示的JS文件（小谢） -->
+ <script src="js/flowershow.js" type="text/javascript" charset="utf-8"><!--页面显示的JS文件（小谢） -->
 		 
 		
 		
-	</script>
+ </script> 
 	<!-- 分页脚本 -->
 	
 </body>

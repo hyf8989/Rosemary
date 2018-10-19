@@ -343,6 +343,7 @@
 		   
 		   //点击新增地址按钮的事件
 		   $(".addressAdd").click(function(){
+			   
 			  location.href="/Rosemary/address.do?op=myAddress&userName=${sessionScope.ub.userName}"; 
 			   
 		   });
