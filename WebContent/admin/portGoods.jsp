@@ -68,58 +68,49 @@
 							<form action="" style="margin-bottom: 40%;">
 								<div class="form-group">
 									<label for="exampleInputFlowerName">商品名称：</label> <input
-										type="text" class="form-control" id="exampleInputFlowerName"
+										type="text" class="form-control" id="flowerName" name="flowerName"
 										aria-describedby="emailHelp" placeholder="请输入花名">
 								</div>
 								<div class="form-group">
 									<label for="exampleInputPrice">商品价格:</label> <input type="text"
-										class="form-control" id="exampleInputPrice"
+										class="form-control" id="price" name="price"
 										placeholder="请输入价格">
 								</div>
 								<div class="form-group">
 									<label for="exampleInputWords">商品寓意:</label> <input type="text"
-										class="form-control" id="exampleInputWords"
+										class="form-control" id="words" name="words"
 										placeholder="请输花的寓意">
 								</div>
 								<div class="form-group">
 									<label for="exampleInputDescription">商品描述:</label> <input
-										type="text" class="form-control" id="exampleInputDescription"
+										type="text" class="form-control" id="description" name="description"
 										placeholder="请输花的描述">
 								</div>
 								<div class="form-group">
 									<label for="exampleInputWords">商品小图:</label>
 									<!-- <input type="text" class="form-control" id="exampleInputWords" placeholder="请输花的寓意"> -->
 									<img src="" width="150px" height="150px" id="img1" /> <br /> 
-									<input type="file" name="sphoto" id="sphoto" accept="image/jpeg" />
+									<input type="file" name="sPicture" id="sPicture" accept="image/jpeg" />
 									<p id="demoText"></p>
 								</div>
 								<div class="form-group">
 									<label for="exampleInputWords">商品大图:</label>
 									<!-- <input type="text" class="form-control" id="exampleInputWords" placeholder="请输花的寓意"> -->
-									<img src="" width="150px" height="150px" id="img2" /> <br /> <input
-										type="file" name="bphoto" id="bphoto" accept="image/jpeg" />
+									<img src="" width="150px" height="150px" id="img2" /> <br />
+									 <input type="file" name="bPicture" id="bPicture" accept="image/jpeg" />
 								</div>
 								<div class="form-group">
 									<label for="exampleInputDescription">所属类型:</label>
 									<!-- 需要选择类型 -->
-									<select class="form-control" id="opType" name="opType"
+									<select class="form-control" id="typeId" name="typeId"
 										style="height: 35px">
-										<!-- <option value="0" selected="selected">郁金香</option>
-													<option value="1">玫瑰</option>
-													<option value="2">康乃馨</option>
-													<option value="3">邹菊</option>
-													<option value="4">满天星</option>
-													<option value="5">百合</option>
-													<option value="6">迷迭香</option>
-													<option value="7">桔梗花</option>
-													<option value="8">扶郎花</option>	 -->
 									</select>
 								</div>
 
 								<script type="text/javascript">
 									//当file发生改变的时候onchange
 									/*将用户选择的图片 赋值给img对象*/
-									document.getElementById("sphoto").onchange = function fun() {
+									document.getElementById("sPicture").onchange = function fun() {
 										document.getElementById("img1").src = URL
 												.createObjectURL(this.files[0]);
 									}
@@ -128,7 +119,7 @@
 								<script type="text/javascript">
 									//当file发生改变的时候onchange
 									/*将用户选择的图片 赋值给img对象*/
-									document.getElementById("bphoto").onchange = function fun() {
+									document.getElementById("bPicture").onchange = function fun() {
 										document.getElementById("img2").src = URL
 												.createObjectURL(this.files[0]);
 									}
@@ -177,28 +168,6 @@
 		<%@ include file="left.jsp"%>
 		<div class="clearfix"></div>
 	</div>
-
-	<!-- 		<script>
-			var toggle = true;
-
-			$(".sidebar-icon").click(function() {
-				if(toggle) {
-					$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-					$("#menu span").css({
-						"position": "absolute"
-					});
-				} else {
-					$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-					setTimeout(function() {
-						$("#menu span").css({
-							"position": "relative"
-						});
-					}, 400);
-				}
-
-				toggle = !toggle;
-			});
-		</script> -->
 	<!--js -->
 	<script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
 
@@ -206,32 +175,7 @@
 	<script src="js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
-	<!-- 新品发布按钮事件 -->
-	<script type="text/javascript">
-		layui.use('layer', function() {
-			var layer = layui.layer;
-		});
-		$("#publishGoods").click(function() {
-			layer.open({
-				title : "友情提醒？",
-				skin : "layui-layer-molv",
-				content : "<span>确定上传新商品吗？</span>",
-				anim : 0,
-				btn : [ '确定', '取消' ],
-				yes : function(index, layero) {
-					layer.msg('发布成功', {
-						icon : 1,
-						time : 2000
-					});
-				},
-				btn2 : function(index, layero) {
-					layer.close();
-				}
-			});
-		});
-	</script>
-	
-	<!-- 所属类型 -->
+		<!-- 所属类型 -->
 	<script type="text/javascript">
 		$(function() {
 			$.get("/Rosemary/type.do?op=load", function(data) {
@@ -239,7 +183,7 @@
 				var arr = JSON.parse(data);
 				console.log(arr);
 				$.each(arr, function(i, t) {
-					$("#opType").append(
+					$("#typeId").append(
 							"<option value="+t.typeId+">" + t.typeName + "</option>");
 				});
 			});
@@ -249,7 +193,7 @@
 	<script type="text/javascript">
 	 //图片上传
     var uploadInst = upload.render({
-    elem: '#sphoto'
+    elem: '#sPicture'
     ,url: '${pageContext.request.contextPath }/UpLoadPhotoServlet'
     ,before: function(obj){
       //预读本地文件示例，不支持ie8
@@ -279,6 +223,62 @@
     }
   });
   </script>
+	<!-- 新品发布按钮事件 -->
+	<script type="text/javascript">
+		layui.use('layer', function() {
+			var layer = layui.layer;
+		});
+		$("#publishGoods").click(function() {
+			alert(123);
+			//获取输入的信息
+			var flowerName = $("#flowerName").val();
+			var price = $("#price").val();
+			var words = $("#words").val();
+			var description = $("#description").val();
+			var sPicture = $("#sPicture").val();
+			var bPicture = $("#bPicture").val();
+			var typeId = $("#typeId").val();
+
+			if(msg="新品发布成功"){			
+			layer.open({
+				title : "友情提醒？",
+				skin : "layui-layer-molv",
+				content : "<span>确定上传新商品吗？</span>",
+				anim : 0,
+				btn : [ '确定', '取消' ],
+				yes : function() {
+					$.get(
+							"/Rosemary/flower.do","op=insertFlower&flowerName="+ flowerName
+									+ "&price="+ price
+									+ "&words="+ words
+									+ "&description="+ description
+									+ "&sPicture="+ sPicture
+									+ "&wordbPictures="+ bPicture
+									+ "&typeId="+ typeId,
+							function(data,status) {
+								msg = data;
+								layer.msg('发布成功',{
+													icon : 1,
+													time : 2000
+									});
+							});
+
+			layer.closeAll();
+			setTimeout(function(){
+				window.location.reload();
+			},2000);
+			
+		},
+				btn2 : function(index, layero) {
+					layer.close();
+				}
+			});
+			}
+		});
+		
+	</script>
+	
+
 	<!-- /Bootstrap Core JavaScript -->
 
 </body>

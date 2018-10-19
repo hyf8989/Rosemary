@@ -18,4 +18,5 @@ public interface FlowerInfoService {
 	public boolean setFlowerStockByFlowerId(int flowerId,int stock);//修改鲜花库存
 	PageData<FlowerInfo> queryFlowerByPage(int page,int pageSize,String keywords);
 	List<FlowerInfo> queryFlowerInfo();
+	boolean insertFlower(FlowerInfo f);//后台新品发布
 }

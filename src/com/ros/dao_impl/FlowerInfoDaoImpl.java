@@ -148,5 +148,15 @@ public class FlowerInfoDaoImpl implements FlowerInfoDao {
 		}
 		return flag;
 	}
+	
+	/**
+	 * 用于后台新品上架
+	 */
+	@Override
+	public boolean insertFlowerInfo(FlowerInfo f) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO flower_info(flowerName,price,words,description,sPicture,bPicture,typeId,createTime,updateTime) VALUES(?,?,?,?,?,?,?,?,?)";
+		return BaseDao.execute(sql, f.getFlowerName(),f.getPrice(),f.getWords(),f.getDescription(),f.getsPicture(),f.getbPicture(),f.getTypeId(),f.getCreateTime(),f.getUpdateTime())>0;
+	}
 
 }

@@ -2,7 +2,9 @@ package com.ros.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -179,6 +181,33 @@ public class FlowerInfoServlet extends HttpServlet {
 			out = response.getWriter();
 			out.println(str);
 			out.close();
+		}
+		 //后台新品发布
+		else if("insertFlower".equals(op)) {
+			String msg="";
+			String flowerName = request.getParameter("flowerName");
+			double price = Float.parseFloat(request.getParameter("price"));
+			String words = request.getParameter("words");
+			String description = request.getParameter("description");
+			String sPicture = request.getParameter("sPicture");
+			String bPicture = request.getParameter("bPicture");
+			int typeId = Integer.parseInt(request.getParameter("typeId"));
+			//当前时间
+			 Date date=new Date();
+			 String createTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+			String updateTime = createTime;
+			FlowerInfo fi = new FlowerInfo(flowerName,price,words,description,sPicture,bPicture,typeId,createTime,updateTime);
+			boolean flag = fIS.insertFlower(fi);
+			if(flag) {
+				msg="新品发布成功";
+			}
+			else {
+				msg="新品发布失败";
+			}
+			
+			out.print(msg);
+			out.close();
+	
 		}
 	
 	}

@@ -126,6 +126,20 @@ public class FlowerInfo {
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 	}
+	
+	public FlowerInfo(String flowerName, double price, String words, String description, String sPicture,
+			String bPicture, int typeId, String createTime, String updateTime) {
+		super();
+		this.flowerName = flowerName;
+		this.price = price;
+		this.words = words;
+		this.description = description;
+		this.sPicture = sPicture;
+		this.bPicture = bPicture;
+		this.typeId = typeId;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
 	@Override
 	public String toString() {
 		return "FlowerInfo [flowerId=" + flowerId + ", flowerName=" + flowerName + ", price=" + price + ", words="
