@@ -104,8 +104,8 @@
 							<br />
 							<table class="layui-table ">
 									<tr>
-										<th>头像</th>
-										<th>用户名</th>
+										<th>管理员编号</th>
+										<th>管理官账号</th>
 										<th>状态</th>
 										<th>系统身份</th>
 										<th>操作</th>
@@ -118,7 +118,8 @@
 											<c:forEach items="${sessionScope.pdm.data}" var="m">
 
 												<tr class="table-row">
-													<td class="table-img"><img src="${pageContext.request.contextPath}/admin/images/in.jpg" alt="">
+													<td class="table-img" style="text-align: center">
+													${m.adminId}
 													</td>
 													<td class="table-text">
 														<h6>${m.adminName}</h6>
