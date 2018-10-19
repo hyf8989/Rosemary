@@ -241,6 +241,8 @@ public class UserServlet extends HttpServlet {
 			String msg="";
 			String userName=request.getParameter("userName");
 			String userPwd=MD5Util.getEncodeByMd5(request.getParameter("userPwd"));//密码加密	
+			String phoneNumber=request.getParameter("userTel");//得到传过来的用户联系方式
+			//System.out.println(phoneNumber);
 			 //获取当前时间
 			Date date=new Date();
 			String createTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
@@ -248,7 +250,11 @@ public class UserServlet extends HttpServlet {
 			UserBasicInfo ub=new UserBasicInfo(userName, userPwd, createTime, updateTime);		
 			boolean flag=us.insertUser(ub);//插入用户基本表
 			if(flag) {
-				msg="添加成功";
+				int userId=us.getUserBasicInfoByUserName(userName).getUserId();//获得刚注册的用户ID
+				UserDetailInfo uDI=new UserDetailInfo(userId, phoneNumber, createTime, updateTime);
+				if(us.insertUserDetail(uDI)) {
+					msg="添加成功";
+				}
 			}else {
 				msg="添加失败";
 			}

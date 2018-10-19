@@ -64,8 +64,8 @@
 		 var msg="";//验证提示信息
 		 var flag=false;
 		
-		var userNameTest=/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{4,8}$/;//用户名校验，必须为字母数字组合，且位数控制在4至8位
-		var passwordTest=/^\w{5}$/;//密码校验，必须为5位任意字符
+		var userNameTest=/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{4,16}$/;//用户名校验，必须为字母数字组合，且位数控制在4至16位
+		var passwordTest=/^\w{6,16}$/;//密码校验，必须为6至16位任意字符
 		var phoneTest=/^1\d{10}$/;//手机号正则表达式，规定由全为数字，1开头
   //用户名的输入校验
 		$("#userName").change(function(){
@@ -73,7 +73,7 @@
 			//如果用户名校验格式不对，则弹窗提醒
 			if(userNameTest.test(userName)==false){
 				
-				msg='必须为字母数字组合，且位数控制在4至8位';
+				msg='必须为字母数字组合，且位数控制在4至16位';
 				layer.msg('<span style="color:black;">'+msg+'</span>', {
 					icon:4,
 					time: 1000
@@ -105,7 +105,7 @@
 		});
 		$("#password").change(function(){
 			if(passwordTest.test($(this).val())==false){
-				msg="密码必须是五位字符";
+				msg="密码必须是6-16位字符";
 				 layer.msg('<span style="color:black;">'+msg+'</span>', {
 						icon:6,
 						time: 1000

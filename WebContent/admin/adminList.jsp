@@ -99,7 +99,9 @@
 
 					<div class="agile-tables">
 						<div class="w3l-table-info">
-							<h2>管理员信息表</h2>
+							<h2 class="agileits-icons-title">管理员信息表</h2>
+							<br />
+							<br />
 							<table class="layui-table ">
 									<tr>
 										<th>头像</th>

@@ -94,7 +94,9 @@
 
 					<div class="agile-tables">
 						<div class="w3l-table-info">
-							<h2>商品基本信息表</h2>
+							<h2 class="agileits-icons-title">商品基本信息表</h2>
+							<br />
+							<br />
 							<table id="table">
 								<thead>
 									<tr>

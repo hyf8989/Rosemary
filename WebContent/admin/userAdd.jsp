@@ -69,15 +69,20 @@
 							<br /> <br />
 							<form action="" style="margin-bottom: 40%;">
 								<div class="form-group">
-									<label for="exampleInputText">账号：</label> <input type="text"
+									<label for="exampleInputText">账号:</label> <input type="text"
 										class="form-control" id="userName" name="userName"
 										aria-describedby="textHelp" placeholder="请输入账号">
 
 								</div>
 								<div class="form-group">
-									<label for="exampleInputPassword1">密码</label> <input
+									<label for="exampleInputPassword1">密码:</label> <input
 										type="password" class="form-control" id="userPwd"
 										name="userPwd" placeholder="请设置密码">
+								</div>
+								<div class="form-group">
+									<label for="userTel">手机号:</label> <input
+										type="text" class="form-control" id="userTel"
+										name="userTel" placeholder="请输入手机号">
 								</div>
 								<center>
 									<div class="form-check">
@@ -86,7 +91,7 @@
 											for="exampleCheck1" style="margin-top: 40px;">确定添加</label>
 									</div>
 									<button type="button" class="btn btn-primary" id="userAdd"
-										name="userAdd">添加用户</button>
+										>添加用户</button>
 								</center>
 							</form>
 
@@ -163,15 +168,16 @@
 			});
 			var msg = "";//验证提示信息
 			var flag = false;
-			var userNameTest = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{4,8}$/;//用户名校验，必须为字母数字组合，且位数控制在4至8位
-			var passwordTest = /^\w{5}$/;//密码校验，必须为5位任意字符
+			var userNameTest = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{4,16}$/;//用户名校验，必须为字母数字组合，且位数控制在4至16位
+			var passwordTest = /^\w{6,16}$/;//密码校验，必须为6-16位任意字符
+			var phoneTest=/^1\d{10}$/;//手机号正则表达式，规定由全为数字，1开头
 			//验证用户名是否合法
 			$("#userName").change(
 					function() {
 						//获取输入的账户名
 						var userName = $("#userName").val();
 						if (userNameTest.test(userName) == false) {
-							msg = '必须为字母数字组合，且位数控制在4至8位';
+							msg = '必须为字母数字组合，且位数控制在4至16位';
 							layer.msg('<span style="color:black;">' + msg
 									+ '</span>', {
 								icon : 4,
@@ -204,7 +210,22 @@
 					function() {
 						var userPwd = $("#userPwd").val();
 						if (passwordTest.test(userPwd) == false) {
-							msg = "密码必须是五位字符";
+							msg = "密码必须是6-16位字符";
+							layer.msg('<span style="color:black;">' + msg
+									+ '</span>', {
+								icon : 6,
+								time : 1000
+							});
+							$(this).val("");
+						} else {
+							flag = true;
+						}
+					});
+			$("#userTel").change(
+					function() {
+						var userTel = $("#userTel").val();
+						if (phoneTest.test(userTel) == false) {
+							msg = "手机号必须是以1开始的11位有效数字";
 							layer.msg('<span style="color:black;">' + msg
 									+ '</span>', {
 								icon : 6,
@@ -221,9 +242,10 @@
 							function() {
 								var userName = $("#userName").val();
 								var userPwd = $("#userPwd").val();
-
-								if (flag == false
-										|| (userName != "" && userPwd != "") == false) {
+								var userTel = $("#userTel").val();
+								/* console.log(userTel); */
+								 if (flag == false
+										|| (userName != "" && userPwd != "" &&userTel !="") == false) {
 									msg = "请输入正确信息";
 									layer.msg('<span style="color:black;">'
 											+ msg + '</span>', {
@@ -231,13 +253,8 @@
 										time : 2000
 									});
 								} else {
-
-									$.get("/Rosemary/user.action",
-											"op=addUser&userName=" + userName
-													+ "&userPwd=" + userPwd,
-											function(data, status) {
-												msg = data;
-											});
+										
+									
 									if (msg = "添加成功") {
 										layer
 												.open({
@@ -246,22 +263,29 @@
 													content : "<span>确定添加吗？</span>",
 													anim : 0,
 													btn : [ '确定', '取消' ],
-													yes : function(index,
-															layero) {
-														layer.msg('添加成功', {
-															icon : 1,
-															time : 2000
-														});
+													yes : function(
+															) {
+														$.get("/Rosemary/user.action",
+																"op=addUser&userName=" + userName
+																		+ "&userPwd=" + userPwd+ "&userTel="+userTel,
+																function(data, status) {
+																	msg = data;
+																	layer.msg('添加成功', {
+																		icon : 1,
+																		time : 2000
+																	});
+																});
+														
 														layer.closeAll();
-														location.href = "/Rosemary/admin/userList.jsp";
+														
 													},
-													btn2 : function(index,
-															layero) {
+													btn2 : function(
+															) {
 														layer.close();
 													}
 												});
 									}
-								}
+								} 
 							});
 		});
 	</script>

@@ -68,10 +68,10 @@
 							<input type="hidden" name="op" value="adminAdd">
 								<div class="form-group">
 									<label for="exampleInputEmail1">管理员账号：</label> <input
-										type="email" name="adminName" class="form-control" id="exampleInputEmail1"
-										aria-describedby="emailHelp" placeholder="Enter email">
-									<small id="emailHelp" class="form-text text-muted">We'll
-										never share your email with anyone else.</small>
+										type="text" name="adminName" class="form-control" id="adminName"
+										aria-describedby="emailHelp" placeholder="please input ManagerName">
+									<!-- <small id="emailHelp" class="form-text text-muted">We'll
+										never share your email with anyone else.</small> -->
 								</div>
 								<div class="form-group">
 									<label for="exampleInputPassword1">密码:</label> <input
