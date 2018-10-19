@@ -56,12 +56,12 @@ public class ManagerDaoImpl implements ManagerDao {
 	/**
 	 * 实现ManagerDao中的删除方法
 	 */
-	@Override
+	/*@Override
 	public boolean delManager(int adminId) {
 		// TODO Auto-generated method stub
 		String sql = "delete from admin where adminName=?";
 		return BaseDao.execute(sql, adminId) > 0;
-	}
+	}*/
 
 	/**
 	 * 重置密码
@@ -91,12 +91,19 @@ public class ManagerDaoImpl implements ManagerDao {
 
 		return BaseDao.execute(sql, adminName) > 0;
 	}
-	
-	public static void main(String[] args) {
-		
-		new ManagerDaoImpl().queryManagerByPage(1, 1, "a");
-		
-		
-		
+	/**
+	 * 根据管理员名查询管理员
+	 */
+	@Override
+	public Manager queryManager(String adminName) {
+		// TODO Auto-generated method stub
+		String sql = "select  * from admin where adminName=?";
+		List<Manager> list = (List<Manager>) BaseDao.select(sql, Manager.class, adminName);
+
+		if (list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
 	}
+	
 }

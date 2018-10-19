@@ -47,11 +47,11 @@ public class ManagerServiceImpl implements ManagerService {
 	/**
 	 * 实现ManagerDao删除管理员的方法
 	 */
-	@Override
+	/*@Override
 	public boolean delManager(int adminId) {
 		// TODO Auto-generated method stub
 		return md.delManager(adminId);
-	}
+	}*/
 	/**
 	 * 重置管理员密码
 	 */
@@ -70,5 +70,10 @@ public class ManagerServiceImpl implements ManagerService {
 	public boolean clearManagerStatus(String adminName) {
 		// TODO Auto-generated method stub
 		return md.clearManagerStatus(adminName);
+	}
+	@Override
+	public Manager queryManager(String adminName) {
+		// TODO Auto-generated method stub
+		return md.queryManager(adminName);
 	}
 }
