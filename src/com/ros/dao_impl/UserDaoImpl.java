@@ -8,7 +8,8 @@ import com.ros.entity.UserBasicInfo;
 import com.ros.entity.UserBean;
 import com.ros.entity.UserDetailInfo;
 import com.ros.util.BaseDao;
-import com.ros.util.MD5Util;;
+import com.ros.util.MD5Util;
+import com.ros.util.PageData;;
 
 /**
  * 自定义UserDao接口的实现类：UserDaoImpl
@@ -147,7 +148,16 @@ public class UserDaoImpl implements UserDao {
 		String sql = "select * from user_basicinfo a INNER JOIN user_detailsinfo b on a.userId=b.userId";
 		return (List<UserBean>) BaseDao.select(sql, UserBean.class);
 	}
-	
+	/**
+	 * 后台用户管理分页
+	 */
+	@Override
+	public PageData<UserBean> queryUserBeanByPage(int page, int pageSize, String keywords) {
+		// TODO Auto-generated method stub
+		String sql = "select b.userId,a.userName,b.name,b.userTel,b.userEmail from user_basicinfo a INNER JOIN user_detailsinfo b on a.userId=b.userId where userName like ?";
+		PageData<UserBean> pd = BaseDao.getPage(sql, page, pageSize, UserBean.class, "%" + keywords + "%");
+		return pd;
+	}
 	/**
 	 * 后台添加用户
 	 */

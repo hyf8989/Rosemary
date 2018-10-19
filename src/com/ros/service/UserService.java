@@ -5,6 +5,7 @@ import java.util.List;
 import com.ros.entity.UserBasicInfo;
 import com.ros.entity.UserBean;
 import com.ros.entity.UserDetailInfo;
+import com.ros.util.PageData;
 
 public interface UserService {
 	public boolean register(String userName);// 用户注册
@@ -25,5 +26,16 @@ public interface UserService {
 	 * @return List<UserBean> 返回类型
 	 */
 	List<UserBean> queryUsersBean();
+
+	/**
+	 * @Title: queryUserBeanByPage
+	 * @Description: TODO(后台用户管理分页)
+	 * @param page
+	 * @param pageSize
+	 * @param keywords
+	 * @return PageData<UserBean> 返回类型
+	 */
+	PageData<UserBean> queryUserBeanByPage(int page, int pageSize, String keywords);
+
 	public boolean addUsers(UserBasicInfo ub);// 后台添加用户
 }

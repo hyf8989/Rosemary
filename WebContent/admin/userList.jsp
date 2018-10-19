@@ -112,11 +112,11 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:if test="${requestScope.list == null}">
-										<jsp:forward page="../user.action?op=queryUsersBean"></jsp:forward>
+									<c:if test="${sessionScope.pdu == null}">
+										<jsp:forward page="../user.action?op=queryUsersBeanByPage"></jsp:forward>
 									</c:if>
-									<c:if test="${requestScope.list != null}">
-										<c:forEach items="${requestScope.list}" var="ub">
+									<c:if test="${sessionScope.pdu != null}">
+										<c:forEach items="${sessionScope.pdu.data}" var="ub">
 
 											<tr>
 												<td>${ub.userId}</td>
@@ -209,26 +209,29 @@
 	<script src="js/bootstrap.min.js"></script>
 	<!-- /Bootstrap Core JavaScript -->
 	<script>
-		layui.use([ 'laypage', 'layer' ], function() {
-			var laypage = layui.laypage, layer = layui.layer;
-			//完整功能 
-			laypage.render({
-				elem : 'pageDiv',
-				count : 5,
-				curr : 1,
-				limit : 5,
-				layout : [ 'count', 'prev', 'page', 'limit', 'next', 'skip' ],
-				jump : function(obj, first) {
-					console.log(obj);
-					console.log(first);
-					//首次不执行
-					if (!first) {
-						//do something
-						location.href = "";
-					}
+	layui.use([ 'laypage', 'layer' ], function() {
+		var laypage = layui.laypage, layer = layui.layer;
+		//完整功能 
+		laypage.render({
+		    elem: 'pageDiv'
+		    ,count:${pdu.total} ,
+		    curr:${pdu.page}
+		   ,limit:${pdu.pageSize}
+		    ,layout: ['count', 'prev', 'page','limit','next', 'skip']
+		    ,jump: function(obj,first){
+				console.log(obj);
+				console.log(first);
+				//首次不执行
+				if (!first) {
+					//do something
+					location.href = "/Rosemary/user.action?op=queryUsersBeanByPage&page="
+						+ obj.curr + "&pageSize=" + obj.limit
+						+ "&keywords="
+						+ document.getElementById("keywords").value;
 				}
-			});
+			}
 		});
+	});
 		
 		/* 编辑按钮弹出层 */
 		$(".layui-btn-normal").click(

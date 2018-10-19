@@ -18,6 +18,7 @@ import com.ros.service.UserService;
 import com.ros.service_impl.AddressServiceImpl;
 import com.ros.service_impl.UserServiceImpl;
 import com.ros.util.MD5Util;
+import com.ros.util.PageData;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -203,10 +204,35 @@ public class UserServlet extends HttpServlet {
 			out.close();
 	
 		
-		}else if(op.equals("queryUsersBean")) {
-			List<UserBean> list = us.queryUsersBean();
+		}
+		//后台用户信息管理
+		else if(op.equals("queryUsersBeanByPage")) {
+			/*List<UserBean> list = us.queryUsersBean();
 			request.setAttribute("list", list);
-			request.getRequestDispatcher("/admin/userList.jsp").forward(request, response);
+			request.getRequestDispatcher("/admin/userList.jsp").forward(request, response);*/
+			int page =1;//默认第一页
+			int pageSize = 2;//默认每页显示10条
+			//如果用户传递的参数不为空
+			if(request.getParameter("page")!=null)
+			{
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+			
+			if(request.getParameter("pageSize")!=null)
+			{
+				pageSize = Integer.parseInt(request.getParameter("pageSize"));
+			}
+			
+			//增加了模糊查询的部分;
+			String keywords="";
+			if(request.getParameter("keywords")!=null)
+			{
+				keywords = request.getParameter("keywords");
+			}
+			PageData<UserBean> pdu = us.queryUserBeanByPage(page, pageSize, keywords);
+			request.getSession().setAttribute("pdu", pdu);
+			request.getSession().setAttribute("keywords", keywords);
+			response.sendRedirect("/Rosemary/admin/userList.jsp");
 		}
 		/**
 		 * 后台添加用户

@@ -11,6 +11,7 @@ import com.ros.entity.UserBean;
 import com.ros.entity.UserDetailInfo;
 import com.ros.service.UserService;
 import com.ros.util.MD5Util;
+import com.ros.util.PageData;
 
 public class UserServiceImpl implements UserService {
 
@@ -106,6 +107,11 @@ public class UserServiceImpl implements UserService {
 	public List<UserBean> queryUsersBean() {
 		// TODO Auto-generated method stub
 		return ud.queryUsersBean();
+	}
+	@Override
+	public PageData<UserBean> queryUserBeanByPage(int page, int pageSize, String keywords) {
+		// TODO Auto-generated method stub
+		return ud.queryUserBeanByPage(page, pageSize, keywords);
 	}
 	
 	@Override
