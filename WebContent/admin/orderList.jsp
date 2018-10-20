@@ -458,7 +458,7 @@
 				if(data="订单信息更新成功啦~(*^▽^*)"){
 					 layer.msg('<span style="color:black;">'+data+'</span>', {
 							icon:6,
-							time: 1000
+							time: 3000
 						});
 					 location.href = "/Rosemary/order.do?op=showOrdersPage&page="
 							+ ${orders.page} + "&pageSize=" +${orders.pageSize}
@@ -469,7 +469,7 @@
 				else{
 					 layer.msg('<span style="color:black;">'+data+'</span>', {
 							icon:1,
-							time: 1000
+							time: 3000
 						});
 				}
 			});

@@ -158,5 +158,17 @@ public class FlowerInfoDaoImpl implements FlowerInfoDao {
 		String sql = "INSERT INTO flower_info(flowerName,price,words,description,sPicture,bPicture,typeId,createTime,updateTime) VALUES(?,?,?,?,?,?,?,?,?)";
 		return BaseDao.execute(sql, f.getFlowerName(),f.getPrice(),f.getWords(),f.getDescription(),f.getsPicture(),f.getbPicture(),f.getTypeId(),f.getCreateTime(),f.getUpdateTime())>0;
 	}
+	
+	/**
+	 * 修改鲜花的库存量（用于后台鲜花的进货）
+	 * @param flowerId 鲜花的编号
+	 * @param stock 要更改成的库存量
+	 * return true/更改成功（进货成功） false/更改失败（进货失败）
+	 */
+	@Override
+	public boolean updateFlowerStock(int flowerId, int stock) {
+		String sql="update flower_info set stock=? where flowerId=?";
+		return BaseDao.execute(sql, stock,flowerId)>0;
+	}
 
 }

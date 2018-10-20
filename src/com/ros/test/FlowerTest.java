@@ -54,7 +54,10 @@ ArrayList<FlowerInfo> list=(ArrayList<FlowerInfo>) BaseDao.select(sql, FlowerInf
 		FlowerInfo a=map.get(1);
 		 a.setFlowerId(5);
 		System.out.println(map.get(1).getFlowerId());*/
-		
+      FlowerInfoDao fId=new FlowerInfoDaoImpl();
+		int newStock=300;
+		boolean flag=fId.updateFlowerStock(1, newStock);
+		System.out.println(flag);
 		
 	}
 }
