@@ -89,9 +89,14 @@
 								<div class="form-group">
 									<label for="exampleInputWords">商品小图:</label>
 									<!-- <input type="text" class="form-control" id="exampleInputWords" placeholder="请输花的寓意"> -->
-									<img src="" width="150px" height="150px" id="img1" /> <br /> 
+									<!-- <img src="" width="150px" height="150px" id="img1" /> <br /> 
 									<input type="file" name="sPicture" id="sPicture" accept="image/jpeg" />
-									<p id="demoText"></p>
+									<p id="demoText"></p> -->
+									<img src="" width="150px" height="150px" id="img1" /> <br />
+									<button type="button" class="layui-btn" id="sPicture" name="sPicture">									
+                                         <i class="layui-icon">&#xe67c;</i>上传图片
+                                    </button>
+									
 								</div>
 								<div class="form-group">
 									<label for="exampleInputWords">商品大图:</label>
@@ -106,6 +111,7 @@
 										style="height: 35px">
 									</select>
 								</div>
+
 
 								<script type="text/javascript">
 									//当file发生改变的时候onchange
@@ -181,7 +187,6 @@
 			$.get("/Rosemary/type.do?op=load", function(data) {
 				//得到的data是一个string类型满足 json格式
 				var arr = JSON.parse(data);
-				console.log(arr);
 				$.each(arr, function(i, t) {
 					$("#typeId").append(
 							"<option value="+t.typeId+">" + t.typeName + "</option>");
@@ -190,11 +195,11 @@
 		});
 	</script>
 	
-	<script type="text/javascript">
+<script type="text/javascript">
 	 //图片上传
     var uploadInst = upload.render({
-    elem: '#sPicture'
-    ,url: '${pageContext.request.contextPath }/UpLoadPhotoServlet'
+    elem: '#sPicture'//绑定元素
+    ,url: '${pageContext.request.contextPath }/UpLoadPhotoServlet'//上传接口
     ,before: function(obj){
       //预读本地文件示例，不支持ie8
       obj.preview(function(index, file, result){
@@ -209,7 +214,7 @@
     	  layer.msg('上传成功');
     	var licencePath=eval(res).data.path;
     	$("#logo-value").attr("value",licencePath);
-    //	console.log(licencePath);
+         console.log(licencePath);
       }
       //上传成功
     }
@@ -222,14 +227,13 @@
       });
     }
   });
-  </script>
+  </script> 
 	<!-- 新品发布按钮事件 -->
 	<script type="text/javascript">
 		layui.use('layer', function() {
 			var layer = layui.layer;
 		});
 		$("#publishGoods").click(function() {
-			alert(123);
 			//获取输入的信息
 			var flowerName = $("#flowerName").val();
 			var price = $("#price").val();
@@ -239,7 +243,7 @@
 			var bPicture = $("#bPicture").val();
 			var typeId = $("#typeId").val();
 
-			if(msg="新品发布成功"){			
+						
 			layer.open({
 				title : "友情提醒？",
 				skin : "layui-layer-molv",
@@ -257,23 +261,26 @@
 									+ "&typeId="+ typeId,
 							function(data,status) {
 								msg = data;
+								if(msg="新品发布成功"){
 								layer.msg('发布成功',{
 													icon : 1,
 													time : 2000
 									});
+							
+							}else{
+								layer.msg('发布失败',{
+									icon : 1,
+									time : 2000
+					          });
+							}
+	
 							});
-
-			layer.closeAll();
-			setTimeout(function(){
-				window.location.reload();
-			},2000);
-			
-		},
+						
+		     },
 				btn2 : function(index, layero) {
 					layer.close();
 				}
 			});
-			}
 		});
 		
 	</script>

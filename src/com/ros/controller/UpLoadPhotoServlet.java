@@ -76,6 +76,8 @@ public class UpLoadPhotoServlet extends HttpServlet {
 			});
 			// 解决上传文件名的中文乱码
 			upload.setHeaderEncoding("UTF-8");
+			response.setContentType("text/html");
+			request.setCharacterEncoding("utf-8");
 			// 3、判断提交上来的数据是否是上传表单的数据
 			if (!ServletFileUpload.isMultipartContent(request)) {
 				// 按照传统方式获取数据
@@ -118,8 +120,7 @@ public class UpLoadPhotoServlet extends HttpServlet {
 						String saveFilename = makeFileName(filename);
 						// 得到文件的保存目录
 						String realSavePath = makePath(saveFilename, savePath);
-					
-						
+	
 						String dirPath=realSavePath+"\\"+saveFilename;
 						//数据库保存路径
 						String DbSavePath=dirPath.substring(dirPath.indexOf("\\img\\singlepro"));
@@ -146,7 +147,7 @@ public class UpLoadPhotoServlet extends HttpServlet {
 					  	//System.out.println(DbSavePath);
 						pw.print("<script>alert('请选择小图');location.href='/Rosemary/admin/portGoods.jsp'</script>");
 					} else {
-						pw.print("<script>alert('上传失败');location.href='bossManage/picture-add.jsp'</script>");	
+						pw.print("<script>alert('上传失败');location.href='/Rosemary/admin/portGoods.jsp'</script>");	
 						return;
 					}
 				}
@@ -155,17 +156,17 @@ public class UpLoadPhotoServlet extends HttpServlet {
 			e.printStackTrace();
 //			request.setAttribute("message", "单个文件超出最大值！！！");
 //			request.getRequestDispatcher("/message.jsp").forward(request, response);
-			pw.print("<script>alert('上传失败');location.href='bossManage/picture-add.jsp'</script>");
+			pw.print("<script>alert('上传失败');location.href='/Rosemary/admin/portGoods.jsp'</script>");
 			return;
 		} catch (FileUploadBase.SizeLimitExceededException e) {
 			e.printStackTrace();
 //			request.setAttribute("message", "上传文件的总的大小超出限制的最大值！！！");
 //			request.getRequestDispatcher("/message.jsp").forward(request, response);
-			pw.print("<script>alert('上传失败');location.href='bossManage/picture-add.jsp'</script>");
+			pw.print("<script>alert('上传失败');location.href='/Rosemary/admin/portGoods.jsp'</script>");
 			return;
 		} catch (Exception e) {
 //			message = "文件上传失败！";
-			pw.print("<script>alert('上传失败');location.href='bossManage/picture-add.jsp'</script>");
+			pw.print("<script>alert('上传失败');location.href='/Rosemary/admin/portGoods.jsp'</script>");
 			e.printStackTrace();
 		}
 //		request.setAttribute("message", message);
@@ -175,7 +176,6 @@ public class UpLoadPhotoServlet extends HttpServlet {
 	/**
 	 * @Method: makeFileName
 	 * @Description: 生成上传文件的文件名，文件名以：uuid+"_"+文件的原始名称
-	 * @Anthor:孤傲苍狼
 	 * @param filename
 	 *            文件的原始名称
 	 * @return uuid+"_"+文件的原始名称
@@ -187,10 +187,6 @@ public class UpLoadPhotoServlet extends HttpServlet {
 
 	/**
 	 * 为防止一个目录下面出现太多文件，要使用hash算法打散存储
-	 * 
-	 * @Method: makePath
-	 * @Description:
-	 * @Anthor:孤傲苍狼
 	 *
 	 * @param filename
 	 *            文件名，要根据文件名生成存储目录
@@ -212,6 +208,7 @@ public class UpLoadPhotoServlet extends HttpServlet {
 			// 创建目录
 			file.mkdirs();
 		}
+		
 		return dir;
 	}
 	/**
