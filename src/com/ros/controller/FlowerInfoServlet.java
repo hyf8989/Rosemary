@@ -70,6 +70,7 @@ public class FlowerInfoServlet extends HttpServlet {
 			 request.getSession().setAttribute("flowerType", list);
 			 response.sendRedirect("/Rosemary/index/shop.jsp");
 			 
+			 
 		 }
 		 //主页分页显示所有鲜花，固定每页6条记录。（包含模糊查询）
 		 else if(op.equals("queryFlowerInfoByPage")) {
@@ -182,6 +183,7 @@ public class FlowerInfoServlet extends HttpServlet {
 			out.println(str);
 			out.close();
 		}
+		
 		 //后台新品发布
 		else if("insertFlower".equals(op)) {
 			String msg="";
@@ -209,7 +211,50 @@ public class FlowerInfoServlet extends HttpServlet {
 			out.close();
 	
 		}
+		 //下拉框展示所有鲜花的类型
+		 else if ("showFlowerType".equals(op)) {
+			 ArrayList<FlowerType> list=fIS.queryFlowerType();
+			 Gson gson=new Gson();
+			 out.print(gson.toJson(list));
+			 out.close();
+		}
 	
+		 //根据鲜花名称获取鲜花的信息
+		 else if("showFlowerInfo".equals(op)) {
+			 //获取界面传递过来的鲜花的编号
+			 int flowerId=Integer.parseInt(request.getParameter("flowerId"));
+			 //调用服务层的方法
+		  FlowerInfo fInfo=fIS.getFlowerInfoById(flowerId);
+		  Gson gson=new Gson();
+		  out.print(gson.toJson(fInfo));
+		  out.close();
+		 }
+		 
+		 //后台鲜花的进货
+		 else if("intFlower".equals(op)){
+			 int newStock=0;
+			 String mString="";
+			 //获取界面传递过来的鲜花的编号
+			int flowerId=Integer.parseInt(request.getParameter("flowerId"));
+		    //获取界面传递过来的进货的数量
+			int quantity=Integer.parseInt(request.getParameter("quantity"));
+			//获取界面传递过来的鲜花原来的库存量
+			int stock=Integer.parseInt(request.getParameter("stock"));
+			
+			//将原来的库存量加上进货的数量
+			newStock=quantity+stock;
+			
+			//调用服务层的方法
+			boolean flag=fIS.updateFlowerStock(flowerId, newStock);
+			if (flag) {
+				mString="ok~,进货成功啦~(*^▽^*)";
+			}
+			else {
+				mString="遗憾~,进货失败了~(ಥ﹏ಥ)";
+			}
+			out.print(mString);
+			out.close();
+		 }
 	}
 
 	/**

@@ -31,7 +31,7 @@ public class FlowerInfo {
     private  int typeId;
    
 	 //库存数量
-    private  int stock = 100;
+    private  int stock ;
    
 	 //花上传时间
     private  String createTime;

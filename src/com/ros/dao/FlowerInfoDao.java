@@ -17,4 +17,7 @@ public interface FlowerInfoDao {
     PageData<FlowerInfo> queryFlowerByPage(int page,int pageSize,String keywords);
     List<FlowerInfo> queryFlowerInfo();
     boolean insertFlowerInfo(FlowerInfo f);//后台新品发布
+    
+    boolean updateFlowerStock(int flowerId,int stock);//鲜花的进货（后台）
+    
 }

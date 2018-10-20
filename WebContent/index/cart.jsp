@@ -111,7 +111,7 @@
     <script type="text/javascript" src="layui/layui.js">
 			
 		</script>
-		<!-- 我们自己编写的购物车js文件 -->
+		<!-- 我们自己编写的购物车js文件 --> 
 		<script src="js/cart.js">
 		<!-- 我们自己编写的购物车js文件 -->
 	

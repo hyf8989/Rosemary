@@ -129,4 +129,16 @@ public class FlowerInfoServiceImpl implements FlowerInfoService {
 		// TODO Auto-generated method stub
 		return fID.insertFlowerInfo(f);
 	}
+	
+	/**
+	 * 根据鲜花的编号更新鲜花的库存量
+	 * @param flowerId 鲜花的编号
+	 * @param stock 要改成的库存量
+	 * return true/更新成功（进货成功） false/更新成功（进货成功）
+	 */
+	@Override
+	public boolean updateFlowerStock(int flowerId, int stock) {
+		// TODO Auto-generated method stub
+		return fID.updateFlowerStock(flowerId, stock);
+	}
 }

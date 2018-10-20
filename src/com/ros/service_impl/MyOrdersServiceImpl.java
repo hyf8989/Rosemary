@@ -98,14 +98,13 @@ public PageData<Orders> getOrderByPage(int page, int pageSize, String keywords) 
 	 * 根据订单编号更改订单信息
 	 *  @param orderId 订单编号
 	 *  @param orderStatus 订单状态
-	 *  @param address 地址
 	 *  @param sendTime 订发货时间
 	 *  return true/更新成功 false/更新失败
 	 */
 	@Override
-	public boolean updateOrder(int orderId, int orderStatus, String address, String sendTime) {
+	public boolean updateOrder(int orderId, int orderStatus, String sendTime) {
 		// TODO Auto-generated method stub
-		return mod.updateOrder(orderId, orderStatus, address, sendTime);
+		return mod.updateOrder(orderId, orderStatus, sendTime);
 	}
 	
 	/**

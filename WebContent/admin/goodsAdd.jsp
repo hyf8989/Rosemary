@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page autoFlush="true" buffer="1094kb"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -67,24 +69,28 @@
 							<br />
 							<form action="" style="margin-bottom: 40%;">
 								<div class="form-group">
-									<label for="goodsName">商品名称</label> 
-									<select class="form-control" id="goodsName" name="goodsName">
+									<label for="flowerName">鲜花名称</label> 
+									<select class="form-control" id="flowerName" name="flowerName">
 										<option>请选择</option>
-										<!-- <option>粉百合</option>
-											<option>明亮向日菊</option>
-											<option>红玫瑰</option>
-											<option>蓝玫瑰</option>
-											<option>蓝色妖姬</option> -->
+							
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="goodsPrice">商品价格:</label> <input type="text"
+									<label for="goodsPrice">鲜花单价:</label> <input type="text"
 										class="form-control" id="goodsPrice" name="goodsPrice">
 								</div>
 								<div class="form-group">
-									<label for="goodsStok">商品库存:</label> <input type="text"
+									<label for="goodsStok">鲜花库存:</label> <input type="text"
 										class="form-control" id="goodsStok" name="goodsStok" placeholder="">
 								</div>
+								<div class="form-group">
+									<label for="flowerType">鲜花类别</label> 
+									<select class="form-control" id="flowerType" name="flowerType">
+										<option>请选择</option>
+							
+									</select>
+								</div>
+								
 								<div class="form-group">
 									<label for="addStock">进货数量（单位：束）</label> <input
 										type="text" class="form-control" name="addStock" id="addStock"
@@ -92,12 +98,8 @@
 								</div>
 
 								<center>
-									<div class="form-check">
-										<input type="checkbox" class="form-check-input"
-											id="exampleCheck1"> <label class="form-check-label"
-											for="exampleCheck1" style="margin-top: 40px;">确定添加</label>
-									</div>
-									<button type="button" class="btn btn-primary" id="createOrder">生成订单</button>
+									
+									<button type="button" class="btn btn-primary" id="intFlower">确定进货</button>
 								</center>
 							</form>
 
@@ -136,6 +138,7 @@
 		<div class="clearfix"></div>
 	</div>
 	<script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 	<script>
 		var toggle = true;
 
@@ -186,21 +189,76 @@
 		});
 
 		$(function() {
+			//将所有花的名称展示在鲜花名称下拉框中
 			$.get("/Rosemary/flower.do?op=goodsAdd", function(data) {
 				array = JSON.parse(data);
 				$.each(array, function(i, goods) {
-					$("#goodsName").append(
-							"<option value="+goods.flowerName+">" + goods.flowerName
+					$("#flowerName").append(
+							"<option value="+goods.flowerId+">" + goods.flowerName
 									+ "</option>");
 
 				});
 			});
+			//将所有花的类别的名称展示在鲜花类别的下拉框中
+			$.get("/Rosemary/flower.do?op=showFlowerType",function(data,status){
+			  var array=JSON.parse(data);
+			  
+				$.each(array,function(index,type){
+					$("#flowerType").append("<option value="+type.typeId+">" + type.typeName+ "</option>");
+				});
+			});
+			
+			//鲜花名称的下拉框的选中事件
+			$("#flowerName").change(function(){
+				var flowerId=$(this).find("option:selected").val();
+				$.get("/Rosemary/flower.do","op=showFlowerInfo&flowerId="+flowerId,function(data,status){
+					var flowerArr=JSON.parse(data);
+					//将获取到的鲜花单价、库存信息展示在输入框中
+					$("#goodsPrice").val(flowerArr.price);
+					$("#goodsStok").val(flowerArr.stock);
+			
+					//将获取到的鲜花类别设置为被选中
+					$("#flowerType option").each(function(){
+			
+						if($(this).val()==flowerArr.typeId){
+							$(this).attr("selected","selected");
+						}  
+			
+					});
+			
+				});
+			});
+			
+			//生成订单按钮的单击事件
+		$("#intFlower").click(function(){
+			//获取选择的鲜花的编号
+			var flowerId=$("#flowerName").find("option:selected").val();
+			//获取输入进货的数量
+			var quantity=$("#addStock").val();
+			//获取鲜花原来的库存量
+			var stock=$("#goodsStok").val();
+			
+			$.get("/Rosemary/flower.do","op=intFlower&flowerId="+flowerId+"&quantity="+quantity+"&stock="+stock,function(data,status){
+				
+				if(data=="ok~,进货成功啦~(*^▽^*)"){
+					layer.msg('<span style="color:black;">'+data+'</span>', {
+						icon:6,
+						time: 3000
+					});
+					window.location.reload();
+				}
+				else{
+					layer.msg('<span style="color:black;">'+data+'</span>', {
+						icon:5,
+						time: 3000
+					});
+				}
+			});
+		});
 			
 		});
 		
-		/* $(function(){
-			
-		}); */
+		
 	</script>
 	<!--js -->
 	<script src="js/jquery.nicescroll.js"></script>

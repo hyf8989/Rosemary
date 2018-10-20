@@ -223,8 +223,11 @@ public class OrderServlet extends HttpServlet {
 				out.print(gson.toJson(list));
 				
 			}
+			else {
+				out.print(mString);
+			}
 			//若查询到的结果集没有记录则将mString传到orderList.jsp界面
-			out.print(mString);
+			
 			out.close();
 			
 		}
@@ -234,10 +237,17 @@ public class OrderServlet extends HttpServlet {
 			 //获取jsp界面传递过来的订单编号、订单状态、地址、发货时间
 			int orderId=Integer.parseInt(request.getParameter("orderId"));
 			int orderStatus= Integer.parseInt(request.getParameter("orderStatus"));
-			String address=request.getParameter("address");
+			
+			//获取jsp界面传递过来的年月日信息
 			String sendTime=request.getParameter("sendTime");
+			//获取当前的时分秒时间
+			Date date=new Date();
+			String dateStr=new SimpleDateFormat("HH:mm:ss").format(date);
+			//将获取到的时间信息拼接起来
+			String sendTimeStr=sendTime+" "+dateStr;
+			
 			//调用服务层的方法
-			boolean flag=orderService.updateOrder(orderId, orderStatus, address, sendTime);
+			boolean flag=orderService.updateOrder(orderId, orderStatus,sendTimeStr);
 			//判断订单信息是否更新成功
 			if(flag) {
 				mString="订单信息更新成功啦~(*^▽^*)";
