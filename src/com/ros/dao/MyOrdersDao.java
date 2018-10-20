@@ -23,6 +23,6 @@ public interface MyOrdersDao {
     public boolean setOrderStatus(int orderId);//支付成功之后，对订单状态设置为已付款
     public PageData<Orders> queryOrdersByPage(int page,int pageSize,String keywords);//查询所有的订单记录并分页、模糊查找(后台)
     List<Orders> orderQueryByStatus(int status);//根据订单状态查询订单信息（后台）
-    boolean updateOrder(int orderId,int orderStatus,String address,String sendTime);//根据订单编号更改订单信息（后台）
+    boolean updateOrder(int orderId,int orderStatus,String sendTime);//根据订单编号更改订单信息（后台,只能更新订单状态和发货时间）
     List<OrderInfo_Re_FlowerInfo> queryOrderDetailInfoByOrderId(int orderId);//根据订单编号查询订单的鲜花等详情信息
 }

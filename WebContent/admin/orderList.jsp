@@ -19,6 +19,7 @@
 	
 	
 	
+	
 			addEventListener("load", function() {
 				setTimeout(hideURLbar, 0);
 			}, false);
@@ -27,6 +28,7 @@
 				window.scrollTo(0, 1);
 			}
 		
+
 
 
 
@@ -128,8 +130,8 @@
 											<option value="4">交易成功</option>
 									</select></th>
 									<th>地址</th>
-                                    <th>下单时间</th>
-									
+									<th>下单时间</th>
+
 
 									<th>操作</th>
 
@@ -163,7 +165,7 @@
 											</c:choose>
 
 
-                                            <td>${order.address }</td>
+											<td>${order.address }</td>
 											<td>${order.createTime }</td>
 
 											<td><button
@@ -182,8 +184,8 @@
 
 						<!-- 订单详情按钮 遮罩层开始 -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-							aria-labelledby="myModalLabel" aria-hidden="true" >
-							<div class="modal-dialog" style="width:800px;">
+							aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog" style="width: 800px;">
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal"
@@ -207,10 +209,10 @@
 													<th>发货时间</th>
 												</tr>
 											</thead>
-											
+
 											<tbody id="tbody-modal">
-												
-										
+ 
+
 											</tbody>
 										</table>
 
@@ -261,22 +263,10 @@
 											<label class="layui-form-label" style="width: 100px;">订单状态：</label>
 											<div class="layui-input-block">
 												<select name="ostatus" id="ostatus" lay-verify="">
-													<option value="5" selected="selected">全部状态</option>
-													<option value="0">未付款</option>
-													<option value="1">已付款</option>
-													<option value="2">未发货</option>
+													<option value="2" selected="selected">未发货</option>
 													<option value="3">已发货</option>
-													<option value="4">交易成功</option>
-												</select>
-											</div>
 
-										</div>
-										<div class="layui-form-item">
-											<label class="layui-form-label" style="width: 100px;">地址：</label>
-											<div class="layui-input-block">
-												<input type="text" name="address" required
-													lay-verify="required" id="oaddress" autocomplete="off"
-													class="layui-input">
+												</select>
 											</div>
 
 										</div>
@@ -285,15 +275,6 @@
 											<div class="layui-input-block">
 												<input type="text" name="time" required
 													lay-verify="required" id="otime" autocomplete="off"
-													class="layui-input">
-											</div>
-
-										</div>
-										<div class="layui-form-item">
-											<label class="layui-form-label" style="width: 100px;">订单金额：</label>
-											<div class="layui-input-block">
-												<input type="text" name="payment" required
-													lay-verify="required" id="opayment" autocomplete="off"
 													class="layui-input">
 											</div>
 
@@ -398,7 +379,7 @@
 
 			//完整功能 
 			laypage.render({
-			    elem: 'pageDiv'
+			    elem: 'pageDiv' 
 			    ,count:${orders.total} ,
 			    curr:${orders.page}
 			   ,limit:${orders.pageSize}
@@ -409,7 +390,7 @@
 					//首次不执行
 					if (!first) {
 						//do something
-						location.href = "/Rosemary/message.do?op=showAllMessagePage&page="
+						location.href = "/Rosemary/order.do?op=showOrdersPage&page="
 							+ obj.curr + "&pageSize=" + obj.limit
 							+ "&keywords="
 							+ document.getElementById("keywords").value;
@@ -422,17 +403,15 @@
 			$(".btn-detail").click(function(){
 				var orderId=$(this).parents("tr").find("td").eq(0).text();
 				$.get("/Rosemary/order.do","op=getOrderDetailInfo&orderId="+orderId,function(data,status){
+					$("#tbody-modal").empty();
 					var array=JSON.parse(data);
 					$.each(array,function(index,od){
 						$("#tbody-modal").append('<tr><td>'+od.flowerName+'</td><td>'+od.price+'</td><td>'+od.quantity+'</td><td>'+od.totalPrice+'</td><td>'+od.sendTime+'</td></tr>');
-								
-								
-								
-								
-							
-					});
+						
+					
 				});
 				
+			});
 			});
 
 			//修改按钮的单击事件
@@ -471,18 +450,20 @@
 		$("#updateOrder").click(function(){
 			//获取订单编号
 		var orderId=$("#orderID").val();
-			//获取输入的订单状态、地址、发货状态
+			//获取输入的订单状态、发货时间
 			var orderStatus=$("#ostatus").find("option:selected").val();
-			
-			var address=$("#oaddress").val();
 			var sendTime=$("#sendTime").val();
-			$.get("/Rosemary/order.do","op=updateOrder&orderId="+orderId+"&orderStatus="+orderStatus+"&address="+address+"&sendTime="+sendTime,function(data,status){
+			$.get("/Rosemary/order.do","op=updateOrder&orderId="+orderId+"&orderStatus="+orderStatus+"&sendTime="+sendTime,function(data,status){
 				//如果得到的信息提示为信息更新成功，则弹出窗口提示用户信息更新成功
 				if(data="订单信息更新成功啦~(*^▽^*)"){
 					 layer.msg('<span style="color:black;">'+data+'</span>', {
 							icon:6,
 							time: 1000
 						});
+					 location.href = "/Rosemary/order.do?op=showOrdersPage&page="
+							+ ${orders.page} + "&pageSize=" +${orders.pageSize}
+							+ "&keywords="
+							+ document.getElementById("keywords").value;
 				}
 				//如果得到的信息提示为信息更新失败，则弹出窗口提示用户信息更新失败
 				else{
@@ -493,49 +474,94 @@
 				}
 			});
 		});
-			//下拉框选中事件
+			 //下拉框选中事件
 				 $("#status").change(function(){ 
+					 
+					 var status="";
 				var statusVal=$(this).find("option:selected").val();
-				$.get("/Rosemary/order.do","op=orderQueryByStatus&statusVal="+statusVal,function(data,status){
-					var array=JSON.parse(data);
-					$.each(array,function(index,order){
-						$("tbody").append/* ("<tr>"+
-								"<td>"+order.orderId +"</td>"+
-								"<td>"+order.userName +"</td>"+
-								
-								"<c:choose>"+
-									"<c:when test='"+order.orderStatus==0+"'>"+
-										"<td>未付款</td>"+
-									"</c:when>"+
-									"<c:when test='"+order.orderStatus==1+"'>"+
-										"<td>已付款</td>"+
-									"</c:when>"+
-									"<c:when test='"+order.orderStatus==2+"'>"+
-										"<td>未发货</td>"+
-									"</c:when>"+
-									"<c:when test='"+order.orderStatus==3+" '>"+
-										"<td>已发货</td>"+
-									"</c:when>"+
-									"<c:otherwise>"+
-										"<td>交易成功</td>"+
-									"</c:otherwise>"+
-								"</c:choose>"+
+				if(statusVal==5){
+					 location.href = "/Rosemary/order.do?op=showOrdersPage&page="
+							+ ${orders.page} + "&pageSize=" +${orders.pageSize}
+							+ "&keywords="
+							+ document.getElementById("keywords").value;
+				}
+				else{
+					$.get("/Rosemary/order.do","op=orderQueryByStatus&statusVal="+statusVal,function(data,status){
+					
+						if(data=="暂时还没有该状态的订单"){
+				
+							layer.msg('<span style="color:black;">'+data+'</span>', {
+								icon:1,
+								time: 1000
+							});
+					}
+						else{
+			         var array=JSON.parse(data);
+			     	console.log(array);
+			     	 $("table tbody").remove(); 
+					 	$.each(array,function(index,order){
+						 	switch(order.orderStatus){
+						 	case 0:status="未付款";
+						 	break;
+						 	case 1:status="已付款";
+						 	break;
+						 	case 2:status="未发货";
+						 	break;
+						 	case 3:status="已发货";
+						 	break;
+						 	case 4:status="未付款";
+						 	break;
+						 	default:status="";
+						 	break;
+						 	}
+						  
+						 	 
+							$("#table").append("<tbody><tr>"+
+									"<td>"+order.orderId +"</td>"+
+									"<td>"+order.userName +"</td>"+
+									"<td>"+status+"</td>"+
+									"<td>"+order.address +"</td>"+
+									"<td>"+order.createTime+"</td>"+
+									"<td><button "+
+											" class='layui-btn layui-btn-radius layui-btn-normal btn-detail2'"+
+											"data-toggle='modal' data-target='#myModal' id='detail' type='button'>订单详情</button>&nbsp;"+
+										"<button class='layui-btn layui-btn-radius layui-btn-danger'>修改"+
+										"</button></td>"+
 
-
-								"<td>"+order.address +"</td>"+
-								"<td>"+order.createTime +"</td>"+
-								"<td>"+order.payment+"</td>"+
-								"<td><button"+
-										"class='layui-btn layui-btn-radius layui-btn-normal btn-detail'"+
-										"data-toggle='modal' data-target='#myModal' id='detail'>订单详情</button>&nbsp;"+
-									"<button class='layui-btn layui-btn-radius layui-btn-danger'>修改"+
-									"</button></td>"+
-
-							"</tr>"); */
+								"</tr></tbody>"); 
+						}); 
+					}
 					});
+				}
+		
+			
+			}); 
+			
+			//下拉框选中之后，点击订单详情按钮的触发事件
+			
+			
+	  $(document).on('click','.btn-detail2',function(){
+			$(".layui-table tbody").remove();
+		  var orderId=$(this).parents("tr").find("td").eq(0).text();
+			$.get("/Rosemary/order.do","op=getOrderDetailInfo&orderId="+orderId,function(data,status){
+				var array=JSON.parse(data);
+				
+				$.each(array,function(index,od){
+				
+					$(".layui-table").append('<tbody><tr><td>'+od.flowerName+'</td><td>'+od.price+'</td><td>'+od.quantity+'</td><td>'+od.totalPrice+'</td><td>'+od.sendTime+'</td></tr></tbody>');
 					
 				});
-			});  
+			});
+		  
+	  }); 
+		 
+				
+				
+			
+		  
+	  
+			
+			
 			//搜索按钮的单击事件
 			$("#search").click(function(){
 				location.href = "/Rosemary/order.do?op=showOrdersPage&page="
