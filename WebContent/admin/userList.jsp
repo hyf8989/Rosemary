@@ -11,9 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <script type="application/x-javascript">
-	
-	
-	
+
 			addEventListener("load", function() {
 				setTimeout(hideURLbar, 0);
 			}, false);
@@ -21,9 +19,6 @@
 			function hideURLbar() {
 				window.scrollTo(0, 1);
 			}
-		
-
-
 </script>
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
@@ -179,30 +174,6 @@
 		<%@ include file="left.jsp"%>
 		<div class="clearfix"></div>
 	</div>
-	<script>
-		var toggle = true;
-
-		$(".sidebar-icon").click(
-				function() {
-					if (toggle) {
-						$(".page-container").addClass("sidebar-collapsed")
-								.removeClass("sidebar-collapsed-back");
-						$("#menu span").css({
-							"position" : "absolute"
-						});
-					} else {
-						$(".page-container").removeClass("sidebar-collapsed")
-								.addClass("sidebar-collapsed-back");
-						setTimeout(function() {
-							$("#menu span").css({
-								"position" : "relative"
-							});
-						}, 400);
-					}
-
-					toggle = !toggle;
-				});
-	</script>
 	<!--js -->
 	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 	<script src="js/jquery.nicescroll.js"></script>

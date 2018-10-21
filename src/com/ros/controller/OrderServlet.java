@@ -98,7 +98,7 @@ public class OrderServlet extends HttpServlet {
 				 double totalPrice=cartItem.getTotal();
 			  //实例化订单详情表实体类
 				 OrderInfo oi=new OrderInfo(flowerId, orderId, quantity, totalPrice) ;
-			  if(orderService.InsertOrderInfo(oi)) {
+			  if(orderService.insertOrderInfo(oi)) {
 				  flag=true;
 			  }
 			}

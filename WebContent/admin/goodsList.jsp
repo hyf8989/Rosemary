@@ -127,50 +127,6 @@
 											</tr>
 										</c:forEach>
 									</c:if>
-									<!-- <tr>
-										<td>2</td>
-										<td>John</td>
-										<td>John Stone</td>
-										<td>4656132165464</td>
-										<td>789451</td>
-										<td><button
-												class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
-											<button class="layui-btn layui-btn-radius layui-btn-danger">删除
-											</button></td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Jane</td>
-										<td>Jane Strip</td>
-										<td>12316456</td>
-										<td>102356</td>
-										<td><button
-												class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
-											<button class="layui-btn layui-btn-radius layui-btn-danger">删除
-											</button></td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>Gary</td>
-										<td>Gary Mountain</td>
-										<td>1234634561</td>
-										<td>621012</td>
-										<td><button
-												class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
-											<button class="layui-btn layui-btn-radius layui-btn-danger">删除
-											</button></td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>James</td>
-										<td>James Camera</td>
-										<td>1234654613</td>
-										<td>621011</td>
-										<td><button
-												class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
-											<button class="layui-btn layui-btn-radius layui-btn-danger">删除
-											</button></td>
-									</tr> -->
 								</tbody>
 							</table>
 						</div>

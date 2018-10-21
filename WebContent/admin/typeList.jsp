@@ -168,20 +168,6 @@
 
 		});
 	</script>
-	<!-- /script-for sticky-nav -->
-	<!--inner block start here-->
-	<!-- <div class="inner-block">
-		page  block
-		<div id="pageDiv" style="text-align: center">111</div>
-	</div> -->
-	<!--inner block end here-->
-	<!--copy rights start here-->
-	<%-- <%@ include file="foot.jsp"%> --%>
-	<!--COPY rights end here-->
-	
-	
-	<!--//content-inner-->
-	<!--/sidebar-menu-->
 	
 	<div class="clearfix"></div>
 	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>

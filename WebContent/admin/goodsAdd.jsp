@@ -139,30 +139,7 @@
 	</div>
 	<script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
 	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-	<script>
-		var toggle = true;
 
-		$(".sidebar-icon").click(
-				function() {
-					if (toggle) {
-						$(".page-container").addClass("sidebar-collapsed")
-								.removeClass("sidebar-collapsed-back");
-						$("#menu span").css({
-							"position" : "absolute"
-						});
-					} else {
-						$(".page-container").removeClass("sidebar-collapsed")
-								.addClass("sidebar-collapsed-back");
-						setTimeout(function() {
-							$("#menu span").css({
-								"position" : "relative"
-							});
-						}, 400);
-					}
-
-					toggle = !toggle;
-				});
-	</script>
 	<script type="text/javascript">
 		layui.use('layer', function() {
 			var layer = layui.layer;

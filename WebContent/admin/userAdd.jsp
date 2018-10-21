@@ -9,9 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <script type="application/x-javascript">
-	
-	
-	
+
 			addEventListener("load", function() {
 				setTimeout(hideURLbar, 0);
 			}, false);
@@ -19,9 +17,6 @@
 			function hideURLbar() {
 				window.scrollTo(0, 1);
 			}
-		
-
-
 </script>
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
@@ -85,11 +80,6 @@
 										name="userTel" placeholder="请输入手机号">
 								</div>
 								<center>
-									<div class="form-check">
-										<input type="checkbox" class="form-check-input"
-											id="exampleCheck1"> <label class="form-check-label"
-											for="exampleCheck1" style="margin-top: 40px;">确定添加</label>
-									</div>
 									<button type="button" class="btn btn-primary" id="userAdd"
 										>添加用户</button>
 								</center>
@@ -129,30 +119,6 @@
 		<%@ include file="left.jsp"%>
 		<div class="clearfix"></div>
 	</div>
-	<script>
-		var toggle = true;
-
-		$(".sidebar-icon").click(
-				function() {
-					if (toggle) {
-						$(".page-container").addClass("sidebar-collapsed")
-								.removeClass("sidebar-collapsed-back");
-						$("#menu span").css({
-							"position" : "absolute"
-						});
-					} else {
-						$(".page-container").removeClass("sidebar-collapsed")
-								.addClass("sidebar-collapsed-back");
-						setTimeout(function() {
-							$("#menu span").css({
-								"position" : "relative"
-							});
-						}, 400);
-					}
-
-					toggle = !toggle;
-				});
-	</script>
 	<!--js -->
 	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="js/jquery.nicescroll.js"></script>
