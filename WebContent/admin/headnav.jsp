@@ -28,11 +28,9 @@
 								<!--notifications of menu start -->
 								<ul class="nofitications-dropdown">
 									<li class="dropdown head-dpdn">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">店铺</span></a>
+										<a href="/Rosemary/index/index.jsp"><i class="fa fa-tasks">店铺</i><span class="badge blue1">进入</span></a>
 									</li>
-									<li class="dropdown head-dpdn">
-										<a href="#">进入</a>
-									</li>
+
 									<div class="clearfix"> </div>
 								</ul>
 								<div class="clearfix"> </div>
