@@ -19,5 +19,6 @@ public interface FlowerInfoDao {
     boolean insertFlowerInfo(FlowerInfo f);//后台新品发布
     
     boolean updateFlowerStock(int flowerId,int stock);//鲜花的进货（后台）
+    boolean updateFlower(FlowerInfo f);//后台商品修改
     
 }

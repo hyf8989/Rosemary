@@ -20,4 +20,5 @@ public interface FlowerInfoService {
 	List<FlowerInfo> queryFlowerInfo();
 	boolean insertFlower(FlowerInfo f);//后台新品发布
 	boolean updateFlowerStock(int flowerId,int stock);//根据鲜花编号更新鲜花的库存量（后台鲜花的进货）
+	boolean updateFlower(FlowerInfo f);//后台商品修改 
 }

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.ros.entity.FlowerInfo;
 import com.ros.entity.FlowerType;
+import com.ros.entity.Types;
 import com.ros.service.FlowerInfoService;
 import com.ros.service_impl.FlowerInfoServiceImpl;
 import com.ros.test.FlowerTest;
@@ -259,6 +260,31 @@ public class FlowerInfoServlet extends HttpServlet {
 			}
 			out.print(mString);
 			out.close();
+		 }
+		 //商品修改
+		 else if("updateFlower".equals(op)) {
+			 String meg="";
+				//获取各个参数
+				int flowerId = Integer.parseInt(request.getParameter("flowerId"));
+				String flowerName=request.getParameter("flowerName");
+				double price=Double.parseDouble(request.getParameter("price"));
+				String words=request.getParameter("words");
+				String description=request.getParameter("description");
+				//获取当前时间
+				 Date date=new Date();
+				 String updateTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+				 FlowerInfo f = new FlowerInfo(flowerId,flowerName,price,words,description,updateTime);
+				 boolean flag = fIS.updateFlower(f);
+				
+				 if(flag) {
+						meg="修改商品成功";
+					}
+					else {
+						meg="修改商品失败";
+					}
+					
+					out.println(meg);
+					out.close();
 		 }
 	}
     /**

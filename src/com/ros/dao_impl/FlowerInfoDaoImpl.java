@@ -170,5 +170,15 @@ public class FlowerInfoDaoImpl implements FlowerInfoDao {
 		String sql="update flower_info set stock=? where flowerId=?";
 		return BaseDao.execute(sql, stock,flowerId)>0;
 	}
+	
+	/**
+	 * 用于后台修改商品
+	 */
+	@Override
+	public boolean updateFlower(FlowerInfo f) {
+		// TODO Auto-generated method stub
+		String sql = "update flower_info set flowerName=?,price=?,words=?,description=?,updateTime=? where flowerId=?";
+		return BaseDao.execute(sql, f.getFlowerName(),f.getPrice(),f.getWords(),f.getDescription(),f.getUpdateTime(),f.getFlowerId())>0;
+	}
 
 }
