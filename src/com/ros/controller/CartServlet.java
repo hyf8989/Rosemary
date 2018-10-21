@@ -32,9 +32,13 @@ public class CartServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+    /**
+	 * Get请求
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @param request
+	 *  @param response
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String op=request.getParameter("op");//判断请求方式
@@ -44,7 +48,7 @@ public class CartServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		 PrintWriter out=response.getWriter();
          //在商品详情页面点击加入购物车时的操作
-         if(op.equals("addToCart")) {
+         if("addToCart".equals(op)) {
 			
 			 Cart cart=(Cart) request.getSession().getAttribute("cart");
 			 //判断是否有购物车，如果没有，自行创建
@@ -79,7 +83,7 @@ public class CartServlet extends HttpServlet {
 			 out.close();
 		 }
          //移除购物项操作
-         else if(op.equals("removeCartItem")) {
+         else if("removeCartItem".equals(op)) {
         	 //获取传递过来的购物项的鲜花编号
         	int flowerId=Integer.valueOf(request.getParameter("flowerId"));
         	//实例化购物车对象（session）
@@ -92,7 +96,7 @@ public class CartServlet extends HttpServlet {
         	 
          }
          //增加减少购物项数量的操作
-         else if(op.equals("updateQuantity")) {
+         else if("updateQuantity".equals(op)) {
         	 //获得用户传进来的购物项的数量
         	 
         	int newQuantity=Integer.valueOf(request.getParameter("newQuantity"));
@@ -127,8 +131,12 @@ public class CartServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Post请求
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @param request
+	 *  @param response
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

@@ -34,9 +34,13 @@ public class UserBeanServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    /**
+   	 * Get请求
+   	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+   	 * @param request
+   	 *  @param response
+   	 */
+   	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//设置请求编码
@@ -79,9 +83,13 @@ public class UserBeanServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+    /**
+   	 * Post请求
+   	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+   	 * @param request
+   	 *  @param response
+   	 */
+   	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

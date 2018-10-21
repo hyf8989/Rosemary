@@ -39,8 +39,13 @@ public class FlowerInfoServlet extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Get请求
+	 *@see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 *@param request
+	 *@param response
+	 * 
 	 */
+    @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 
@@ -51,20 +56,20 @@ public class FlowerInfoServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		 PrintWriter out=response.getWriter();
 		 //最新鲜花
-		 if(op.equals("getFlowerInfoByLimit")) {
+		 if("getFlowerInfoByLimit".equals(op)) {
 			 ArrayList<FlowerInfo> list=fIS.getFlowerInfoByLimit();
 			  request.getSession().setAttribute("list", list);
 			 response.sendRedirect("/Rosemary/index/index.jsp");
 			
 		 }
 		 //顶级鲜花
-		 else if(op.equals("getFlowerInfoByPrice")) {
+		 else if("getFlowerInfoByPrice".equals(op)) {
 			 ArrayList<FlowerInfo> list=fIS.getFlowerInfoByPrice();
 			  request.getSession().setAttribute("list2", list);
 			 response.sendRedirect("/Rosemary/index/index.jsp");
 			 
 		 }//所有花的类别
-		 else if(op.equals("queryFlowerType")) {
+		 else if("queryFlowerType".equals(op)) {
 			 
 			 ArrayList<FlowerType> list=fIS.queryFlowerType();
 			 request.getSession().setAttribute("flowerType", list);
@@ -73,9 +78,9 @@ public class FlowerInfoServlet extends HttpServlet {
 			 
 		 }
 		 //主页分页显示所有鲜花，固定每页6条记录。（包含模糊查询）
-		 else if(op.equals("queryFlowerInfoByPage")) {
+		 else if("queryFlowerInfoByPage".equals(op)) {
 			 //初始化分页对象
-			 PageData<FlowerInfo> FlowerInfo=null;
+			 PageData<FlowerInfo> flowerInfo=null;
 		    int page=1;//默认第一页
 		    int pageSize=6;//默认每页显示6条
 		    String keyword="";//默认关键词搜索为空字符串（查询所有）
@@ -118,13 +123,13 @@ public class FlowerInfoServlet extends HttpServlet {
 		    } 
 		    //如果用户没有传入花的类别编号，即默认查询所有类别
 		    if(request.getParameter("typeId")==null) {
-		    	 FlowerInfo=fIS.queryFlowerInfoByPage(page, pageSize, "%"+keyword+"%", priceStart, priceEnd, typeIdMin, typeIdMax, sort, sortType);
+		    	 flowerInfo=fIS.queryFlowerInfoByPage(page, pageSize, "%"+keyword+"%", priceStart, priceEnd, typeIdMin, typeIdMax, sort, sortType);
 		    	
 		    }
 		    //用户点击左侧花的类别触发的模糊查询事件
 		    else {
 		    	int typeId=Integer.valueOf(request.getParameter("typeId"));//初始化花的类别编号
-		    	FlowerInfo=fIS.queryFlowerInfoByPage(page, pageSize, "%"+keyword+"%", priceStart, priceEnd,typeId , typeId, sort, sortType);
+		    	flowerInfo=fIS.queryFlowerInfoByPage(page, pageSize, "%"+keyword+"%", priceStart, priceEnd,typeId , typeId, sort, sortType);
 		    	
 		    }
 		   /* //设置session对象存储花的数据
@@ -135,13 +140,13 @@ public class FlowerInfoServlet extends HttpServlet {
 		    
 		    Gson gson = new Gson();
 		    
-		    String jsonStr=gson.toJson(FlowerInfo);
+		    String jsonStr=gson.toJson(flowerInfo);
 		    out.print(jsonStr);
 		  
 		    
 		 }
 		 //点击鲜花，进入鲜花详情页
-		 else if(op.equals("Gotodetail")) {
+		 else if("Gotodetail".equals(op)) {
 			 int flowerId=Integer.valueOf(request.getParameter("flowerId"));//获得传进来的鲜花编号
 			 FlowerInfo flower=fIS.getFlowerInfoById(flowerId);//调用服务方法，查询该编号下的鲜花信息，并生成一个鲜花实体类
 			 request.getSession().setAttribute("flower", flower);//使用session对象存储一个鲜花对象的值
@@ -149,7 +154,7 @@ public class FlowerInfoServlet extends HttpServlet {
 			 
 		 }
 		 //后台商品分页
-		else if (op.equals("queryFlowerByPage")) {
+		else if ("queryFlowerByPage".equals(op)) {
 				int page =1;//默认第一页
 				int pageSize = 2;//默认每页显示10条
 				//如果用户传递的参数不为空
@@ -175,7 +180,7 @@ public class FlowerInfoServlet extends HttpServlet {
 				response.sendRedirect("/Rosemary/admin/goodsList.jsp");
 		 }
 		 //后台商品添加
-		else if(op.equals("goodsAdd")) {
+		else if("goodsAdd".equals(op)) {
 			List<FlowerInfo> lfi = fIS.queryFlowerInfo();
 			Gson gson = new Gson();
 			String str = gson.toJson(lfi);
@@ -256,10 +261,13 @@ public class FlowerInfoServlet extends HttpServlet {
 			out.close();
 		 }
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    /**
+	 * Post请求
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @param request
+	 *  @param response
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

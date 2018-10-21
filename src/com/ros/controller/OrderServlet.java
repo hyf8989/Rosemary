@@ -45,9 +45,13 @@ public class OrderServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+    /**
+	 * Get请求
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @param request
+	 *  @param response
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String op=request.getParameter("op");//判断请求方式
@@ -57,7 +61,7 @@ public class OrderServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		 PrintWriter out=response.getWriter();
 		 //如果请求是生成订单
-		 if(op.equals("createOrder")) {
+		 if("createOrder".equals(op)) {
 			//初始化订单操作回调信息
 			 String msg="";
 			 //获取传过来的订单号
@@ -121,7 +125,7 @@ public class OrderServlet extends HttpServlet {
 			 
 			 
 		 }
-		 else if(op.equals("success")) {
+		 else if("success".equals(op)) {
 			 //获取传递过来的订单号
 			 int orderId=Integer.valueOf(request.getParameter("orderId"));
 			
@@ -163,7 +167,7 @@ public class OrderServlet extends HttpServlet {
 		 }
 		 //根据传递过来的用户ID查询对应的订单（查看订单操作）
 		 
-		 else if(op.equals("queryOrderByUserId")) {
+		 else if("queryOrderByUserId".equals(op)) {
 			 int page=1;//默认当前页1
 			 int pageSize=4;//默认每页4条
 			//获取传递过来的用户编号
@@ -272,8 +276,12 @@ public class OrderServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Post请求
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @param request
+	 *  @param response
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

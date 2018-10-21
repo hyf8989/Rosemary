@@ -33,8 +33,12 @@ public class AddressServlet extends HttpServlet {
     }
 
 	/**
+	 * Get请求
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @param request
+	 *  @param response
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	//设置编码格式
 		request.setCharacterEncoding("utf-8");
@@ -144,8 +148,13 @@ public class AddressServlet extends HttpServlet {
 	}
 
 	/**
+	 * Post请求
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 *@param request
+	 *@param response
+	 *
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
