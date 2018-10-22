@@ -35,7 +35,7 @@ public class MyOrdersDaoImpl implements MyOrdersDao {
 	 * 
 	 */
 	@Override
-	public boolean InsertOrderInfo(OrderInfo orderInfo) {
+	public boolean insertOrderInfo(OrderInfo orderInfo) {
 		// TODO Auto-generated method stub
 		String sql="insert into order_info(flowerId,orderId,quantity,totalPrice)"
 				+ " values(?,?,?,?)";

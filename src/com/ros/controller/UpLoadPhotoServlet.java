@@ -37,9 +37,13 @@ public class UpLoadPhotoServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+    /**
+	 * Get请求
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @param request
+	 *  @param response
 	 */
+	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
     	//我的地址 E:\soft\JAVA\CodeWorkspace\Rosemary\WebContent\index\img\singlepro
@@ -66,12 +70,15 @@ public class UpLoadPhotoServlet extends HttpServlet {
 			ServletFileUpload upload = new ServletFileUpload(factory);
 			// 监听文件上传进度
 			upload.setProgressListener(new ProgressListener() {
+				
+				/**
+				 * 文件大小为：14608,当前已处理：4096 文件大小为：14608,当前已处理：7367 文件大小为：14608,当前已处理：11419
+				 * 文件大小为：14608,当前已处理：14608
+				 */
+				@Override
 				public void update(long pBytesRead, long pContentLength, int arg2) {
 					// System.out.println("文件大小为：" + pContentLength + ",当前已处理：" + pBytesRead);
-					/**
-					 * 文件大小为：14608,当前已处理：4096 文件大小为：14608,当前已处理：7367 文件大小为：14608,当前已处理：11419
-					 * 文件大小为：14608,当前已处理：14608
-					 */
+				
 				}
 			});
 			// 解决上传文件名的中文乱码
@@ -112,8 +119,8 @@ public class UpLoadPhotoServlet extends HttpServlet {
 					String fileExtName = filename.substring(filename.lastIndexOf(".") + 1);
 					// 如果需要限制上传的文件类型，那么可以通过文件的扩展名来判断上传的文件类型是否合法
 					// System.out.println("上传的文件的扩展名是："+fileExtName);
-					if (fileExtName.equals("jpeg") || fileExtName.equals("jpg") || fileExtName.equals("png")
-							|| fileExtName.equals("gif")) {
+					if ("jpeg".equals(fileExtName) || "jpg".equals(fileExtName) || "png".equals(fileExtName)
+							|| "gif".equals(fileExtName)) {
 						// 获取item中的上传文件的输入流
 						InputStream in = item.getInputStream();
 						// 得到文件保存的名称
@@ -123,8 +130,8 @@ public class UpLoadPhotoServlet extends HttpServlet {
 	
 						String dirPath=realSavePath+"\\"+saveFilename;
 						//数据库保存路径
-						String DbSavePath=dirPath.substring(dirPath.indexOf("\\img\\singlepro"));
-						DbSavePath=DbSavePath.replace("\\", "/");
+						String dbSavePath=dirPath.substring(dirPath.indexOf("\\img\\singlepro"));
+						dbSavePath=dbSavePath.replace("\\", "/");
 						// 创建一个文件输出流
 						FileOutputStream out = new FileOutputStream(realSavePath + "\\" + saveFilename);
 						// 创建一个缓冲区
@@ -143,7 +150,7 @@ public class UpLoadPhotoServlet extends HttpServlet {
 						// 删除处理文件上传时生成的临时文件
 						// item.delete();
 //						message = "文件上传成功！";
-					  	request.getSession().setAttribute("DbSavePath", DbSavePath);
+					  	request.getSession().setAttribute("DbSavePath", dbSavePath);
 					  	//System.out.println(DbSavePath);
 						pw.print("<script>alert('请选择小图');location.href='/Rosemary/admin/portGoods.jsp'</script>");
 					} else {
@@ -211,9 +218,13 @@ public class UpLoadPhotoServlet extends HttpServlet {
 		
 		return dir;
 	}
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    /**
+	 * Post请求
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @param request
+	 *  @param response
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

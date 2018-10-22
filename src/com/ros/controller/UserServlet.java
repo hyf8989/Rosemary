@@ -44,9 +44,13 @@ public class UserServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    /**
+   	 * Get请求
+   	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+   	 * @param request
+   	 *  @param response
+   	 */
+   	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
@@ -60,7 +64,7 @@ public class UserServlet extends HttpServlet {
 
 		 PrintWriter out=response.getWriter();
 
-		if(op.equals("sendCode")) {
+		if("sendCode".equals(op)) {
 			String phoneNumber=request.getParameter("phoneNumber");
 			MessageSend ms=new MessageSend();
 			StringBuilder code= ms.sendCode(phoneNumber);
@@ -76,7 +80,7 @@ public class UserServlet extends HttpServlet {
 			
 		}
 		//用户输完用户名离开焦点时对数据库的查询判断是否用户是否存在
-		else if (op.equals("register")) {
+		else if ("register".equals(op)) {
 			String userName=request.getParameter("userName");
 			
 			if(us.register(userName)==true) {
@@ -93,7 +97,7 @@ public class UserServlet extends HttpServlet {
 		} 
 		
 		//用户登录
-		else if(op.equals("login")) {
+		else if("login".equals(op)) {
 			String userName=request.getParameter("userName");
 			String userPwd=MD5Util.getEncodeByMd5(request.getParameter("userPwd"));
 			UserBasicInfo ub=us.login(userName, userPwd);
@@ -122,7 +126,7 @@ public class UserServlet extends HttpServlet {
 			}
 		}
 		//插入用户基本表（用户注册功能）
-		else if(op.equals("insert")) {
+		else if("insert".equals(op)) {
 			String msg="";
 			String userName=request.getParameter("userName");
 			String userPwd=MD5Util.getEncodeByMd5(request.getParameter("userPwd"));//密码加密
@@ -155,7 +159,7 @@ public class UserServlet extends HttpServlet {
 		/**
 		 * 用户输入的旧密码的验证
 		 */
-		else if(op.equals("verifyPwd")) {
+		else if("verifyPwd".equals(op)) {
 			String messge="";
 			
 			//获取用户输入的旧密码
@@ -180,7 +184,7 @@ public class UserServlet extends HttpServlet {
 		/**
 		 * 用户修改密码
 		 */
-		else if(op.equals("updatePwd")) {
+		else if("updatePwd".equals(op)) {
 			String messge="";
 			//获取用户名
 			String userName=request.getParameter("userName");
@@ -206,7 +210,7 @@ public class UserServlet extends HttpServlet {
 		
 		}
 		//后台用户信息管理
-		else if(op.equals("queryUsersBeanByPage")) {
+		else if("queryUsersBeanByPage".equals(op)) {
 			/*List<UserBean> list = us.queryUsersBean();
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/admin/userList.jsp").forward(request, response);*/
@@ -264,9 +268,13 @@ public class UserServlet extends HttpServlet {
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+    /**
+   	 * Post请求
+   	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+   	 * @param request
+   	 *  @param response
+   	 */
+   	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

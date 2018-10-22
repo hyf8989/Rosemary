@@ -67,16 +67,16 @@ public class FlowerInfoDaoImpl implements FlowerInfoDao {
 			int priceEnd, int typeId1, int typeId2, String sort, String sortType) {
 		// TODO Auto-generated method stub
 		String sql = "";
-		if (sort.equals("price")) {
-			if (sortType.equals("desc")) {
+		if ("price".equals(sort)) {
+			if ("desc".equals(sortType)) {
 				sql = "select flower_info.* from flower_info INNER JOIN flower_type on flower_info.typeId=flower_type.typeId  where flowerName like ? and stock >0 and (price BETWEEN ? and ?) and (flower_type.typeId BETWEEN (?) and (?) ) ORDER BY price desc";
 			} else {
 				sql = "select flower_info.* from flower_info INNER JOIN flower_type on flower_info.typeId=flower_type.typeId  where flowerName like ? and stock >0 and (price BETWEEN ? and ?) and (flower_type.typeId BETWEEN (?) and (?) ) ORDER BY price asc";
 			}
-		} else if (sortType.equals("createTime")) {
+		} else if ("createTime".equals(sortType)) {
 			sql = "select flower_info.* from flower_info INNER JOIN flower_type on flower_info.typeId=flower_type.typeId  where flowerName like ? and stock >0 and (price BETWEEN ? and ?) and (flower_type.typeId BETWEEN (?) and (?) ) ORDER BY createTime desc";
 		} else {
-			if (sortType.equals("desc")) {
+			if ("desc".equals(sortType)) {
 				sql = "select flower_info.* from flower_info INNER JOIN flower_type on flower_info.typeId=flower_type.typeId  where flowerName like ? and stock >0 and (price BETWEEN ? and ?) and (flower_type.typeId BETWEEN (?) and (?) ) ORDER BY flowerName desc";
 			} else {
 				sql = "select flower_info.* from flower_info INNER JOIN flower_type on flower_info.typeId=flower_type.typeId  where flowerName like ? and stock >0 and (price BETWEEN ? and ?) and (flower_type.typeId BETWEEN (?) and (?) ) ORDER BY flowerName asc";
@@ -169,6 +169,16 @@ public class FlowerInfoDaoImpl implements FlowerInfoDao {
 	public boolean updateFlowerStock(int flowerId, int stock) {
 		String sql="update flower_info set stock=? where flowerId=?";
 		return BaseDao.execute(sql, stock,flowerId)>0;
+	}
+	
+	/**
+	 * 用于后台修改商品
+	 */
+	@Override
+	public boolean updateFlower(FlowerInfo f) {
+		// TODO Auto-generated method stub
+		String sql = "update flower_info set flowerName=?,price=?,words=?,description=?,updateTime=? where flowerId=?";
+		return BaseDao.execute(sql, f.getFlowerName(),f.getPrice(),f.getWords(),f.getDescription(),f.getUpdateTime(),f.getFlowerId())>0;
 	}
 
 }

@@ -95,7 +95,7 @@ public class MessageSend {
 				builder.addTextBody(key, String.valueOf(value),contentType);
 			}
 		}	
-		if(signtype.equals(TYPE_MD5) || signtype.equals(TYPE_SHA1)){
+		if(TYPE_MD5.equals(signtype) ||TYPE_SHA1.equals( signtype)){
 			String timestamp = getTimestamp();
 			requestData.put("timestamp", timestamp);
 			requestData.put("sign_type", signtype);

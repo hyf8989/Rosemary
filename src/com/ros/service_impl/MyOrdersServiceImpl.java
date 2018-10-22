@@ -28,17 +28,16 @@ public class MyOrdersServiceImpl implements MyOrdersService {
 	 订单详情表的插入
 	 */
 	@Override
-	public boolean InsertOrderInfo(OrderInfo orderInfo) {
+	public boolean insertOrderInfo(OrderInfo orderInfo) {
 		// TODO Auto-generated method stub
-		return mod.InsertOrderInfo(orderInfo);
+		return mod.insertOrderInfo(orderInfo);
 	}
 
 	/**   
-	 * <p>Title: getOrderInfoByOrderId</p>   
-	 * <p>Description: </p>   
-	 * @param orderId
-	 * @return   
-	 * @see com.ros.service.MyOrdersService#getOrderInfoByOrderId(int)   
+	 *  根据订单编号获取订单信息
+	 * @param orderId 订单编号
+	 * @return   订单对象
+	 * 
 	 */
 	@Override
 	public Orders getOrderInfoByOrderId(int orderId) {

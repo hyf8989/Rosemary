@@ -12,14 +12,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <script type="application/x-javascript">
-	
-	
-	
-	
-	
-	
-	
-	
 			addEventListener("load", function() {
 				setTimeout(hideURLbar, 0);
 			}, false);
@@ -27,14 +19,6 @@
 			function hideURLbar() {
 				window.scrollTo(0, 1);
 			}
-		
-
-
-
-
-
-
-
 </script>
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
@@ -555,13 +539,6 @@
 		  
 	  }); 
 		 
-				
-				
-			
-		  
-	  
-			
-			
 			//搜索按钮的单击事件
 			$("#search").click(function(){
 				location.href = "/Rosemary/order.do?op=showOrdersPage&page="

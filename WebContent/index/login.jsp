@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>用户列登录</title>
+<title>login</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link rel="stylesheet" href="css/style3.css" />

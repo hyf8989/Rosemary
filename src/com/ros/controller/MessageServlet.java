@@ -31,9 +31,13 @@ public class MessageServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+    /**
+	 * Get请求
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @param request
+	 *  @param response
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String op=request.getParameter("op");//判断请求方式
 		//统一设置编码格式
@@ -103,8 +107,12 @@ public class MessageServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Post请求
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @param request
+	 *  @param response
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

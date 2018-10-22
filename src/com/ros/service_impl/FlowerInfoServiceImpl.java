@@ -141,4 +141,13 @@ public class FlowerInfoServiceImpl implements FlowerInfoService {
 		// TODO Auto-generated method stub
 		return fID.updateFlowerStock(flowerId, stock);
 	}
+	
+	/**
+	 * 后台商品修改
+	 */
+	@Override
+	public boolean updateFlower(FlowerInfo f) {
+		// TODO Auto-generated method stub
+		return fID.updateFlower(f);
+	}
 }

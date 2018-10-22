@@ -36,9 +36,12 @@ public class TypesServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Get请求
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @param request
+	 *  @param response
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -138,9 +141,12 @@ public class TypesServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Post请求
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @param request
+	 *  @param response
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub

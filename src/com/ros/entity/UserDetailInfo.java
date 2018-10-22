@@ -6,18 +6,19 @@ package com.ros.entity;
  */
 public class UserDetailInfo {
 
-	private int Id;
+	private int id;
 	private int userId;
 	private String name;
 	private String userTel;
 	private String userEmail;
 	private String createTime;
 	private String updateTime;
+	
 	public int getId() {
-		return Id;
+		return id;
 	}
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 	public int getUserId() {
 		return userId;
@@ -57,13 +58,13 @@ public class UserDetailInfo {
 	}
 	@Override
 	public String toString() {
-		return "UserDetailInfo [Id=" + Id + ", userId=" + userId + ", name=" + name + ", userTel=" + userTel
+		return "UserDetailInfo [Id=" + id + ", userId=" + userId + ", name=" + name + ", userTel=" + userTel
 				+ ", userEmail=" + userEmail + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
 	public UserDetailInfo(int id, int userId, String name, String userTel, String userEmail, String createTime,
 			String updateTime) {
 		super();
-		Id = id;
+		id = id;
 		this.userId = userId;
 		this.name = name;
 		this.userTel = userTel;
@@ -77,7 +78,7 @@ public class UserDetailInfo {
 	}
 	public UserDetailInfo(int id, int userId, String userTel, String createTime, String updateTime) {
 		super();
-		Id = id;
+		id = id;
 		this.userId = userId;
 		this.userTel = userTel;
 		this.createTime = createTime;

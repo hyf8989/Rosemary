@@ -10,8 +10,14 @@ import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
  * 使HttpDelete可以发送body信息。
  */
 @NotThreadSafe
+
 public class HttpDeleteWithBody extends HttpEntityEnclosingRequestBase {
     public static final String METHOD_NAME = "DELETE";
+    
+    /**
+     * 覆盖其中的getMethod方法，使其返回“DELETE”,
+     */
+    @Override
     public String getMethod() { return METHOD_NAME; }
 
     public HttpDeleteWithBody(final String uri) {

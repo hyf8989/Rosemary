@@ -33,9 +33,13 @@ public class UploadHandleServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+    /**
+	 * Get请求
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @param request
+	 *  @param response
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
@@ -62,14 +66,16 @@ public class UploadHandleServlet extends HttpServlet {
 		                      ServletFileUpload upload = new ServletFileUpload(factory);
 		                      //监听文件上传进度
 		                      upload.setProgressListener(new ProgressListener(){
-		                          public void update(long pBytesRead, long pContentLength, int arg2) {
+		                          /**
+	                               * 文件大小为：14608,当前已处理：4096
+	                                  文件大小为：14608,当前已处理：7367
+	                                  文件大小为：14608,当前已处理：11419
+	                                  文件大小为：14608,当前已处理：14608
+	                               */
+		                    	  @Override
+		                    	  public void update(long pBytesRead, long pContentLength, int arg2) {
 		                              System.out.println("文件大小为：" + pContentLength + ",当前已处理：" + pBytesRead);
-		                              /**
-		                               * 文件大小为：14608,当前已处理：4096
-		                                  文件大小为：14608,当前已处理：7367
-		                                  文件大小为：14608,当前已处理：11419
-		                                  文件大小为：14608,当前已处理：14608
-		                               */
+		               
 		                          }
 		                      });
 		                       //解决上传文件名的中文乱码
@@ -190,6 +196,14 @@ public class UploadHandleServlet extends HttpServlet {
 		        }
 	         return dir;
 	    }
+	     
+	     /**
+	 	 * Post请求
+	 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 	 * @param request
+	 	 *  @param response
+	 	 */
+	 	@Override
 	
 	    public void doPost(HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException {

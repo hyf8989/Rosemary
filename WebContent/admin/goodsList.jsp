@@ -121,56 +121,13 @@
 												<td>${goods.words}</td>
 												<td>${goods.description}</td>
 												<td><button
-														class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
-													<button class="layui-btn layui-btn-radius layui-btn-danger">删除
-													</button></td>
+														class="layui-btn layui-btn-radius layui-btn-normal" name="update" id="update">编辑</button>&nbsp;
+													<!-- <button class="layui-btn layui-btn-radius layui-btn-danger">删除
+													</button> -->
+													</td>
 											</tr>
 										</c:forEach>
 									</c:if>
-									<!-- <tr>
-										<td>2</td>
-										<td>John</td>
-										<td>John Stone</td>
-										<td>4656132165464</td>
-										<td>789451</td>
-										<td><button
-												class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
-											<button class="layui-btn layui-btn-radius layui-btn-danger">删除
-											</button></td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Jane</td>
-										<td>Jane Strip</td>
-										<td>12316456</td>
-										<td>102356</td>
-										<td><button
-												class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
-											<button class="layui-btn layui-btn-radius layui-btn-danger">删除
-											</button></td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>Gary</td>
-										<td>Gary Mountain</td>
-										<td>1234634561</td>
-										<td>621012</td>
-										<td><button
-												class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
-											<button class="layui-btn layui-btn-radius layui-btn-danger">删除
-											</button></td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>James</td>
-										<td>James Camera</td>
-										<td>1234654613</td>
-										<td>621011</td>
-										<td><button
-												class="layui-btn layui-btn-radius layui-btn-normal">编辑</button>&nbsp;
-											<button class="layui-btn layui-btn-radius layui-btn-danger">删除
-											</button></td>
-									</tr> -->
 								</tbody>
 							</table>
 						</div>
@@ -209,30 +166,6 @@
 		<%@ include file="left.jsp"%>
 		<div class="clearfix"></div>
 	</div>
-	<script>
-		var toggle = true;
-
-		$(".sidebar-icon").click(
-				function() {
-					if (toggle) {
-						$(".page-container").addClass("sidebar-collapsed")
-								.removeClass("sidebar-collapsed-back");
-						$("#menu span").css({
-							"position" : "absolute"
-						});
-					} else {
-						$(".page-container").removeClass("sidebar-collapsed")
-								.addClass("sidebar-collapsed-back");
-						setTimeout(function() {
-							$("#menu span").css({
-								"position" : "relative"
-							});
-						}, 400);
-					}
-
-					toggle = !toggle;
-				});
-	</script>
 	<!--js -->
 	<script src="js/jquery.nicescroll.js"></script>
 	<script src="js/scripts.js"></script>
@@ -251,8 +184,6 @@
 			   ,limit:${pdf.pageSize}
 			    ,layout: ['count', 'prev', 'page','limit','next', 'skip']
 			    ,jump: function(obj,first){
-					console.log(obj);
-					console.log(first);
 					//首次不执行
 					if (!first) {
 						//do something
@@ -265,23 +196,77 @@
 			});
 
 		});
-		$(".layui-btn-normal")
-				.click(
+		
+		$(".layui-btn-normal").click(
 						function() {
-							layer
-									.open({
+							var msg="";
+							//获取当前行的第一个td
+						    var flowerId = $(this).parents("tr").find("td").eq(0).text();
+							var flowerName = $(this).parents("tr").find("td").eq(1).text();
+							var price = $(this).parents("tr").find("td").eq(2).text();
+							var words = $(this).parents("tr").find("td").eq(3).text();
+							var description = $(this).parents("tr").find("td").eq(4).text();
+							
+							layer.open({
 										type : 1,
 										skin : "layui-layer-lan",
 										title : "更改商品",
 										anim : 1,
-										area : [ '600px', '600px' ],
+										area : [ '550px', '570px' ],
 										offset : "auto",
 										shadeClose : true,
 										closeBtn : 1,
-										content : " <div class='modal-body'> 商品名： <input type='text' disabled='disabled' name='userName' style='width:300px;margin-left:30px;margin-bottom:20px;'> </div><div class='modal-body'>价格：<input type='text' name='userPwd'  style='width:300px;margin-left:55px;margin-bottom:30px;'></div> <div class='modal-body'>寓意： <input type='text' name='userLevel' style='width:300px;margin-left:50px;margin-bottom:30px;'> </div><div class='modal-body'>描述：  <input type='text' name='userState' style='width:300px;margin-left:50px;margin-bottom:30px;'><input type='hidden' name='userId' style='width:300px;margin-left:15px;margin-bottom:30px;'><br/><button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' style='margin-left:20%;margin-right:20px;'>更新</button><button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' margin-top:100px;>取消</div>"
+										content : " <div class='modal-body'> 商品名： <input type='text' name='flowerName' id='flowerName' style='width:300px; height:35px; margin-left:30px;margin-bottom:20px;'> </div>"
+										+"<div class='modal-body'>价格：<input type='text' name='price' id='price' style='width:300px;height:35px;margin-left:55px;margin-bottom:30px;'></div> "
+										+"<div class='modal-body'>寓意： <input type='text' name='words' id='words' style='width:300px;height:35px;margin-left:50px;margin-bottom:30px;'> </div>"
+										+"<div class='modal-body'>描述：  <input type='text' name='description' id='description' style='width:300px;height:35px;margin-left:50px;margin-bottom:30px;'>"
+										+"<input type='hidden' name='flowerId' id='flowerId' style='width:300px;margin-left:15px;margin-bottom:30px;'><br/>"
+										+"<button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' style='margin-left:20%;margin-right:20px;' name='updateF' id='updateF'>更新</button>"
+										+"<button class='layui-btn layui-btn-lg layui-btn-radius layui-btn-normal' margin-top:100px; name='closeF' id='closeF'>取消</div>"
 
 									});
+							$("#flowerId").val(flowerId);
+							//用jq代码信息显示在content元素中
+							$("#flowerName").val(flowerName);
+							$("#price").val(price);
+							$("#words").val(words);
+							$("#description").val(description);
+							//编辑按钮事件
+							$("#updateF").click(function name() {																
+								//获取当前类型编号
+								var flowerId = $("#flowerId").val(); 
+								//获取输入的用户名
+								var flowerName = $("#flowerName").val();
+								var price = $("#price").val();
+								var words = $("#words").val();
+								var description = $("#description").val();
+								$.get("/Rosemary/flower.do",
+										"op=updateFlower&flowerId=" + flowerId 
+										        + "&flowerName="+flowerName
+												+ "&price="+ price
+												+ "&words="+ words
+												+ "&description=" + description
+											    , function(data, status) {										
+											layer.open({
+												title : "温馨提醒",
+												skin : "layui-layer-molv",
+												content : "<span style='color:black;'>" + data+ "</span>",
+												anim : 0,
+												btn : [ 'OK' ],
+												yes : function(index, layero) {
+													layer.closeAll();
+													location.href = "/Rosemary/flower.do?op=queryFlowerByPage";
+												}
+											}); 
+										}); 														
+								});	
+							
 						});
+		
+	
+		
+/* 		$(".update").click
+		
 		$(".layui-btn-danger").click(function() {
 			layer.open({
 				title : "友情提醒？",
@@ -297,7 +282,7 @@
 				}
 			});
 
-		});
+		}); */
 	</script>
 </body>
 
