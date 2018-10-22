@@ -314,6 +314,10 @@
 			});
 		});
 	</script>
-	</body>
+	  <!-- 我们自己编写的用户js文件 --> 
+<!-- 		<script src="js/user.js">
+		<!-- 我们自己编写的用户js文件 -->
+		</script> -->
+</body>
 
 </html>
